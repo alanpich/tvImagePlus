@@ -22,8 +22,8 @@ private function getImageDataJSON($value,$params){
 		$MS = $this->tv->getSource('web')->toArray();
 		$data->mediasource = new stdClass;
 		$data->mediasource->id = $MS['id'];
-		$data->mediasource->path = is_null($MS['properties']['basePath']['value'])? '' : $MS['properties']['basePath']['value'];
-		$data->mediasource->url = is_null($MS['properties']['baseUrl']['value'])? '' : $MS['properties']['baseUrl']['value'];
+		$data->mediasource->path = is_null($MS['properties']['basePath']['value'])? $this->modx->getOption('base_path') : $MS['properties']['basePath']['value'];
+		$data->mediasource->url = is_null($MS['properties']['baseUrl']['value'])? $this->modx->getOption('base_url') : $MS['properties']['baseUrl']['value'];
 		unset($MS);
 		
 		// Grab constraint info
