@@ -16,7 +16,10 @@ public static function getImageURL( $json, &$modx){
 			'w' => $data->constraint->width,
 			'h' => $data->constraint->height,
 			'far' => true,
-			'zc' => true
+			'sx' => $data->crop->x,
+			'sy'=> $data->crop->y,
+			'sw'=> $data->crop->width,
+			'sh'=> $data->crop->height
 		);
 		$options = '';
 		foreach($params as $key => $val){

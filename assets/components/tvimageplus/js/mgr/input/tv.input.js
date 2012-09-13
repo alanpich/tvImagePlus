@@ -49,6 +49,7 @@ this.init = function(){
 		this.prepareConstraints();
 	
 		this.createImageSelector();
+		this.createCropButton();
 		
 		// Set up the image preview
 		this.previewImage = document.createElement('img');
@@ -114,6 +115,9 @@ this.prepareConstraints = function(){
 	}//
 
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
 
 // Create source image browser
 //----------------------------------------------------------------	
@@ -139,6 +143,62 @@ this.createImageSelector = function(){
 	
 	
 	
+// Create 'edit' button 
+//----------------------------------------------------------------	
+this.createCropButton = function(){
+		this.cropButton = MODx.load({
+			xtype: 'button',
+			text: 'Edit image', // _('tvimageplus.edit_image_buttontext'),			
+			renderTo: this.wrapperID,
+			imageplus: this,
+			handler: function(btn,e){
+				btn.imageplus.showCropWindow();
+			}
+		});
+	}//	
+	
+	
+	
+this.showCropWindow = function(){
+
+		this.cropWindow = new Extamples.CropWindow({
+						imageUrl: this.data.mediasource.url+this.data.source.path+this.data.source.filename
+						,imageplus: this
+						,title: 'Edit Image' // _('tvimageplus.edit_image')
+						,listeners:{
+						    save: function(cmp){
+						      this.updateCropData(cmp.cropData);
+						      cmp.close();
+						    },
+						    scope: this
+						  }
+					});
+		this.cropWindow.show();
+		return;
+		
+		this.cropWindow = MODx.load({
+			xtype: 'window',
+			title: 'Edit image',
+			imageplus: this,
+			width: this.data.source.width,
+			height: this.data.source.height,
+			padding:0,
+			listeners: {
+				'render': {fn: function(win){
+					win.add( new Extamples.CropWindow({
+						imageUrl: this.data.mediasource.url+this.data.source.path+this.data.source.filename
+					}));
+				},scope:this}		
+			}
+		});
+		this.cropWindow.show();
+		
+	}//	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	
 // A new source image has been selected
 //----------------------------------------------------------------
 this.updateSourceImage = function(data){
@@ -155,6 +215,19 @@ this.updateSourceImage = function(data){
 		this.updateTV();
 		this.updatePreview();
 	}//	
+	
+	
+	
+	
+// Parse saved data to useful
+//----------------------------------------------------------------
+this.updateCropData = function(crop){
+		this.data.crop = crop;
+		
+		this.updateTV();
+		this.updatePreview();
+	}//	
+	
 	
 	
 // Parse saved data to useful
@@ -179,14 +252,14 @@ this.updatePreview = function(){
 		
 		var imgSrc = this.data.mediasource.path+this.data.source.path+this.data.source.filename;
 
-		console.log(imgSrc);
 		var paramObj = {
 			'w': this.data.constraint.width,
 			'h': this.data.constraint.height,
-			'cx': 0,
-			'cy': 0,
+			'sx': this.data.crop.x,
+			'sy': this.data.crop.y,
+			'sw': this.data.crop.width,
+			'sh': this.data.crop.height,
 			'src': imgSrc,
-			'zc':true,
 			'far':true
 		}
 		var params = '';
