@@ -142,9 +142,10 @@ this.createImageSelector = function(){
 // A new source image has been selected
 //----------------------------------------------------------------
 this.updateSourceImage = function(data){
+		console.log(data);
 		this.data.source = {
-			path: data.relativeUrl.replace(data.shortName,''),
-			filename: data.shortName,
+			path: data.relativeUrl.replace(data.name,''),
+			filename: data.name,
 			width: data.image_width,
 			height: data.image_height,
 			size: data.size
