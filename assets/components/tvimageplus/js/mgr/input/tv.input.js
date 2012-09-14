@@ -80,10 +80,10 @@ this.prepareData = function(){
 		} else
 		if( !isNaN(this.data.source.width/this.data.source.height) ){
 			// Compute from raw image dimensions
-			this.constraint.ratio = this.data.source.width/this.data.source.height;
+			this.data.constraint.ratio = this.data.source.width/this.data.source.height;
 		} else {
 			// Fallback safely
-			this.constraint.ratio = 1;
+			this.data.constraint.ratio = 1;
 		};
 		
 		
@@ -263,8 +263,8 @@ this.updatePreview = function(){
 		var paramObj = {
 			'w': this.data.constraint.width,
 			'h': this.data.constraint.height,
-			'sx': this.data.crop.x,
-			'sy': this.data.crop.y,
+			'sx': this.data.crop.x || 0,
+			'sy': this.data.crop.y || 0,
 			'sw': this.data.crop.width,
 			'sh': this.data.crop.height,
 			'src': imgSrc,
@@ -309,7 +309,7 @@ this.getCropHeight = function(){
 			return this.data.crop.height;
 		} else {
 			var constH = this.data.constraint.height;
-			if(constW > this.data.source.height){
+			if(constH > this.data.source.height){
 				return constH;
 			} else {
 				return this.data.source.height;
