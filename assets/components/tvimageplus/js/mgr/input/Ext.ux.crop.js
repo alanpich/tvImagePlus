@@ -20,34 +20,38 @@ Ext.ux.ImageCrop = Ext.extend(Ext.Component, {
   initComponent: function() {
     this.preserveRatio = this.quadratic || this.preserveRatio;
     Ext.ux.ImageCrop.superclass.initComponent.call(this);
+    this.cropData = this.imageplus.data.crop;
+    console.log('BEFORE', this.cropData);
   },
   onRender : function(ct, position){
     var c = {};
-    if(this.quadratic) {
-      c.height = c.width = Math.min(this.initialWidth, this.initialHeight);
-      this.maxWidth = this.maxHeight = c.height;
-    }
-    else {
-      c.height = this.imageplus.data.constraint.height;
-      c.width = this.imageplus.data.constraint.width;
-      this.maxWidth = this.maxHeight = 10000;
-    }
+	c.height = this.imageplus.getCropHeight(); //this.imageplus.data.constraint.height;
+	c.width = this.imageplus.getCropWidth(); //this.imageplus.data.constraint.width;
+	this.maxWidth = this.maxHeight = 10000;
     this.cropData.height = c.height;
     this.cropData.width = c.width;
+    this.cropData.x = this.imageplus.getCropX(); // ALAN ADDITION
+    this.cropData.y = this.imageplus.getCropY(); // ALAN ADDITION	
+    
     Ext.ux.ImageCrop.superclass.onRender.call(this, ct, position);
     this.el.setStyle({
-      position: 'relative'
+		position: 'relative',
     }).setSize(this.initialWidth,this.initialHeight);
     this.cropWrapper = this.el.insertFirst().setSize(this.initialWidth,this.initialHeight);
-    this.cropWrapped = this.cropWrapper.insertFirst().setSize(c.width, c.height);
+    this.cropWrapped = this.cropWrapper.insertFirst().setSize(c.width, c.height).setStyle({
+    															left:this.cropData.x+'px',
+    															top: this.cropData.y+'px',
+    															backgroundPosition: '-'+this.cropData.x+"px -"+this.cropData.y+'px'
+    														});
     this.cropWrapped.insertFirst({tag: "img", src: Ext.BLANK_IMAGE_URL, width: c.width, height: c.height});
     this.cropBgBox = this.el.insertFirst().setStyle({
-      background: 'url('+this.imageUrl+') no-repeat left top',
-      position: 'absolute',
-      left: 0,
-      top: 0
-    }).setSize(this.initialWidth,this.initialHeight).setOpacity(0.5);
+		background: 'url('+this.imageUrl+') no-repeat left top',
+		position: 'absolute',
+		left: 0,
+		top: 0
+    }).setSize(this.initialWidth,this.initialHeight).setOpacity(0.3);
     this.initWrapper();
+    wrapped.fireEvent('change', this) 
   },
   getCropData: function() {
     return this.cropData;
@@ -90,7 +94,7 @@ Ext.ux.ImageCrop = Ext.extend(Ext.Component, {
       dynamic:true
     });
     //wrapped.getResizedChild().setStyle({background:'url(../images/hochschule-reutlingen_medium.jpg)'});
-    wrapped.getEl().setStyle({background:'url('+imageUrl+')'});
+    wrapped.getEl().setStyle({background:'url('+imageUrl+') -'+this.cropData.x+'px -'+this.cropData.y+'px'});
     wrapped.imageOffset = [0,0];
     wrapped.dd.endDrag = function(){
       wrapped.imageOffset = [wrapped.getEl().getBox().x - cropBgBox.getX(), wrapped.getEl().getBox().y - cropBgBox.getY()];

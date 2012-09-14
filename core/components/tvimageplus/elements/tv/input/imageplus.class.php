@@ -7,7 +7,9 @@ class ImagePlusInputRender extends modTemplateVarInputRender {
     	 $this->setPlaceholder('mediasource',$this->tv->getSource('web')->get('id'));
     	 $this->setPlaceholder('tvparams',json_encode($this->getInputOptions()));
     	 
-    	 $this->setPlaceholder('imgData',$this->getImageDataJSON($value,$params));    	 
+    	 $this->setPlaceholder('imgData',$this->getImageDataJSON($value,$params)); 
+    	 
+    	 return 'arse'; 	 
     	
     }
     
@@ -55,6 +57,16 @@ private function getImageDataJSON($value,$params){
 		} else {
 			$data->source = false;
 		};
+		
+		// Grab crop params (if they exist yet)
+		if( isset($I->crop)){
+			$data->crop = new stdClass;
+			$data->crop->x = $I->crop->x;
+			$data->crop->y = $I->crop->y;
+			$data->crop->width = $I->crop->width;
+			$data->crop->height = $I->crop->height;
+		};
+			
 		return json_encode($data);
     }//
 

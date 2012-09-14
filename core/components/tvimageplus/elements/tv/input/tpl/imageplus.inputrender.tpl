@@ -1,5 +1,5 @@
-<input type="text" name="tv{$tv->id}" id="tv{$tv->id}" value="{$tv->value}" />
-<div class="tvimageplus-inputform" id="tvimageplus{$tv->id}"></div>
+<input type="hidden" name="tv{$tv->id}" id="tv{$tv->id}" value="{$tv->value}" />
+<div class="tvimageplus-inputform" id="tvimageplus{$tv->id}" style="width:400px;"></div>
 <script type="text/javascript">
 // Start up the ImagePlus TV type
 IP{$tv->id} = new ImagePlus({$tv->id},{literal} { {/literal}

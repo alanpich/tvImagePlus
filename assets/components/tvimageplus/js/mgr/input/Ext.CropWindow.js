@@ -13,47 +13,33 @@ Extamples.CropWindow = Ext.extend(Extamples.CropWindowUi, {
     // I am using an image preloader here, for getting the initial height and width
     //
     Extamples.CropWindow.superclass.initComponent.call(this);
-    var imgLoad = new Image();
-    imgLoad.onload = (function(){
-      this.setSize(imgLoad.width + 20, imgLoad.height + 100);
-      var crop = new Ext.ux.ImageCrop({
-        imageUrl: this.imageUrl,
-        initialWidth: imgLoad.width,
-        imageplus: this.imageplus,
-        minWidth: this.imageplus.data.constraint.width,
-        minHeight: this.imageplus.data.constraint.height,
-        initialHeight: imgLoad.height,
-        quadratic: false
-      });
-      this.cropData = crop.getCropData();
-      crop.on('change', function(foo,x) {this.cropData = x;}, this);
-      this.add(crop);
-    }).createDelegate(this);
-    imgLoad.src = this.imageUrl;
+    this.imgLoad = new Image();
+    this.imgLoad.onload = (function(){
+		this.setSize(this.imgLoad.width + 20, this.imgLoad.height + 100);
+		var crop = new Ext.ux.ImageCrop({
+				imageUrl: this.imageUrl,
+				initialWidth: this.imgLoad.width,
+				imageplus: this.imageplus,
+				minWidth: this.imageplus.data.constraint.width,
+				minHeight: this.imageplus.data.constraint.height,
+				initialHeight: this.imgLoad.height,
+				quadratic: false,
+				cropData: this.imageplus.data.crop
+			});
+		this.cropData = crop.getCropData();
+		crop.on('change', function(foo,x) {this.cropData = x;}, this);
+		this.add(crop);
+	}).createDelegate(this);
+    this.imgLoad.src = this.imageUrl;
     
     // handler for the buttons
     this.buttonCancel.on('click', this.close, this);
     this.buttonSave.on('click', this.saveCrop, this);
   },
-  saveCrop: function() {
-    if(this.fireEvent('save', this) === false){
-      return this;
-    }
-    
-    /*
-     *  or you can use a ajax call!
-    Ext.Ajax.request({
-      url: this.imageUrl,
-      method: 'post',
-      params: this.cropData,
-      success: function(){
-        if(this.fireEvent('save', this) === false){
-          return this;
-        }
-        this.close();
-      },
-      scope: this
-    });
-    */
-  }
+  
+	saveCrop: function() {
+		if(this.fireEvent('save', this) === false){
+	  		return this;
+		}
+	}
 });
