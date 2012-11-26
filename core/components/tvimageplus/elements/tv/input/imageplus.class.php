@@ -1,15 +1,45 @@
 <?php
+
 class ImagePlusInputRender extends modTemplateVarInputRender {
+    
+    /* @var tvImagePlus $helper */
+    private $helper;
+    
     public function getTemplate() {
     	  return dirname(__FILE__).'/tpl/imageplus.inputrender.tpl';
-    }
+    }//
+    
+    
     public function process($value,array $params = array()) {
-    	 $this->setPlaceholder('mediasource',$this->tv->getSource('web')->get('id'));
-    	 $this->setPlaceholder('tvparams',json_encode($this->getInputOptions()));
-    	 
-    	 $this->setPlaceholder('imgData',$this->getImageDataJSON($value,$params)); 
-    	 
-    	 return 'arse'; 	 
+        // Load helper class
+        if(!class_exists('tvImagePlus')){ 
+            require $this->modx->getOption('core_path').'components/tvimageplus/tvImagePlus.class.php'; };
+        $this->helper = new tvImagePlus($this->modx);
+
+        // Load required javascripts & register global config
+        $this->modx->regClientCSS($this->helper->config['assets_url'].'mgr/css/jquery/jquery.jcrop.min.css');
+        $this->modx->regClientStartupScript($this->helper->config['assets_url'].'mgr/js/tvimageplus.js');
+        $this->modx->regClientStartupScript($this->helper->config['assets_url'].'mgr/js/tvimageplus.panel.input.js');
+        $this->modx->regClientStartupScript($this->helper->config['assets_url'].'mgr/js/tvimageplus.window.editor.js');
+        $this->modx->regClientStartupScript($this->helper->config['assets_url'].'mgr/js/tools/JSON2.js');
+        $this->modx->regClientStartupScript($this->helper->config['assets_url'].'mgr/js/jquery/jquery.min.js');
+        $this->modx->regClientStartupScript($this->helper->config['assets_url'].'mgr/js/jquery/jquery.jcrop.min.js');
+        $this->modx->regClientStartupScript($this->helper->config['assets_url'].'mgr/js/tvimageplus.jquery.imagecrop.js');
+        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
+                                              .' tvImagePlus.config = '.json_encode($this->helper->config).';'
+                                              .'</script>');
+        
+        // Prepare tv config for jsonification
+        $tvConfig = $this->helper->loadTvConfig($this,$value,$params);
+        $this->setPlaceholder('tvimageplusconfig',json_encode($tvConfig));
+        $this->setPlaceholder('tvValue',$value);
+
+
+        $this->setPlaceholder('mediasource',$this->tv->getSource('web')->get('id'));
+        $this->setPlaceholder('tvparams',json_encode($this->getInputOptions()));
+
+        $this->setPlaceholder('imgData',$this->getImageDataJSON($value,$params)); 
+        return 'arse'; 	 
     	
     }
     
@@ -24,8 +54,8 @@ private function getImageDataJSON($value,$params){
 		$MS = $this->tv->getSource('web')->toArray();
 		$data->mediasource = new stdClass;
 		$data->mediasource->id = $MS['id'];
-		$data->mediasource->path = is_null($MS['properties']['basePath']['value'])? $this->modx->getOption('base_path') : $MS['properties']['basePath']['value'];
-		$data->mediasource->url = is_null($MS['properties']['baseUrl']['value'])? $this->modx->getOption('base_url') : $MS['properties']['baseUrl']['value'];
+		$data->mediasource->path = !isset($MS['properties']['basePath'])? $this->modx->getOption('base_path') : $MS['properties']['basePath']['value'];
+		$data->mediasource->url = !isset($MS['properties']['baseUrl'])? $this->modx->getOption('base_url') : $MS['properties']['baseUrl']['value'];
 		unset($MS);
 		
 		// Grab constraint info

@@ -1,28 +1,15 @@
-<input type="hidden" name="tv{$tv->id}" id="tv{$tv->id}" value="{$tv->value}" />
+<textarea type="text" name="tv{$tv->id}" style="width:500px; height:200px;" id="tv{$tv->id}" value="{$tv->value}">{$tv->value}</textarea>
 <div class="tvimageplus-inputform" id="tvimageplus{$tv->id}" style="width:400px;"></div>
+<div id="tvimageplus-panel-input-div"></div>
 <script type="text/javascript">
-// Start up the ImagePlus TV type
-IP{$tv->id} = new ImagePlus({$tv->id},{literal} { {/literal}
-	wrapperID: 'tvimageplus{$tv->id}', 
-
-	params: {literal}{
-		{/literal}
-		{foreach from=$params key=k item=v name='p'}
-		 '{$k}': '{$v|escape:"javascript"}'{if NOT $smarty.foreach.p.last},{/if}
-		{/foreach}
-		{literal}	
-	}, {/literal}
-	mediaSource: {$mediasource},
-	data: {$imgData}
-{literal} } {/literal});
-
-Ext.onReady(function() {literal}{{/literal}
-IP{$tv->id}.init();
-
 {literal}
-});
+Ext.onReady(function(){ 
+    MODx.load({   {/literal}
+            xtype: 'tvimageplus-panel-input'
+            ,renderTo: 'tvimageplus-panel-input-div'
+            ,tvimageplus: {$tvimageplusconfig}
+            ,updateTo: 'tv{$tv->id}'  {literal}
+        });
+ });
 {/literal}
-
-
-
 </script>

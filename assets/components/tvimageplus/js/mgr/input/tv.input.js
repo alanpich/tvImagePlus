@@ -263,10 +263,10 @@ this.updatePreview = function(){
 		var paramObj = {
 			'w': this.data.constraint.width,
 			'h': this.data.constraint.height,
-			'sx': this.data.crop.x || 0,
-			'sy': this.data.crop.y || 0,
-			'sw': this.data.crop.width,
-			'sh': this.data.crop.height,
+			'sx': this.data.crop? this.data.crop.x : 0,
+			'sy': this.data.crop? this.data.crop.y : 0,
+			'sw': this.data.crop? this.data.crop.width : 0,
+			'sh': this.data.crop? this.data.crop.height : 0,
 			'src': imgSrc,
 			'far':true
 		}
