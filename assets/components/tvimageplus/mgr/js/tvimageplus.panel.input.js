@@ -36,7 +36,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      */
     create_editButton: function(){
         this.editButton = new Ext.Button({
-            text: 'Edit Image'
+            text: _('tvimageplus.edit_image')
             ,handler: this.editImage
             ,scope:this
         })

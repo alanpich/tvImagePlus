@@ -1,9 +1,10 @@
 <div id="tv-input-properties-form{$tv}"></div>
-
-{literal}
-
 <script type="text/javascript">
 // <![CDATA[
+var tvip_lex = {$tvimagepluslexicon};
+{literal}
+for(i in tvip_lex){ MODx.lang[i] = tvip_lex[i];};
+    
 var params = {
 {/literal}{foreach from=$params key=k item=v name='p'}
  '{$k}': '{$v|escape:"javascript"}'{if NOT $smarty.foreach.p.last},{/if}
@@ -19,7 +20,7 @@ MODx.load({
     ,labelAlign: 'top'
     ,items: [{
  		xtype: 'textfield',
- 		fieldLabel: 'Target width',							// _('tvimageplus.targetwidth'),
+ 		fieldLabel: _('tvimageplus.targetwidth'),
  		name: 'inopt_targetWidth',
  		id: 'inopt_targetWidth{/literal}{$tv}{literal}',
  		value: params['targetWidth'] || '',
@@ -28,11 +29,11 @@ MODx.load({
  	},{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
         ,forId: 'inopt_targetWidth{/literal}{$tv}{literal}'
-        ,html: 'The target width for the output image'		// _('tvimageplu.targetwidth_desc')
+        ,html: _('tvimageplus.targetwidth_desc')
         ,cls: 'desc-under'
     },{
  		xtype: 'textfield',
- 		fieldLabel: 'Target height',							// _('tvimageplus.targetheight'),
+ 		fieldLabel: _('tvimageplus.targetheight'),
  		name: 'inopt_targetHeight',
  		id: 'inopt_targetHeight{/literal}{$tv}{literal}',
  		value: params['targetHeight'] || '',
@@ -41,7 +42,7 @@ MODx.load({
  	},{
         xtype: MODx.expandHelp ? 'label' : 'hidden'
         ,forId: 'inopt_targetHeight{/literal}{$tv}{literal}'
-        ,html: 'The target height for the output image'		// _('tvimageplu.targetheight_desc')
+        ,html: _('tvimageplus.targetheight_desc')
         ,cls: 'desc-under'
     }]
  	,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
