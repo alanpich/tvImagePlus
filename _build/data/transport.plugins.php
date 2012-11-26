@@ -4,41 +4,60 @@ function getPluginContent($filename) {
     $o = trim(str_replace(array('<?php','?>'),'',$o));
     return $o;
 }
-$plugins = array();
- 
-$plugins[0]= $modx->newObject('modPlugin');
-$plugins[0]->fromArray(array(
-    'id' => 0,
-    'name' => 'ImagePlus',
-    'description' => 'Required by ModX <2.3 to route class calls properly',
-    'plugincode' => getPluginContent($sources['plugins'].'plugin.ImagePlus.php'),
-    'locked' => true
-),'',true,true);
-$properties = array();// include $sources['data'].'properties/properties.doodles.php';
-$plugins[0]->setProperties($properties);
-unset($properties);
 
+/* create the plugin object */
+$plugin= $modx->newObject('modPlugin');
+$plugin->set('id',1);
+$plugin->set('name', 'ImagePlusRouter');
+$plugin->set('description', 'Required by ModX <2.3 to route class calls properly');
+$plugin->set('plugincode', getPluginContent($sources['elements'] . 'plugins/plugin.GlossaryHighlighter.php'));
+$plugin->set('category', 0);
 
-
-// Add events to plugins
+/* add plugin events */
 $events = array();
-$events[] = $modx->newObject('modPluginEvent',array(
-		'event' =>	'OnTVInputPropertiesList'
-	));
-$events[] = $modx->newObject('modPluginEvent',array(
-		'event' =>	'OnTVInputRenderList'
-	));
-$events[] = $modx->newObject('modPluginEvent',array(
-		'event' =>	'OnTVOutputRenderList'
-	));
-$events[] = $modx->newObject('modPluginEvent',array(
-		'event' =>	'OnTVOutputRenderPropertiesList'
-	));
-$events[] = $modx->newObject('modPluginEvent',array(
-		'event' =>	'OnManagerPageBeforeRender'
-	));
 
-$plugins[0]->addMany($events);
-  
- 
-return $plugins;
+$event = $modx->newObject('modPluginEvent');
+$event->set('event','OnTVInputPropertiesList');
+$event->set('priority',0);
+$event->set('propertyset',0);
+$events[] = $event;
+
+$event = $modx->newObject('modPluginEvent');
+$event->set('event','OnTVInputRenderList');
+$event->set('priority',0);
+$event->set('propertyset',0);
+$events[] = $event;
+
+$event = $modx->newObject('modPluginEvent');
+$event->set('event','OnTVOutputRenderList');
+$event->set('priority',0);
+$event->set('propertyset',0);
+$events[] = $event;
+
+$event = $modx->newObject('modPluginEvent');
+$event->set('event','OnTVOutputRenderPropertiesList');
+$event->set('priority',0);
+$event->set('propertyset',0);
+$events[] = $event;
+
+$plugin->addMany($events);
+$modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' Plugin Events.'); flush();
+unset($events);
+
+/* create vehicle for plugin */
+$attributes= array(
+    xPDOTransport::UNIQUE_KEY => 'name',
+    xPDOTransport::PRESERVE_KEYS => false,
+    xPDOTransport::UPDATE_OBJECT => true,
+    xPDOTransport::RELATED_OBJECTS => true,
+    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
+        'PluginEvents' => array(
+            xPDOTransport::PRESERVE_KEYS => true,
+            xPDOTransport::UPDATE_OBJECT => false,
+            xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
+        ),
+    ),
+);
+$vehicle = $builder->createVehicle($plugin, $attributes);
+$modx->log(modX::LOG_LEVEL_INFO,'Packaging in plugins...');
+$builder->putVehicle($vehicle);

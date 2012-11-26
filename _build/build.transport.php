@@ -84,11 +84,7 @@ $vehicle->resolve('file',array(
 
  
 // Add Router plugin -------------------------------------------------------------------------
-	$modx->log(modX::LOG_LEVEL_INFO,'Packaging in plugin...');
-	$plugins = include $sources['data'].'transport.plugins.php';
-	if (empty($plugins)) $modx->log(modX::LOG_LEVEL_ERROR,'  => Could not package in plugin.');
-	$category->addMany($plugins);
-	$category->addMany($events);
+include $sources['data'].'transport.plugins.php';
     
     
  $builder->putVehicle($vehicle);
