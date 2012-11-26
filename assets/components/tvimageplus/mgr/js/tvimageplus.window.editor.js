@@ -107,10 +107,8 @@ Ext.extend(tvImagePlus.window.Editor, Ext.Window, {
      * Handle window closing
      */
     ,on_close: function(){
-        console.log('destroyMe');
-        this.inputPanel.editorWindow = false;
-        console.log(this);
-    }
+        this.inputPanel.editorWindow = false; 
+   }
     
     /**
      * Handle crop area change

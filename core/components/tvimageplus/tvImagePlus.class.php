@@ -53,7 +53,7 @@ public $dataStr;
             $data->sourceImg->width = 0;
             $data->sourceImg->height = 0;
             $data->sourceImg->src = '';
-            $data->sourceImg->source = 1;
+            $data->sourceImg->source = 1; 
         } else {
              // Crop data
             $data->crop = new stdClass();
@@ -72,17 +72,46 @@ public $dataStr;
         return $data;        
     }//
     
-
-public static function getImageURL( $json, &$modx){
+    
+    /**
+     * Check if phpThumbOf is installed
+     * @return bool
+     */
+    public function hasPhpThumbOf(){
+        $pto = $this->modx->getObject('modSnippet',array('name'=>'phpthumbof'));
+        return $pto instanceof modSnippet;
+    }//
+    
+    /**
+     * Return a scaled, cached version of the source image for front-end use
+     * @param string $json
+     * @param array $params
+     * @return string
+     */
+    public function getImageURL($json, $params = array()){
+        // Return error message if phpthumbof not found
+        if(!$this->hasPhpThumbOf()){
+            return "Image+ Error: PhpThumbOf Extra not found";
+        }
+    
 		// Parse json to object
 		$data = json_decode($json);
-		
+        
+        // Load up the mediaSource
+        $source = $this->modx->getObject('modMediaSource',$data->sourceImg->source);
+        if(!$source instanceof modMediaSource){
+            return 'Image+ Error: Invalid Media Source';
+        };
+        $source->initialize();
+        
+        // Grab absolute system path to image
+        $imgPath = $source->getBasePath().$data->sourceImg->src;
+        
 		// Prepare arguments for phpthumbof snippet call
-		$imgPath = $data->mediasource->path.$data->source->path.$data->source->filename;
 		$params = array(
 			'src' => $imgPath,
-			'w' => $data->constraint->width,
-			'h' => $data->constraint->height,
+			'w' => $data->targetWidth,
+			'h' => $data->targetHeight,
 			'far' => true,
 			'sx' => $data->crop->x,
 			'sy'=> $data->crop->y,
@@ -95,7 +124,7 @@ public static function getImageURL( $json, &$modx){
 		};
 		
 		// Call phpthumbof for url
-		$url = $modx->runSnippet('phpthumbof',array(
+		$url = $this->modx->runSnippet('phpthumbof',array(
 				'options'=>$options,
 				'input' => $imgPath
 			));

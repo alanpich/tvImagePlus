@@ -62,11 +62,12 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
     }
     
     ,generateThumbUrl: function(params){
-        var url = MODx.config.connectors_url+'system/phpthumb.php?zc=1'
+        var url = MODx.config.connectors_url+'system/phpthumb.php?imageplus=1'
         var defaults = {
             wctx: 'mgr'
             ,f: 'png'
             ,q: 90
+            ,w: 150
             ,source: this.tvimageplus.mediaSource
         }
         for(i in params){ defaults[i] = params[i]};
@@ -130,6 +131,8 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
         var TV = {
             sourceImg: this.tvimageplus.sourceImg
             ,crop: this.tvimageplus.crop
+            ,targetWidth: this.tvimageplus.targetWidth
+            ,targetHeight: this.tvimageplus.targetHeight
         }
         var json = JSON.stringify(TV,null,'  ');
         if(document.getElementById(this.updateTo)){

@@ -17,10 +17,4 @@ switch ($modx->event->name) {
     case 'OnTVOutputRenderPropertiesList':
         $modx->event->output($corePath.'elements/tv/output/options/');
         break;
-    case 'OnManagerPageBeforeRender':
-        $modx->regClientStartupScript($assetsUrl.'input/Ext.ux.crop.js'); 
-        $modx->regClientStartupScript($assetsUrl.'input/Ext.cropwindow.ui.js'); 
-        $modx->regClientStartupScript($assetsUrl.'input/Ext.CropWindow.js'); 
-        $modx->regClientStartupScript($assetsUrl.'input/tv.input.js'); 
-        break;
-}
+};
