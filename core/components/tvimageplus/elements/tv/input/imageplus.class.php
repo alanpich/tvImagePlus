@@ -10,7 +10,14 @@ class ImagePlusInputRender extends modTemplateVarInputRender {
     }//
     
     
+    public function getLexiconTopics(){
+        return array('tvimageplus:default');
+    }//
+    
+    
     public function process($value,array $params = array()) {
+        $this->modx->lexicon->load('tvimageplus:default');
+        
         // Load helper class
         if(!class_exists('tvImagePlus')){ 
             require $this->modx->getOption('core_path').'components/tvimageplus/tvImagePlus.class.php'; };
@@ -27,6 +34,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender {
         $this->modx->regClientStartupScript($this->helper->config['assets_url'].'mgr/js/tvimageplus.jquery.imagecrop.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
                                               .' tvImagePlus.config = '.json_encode($this->helper->config).';'
+                                              .' for(i in tvImagePlus.config.lexicon){ MODx.lang[i] = tvImagePlus.config.lexicon[i] }'
                                               .'</script>');
         
         // Prepare tv config for jsonification
@@ -39,7 +47,6 @@ class ImagePlusInputRender extends modTemplateVarInputRender {
         $this->setPlaceholder('tvparams',json_encode($this->getInputOptions()));
 
         $this->setPlaceholder('imgData',$this->getImageDataJSON($value,$params)); 
-        return 'arse'; 	 
     	
     }
     

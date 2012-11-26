@@ -180,7 +180,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             
             this.editorWindow = MODx.load({
                 xtype: 'tvimageplus-window-editor'
-                ,title: 'Image+ Editor'
+                ,title: _('tvimageplus.editor_title')
                 ,tvimageplus: this.tvimageplus
                 ,inputPanel: this
                 ,displayRatio: ratio

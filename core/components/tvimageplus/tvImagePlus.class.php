@@ -8,6 +8,7 @@ public $dataStr;
     function __construct(modX &$modx){
        $this->modx =& $modx;
        $this->loadConfig();
+       $this->loadLexicon();
     }//
 
     
@@ -16,8 +17,20 @@ public $dataStr;
         $assets = $this->modx->getOption('assets_url').'components/tvimageplus/';
         $this->config = array(
             'core_path' => $core,
-            'assets_url' => $assets,
+            'assets_url' => $assets
         );
+    }//
+    
+    
+    /**
+     * Load the lexicon topic
+     * @todo Do it properly with MODx.lang _()
+     */
+    private function loadLexicon(){
+        // This should be enough aaaarrrrrgh!!!!!
+       $this->modx->lexicon->load('tvimageplus');
+       $lex = $this->modx->lexicon->getFileTopic($this->modx->cultureKey,'tvimageplus');
+       $this->config['lexicon'] = $lex;
     }//
 
     /**

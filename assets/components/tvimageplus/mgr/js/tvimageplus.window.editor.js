@@ -28,11 +28,11 @@ tvImagePlus.window.Editor = function(config) {
         }]
         ,buttonAlign: 'right'
         ,buttons: [{
-            text: 'Cancel'
+            text: _('cancel')
             ,handler: this.updateFromEditor
             ,scope: this    
         },{      
-            text: 'Update'
+            text: _('update')
             ,handler: this.updateFromEditor
             ,scope: this
         }]
@@ -127,7 +127,7 @@ Ext.extend(tvImagePlus.window.Editor, Ext.Window, {
     }
     
     ,on_show: function(){
-        this.center.defer(100,this);
+        this.center.defer(150,this);
     }//
     
     /**
