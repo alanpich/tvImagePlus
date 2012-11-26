@@ -81,13 +81,13 @@ $vehicle->resolve('file',array(
     'source' => $sources['source_core'],
     'target' => "return MODX_CORE_PATH . 'components/';",
 ));
-
+$builder->putVehicle($vehicle);
  
 // Add Router plugin -------------------------------------------------------------------------
 include $sources['data'].'transport.plugins.php';
     
     
- $builder->putVehicle($vehicle);
+ 
  
  
  /**
