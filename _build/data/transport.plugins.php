@@ -9,7 +9,7 @@ $plugins = array();
 $plugins[0]= $modx->newObject('modPlugin');
 $plugins[0]->fromArray(array(
     'id' => 0,
-    'name' => 'ImagePlusRouter',
+    'name' => 'ImagePlus',
     'description' => 'Required by ModX <2.3 to route class calls properly',
     'plugincode' => getPluginContent($sources['plugins'].'plugin.ImagePlus.php'),
     'locked' => true
@@ -22,19 +22,19 @@ unset($properties);
 
 // Add events to plugins
 $events = array();
-$events[] = $modx->newObject('modPluginEvent')->fromArray(array(
+$events[] = $modx->newObject('modPluginEvent',array(
 		'event' =>	'OnTVInputPropertiesList'
 	));
-$events[] = $modx->newObject('modPluginEvent')->fromArray(array(
+$events[] = $modx->newObject('modPluginEvent',array(
 		'event' =>	'OnTVInputRenderList'
 	));
-$events[] = $modx->newObject('modPluginEvent')->fromArray(array(
+$events[] = $modx->newObject('modPluginEvent',array(
 		'event' =>	'OnTVOutputRenderList'
 	));
-$events[] = $modx->newObject('modPluginEvent')->fromArray(array(
+$events[] = $modx->newObject('modPluginEvent',array(
 		'event' =>	'OnTVOutputRenderPropertiesList'
 	));
-$events[] = $modx->newObject('modPluginEvent')->fromArray(array(
+$events[] = $modx->newObject('modPluginEvent',array(
 		'event' =>	'OnManagerPageBeforeRender'
 	));
 

@@ -1,0 +1,7 @@
+-------------------------
+ Image+ TV type changelog
+-------------------------
+
+# v2.0
+-------
+Complete rewrite

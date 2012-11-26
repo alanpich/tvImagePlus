@@ -1,5 +1,5 @@
 <?php
-define('MODX_BASE_PATH', '/home/orangutan/www/alan/image-plus/');
+define('MODX_BASE_PATH', '/var/www/modx/1/');
 define('MODX_CORE_PATH', MODX_BASE_PATH . 'core/');
 define('MODX_MANAGER_PATH', MODX_BASE_PATH . 'manager/');
 define('MODX_CONNECTORS_PATH', MODX_BASE_PATH . 'connectors/');

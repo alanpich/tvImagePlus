@@ -33,7 +33,9 @@ $modx= new modX();
 $modx->initialize('mgr');
 echo '<pre>'; /* used for nice formatting of log messages */
 $modx->setLogLevel(modX::LOG_LEVEL_INFO);
-$modx->setLogTarget('ECHO');
+if(!defined('LOG_TARGET_ALREADY_SET')){
+    $modx->setLogTarget('ECHO');
+};
  
 $modx->loadClass('transport.modPackageBuilder','',false, true);
 $builder = new modPackageBuilder($modx);
@@ -85,12 +87,37 @@ $vehicle->resolve('file',array(
 	if (empty($plugins)) $modx->log(modX::LOG_LEVEL_ERROR,'  => Could not package in plugin.');
 	$category->addMany($plugins);
 	$category->addMany($events);
+    
+    
+ $builder->putVehicle($vehicle);
  
  
+ /**
+ * Parse the smarty readme tpl for packaging
+ * @param string $path Path to tpl
+ * @return string
+ */
+function getReadmeFile( $path ){
+    global $modx;
+    $modx->getService('smarty','smarty.modSmarty');
+    
+    $modx->smarty->assign('date',date("jS M Y g:ia"));
+    $modx->smarty->assign('version',PKG_VERSION.' '.PKG_RELEASE);
+    $readme = $modx->smarty->fetch($path);
+    return $readme;
+}//   
+ // Add documentation ===========================================================
+$modx->log(modX::LOG_LEVEL_INFO,'Adding documentation...');
+$builder->setPackageAttributes(array(
+    'license' => file_get_contents($sources['docs'] . 'license.txt'),
+    'readme' => getReadmeFile($sources['docs'] . 'readme.tpl'),
+    'changelog' => file_get_contents($sources['docs'] . 'changelog.txt')
+));   
+    
+    
  
  
- 
-$builder->putVehicle($vehicle);
+
 
 
 
