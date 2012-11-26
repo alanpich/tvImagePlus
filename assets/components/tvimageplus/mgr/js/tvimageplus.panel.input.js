@@ -135,10 +135,22 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             ,targetHeight: this.tvimageplus.targetHeight
         }
         var json = JSON.stringify(TV,null,'  ');
+        
+        
+        var external = document.getElementById(this.updateTo);
+        var current = external.value || '';
+            if(current==''){ current=external.innerHTML}
+        
+        // Has value changed?
+        if(current==json){ return }
+        
         if(document.getElementById(this.updateTo)){
             document.getElementById(this.updateTo).value = json;
             document.getElementById(this.updateTo).innerHTML = json;
         }
+        
+        // Mark resource as dirty
+        MODx.fireResourceFormChange()
     }
     
     
@@ -150,10 +162,10 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
         if(!this.editorWindow){
             
             // Calculate safe image ratio
-            var imgW = this.tvimageplus.sourceImg.image_width;
-            var imgH = this.tvimageplus.sourceImg.image_height;
-            var maxH = window.innerHeight * 0.8;
-            var maxW = window.innerWidth * 0.8;
+            var imgW = this.tvimageplus.sourceImg.width;
+            var imgH = this.tvimageplus.sourceImg.height;
+            var maxH = window.innerHeight * 0.7;
+            var maxW = window.innerWidth * 0.7;
                 // Is image taller than screen?
                 if(imgH > maxH){
                     var ratio = maxH/imgH
@@ -163,6 +175,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
                 } else {
                     var ratio = 1;
                 }
+                
             
             
             this.editorWindow = MODx.load({
@@ -171,7 +184,8 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
                 ,tvimageplus: this.tvimageplus
                 ,inputPanel: this
                 ,displayRatio: ratio
-                ,autoWidth: true
+            //    ,autoWidth: true
+                ,width: imgW*ratio
                 ,crop: this.tvimageplus.crop
             });
             

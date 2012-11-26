@@ -6,6 +6,7 @@ tvImagePlus.jquery.ImageCrop= function(config) {
     
     Ext.apply(config,{
         cropData: this.tvimageplus.crop
+        ,collapsable: false
         ,items: [{
             html: '<img id="'+this.imageDOMid+'" src="'+this.window.getImageUrl()+'" />'
         }]
@@ -16,7 +17,7 @@ tvImagePlus.jquery.ImageCrop= function(config) {
     });
     tvImagePlus.jquery.ImageCrop.superclass.constructor.call(this,config);
 };
-Ext.extend(tvImagePlus.jquery.ImageCrop, MODx.Panel, {
+Ext.extend(tvImagePlus.jquery.ImageCrop, Ext.Panel, {
 
     
     
@@ -46,7 +47,6 @@ Ext.extend(tvImagePlus.jquery.ImageCrop, MODx.Panel, {
             };
             this.$image.Jcrop(conf,function(ths){ return function(){
                     ths.cropper = this;
-                    console.log(ths.window.getOuterImageUrl())
                     this.setOptions({
                         outerImage: ths.window.getOuterImageUrl()
                         ,bgOpacity: 0.5

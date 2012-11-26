@@ -12,6 +12,7 @@ tvImagePlus.window.Editor = function(config) {
         ,listeners: {
             'close': {fn: this.on_close,scope:this}
             ,'success': {fn:function(){console.log('success')}}
+            ,'show': {fn:this.on_show,scope:this}
         }
         ,items: [{
             xtype: 'tvimageplus-jquery-imagecrop'
@@ -25,7 +26,12 @@ tvImagePlus.window.Editor = function(config) {
             }
             ,cropData: this.tvimageplus.crop
         }]
+        ,buttonAlign: 'right'
         ,buttons: [{
+            text: 'Cancel'
+            ,handler: this.updateFromEditor
+            ,scope: this    
+        },{      
             text: 'Update'
             ,handler: this.updateFromEditor
             ,scope: this
@@ -118,7 +124,11 @@ Ext.extend(tvImagePlus.window.Editor, Ext.Window, {
      */
     ,on_close: function(){
         this.inputPanel.editorWindow = false; 
-   }
+    }
+    
+    ,on_show: function(){
+        this.center.defer(100,this);
+    }//
     
     /**
      * Handle crop area change
