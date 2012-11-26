@@ -12,6 +12,7 @@ tvImagePlus.panel.input = function(config) {
         ,baseCls: 'modx-formpanel'
         ,cls: 'container'
         ,updateTo: config.updateTo
+        ,width: '100%'
         ,items: [{
             xtype: 'compositefield'
             ,anchor: '98%'

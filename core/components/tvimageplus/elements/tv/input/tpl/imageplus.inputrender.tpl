@@ -1,6 +1,5 @@
-<textarea type="text" name="tv{$tv->id}" style="width:500px; height:200px;" id="tv{$tv->id}" value="{$tv->value}">{$tv->value}</textarea>
-<div class="tvimageplus-inputform" id="tvimageplus{$tv->id}" style="width:400px;"></div>
-<div id="tvimageplus-panel-input-div"></div>
+<input type="hidden" name="tv{$tv->id}" id="tv{$tv->id}" value="{$tv->value}" />
+<div id="tvimageplus-panel-input-div" style="width:420px"></div>
 <script type="text/javascript">
 {literal}
 Ext.onReady(function(){ 
