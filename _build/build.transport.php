@@ -2,12 +2,15 @@
 $tstart = explode(' ', microtime());
 $tstart = $tstart[1] + $tstart[0];
 set_time_limit(0);
+
+require dirname(__FILE__).'/build.tools.php';
  
 /* define package names */
 define('PKG_NAME','Image+ TV');
 define('PKG_NAME_LOWER','tvimageplus');
 define('PKG_VERSION','2.0');
 define('PKG_RELEASE','beta1');
+define('PKG_COMMIT',getGitCommitId(dirname(dirname(__FILE__))));
  
 /* define build paths */
 $root = dirname(dirname(__FILE__)).'/';
@@ -33,6 +36,7 @@ $modx= new modX();
 $modx->initialize('mgr');
 echo '<pre>'; /* used for nice formatting of log messages */
 $modx->setLogLevel(modX::LOG_LEVEL_INFO);
+
 if(!defined('LOG_TARGET_ALREADY_SET')){
     $modx->setLogTarget('ECHO');
 };
@@ -89,21 +93,7 @@ include $sources['data'].'transport.plugins.php';
     
  
  
- 
- /**
- * Parse the smarty readme tpl for packaging
- * @param string $path Path to tpl
- * @return string
- */
-function getReadmeFile( $path ){
-    global $modx;
-    $modx->getService('smarty','smarty.modSmarty');
-    
-    $modx->smarty->assign('date',date("jS M Y g:ia"));
-    $modx->smarty->assign('version',PKG_VERSION.' '.PKG_RELEASE);
-    $readme = $modx->smarty->fetch($path);
-    return $readme;
-}//   
+
  // Add documentation ===========================================================
 $modx->log(modX::LOG_LEVEL_INFO,'Adding documentation...');
 $builder->setPackageAttributes(array(
