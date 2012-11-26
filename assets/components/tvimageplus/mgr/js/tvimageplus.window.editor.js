@@ -53,7 +53,17 @@ Ext.extend(tvImagePlus.window.Editor, Ext.Window, {
                 ,h: this.getDisplayHeight()
             })
         return url;
-    }
+    }//
+    
+    ,getOuterImageUrl: function(){
+        var url = this.inputPanel.generateThumbUrl({
+                src: this.tvimageplus.sourceImg.src
+                ,w: this.getDisplayWidth()
+                ,h: this.getDisplayHeight()
+                ,'fltr[]': 'blur|25'
+            })
+        return url;
+    }//
     
     ,getMinCropSize: function(){
         return [ 

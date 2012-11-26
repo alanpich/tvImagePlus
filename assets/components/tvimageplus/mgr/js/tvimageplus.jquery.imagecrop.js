@@ -32,6 +32,7 @@ Ext.extend(tvImagePlus.jquery.ImageCrop, MODx.Panel, {
                 minSize: this.window.getMinCropSize()
                 ,aspectRatio: this.window.getAspectRatio()
                 ,setSelect: this.window.getCropCoords()
+                ,outerImage: this.window.getOuterImageUrl()
                 ,onSelect: function(ext){
                         return function(crop){
                             ext.on_cropChange({
@@ -45,6 +46,11 @@ Ext.extend(tvImagePlus.jquery.ImageCrop, MODx.Panel, {
             };
             this.$image.Jcrop(conf,function(ths){ return function(){
                     ths.cropper = this;
+                    console.log(ths.window.getOuterImageUrl())
+                    this.setOptions({
+                        outerImage: ths.window.getOuterImageUrl()
+                        ,bgOpacity: 0.5
+                    })
             }}(this))
         }//
         
