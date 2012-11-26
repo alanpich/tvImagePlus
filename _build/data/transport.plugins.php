@@ -10,7 +10,7 @@ $plugin= $modx->newObject('modPlugin');
 $plugin->set('id',1);
 $plugin->set('name', 'ImagePlusRouter');
 $plugin->set('description', 'Required by ModX <2.3 to route class calls properly');
-$plugin->set('plugincode', getPluginContent($sources['elements'] . 'plugins/plugin.GlossaryHighlighter.php'));
+$plugin->set('plugincode', getPluginContent($sources['elements'] . 'plugins/plugin.ImagePlusRouter.php'));
 $plugin->set('category', 0);
 
 /* add plugin events */
