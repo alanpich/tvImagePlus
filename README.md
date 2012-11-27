@@ -1,7 +1,7 @@
 # Image+ v2.0 #
 ## Advanced Image Template Variable
 
-**Beta build now available for [download](https://github.com/downloads/alanpich/tvImagePlus/tvimageplus-2.0-beta1.transport.zip)**
+**Beta build now available for [download](https://github.com/downloads/alanpich/tvImagePlus/tvimageplus-2.0-beta2.transport.zip) `v2.0-beta2`**
 
 Advanced image TV input type for MODx Revolution.
 The required dimensions for the image can (optionally) 
