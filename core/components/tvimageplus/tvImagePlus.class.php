@@ -9,6 +9,7 @@ public $dataStr;
        $this->modx =& $modx;
        $this->loadConfig();
        $this->loadLexicon();
+       $this->loadSourceMap();
     }//
 
     
@@ -17,7 +18,8 @@ public $dataStr;
         $assets = $this->modx->getOption('assets_url').'components/tvimageplus/';
         $this->config = array(
             'core_path' => $core,
-            'assets_url' => $assets
+            'assets_url' => $assets,
+            'sources' => array()
         );
     }//
     
@@ -32,6 +34,20 @@ public $dataStr;
        $lex = $this->modx->lexicon->getFileTopic($this->modx->cultureKey,'tvimageplus');
        $this->config['lexicon'] = $lex;
     }//
+    
+    /**
+     * Get a map of MediaSource id => baseUrl
+     * @return void
+     */
+    private function loadSourceMap(){
+        $sources = $this->modx->getCollection('sources.modMediaSource');
+        foreach($sources as $source){
+            $source->initialize();
+            $this->config['sources'][$source->get('id')] = new stdClass();
+            $this->config['sources'][$source->get('id')]->url = $source->getBaseUrl();
+        };
+    }//
+    
 
     /**
      * Gather info about the TV

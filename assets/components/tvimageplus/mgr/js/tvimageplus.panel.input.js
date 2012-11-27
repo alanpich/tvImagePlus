@@ -105,9 +105,30 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             ,source: this.tvimageplus.mediaSource
         }
         
-        // Update display
-        this.updateDisplay();
-    }
+        // If server returns 800x600, image may be larger
+        //  so need to get size manually
+        if(img.image_width == 800 && img.image_height == 600){
+            this.manual_getImageSize();
+        } else {        
+            // Update display
+            this.updateDisplay();
+        };
+    }//
+    
+    /**
+     * Manually get image size
+     * @return void
+     */
+    ,manual_getImageSize: function(){
+        var baseUrl = tvImagePlus.config['sources'][this.tvimageplus.sourceImg.source].url;
+        var img = new Image();
+            img.onload = (function(ths){ return function(){
+                ths.tvimageplus.sourceImg.width = this.width;
+                ths.tvimageplus.sourceImg.height = this.height;
+                ths.updateDisplay();
+            }})(this);
+        img.src = baseUrl+this.tvimageplus.sourceImg.src;
+    }//
     
     /**
      * Update the component display on state change
