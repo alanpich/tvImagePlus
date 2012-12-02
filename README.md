@@ -3,6 +3,8 @@
 
 **Beta build now available for [download](https://github.com/downloads/alanpich/tvImagePlus/tvimageplus-2.0-beta2.transport.zip) `v2.0-beta2`**
 
+**Dependant on PhpThumbOf component**
+
 Advanced image TV input type for MODx Revolution.
 The required dimensions for the image can (optionally) 
 be configured on the TV, restricting one or both 
