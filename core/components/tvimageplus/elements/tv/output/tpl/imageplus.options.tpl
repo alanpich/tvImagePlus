@@ -31,6 +31,29 @@ MODx.load({
             ,forId: 'prop_phpThumbParams{/literal}{$tv}{literal}'
             ,html: _('tvimageplus.phpThumbParams_desc')
             ,cls: 'desc-under'
+        },{
+            xtype: 'modx-combo',
+            url: MODx.config.connectors_url+'element/chunk.php',
+            baseParams: {
+                    action: 'getlist'
+               },
+            pageSize: 20,
+            fields: ['name','id'],
+            displayField: 'name',
+            valueField: 'name',
+            typeAhead: true,
+            editable: true,
+            fieldLabel: _('tvimageplus.outputChunk'),
+            name: 'prop_outputChunk',
+            id: 'prop_outputChunk{/literal}{$tv}{literal}',
+            value: params['outputChunk'] || '',
+            width: '99%',
+            listeners: oc
+ 	},{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'prop_outputChunk{/literal}{$tv}{literal}'
+            ,html: _('tvimageplus.outputChunk_desc')
+            ,cls: 'desc-under'
     }]
     ,renderTo: 'tv-output-properties-form{/literal}{$tv}{literal}'
 });

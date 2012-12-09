@@ -9,6 +9,7 @@ $a = print_r($this->getProperties(),1);
 
 $modx->controller->setPlaceholder('t_width',$a);
 $modx->controller->setPlaceholder('tvimagepluslexicon',json_encode($helper->config['lexicon']));
+$modx->controller->setPlaceholder('tvimageplus',$helper);
 $modx->controller->addLexiconTopic('tvimageplus:default');
 
 

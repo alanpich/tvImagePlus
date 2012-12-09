@@ -19,6 +19,7 @@ public $dataStr;
         $this->config = array(
             'core_path' => $core,
             'assets_url' => $assets,
+            'connectorUrl' => $assets.'mgr/connector.php',
             'sources' => array()
         );
     }//
@@ -167,15 +168,26 @@ public $dataStr;
         };
         $options = implode('&',$options);
 
+        
         // Call phpthumbof for url
         $url = $this->modx->runSnippet('phpthumbof',array(
                     'options'=>$options,
                     'input' => $imgPath
                 ));
         
-        echo '<pre>'.$options.'</pre>';
-
-        return $url;
+        // If an output chunk is selected, parse that
+        if(isset($opts['outputChunk']) && !empty($opts['outputChunk']) ){
+            $chunkParams = array(
+                'url' => $url,
+                'alt' => $data->altTag,
+                'width' => $data->targetWidth,
+                'height' => $data->targetHeight
+            );
+            return $this->modx->getChunk($opts['outputChunk'],$chunkParams);
+        } else {
+            // Otherwise return raw url
+            return $url;
+        };
     }//
 
 

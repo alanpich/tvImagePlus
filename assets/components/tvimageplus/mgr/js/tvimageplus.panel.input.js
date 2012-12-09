@@ -114,7 +114,6 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      * Runs after initial render of panel
      */
     ,onAfterRender: function(){
-     //   console.log('onAfterRender',this.tvimageplus);
         this.updateDisplay();
     }//
     
