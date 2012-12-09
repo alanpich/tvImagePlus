@@ -1,7 +1,7 @@
 # Image+ v2.0 #
 ## Advanced Image Template Variable
 
-**Beta build now available for [download](https://github.com/downloads/alanpich/tvImagePlus/tvimageplus-2.0-beta2.transport.zip) `v2.0-beta2`**
+**v2.1 now available for [download](https://github.com/downloads/alanpich/tvImagePlus/tvimageplus-2.1-pl.transport.zip) `v2.1-pl`**
 
 **Dependant on PhpThumbOf component**
 
