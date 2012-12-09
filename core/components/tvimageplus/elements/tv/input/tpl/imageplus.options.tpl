@@ -49,7 +49,7 @@ MODx.load({
             fieldLabel: _('tvimageplus.allowAltTag'),
             name: 'inopt_allowAltTag',
             id: 'inopt_allowAltTag{/literal}{$tv}{literal}',
-            value: (bool) (params['allowAltTag'] || false),
+            value: (params['allowAltTag'] || false),
             labelAlign: 'left',
             anchors: '98%',
             listeners: oc
