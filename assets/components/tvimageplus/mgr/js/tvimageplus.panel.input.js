@@ -5,6 +5,7 @@ tvImagePlus.panel.input = function(config) {
     this.create_editButton();
     this.create_imageBrowser();
     this.create_imagePreview();
+    this.create_altTextField();
     
     
     Ext.apply(config,{
@@ -25,7 +26,7 @@ tvImagePlus.panel.input = function(config) {
                 ,'afterRender': {fn: this.onAfterRender,scope:this}
             }
             ,items: [this.imageBrowser,this.editButton]
-        },this.imagePreview]
+        },this.altTextField,this.imagePreview]
     });
     tvImagePlus.panel.input.superclass.constructor.call(this,config);
 };
@@ -46,7 +47,6 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      * Create the image browser combo
      */
     ,create_imageBrowser: function(){
-        console.log(this.tvimageplus);
         // Generate opento path
         var openToPath = this.tvimageplus.sourceImg.src.split('/');
             openToPath.pop();
@@ -69,6 +69,23 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
     ,create_imagePreview: function(){
         this.imagePreview = new Ext.BoxComponent({autoEl: {tag: 'img', src: ''}});
     }
+    
+    /**
+     * Create field for alt-text input
+     */
+    ,create_altTextField: function(){
+        this.altTextField = MODx.load({
+            xtype: this.tvimageplus.altTagOn? 'textfield' : 'hidden'
+            ,value: this.tvimageplus.altTag || ''
+            ,listeners: {
+                'change': {fn: this.on_altTagChange,scope:this}
+            }
+            ,width: 300
+            ,style: {marginBottom:'5px'}
+        })
+    }
+    
+    
     
     ,generateThumbUrl: function(params){
         var url = MODx.config.connectors_url+'system/phpthumb.php?imageplus=1'
@@ -124,6 +141,14 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
     }//
     
     /**
+     * Fired when alt-tag field is changed
+     */
+    ,on_altTagChange: function(field, value){
+        this.tvimageplus.altTag = value;
+        this.updateExternalField();
+    }
+    
+    /**
      * Manually get image size
      * @return void
      */
@@ -163,6 +188,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             ,crop: this.tvimageplus.crop
             ,targetWidth: this.tvimageplus.targetWidth
             ,targetHeight: this.tvimageplus.targetHeight
+            ,altTag: this.tvimageplus.altTag
         }
         var json = JSON.stringify(TV,null,'  ');
         

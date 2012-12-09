@@ -19,33 +19,47 @@ MODx.load({
     ,border: false
     ,labelAlign: 'top'
     ,items: [{
- 		xtype: 'textfield',
- 		fieldLabel: _('tvimageplus.targetwidth'),
- 		name: 'inopt_targetWidth',
- 		id: 'inopt_targetWidth{/literal}{$tv}{literal}',
- 		value: params['targetWidth'] || '',
- 		anchors: '98%',
- 		listeners: oc
- 	},{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_targetWidth{/literal}{$tv}{literal}'
-        ,html: _('tvimageplus.targetwidth_desc')
-        ,cls: 'desc-under'
-    },{
- 		xtype: 'textfield',
- 		fieldLabel: _('tvimageplus.targetheight'),
- 		name: 'inopt_targetHeight',
- 		id: 'inopt_targetHeight{/literal}{$tv}{literal}',
- 		value: params['targetHeight'] || '',
- 		anchors: '98%',
- 		listeners: oc
- 	},{
-        xtype: MODx.expandHelp ? 'label' : 'hidden'
-        ,forId: 'inopt_targetHeight{/literal}{$tv}{literal}'
-        ,html: _('tvimageplus.targetheight_desc')
-        ,cls: 'desc-under'
-    }]
- 	,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
+            xtype: 'textfield',
+            fieldLabel: _('tvimageplus.targetwidth'),
+            name: 'inopt_targetWidth',
+            id: 'inopt_targetWidth{/literal}{$tv}{literal}',
+            value: params['targetWidth'] || '',
+            anchors: '98%',
+            listeners: oc
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'inopt_targetWidth{/literal}{$tv}{literal}'
+            ,html: _('tvimageplus.targetwidth_desc')
+            ,cls: 'desc-under'
+        },{
+            xtype: 'textfield',
+            fieldLabel: _('tvimageplus.targetheight'),
+            name: 'inopt_targetHeight',
+            id: 'inopt_targetHeight{/literal}{$tv}{literal}',
+            value: params['targetHeight'] || '',
+            anchors: '98%',
+            listeners: oc
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'inopt_targetHeight{/literal}{$tv}{literal}'
+            ,html: _('tvimageplus.targetheight_desc')
+            ,cls: 'desc-under'        
+        },{
+            xtype: 'combo-boolean',
+            fieldLabel: _('tvimageplus.allowAltTag'),
+            name: 'inopt_allowAltTag',
+            id: 'inopt_allowAltTag{/literal}{$tv}{literal}',
+            value: (bool) (params['allowAltTag'] || false),
+            labelAlign: 'left',
+            anchors: '98%',
+            listeners: oc
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'inopt_allowAltTag{/literal}{$tv}{literal}'
+            ,html: _('tvimageplus.allowAltTag_desc')
+            ,cls: 'desc-under'
+        }]
+    ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
 });
 // ]]>
 </script>

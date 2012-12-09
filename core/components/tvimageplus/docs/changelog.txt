@@ -2,6 +2,11 @@
  Image+ TV type changelog
 -------------------------
 
+# v2.0.1
+--------
+ :: Fixed bug with non-default media sources
+ :: Added field for additional phpThumb parameters to output renderer
+
 # v2.0
 -------
 Complete rewrite

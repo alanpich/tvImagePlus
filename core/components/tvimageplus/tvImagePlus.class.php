@@ -69,9 +69,9 @@ public $dataStr;
         $data->targetWidth = (int)$params['targetWidth'];
         $data->targetHeight = (int)$params['targetHeight'];
         // Alt-tag options
-        $data->altTagOn = (isset($params['allowAltTag']) && $params['allowAltTag']==1);
+        $data->altTagOn = (isset($params['allowAltTag']) && $params['allowAltTag']=='Yes');
         
-        $saved = json_decode($value);
+        $saved = empty($value)? null : json_decode($value);
         if(is_null($saved)){
             // Crop data
             $data->crop = new stdClass();
@@ -99,7 +99,7 @@ public $dataStr;
             $data->sourceImg->height = $saved->sourceImg->height;
             $data->sourceImg->src = $saved->sourceImg->src;
             $data->sourceImg->source = $saved->sourceImg->source;
-            
+      //      die('<pre>'.print_r($saved,1));
             $data->altTag = ($data->altTagOn? (isset($saved->altTag)? $saved->altTag:'') : false);
         }
         
