@@ -46,9 +46,17 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      * Create the image browser combo
      */
     ,create_imageBrowser: function(){
+        console.log(this.tvimageplus);
+        // Generate opento path
+        var openToPath = this.tvimageplus.sourceImg.src.split('/');
+            openToPath.pop();
+            openToPath = openToPath.join('/');
+           
+        // Create browser component
         this.imageBrowser = new MODx.combo.Browser({
             value: this.tvimageplus.sourceImg.src
-            
+            ,source: this.tvimageplus.sourceImg.source
+            ,openTo: openToPath
             ,listeners: {
                 'select': {fn: this.on_imageSelected,scope:this}
             }
@@ -69,7 +77,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             ,f: 'png'
             ,q: 90
             ,w: 150
-            ,source: this.tvimageplus.mediaSource
+            ,source: this.tvimageplus.sourceImg.source
         }
         for(i in params){ defaults[i] = params[i]};
         for(i in defaults){
@@ -99,7 +107,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
     ,on_imageSelected: function(img){
         
         this.tvimageplus.sourceImg = {
-            src: img.fullRelativeUrl
+            src: img.relativeUrl
             ,width: img.image_width
             ,height: img.image_height
             ,source: this.tvimageplus.mediaSource
