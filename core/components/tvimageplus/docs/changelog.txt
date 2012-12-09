@@ -2,10 +2,11 @@
  Image+ TV type changelog
 -------------------------
 
-# v2.0.1
+# v2.1
 --------
  :: Fixed bug with non-default media sources
  :: Added field for additional phpThumb parameters to output renderer
+ :: Added option to specify a chunk for output formatting (fields: url,alt,width,height)
 
 # v2.0
 -------
