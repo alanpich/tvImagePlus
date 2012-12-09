@@ -68,6 +68,8 @@ public $dataStr;
         // Dimension constraints
         $data->targetWidth = (int)$params['targetWidth'];
         $data->targetHeight = (int)$params['targetHeight'];
+        // Alt-tag options
+        $data->altTagOn = (isset($params['allowAltTag']) && $params['allowAltTag']==1);
         
         $saved = json_decode($value);
         if(is_null($saved)){
@@ -83,6 +85,7 @@ public $dataStr;
             $data->sourceImg->height = 0;
             $data->sourceImg->src = '';
             $data->sourceImg->source = 1; 
+            $data->altTag = ($data->altTagOn? '' : false);
         } else {
              // Crop data
             $data->crop = new stdClass();
@@ -96,6 +99,8 @@ public $dataStr;
             $data->sourceImg->height = $saved->sourceImg->height;
             $data->sourceImg->src = $saved->sourceImg->src;
             $data->sourceImg->source = $saved->sourceImg->source;
+            
+            $data->altTag = ($data->altTagOn? (isset($saved->altTag)? $saved->altTag:'') : false);
         }
         
         return $data;        
@@ -117,15 +122,15 @@ public $dataStr;
      * @param array $params
      * @return string
      */
-    public function getImageURL($json, $params = array()){
+    public function getImageURL($json, $opts = array()){
         // Return error message if phpthumbof not found
         if(!$this->hasPhpThumbOf()){
             return "Image+ Error: PhpThumbOf Extra not found";
         }
     
-		// Parse json to object
-		$data = json_decode($json);
-        
+        // Parse json to object
+        $data = json_decode($json);
+
         // Load up the mediaSource
         $source = $this->modx->getObject('modMediaSource',$data->sourceImg->source);
         if(!$source instanceof modMediaSource){
@@ -136,30 +141,42 @@ public $dataStr;
         // Grab absolute system path to image
         $imgPath = $source->getBasePath().$data->sourceImg->src;
         
-		// Prepare arguments for phpthumbof snippet call
-		$params = array(
-			'src' => $imgPath,
-			'w' => $data->targetWidth,
-			'h' => $data->targetHeight,
-			'far' => true,
-			'sx' => $data->crop->x,
-			'sy'=> $data->crop->y,
-			'sw'=> $data->crop->width,
-			'sh'=> $data->crop->height
-		);
-		$options = '';
-		foreach($params as $key => $val){
-			$options.= $key.'='.$val.'&';
-		};
-		
-		// Call phpthumbof for url
-		$url = $this->modx->runSnippet('phpthumbof',array(
-				'options'=>$options,
-				'input' => $imgPath
-			));
-		
-		return $url;
-	}//
+        // Prepare arguments for phpthumbof snippet call
+        $params = array(
+                'src' => $imgPath,
+                'w' => $data->targetWidth,
+                'h' => $data->targetHeight,
+                'far' => true,
+                'sx' => $data->crop->x,
+                'sy'=> $data->crop->y,
+                'sw'=> $data->crop->width,
+                'sh'=> $data->crop->height
+        );
+
+        // Add in output render params
+        $optParams = explode('&',$opts['phpThumbParams']);
+        foreach($optParams as $oP){
+            if(empty($oP)){ continue; };
+            $bits = explode('=',$oP);
+            $params[$bits[0]] = $bits[1];
+        }
+        
+        $options = array();
+        foreach($params as $key => $val){
+            $options[] = $key.'='.$val;
+        };
+        $options = implode('&',$options);
+
+        // Call phpthumbof for url
+        $url = $this->modx->runSnippet('phpthumbof',array(
+                    'options'=>$options,
+                    'input' => $imgPath
+                ));
+        
+        echo '<pre>'.$options.'</pre>';
+
+        return $url;
+    }//
 
 
 
