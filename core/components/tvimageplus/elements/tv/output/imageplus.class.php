@@ -5,7 +5,8 @@ class ImagePlusOutputRender extends modTemplateVarOutputRender {
     	if(!class_exists('tvImagePlus')){ require_once $this->modx->getOption('core_path').'components/tvimageplus/tvImagePlus.class.php'; };
     	$this->helper = new tvImagePlus($this->modx);
         
+        
     	return $this->helper->getImageURL($value,$params);
     }//
-}
+};
 return 'ImagePlusOutputRender';
