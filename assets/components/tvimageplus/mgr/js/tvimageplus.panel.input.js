@@ -55,7 +55,8 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
         // Create browser component
         this.imageBrowser = new MODx.combo.Browser({
             value: this.tvimageplus.sourceImg.src
-            ,source: this.tvimageplus.sourceImg.source
+            ,source: this.tvimageplus.mediaSource
+            ,hideSourceCombo: true  
             ,openTo: openToPath
             ,listeners: {
                 'select': {fn: this.on_imageSelected,scope:this}
