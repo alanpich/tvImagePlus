@@ -4,6 +4,9 @@
 
 # v2.2
 --------
+ :: Added option to put an icon on TV input 'crop' button.
+    - Create a system setting called tvimageplus.crop_icon and
+      populate it with the url to the desired icon png
  :: Added system setting override for core_path and assets_url (#25)
  :: Added Czech translation (@TheBoxer)
  :: Added Danish translation (@Flygenring)
