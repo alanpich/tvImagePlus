@@ -14,8 +14,8 @@ public $dataStr;
 
     
     private function loadConfig(){
-        $core = $this->modx->getOption('core_path').'components/tvimageplus/';
-        $assets = $this->modx->getOption('assets_url').'components/tvimageplus/';
+        $core = $this->modx->getOption('tvimageplus.core_path',null,$this->modx->getOption('core_path').'components/tvimageplus/');
+        $assets = $this->modx->getOption('tvimageplus.assets_url',null,$this->modx->getOption('assets_url').'components/tvimageplus/');
         $this->config = array(
             'core_path' => $core,
             'assets_url' => $assets,

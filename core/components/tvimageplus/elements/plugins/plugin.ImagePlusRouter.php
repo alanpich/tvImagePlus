@@ -1,6 +1,6 @@
 <?php
-$corePath = $modx->getOption('core_path',null,MODX_CORE_PATH).'components/tvimageplus/';
-$assetsUrl = $modx->getOption('assets_url',null,MODX_ASSETS_URL).'components/tvimageplus/js/mgr/';
+$corePath = $modx->getOption('tvimageplus.core_path',null,$modx->getOption('core_path',null,MODX_CORE_PATH).'components/tvimageplus/');
+$assetsUrl = $modx->getOption('tvimageplus.assets_url',null,$modx->getOption('assets_url',null,MODX_ASSETS_URL).'components/tvimageplus/js/mgr/');
 
 $modx->lexicon->load('tvimageplus:default');
 

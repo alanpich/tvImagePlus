@@ -14,6 +14,6 @@ $modx->lexicon->load('tvimageplus:default');
  
 // Handle request 
 $modx->request->handleRequest(array(
-    'processors_path' => $modx->getOption('core_path').'components/tvimageplus/processors/',
+    'processors_path' => $modx->getOption('tvimageplus.core_path',null,$modx->getOption('core_path').'components/tvimageplus/').'processors/',
     'location' => '',
 ));

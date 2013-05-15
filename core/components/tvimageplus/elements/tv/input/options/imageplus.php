@@ -1,5 +1,5 @@
 <?php 
-$root = $modx->getOption('core_path').'components/tvimageplus/';
+$root = $modx->getOption('tvimageplus.core_path',null,$modx->getOption('core_path').'components/tvimageplus/');
 if(!class_exists('tvImagePlus')){ require $root.'tvImagePlus.class.php'; };
 $helper = new tvImagePlus($modx);
 

@@ -20,7 +20,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender {
         
         // Load helper class
         if(!class_exists('tvImagePlus')){ 
-            require $this->modx->getOption('core_path').'components/tvimageplus/tvImagePlus.class.php'; };
+            require $this->modx->getOption('tvimageplus.core_path',null,$this->modx->getOption('core_path').'components/tvimageplus/tvImagePlus.class.php'); };
         $this->helper = new tvImagePlus($this->modx);
 
         // Load required javascripts & register global config
