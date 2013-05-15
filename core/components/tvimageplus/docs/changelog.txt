@@ -4,6 +4,7 @@
 
 # v2.2
 --------
+ :: Added system setting override for core_path and assets_url (#25)
  :: Added Czech translation (@TheBoxer)
  :: Added Danish translation (@Flygenring)
  :: Added German translation (@KristianP)
@@ -12,7 +13,7 @@
  :: Added Hungarian translation (Kristof Kotai)
  :: Added Italian translation (@tillilab)
  :: Added Dutch translation (@Mark-H)
- :: Added Russian translation (@Alroniks)g
+ :: Added Russian translation (@Alroniks)
 
 # v2.1
 --------
