@@ -201,6 +201,13 @@ class tvImagePlus
         // Parse json to object
         $data = json_decode($json);
 
+        // If data is null, json was invalid or empty.
+        // This is almost certainly because the TV is empty
+        if(is_null($data)){
+            $this->modx->log(xPDO::LOG_LEVEL_INFO,"Image+ TV renderer failed to parse JSON");
+            return '';
+        }
+
         // Load up the mediaSource
         $source = $this->modx->getObject('modMediaSource', $data->sourceImg->source);
         if (!$source instanceof modMediaSource) {
