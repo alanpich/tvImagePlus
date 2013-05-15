@@ -59,8 +59,10 @@ class tvImagePlus
             'core_path' => $core,
             'assets_url' => $assets,
             'connectorUrl' => $assets . 'mgr/connector.php',
-            'sources' => array()
+            'sources' => array(),
+            'crop_icon' => $this->modx->getOption('tvimageplus.crop_icon',null,$assets."mgr/icons/icon.crop.png")
         );
+
     }
 
     //
@@ -79,7 +81,7 @@ class tvImagePlus
         $this->config['lexicon'] = $lex;
     }
 
-    //
+
 
     /**
      * Get a map of MediaSource id => baseUrl
