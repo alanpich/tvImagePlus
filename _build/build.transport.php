@@ -1,120 +1,86 @@
 <?php
-$tstart = explode(' ', microtime());
-$tstart = $tstart[1] + $tstart[0];
-set_time_limit(0);
+/*
+ * Copyright 2013 by Alan Pich <alan.pich@gmail.com>
+ *
+ * This file is part of tvImagePlus
+ *
+ * tvImagePlus is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * tvImagePlus is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * Vapor; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * Suite 330, Boston, MA 02111-1307 USA
+ *
+ * @package tvImagePlus
+ * @author Alan Pich <alan.pich@gmail.com>
+ * @copyright Alan Pich 2013
+ */
 
-require dirname(__FILE__).'/build.tools.php';
- 
-/* define package names */
-define('PKG_NAME','Image+ TV');
-define('PKG_NAME_LOWER','tvimageplus');
-define('PKG_VERSION','2.1.5');
-define('PKG_RELEASE','pl');
-define('PKG_COMMIT',getGitCommitId(dirname(dirname(__FILE__))));
- 
-/* define build paths */
-$root = dirname(dirname(__FILE__)).'/';
-$sources = array(
-    'root' => $root,
-    'build' => $root . '_build/',
-    'data' => $root . '_build/data/',
-    'resolvers' => $root . '_build/resolvers/',
-    'plugins' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/plugins/',
-    'lexicon' => $root . 'core/components/'.PKG_NAME_LOWER.'/lexicon/',
-    'docs' => $root.'core/components/'.PKG_NAME_LOWER.'/docs/',
-    'elements' => $root.'core/components/'.PKG_NAME_LOWER.'/elements/',
-    'source_assets' => $root.'assets/components/'.PKG_NAME_LOWER,
-    'source_core' => $root.'core/components/'.PKG_NAME_LOWER,
-);
-unset($root);
- 
-/* override with your own defines here (see build.config.sample.php) */
-require_once $sources['build'] . 'build.config.php';
-require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
- 
-$modx= new modX();
-$modx->initialize('mgr');
-echo '<pre>'; /* used for nice formatting of log messages */
-$modx->setLogLevel(modX::LOG_LEVEL_INFO);
+require dirname(__FILE__) . '/tools/build.tools.php';
+require dirname(__FILE__) . '/build.config.php';
+require MODX_BASE_PATH . 'config.core.php';
+Tools::StartTimer();
 
-if(!defined('LOG_TARGET_ALREADY_SET')){
-    $modx->setLogTarget('ECHO');
-};
- 
-$modx->loadClass('transport.modPackageBuilder','',false, true);
+
+// Create modx & package instance -----------------------------------------------------------------
+$modx = Tools::loadModxInstance();
 $builder = new modPackageBuilder($modx);
-$builder->createPackage(PKG_NAME_LOWER,PKG_VERSION,PKG_RELEASE);
-$builder->registerNamespace(PKG_NAME_LOWER,false,true,'{core_path}components/'.PKG_NAME_LOWER.'/');
-
-$category= $modx->newObject('modCategory');
-$category->set('id',1);
-$category->set('category','ImagePlus');
-
- 
-// Create category vehicle -----------------------------------------------------------------
-$attr = array(
-		xPDOTransport::UNIQUE_KEY => 'category',
-		xPDOTransport::PRESERVE_KEYS => false,
-		xPDOTransport::UPDATE_OBJECT => true,
-		xPDOTransport::RELATED_OBJECTS => true,
-		xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-		    'Plugins' => array(
-		        xPDOTransport::PRESERVE_KEYS => false,
-		        xPDOTransport::UPDATE_OBJECT => true,
-		        xPDOTransport::UNIQUE_KEY => 'name',
-                xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-                    'PluginEvents' => array(
-                        xPDOTransport::PRESERVE_KEYS => false,
-                        xPDOTransport::UPDATE_OBJECT => true,
-                        xPDOTransport::UNIQUE_KEY => 'id',
-                     ),
-                )			
-            )
-       )
-	);
-$vehicle = $builder->createVehicle($category,$attr);
+$builder->createPackage(PKG_NAMESPACE, PKG_VERSION, PKG_RELEASE);
 
 
-// Add file resolvers ------------------------------------------------------------------------
-$modx->log(modX::LOG_LEVEL_INFO,'Adding file resolvers to category...');
+// Register Namespace -----------------------------------------------------------------------------
+$builder->registerNamespace(PKG_NAMESPACE, false, true, '{core_path}components/' . PKG_NAMESPACE . '/');
+
+
+// Create the plugin object -----------------------------------------------------------------------
+include $sources['data'] . 'transport.plugin.ImagePlusRouter.php';
+
+
+// Package core and assets directories ------------------------------------------------------------
+$modx->log(modX::LOG_LEVEL_INFO, 'Packaging core & assets directories...');
+$vehicle = $builder->createVehicle($plugin, $attributes);
 $vehicle->resolve('file',array(
-    'source' => $sources['source_assets'],
-    'target' => "return MODX_ASSETS_PATH . 'components/';",
-));
+        'source' => PKG_ASSETS,
+        'target' => "return MODX_ASSETS_PATH . 'components/';",
+    ));
 $vehicle->resolve('file',array(
-    'source' => $sources['source_core'],
-    'target' => "return MODX_CORE_PATH . 'components/';",
-));
+        'source' => PKG_CORE,
+        'target' => "return MODX_CORE_PATH . 'components/';",
+    ));
 $builder->putVehicle($vehicle);
- 
-// Add Router plugin -------------------------------------------------------------------------
-include $sources['data'].'transport.plugins.php';
-    
-    
- 
- 
-
- // Add documentation ===========================================================
-$modx->log(modX::LOG_LEVEL_INFO,'Adding documentation...');
-$builder->setPackageAttributes(array(
-    'license' => file_get_contents($sources['docs'] . 'license.txt'),
-    'readme' => getReadmeFile($sources['docs'] . 'readme.tpl'),
-    'changelog' => file_get_contents($sources['docs'] . 'changelog.txt')
-));   
-    
-    
- 
- 
 
 
+// Add documentation ------------------------------------------------------------------------------
+$modx->log(modX::LOG_LEVEL_INFO, 'Adding documentation...');
+$builder->setPackageAttributes(
+    array(
+        'license' => file_get_contents($sources['docs'] . 'license.txt'),
+        'readme' => Tools::parseReadmeTpl($sources['docs'] . 'readme.tpl'),
+        'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
+    )
+);
 
 
-/* zip up package */
-$modx->log(modX::LOG_LEVEL_INFO,'Packing up transport package zip...');
+// Create transport package -----------------------------------------------------------------------
+$modx->log(modX::LOG_LEVEL_INFO, 'Packing component for transport...');
 $builder->pack();
- 
-$tend= explode(" ", microtime());
-$tend= $tend[1] + $tend[0];
-$totalTime= sprintf("%2.4f s",($tend - $tstart));
-$modx->log(modX::LOG_LEVEL_INFO,"\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
-exit ();
+
+
+// Copy transport package back to PKG_ROOT --------------------------------------------------------
+$zipFile = PKG_NAMESPACE.'-'.PKG_VERSION.'-'.PKG_RELEASE.'.transport.zip';
+$zipPath = MODX_CORE_PATH.'packages/'. $zipFile;
+copy($zipPath,PKG_ROOT.$zipFile);
+
+
+// Build process finished -------------------------------------------------------------------------
+$totalTime= sprintf("%2.4f s", Tools::stopTimer());
+$modx->log(modX::LOG_LEVEL_INFO,"Package ".PKG_NAME.' '.PKG_VERSION.'-'.PKG_RELEASE." built in {$totalTime}");
+
+
+exit;

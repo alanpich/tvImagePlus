@@ -9,8 +9,7 @@ function getPluginContent($filename) {
 $plugin= $modx->newObject('modPlugin');
 $plugin->set('id',1);
 $plugin->set('name', 'ImagePlusRouter');
-$plugin->set('description', 'Required by ModX <2.3 to route class calls properly');
-$plugin->set('plugincode', getPluginContent($sources['elements'] . 'plugins/plugin.ImagePlusRouter.php'));
+$plugin->set('description', PKG_NAME.' '.PKG_VERSION.'-'.PKG_RELEASE.' :: Image+ runtime hooks - registers custom TV input & output types and includes javascripts on document edit pages so that the TV can be used from within MIGX');$plugin->set('plugincode', getPluginContent($sources['elements'] . 'plugins/plugin.ImagePlusRouter.php'));
 $plugin->set('category', 0);
 
 /* add plugin events */
@@ -59,5 +58,5 @@ $attributes= array(
     ),
 );
 $vehicle = $builder->createVehicle($plugin, $attributes);
-$modx->log(modX::LOG_LEVEL_INFO,'Packaging in plugins...');
+$modx->log(modX::LOG_LEVEL_INFO,'Added plugin ImagePlusRouter');
 $builder->putVehicle($vehicle);
