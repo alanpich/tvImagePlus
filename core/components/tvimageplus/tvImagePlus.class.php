@@ -186,12 +186,13 @@ class tvImagePlus
     /**
      * Return a scaled, cached version of the source image for front-end use
      *
-     * @param string $json
-     * @param array  $opts
+     * @param string         $json
+     * @param array          $opts
+     * @param modTemplateVar $tv
      * @internal param array $params
      * @return string
      */
-    public function getImageURL($json, $opts = array())
+    public function getImageURL($json, $opts = array(), modTemplateVar $tv)
     {
         // Return error message if phpthumbof not found
         if (!$this->hasPhpThumbOf()) {
@@ -205,6 +206,11 @@ class tvImagePlus
         // This is almost certainly because the TV is empty
         if(is_null($data)){
             $this->modx->log(xPDO::LOG_LEVEL_INFO,"Image+ TV renderer failed to parse JSON");
+
+            return $tv->default_text;
+
+            return "EMPTY TV FIELD";
+
             return '';
         }
 
