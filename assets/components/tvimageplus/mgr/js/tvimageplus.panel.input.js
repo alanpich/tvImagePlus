@@ -61,8 +61,6 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      */
     create_editButton: function(){
 
-        console.log(this.tvimageplus);
-
         this.editButton = new Ext.Button({
             text: _('tvimageplus.edit_image')
             ,handler: this.editImage
@@ -150,7 +148,12 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      * Fired when user has selected an image from the browser
      */
     ,on_imageSelected: function(img){
-        
+
+        this.oldSourceImg = {};
+        for(i in this.tvimageplus){
+            this.oldSourceImg[i] = this.tvimageplus.sourceImg[i];
+        }
+
         this.tvimageplus.sourceImg = {
             src: img.relativeUrl
             ,width: img.image_width
@@ -190,11 +193,21 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             }})(this);
         img.src = baseUrl+this.tvimageplus.sourceImg.src;
     }//
-    
+
+
     /**
      * Update the component display on state change
      */
     ,updateDisplay: function(){
+
+        // Make sure image is large enough to use
+        if(!this.checkImageIsLargeEnough()){
+            this.tvimageplus.sourceImg = this.oldSourceImg;
+            console.log(this.imageBrowser.reset());
+            MODx.msg.alert("Image too small","The selected image is too small to be used here. Please select a different image");
+            return;
+        }
+
         // Hide 'edit' button if field is empty
         if(this.imageBrowser.getValue()==''){
             this.editButton.disable();
@@ -205,7 +218,8 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
         
         this.updateExternalField();
     }//
-    
+
+
     /**
      * Update updateTo field input field value
      */
@@ -235,6 +249,25 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
         
         // Mark resource as dirty
         MODx.fireResourceFormChange()
+    }
+
+
+    /**
+     * Checks whether the image is larger than specified crop dimensions
+     * @returns bool
+     */
+    ,checkImageIsLargeEnough: function(){
+        if(this.tvimageplus.targetWidth > 0){
+            if(this.tvimageplus.targetWidth > this.tvimageplus.sourceImg.width){
+                return false;
+            }
+        }
+        if(this.tvimageplus.targetHeight > 0){
+            if(this.tvimageplus.targetHeight > this.tvimageplus.sourceImg.height){
+                return false;
+            }
+        }
+        return true;
     }
     
     
