@@ -53,9 +53,27 @@ tvImagePlus.panel.input = function(config) {
         },this.altTextField,this.imagePreview]
     });
     tvImagePlus.panel.input.superclass.constructor.call(this,config);
+
+
+    this.listenForResetEvent();
 };
 Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
-    
+
+
+    /**
+     * Bind change event on tv input DOM element so
+     * that we can be notified when the user hits the
+     * native 'Reset' button
+     */
+    listenForResetEvent: function(){
+        var resourcePanel = Ext.getCmp('modx-panel-resource');
+        resourcePanel.on('tv-reset',function(changed){
+            if(changed.id = this.tvimageplus.tv.id){
+                this.on_Reset();
+            }
+        },this)
+    },
+
     /**
      * Create the 'edit image' button
      */
@@ -129,7 +147,18 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
         };
         return url;
     }
-    
+
+    /**
+     * Fires when the TV field is reset
+     */
+    ,on_Reset: function(){
+        console.log('RESET!!!');
+        this.imageBrowser.setValue('');
+        this.tvimageplus.sourceImg = false;
+        this.editButton.disable();
+        this.updatePreviewImage.defer(10,this);
+    }
+
     /**
      * Render form elements to page
      */
@@ -244,7 +273,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
         
         if(document.getElementById(this.updateTo)){
             document.getElementById(this.updateTo).value = json;
-            document.getElementById(this.updateTo).innerHTML = json;
+//            document.getElementById(this.updateTo).innerHTML = json;
         }
         
         // Mark resource as dirty
@@ -322,7 +351,10 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
     }
     
     ,updatePreviewImage: function(){
-        if(!this.tvimageplus.sourceImg || this.tvimageplus.crop.width==0){return;}
+        if(!this.tvimageplus.sourceImg || this.tvimageplus.crop.width==0){
+            this.imagePreview.hide();
+            return;
+        }
         url = this.generateThumbUrl({
                 src: this.tvimageplus.sourceImg.src
                 ,sw: this.tvimageplus.crop.width
@@ -332,6 +364,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             })
         if(this.imagePreview.el){
             this.imagePreview.el.dom.src = url;
+            this.imagePreview.show()
         };
     }
     
