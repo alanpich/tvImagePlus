@@ -8,8 +8,8 @@ require dirname(__FILE__).'/build.tools.php';
 /* define package names */
 define('PKG_NAME','Image+ TV');
 define('PKG_NAME_LOWER','tvimageplus');
-define('PKG_VERSION','2.0');
-define('PKG_RELEASE','beta1');
+define('PKG_VERSION','2.1.5');
+define('PKG_RELEASE','pl');
 define('PKG_COMMIT',getGitCommitId(dirname(dirname(__FILE__))));
  
 /* define build paths */

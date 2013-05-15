@@ -2,7 +2,7 @@
  Image+ TV type 
 ---------------------
  Version:  {$version}
- Author:   Alan Pich <alan.pich@gmail.com>
+ Author:   Alan Pich <alan.pich@gmailg.com>
  License:  GNU GPLv2
  Date:     {$date}
  Build:    {$commit}
