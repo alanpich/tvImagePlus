@@ -152,7 +152,6 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      * Fires when the TV field is reset
      */
     ,on_Reset: function(){
-        console.log('RESET!!!');
         this.imageBrowser.setValue('');
         this.tvimageplus.sourceImg = false;
         this.editButton.disable();
@@ -232,7 +231,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
         // Make sure image is large enough to use
         if(!this.checkImageIsLargeEnough()){
             this.tvimageplus.sourceImg = this.oldSourceImg;
-            console.log(this.imageBrowser.reset());
+            this.imageBrowser.reset();
             MODx.msg.alert("Image too small","The selected image is too small to be used here. Please select a different image");
             return;
         }
@@ -286,13 +285,19 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      * @returns bool
      */
     ,checkImageIsLargeEnough: function(){
-        if(this.tvimageplus.targetWidth > 0){
+        if(!this.tvimageplus.sourceImg || this.tvimageplus == undefined) return true;
+
+
+        console.log(this.tvimageplus);
+        if(this.tvimageplus.targetWidth > 0 && this.tvimageplus.sourceImg.width>0){
             if(this.tvimageplus.targetWidth > this.tvimageplus.sourceImg.width){
+                console.log('Width to small');
                 return false;
             }
         }
-        if(this.tvimageplus.targetHeight > 0){
+        if(this.tvimageplus.targetHeight > 0 && this.tvimageplus.sourceImg.height>0){
             if(this.tvimageplus.targetHeight > this.tvimageplus.sourceImg.height){
+                console.log('height too small');
                 return false;
             }
         }
