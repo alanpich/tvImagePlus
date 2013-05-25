@@ -4,6 +4,7 @@
 
 # v2.2
 --------
+ :: Now works with MIGX [#15]
  :: TV Default Value is now output if TV is empty
  :: TV Reset button now works [#22]
  :: Added image preloader to accurately get image size on upload.

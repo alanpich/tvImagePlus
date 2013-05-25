@@ -12,6 +12,7 @@
  * @event   OnTVOutputRenderList
  * @event   OnTVInputPropertiesList
  * @event   OnTVOutputPropertiesList
+ * @event   OnTVOutputRenderPropertiesList
  * @event   OnDocFormRender
  *
  */

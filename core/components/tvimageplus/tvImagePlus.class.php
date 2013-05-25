@@ -14,7 +14,7 @@
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * Vapor; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * tvImagePlus; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
  *
  * @package tvImagePlus
@@ -170,6 +170,7 @@ class tvImagePlus
         $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tvimageplus.js');
         $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tvimageplus.panel.input.js');
         $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tvimageplus.window.editor.js');
+        $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tvimageplus.migx_renderer.js');
         $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tools/JSON2.js');
         $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/jquery/jquery.min.js');
         $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/jquery/jquery.jcrop.min.js');
@@ -244,18 +245,20 @@ class tvImagePlus
         );
 
         // Add in output render params
-        $optParams = explode('&', $opts['phpThumbParams']);
-        foreach ($optParams as $oP) {
-            if (empty($oP)) {
-                continue;
-            };
-            $bits = explode('=', $oP);
-            $params[$bits[0]] = $bits[1];
-        }
-
         $options = array();
-        foreach ($params as $key => $val) {
-            $options[] = $key . '=' . $val;
+        if(isset($opts['phpThumbParams'])){
+            $optParams = explode('&', $opts['phpThumbParams']);
+            foreach ($optParams as $oP) {
+                if (empty($oP)) {
+                    continue;
+                };
+                $bits = explode('=', $oP);
+                $params[$bits[0]] = $bits[1];
+            }
+
+            foreach ($params as $key => $val) {
+                $options[] = $key . '=' . $val;
+            };
         };
         $options = implode('&', $options);
 

@@ -13,7 +13,7 @@
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * Vapor; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * tvImagePlus; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
  *
  * @package tvImagePlus
@@ -27,7 +27,29 @@ var tvImagePlus = function(config) {
     tvImagePlus.superclass.constructor.call(this,config);
 };
 Ext.extend(tvImagePlus,Ext.Component,{
-    page:{},window:{},grid:{},tree:{},panel:{},combo:{},config: {},jquery:{}
+    page:{},window:{},grid:{},tree:{},panel:{},combo:{},config: {},jquery:{},
+
+    generateThumbUrl: function(params){
+        return this.generatePhpThumbOfUrl(params);
+    },
+
+    generatePhpThumbOfUrl: function(params){
+        var url = MODx.config.connectors_url+'system/phpthumb.php?imageplus=1'
+        var defaults = {
+            wctx: 'mgr'
+            ,f: 'png'
+            ,q: 90
+            ,w: 150
+            ,source: 1
+        }
+        for(i in params){ defaults[i] = params[i]};
+        for(i in defaults){
+            url+= '&'+i+'='+defaults[i];
+        };
+        return url;
+
+    }
 });
-Ext.reg('doodles',tvImagePlus);
+Ext.reg('imageplus',tvImagePlus);
 tvImagePlus = new tvImagePlus();
+

@@ -13,7 +13,7 @@
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * Vapor; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * tvImagePlus; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
  *
  * @package tvImagePlus
@@ -287,17 +287,13 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
     ,checkImageIsLargeEnough: function(){
         if(!this.tvimageplus.sourceImg || this.tvimageplus == undefined) return true;
 
-
-        console.log(this.tvimageplus);
         if(this.tvimageplus.targetWidth > 0 && this.tvimageplus.sourceImg.width>0){
             if(this.tvimageplus.targetWidth > this.tvimageplus.sourceImg.width){
-                console.log('Width to small');
                 return false;
             }
         }
         if(this.tvimageplus.targetHeight > 0 && this.tvimageplus.sourceImg.height>0){
             if(this.tvimageplus.targetHeight > this.tvimageplus.sourceImg.height){
-                console.log('height too small');
                 return false;
             }
         }

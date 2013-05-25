@@ -14,7 +14,7 @@
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * Vapor; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * tvImagePlus; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
  *
  * @package tvImagePlus
@@ -47,7 +47,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender {
 
         // Load required javascripts & register global config
         $this->helper->includeScriptAssets();
-        
+
         // Prepare tv config for jsonification
         $tvConfig = $this->helper->loadTvConfig($this,$value,$params);
         $this->setPlaceholder('tvimageplusconfig',json_encode($tvConfig));
