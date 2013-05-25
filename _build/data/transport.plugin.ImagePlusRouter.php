@@ -39,6 +39,12 @@ $event->set('priority',0);
 $event->set('propertyset',0);
 $events[] = $event;
 
+$event = $modx->newObject('modPluginEvent');
+$event->set('event','OnDocFormRender');
+$event->set('priority',0);
+$event->set('propertyset',0);
+$events[] = $event;
+
 $plugin->addMany($events);
 $modx->log(xPDO::LOG_LEVEL_INFO,'Packaged in '.count($events).' Plugin Events.'); flush();
 unset($events);
