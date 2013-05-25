@@ -4,6 +4,8 @@
 
 # v2.2
 --------
+ :: Added grid renderer for MIGX backend
+ :: Confirmed to work with Articles [#21]
  :: Now works with MIGX [#15]
  :: TV Default Value is now output if TV is empty
  :: TV Reset button now works [#22]

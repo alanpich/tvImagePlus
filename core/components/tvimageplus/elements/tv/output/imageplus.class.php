@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright 2013 by Alan Pich <alan.pich@gmail.com>
  *
  * This file is part of tvImagePlus
