@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Copyright 2013 by Alan Pich <alan.pich@gmail.com>
  *
  * This file is part of tvImagePlus
@@ -153,7 +153,6 @@ class tvImagePlus
             $data->sourceImg->height = $saved->sourceImg->height;
             $data->sourceImg->src = $saved->sourceImg->src;
             $data->sourceImg->source = $saved->sourceImg->source;
-            //      die('<pre>'.print_r($saved,1));
             $data->altTag = ($data->altTagOn ? (isset($saved->altTag) ? $saved->altTag : '') : false);
         }
 
@@ -183,19 +182,6 @@ class tvImagePlus
 
 
     /**
-     * Check if phpThumbOf is installed
-     *
-     * @return bool
-     */
-    public function hasPhpThumbOf()
-    {
-        $pto = $this->modx->getObject('modSnippet', array('name' => 'phpthumbof'));
-        return $pto instanceof modSnippet;
-    }
-
-    //
-
-    /**
      * Return a scaled, cached version of the source image for front-end use
      *
      * @param string         $json
@@ -206,85 +192,33 @@ class tvImagePlus
      */
     public function getImageURL($json, $opts = array(), modTemplateVar $tv)
     {
-        // Return error message if phpthumbof not found
-        if (!$this->hasPhpThumbOf()) {
-            return "Image+ Error: PhpThumbOf Extra not found";
+        // Register a micro autoloader for in-house engines
+        spl_autoload_register(function($className){
+            if(strpos($className,'tvImagePlus\\CropEngines\\') === false)
+                return;
+
+            $class = str_replace('tvImagePlus\\CropEngines\\','',$className);
+            $path = dirname(__FILE__).'/lib/CropEngines/'.$class.'.php';
+            if(is_readable($path))
+                include $path;
+
+        });
+
+        // Check system settings for crop engine override
+        $engineClass = $this->modx->getOption('tvimageplus.crop_engine_class',null,'\\tvImagePlus\\CropEngines\\PhpThumbOf');
+
+        /**
+         * @var tvImagePlus\CropEngines\AbstractCropEngine $cropEngine
+         */
+        $cropEngine = new $engineClass($this->modx);
+
+        // Check crop engine is usable
+        if(!$cropEngine->engineRequirementsMet()){
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR,"Image+ :: Requirements not met for Crop Engine [{$engineClass}]");
+            return 'IMAGE+ ERROR';
         }
 
-        // Parse json to object
-        $data = json_decode($json);
-
-        // If data is null, json was invalid or empty.
-        // This is almost certainly because the TV is empty
-        if(is_null($data)){
-            $this->modx->log(xPDO::LOG_LEVEL_INFO,"Image+ TV renderer failed to parse JSON");
-
-            return $tv->default_text;
-        }
-
-        // Load up the mediaSource
-        $source = $this->modx->getObject('modMediaSource', $data->sourceImg->source);
-        if (!$source instanceof modMediaSource) {
-            return 'Image+ Error: Invalid Media Source';
-        };
-        $source->initialize();
-
-        // Grab absolute system path to image
-        $imgPath = $source->getBasePath() . $data->sourceImg->src;
-
-        // Prepare arguments for phpthumbof snippet call
-        $params = array(
-            'src' => $imgPath,
-            'w' => $data->targetWidth,
-            'h' => $data->targetHeight,
-            'far' => true,
-            'sx' => $data->crop->x,
-            'sy' => $data->crop->y,
-            'sw' => $data->crop->width,
-            'sh' => $data->crop->height
-        );
-
-        // Add in output render params
-        $options = array();
-        if(isset($opts['phpThumbParams'])){
-            $optParams = explode('&', $opts['phpThumbParams']);
-            foreach ($optParams as $oP) {
-                if (empty($oP)) {
-                    continue;
-                };
-                $bits = explode('=', $oP);
-                $params[$bits[0]] = $bits[1];
-            }
-
-            foreach ($params as $key => $val) {
-                $options[] = $key . '=' . $val;
-            };
-        };
-        $options = implode('&', $options);
-
-
-        // Call phpthumbof for url
-        $url = $this->modx->runSnippet(
-            'phpthumbof',
-            array(
-                'options' => $options,
-                'input' => $imgPath
-            )
-        );
-
-        // If an output chunk is selected, parse that
-        if (isset($opts['outputChunk']) && !empty($opts['outputChunk'])) {
-            $chunkParams = array(
-                'url' => $url,
-                'alt' => $data->altTag,
-                'width' => $data->targetWidth,
-                'height' => $data->targetHeight
-            );
-            return $this->modx->getChunk($opts['outputChunk'], $chunkParams);
-        } else {
-            // Otherwise return raw url
-            return $url;
-        };
+        return $cropEngine->getImageUrl($json,$opts,$tv);
     }
     //
 
