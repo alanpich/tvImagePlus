@@ -205,7 +205,16 @@ class tvImagePlus
         });
 
         // Check system settings for crop engine override
-        $engineClass = $this->modx->getOption('tvimageplus.crop_engine_class',null,'\\tvImagePlus\\CropEngines\\PhpThumbOf');
+        $engineClass = $this->modx->getOption('tvimageplus.crop_engine_class',null,false);
+
+        // Do some basic intelligent sniffing
+        if(!$engineClass){
+            if($this->snippetExists('phpthumbsup')){
+                $engineClass = '\\tvImagePlus\\CropEngines\\PhpThumbsUp';
+            } else {
+                $engineClass = '\\tvImagePlus\\CropEngines\\PhpThumbOf';
+            }
+        }
 
         /**
          * @var tvImagePlus\CropEngines\AbstractCropEngine $cropEngine
@@ -215,12 +224,25 @@ class tvImagePlus
         // Check crop engine is usable
         if(!$cropEngine->engineRequirementsMet()){
             $this->modx->log(xPDO::LOG_LEVEL_ERROR,"Image+ :: Requirements not met for Crop Engine [{$engineClass}]");
-            return 'IMAGE+ ERROR';
+            return 'IMAGE+ ERROR - requirements not met for crop engine';
         }
 
         return $cropEngine->getImageUrl($json,$opts,$tv);
     }
-    //
+
+
+    /**
+     * Check if a snippet exists by name
+     *
+     * @param string $snippet Name of snippet to check for
+     * @return bool
+     */
+    protected function snippetExists($snippet){
+        $obj = $this->modx->getObject('modSnippet',array(
+            'name' => $snippet
+        ));
+        return $obj instanceof modSnippet;
+    }
 
 
 }

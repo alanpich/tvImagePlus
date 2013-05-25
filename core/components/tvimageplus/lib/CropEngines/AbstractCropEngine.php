@@ -36,8 +36,6 @@ abstract class AbstractCropEngine
     public function __construct(\modX $modx)
     {
         $this->modx = $modx;
-
-        echo '<pre>Loaded CropEngine</pre>';
     }
 
 

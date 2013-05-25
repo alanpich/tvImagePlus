@@ -4,6 +4,8 @@
 
 # v2.2
 --------
+ :: Added PhpThumbsUp crop engine
+ :: Refactored to allow changing of crop engines
  :: Added grid renderer for MIGX backend
  :: Confirmed to work with Articles [#21]
  :: Now works with MIGX [#15]
