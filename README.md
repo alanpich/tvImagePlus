@@ -1,9 +1,10 @@
 # Image+ v2.0 #
 ## Advanced Image Template Variable
 
-**v2.1 now available for [download](https://github.com/downloads/alanpich/tvImagePlus/tvimageplus-2.1-pl.transport.zip) `v2.1-pl`**
+** v2.2 is currently in beta phase - [Build Instructions](https://github.com/alanpich/tvImagePlus/wiki/Installation) - 
+please log any feedback as an issue [here](https://github.com/alanpich/tvImagePlus/issues) **
 
-**Dependant on PhpThumbOf component**
+**Dependant on PhpThumbOf or PhpThumbsUp component**
 
 Advanced image TV input type for MODx Revolution.
 The required dimensions for the image can (optionally) 
