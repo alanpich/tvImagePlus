@@ -27,6 +27,7 @@ tvImagePlus.panel.input = function(config) {
     this.tvimageplus = config.tvimageplus;
     
     this.create_editButton();
+	this.create_clearButton();
     this.create_imageBrowser();
     this.create_imagePreview();
     this.create_altTextField();
@@ -50,7 +51,7 @@ tvImagePlus.panel.input = function(config) {
                 ,'afterRender': {fn: this.onAfterRender,scope:this}
             }
             ,items: [this.imageBrowser,this.editButton]
-        },this.altTextField,this.imagePreview]
+        },this.altTextField,this.imagePreview,this.clearButton]
     });
     tvImagePlus.panel.input.superclass.constructor.call(this,config);
 
@@ -84,6 +85,14 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             ,handler: this.editImage
             ,scope:this
             ,icon: tvImagePlus.config.crop_icon
+        })
+    }//
+	
+	,create_clearButton: function(){
+        this.clearButton = new Ext.Button({
+            text: _('tvimageplus.clear_image') || "Clear Image"
+            ,handler: this.clearImage
+            ,scope:this
         })
     }//
     
@@ -176,11 +185,15 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      * Fired when user has selected an image from the browser
      */
     ,on_imageSelected: function(img){
+		
+		var diffImg =  (this.tvimageplus.sourceImg && this.tvimageplus.sourceImg.src != img.relativeUrl);
 
-        this.oldSourceImg = {};
-        for(i in this.tvimageplus){
+      		
+		this.oldSourceImg = {};
+        for(i in this.tvimageplus.sourceImg){
             this.oldSourceImg[i] = this.tvimageplus.sourceImg[i];
         }
+	
 
         this.tvimageplus.sourceImg = {
             src: img.relativeUrl
@@ -188,14 +201,25 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             ,height: img.image_height
             ,source: this.tvimageplus.mediaSource
         }
-        
-        // If server returns 800x600, image may be larger
+		
+		
+		// Reset crop rectangle everytime an image is selected to be different from browser
+		if (diffImg) {
+			this.tvimageplus.crop.x  =0;
+			this.tvimageplus.crop.y  =0;
+			this.tvimageplus.crop.width  = this.tvimageplus.targetWidth;
+			this.tvimageplus.crop.height = this.tvimageplus.targetHeight;
+		}
+
+		
+        // If server returns 800x600 or higher, image may be larger
         //  so need to get size manually
-        if(img.image_width == 800 && img.image_height == 600){
+        if(img.image_width >= 800 || img.image_height >= 600){
             this.manual_getImageSize();
         } else {        
             // Update display
             this.updateDisplay();
+			if (this.tvimageplus.crop.width ==0 || this.tvimageplus.crop.height ==0 ) this.editImage();
         };
     }//
     
@@ -217,7 +241,9 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             img.onload = (function(ths){ return function(){
                 ths.tvimageplus.sourceImg.width = this.width;
                 ths.tvimageplus.sourceImg.height = this.height;
+				
                 ths.updateDisplay();
+				if (ths.tvimageplus.crop.width ==0 || ths.tvimageplus.crop.height ==0 )  ths.editImage();
             }})(this);
         img.src = baseUrl+this.tvimageplus.sourceImg.src;
     }//
@@ -230,17 +256,31 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
 
         // Make sure image is large enough to use
         if(!this.checkImageIsLargeEnough()){
+			
             this.tvimageplus.sourceImg = this.oldSourceImg;
-            this.imageBrowser.reset();
+			
+           if (!this.oldSourceImg) this.imageBrowser.reset();
+		   else {
+			   if (this.oldSourceImg.crop) {
+				   this.tvimageplus.crop.x = this.oldSourceImg.crop.x;
+				    this.tvimageplus.crop.y = this.oldSourceImg.crop.y;
+					 this.tvimageplus.crop.width = this.oldSourceImg.crop.width;
+					  this.tvimageplus.crop.height = this.oldSourceImg.crop.height;
+			   }
+			   this.imageBrowser.setValue(this.lastFileLabel || "");
+		   }
             MODx.msg.alert("Image too small","The selected image is too small to be used here. Please select a different image");
             return;
         }
+		this.lastFileLabel = this.tvimageplus.sourceImg.src;
 
         // Hide 'edit' button if field is empty
         if(this.imageBrowser.getValue()==''){
             this.editButton.disable();
+			this.clearButton.hide();
         } else {
             this.editButton.enable();
+			this.clearButton.show();
         }
         this.updatePreviewImage.defer(10,this);
         
@@ -253,6 +293,9 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      */
     ,updateExternalField: function(){
       //  console.log(this.updateTo);
+	  
+	
+	  
         var TV = {
             sourceImg: this.tvimageplus.sourceImg
             ,crop: this.tvimageplus.crop
@@ -340,13 +383,43 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
         // Show the window
         this.editorWindow.show();
     }//
-    
-    
+	,clearImage: function() {
+		  this.tvimageplus.sourceImg = null;
+			this.oldSourceImg = null;
+		  this.lastFileLabel = "";
+		  this.editButton.disable();
+			this.clearButton.hide();
+		 if(this.imagePreview.el) {
+			 jQuery(this.imagePreview.el.dom).attr( 'src','data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==');
+		 }
+		 document.getElementById(this.updateTo).innerHTML = "";
+		  document.getElementById(this.updateTo).value = "";
+		  this.imageBrowser.setValue("");
+		   MODx.fireResourceFormChange();
+	}
+
     /**
      * Receive new cropping dimensions from editor
      */
     ,updateFromEditor: function(crop){
-        this.tvimageplus.crop = crop;
+        this.tvimageplus.crop.x = crop.x;
+		this.tvimageplus.crop.y = crop.y;
+		this.tvimageplus.crop.width = crop.width;
+		this.tvimageplus.crop.height = crop.height;
+		
+		if (!this.oldSourceImg) {
+			this.oldSourceImg = {};
+			for(i in this.tvimageplus.sourceImg){
+				this.oldSourceImg[i] = this.tvimageplus.sourceImg[i];
+			}
+		}
+		this.oldSourceImg.crop = {};
+		this.oldSourceImg.crop.x = crop.x;
+		this.oldSourceImg.crop.y = crop.y;
+		this.oldSourceImg.crop.width = crop.width;
+		this.oldSourceImg.crop.height = crop.height;
+		
+		
         this.editorWindow = null;
         this.updateDisplay();
     }
