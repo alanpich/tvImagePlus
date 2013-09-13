@@ -27,10 +27,17 @@ tvImagePlus.window.Editor = function(config) {
     this.tvimageplus = config.tvimageplus;
     this.inputPanel = config.inputPanel;
     this.displayRatio = config.displayRatio;
+	
+	var cropSettings = {
+		x: this.tvimageplus.crop.x,
+		y: this.tvimageplus.crop.y,
+		width: this.tvimageplus.crop.width,
+		height: this.tvimageplus.crop.height
+	}
     
     Ext.apply(config,{
         border: false
-        ,crop: this.tvimageplus.crop
+        ,crop: cropSettings
         ,resizable: false
         ,closeAction: 'close'
         ,listeners: {
@@ -53,7 +60,7 @@ tvImagePlus.window.Editor = function(config) {
         ,buttonAlign: 'right'
         ,buttons: [{
             text: _('cancel')
-            ,handler: this.updateFromEditor
+            ,handler: this.closeFromEditor
             ,scope: this    
         },{      
             text: _('update')
@@ -168,6 +175,12 @@ Ext.extend(tvImagePlus.window.Editor, Ext.Window, {
         this.inputPanel.updateFromEditor(this.crop);
         this.close();
     }
-    
+    ,closeFromEditor: function() {
+		this.crop.width = this.tvimageplus.crop.width;
+		this.crop.height = this.tvimageplus.crop.height;
+		this.crop.x = this.tvimageplus.crop.x;
+		this.crop.y = this.tvimageplus.crop.y;
+		this.close();
+	}
 });
 Ext.reg('tvimageplus-window-editor',tvImagePlus.window.Editor);
