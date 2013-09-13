@@ -32,6 +32,9 @@ class tvImagePlus
     public $modx;
 
 
+    public $config;
+
+
     function __construct(modX &$modx)
     {
         $this->modx =& $modx;
@@ -73,16 +76,23 @@ class tvImagePlus
      *
      * @todo Do it properly with MODx.lang _()
      */
-    private function loadLexicon()
-    {
-        // This should be enough aaaarrrrrgh!!!!!
-        $this->modx->lexicon->load('tvimageplus');
-        $lex = $this->modx->lexicon->getFileTopic($this->modx->cultureKey, 'tvimageplus');
-        $this->config['lexicon'] = $lex;
-    }
+    private function loadLexicon(){
+        $lexicon = $this->modx->lexicon;
+        $modx = $this->modx;
+        $mgr_lang = $modx->getOption('manager_language');
 
+        $lexicon->load('tvimageplus');
 
+        if(in_array($mgr_lang, $lexicon->getLanguageList('tvimageplus'))){
+            $lang = $mgr_lang;
+        }
+        else{
+            $lang = 'en';
+        }
 
+        $this->config['lexicon'] = $lexicon->getFileTopic($lang, 'tvimageplus');
+    }//
+    
     /**
      * Get a map of MediaSource id => baseUrl
      *
@@ -92,6 +102,7 @@ class tvImagePlus
     {
         $sources = $this->modx->getCollection('sources.modMediaSource');
         foreach ($sources as $source) {
+            /** @var modMediaSource $source */
             $source->initialize();
             $this->config['sources'][$source->get('id')] = new stdClass();
             $this->config['sources'][$source->get('id')]->url = $source->getBaseUrl();
