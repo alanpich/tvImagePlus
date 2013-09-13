@@ -22,15 +22,15 @@
  * @copyright Alan Pich 2013
  */
 
+use tvImagePlus\CropEngines;
 
 class tvImagePlus
 {
 
     public $dataStr;
 
-    /** @var \modX  */
+    /** @var \modX */
     public $modx;
-
 
     public $config;
 
@@ -41,11 +41,12 @@ class tvImagePlus
         $this->loadConfig();
         $this->loadLexicon();
         $this->loadSourceMap();
+        $this->checkDependencies();
     }
 
-    //
-
-
+    /**
+     * Load default configuration
+     */
     private function loadConfig()
     {
         $core = $this->modx->getOption(
@@ -63,36 +64,58 @@ class tvImagePlus
             'assets_url' => $assets,
             'connectorUrl' => $assets . 'mgr/connector.php',
             'sources' => array(),
-            'crop_icon' => $this->modx->getOption('tvimageplus.crop_icon',null,$assets."mgr/icons/icon.crop.png")
+            'crop_icon' => $this->modx->getOption('tvimageplus.crop_icon', null, $assets . "mgr/icons/icon.crop.png"),
+            'has_unmet_dependencies' => false,
         );
-
     }
 
-    //
+    /**
+     * Check dependencies and raise warnings if not met
+     */
+    private function checkDependencies()
+    {
+        // Register a micro autoloader for in-house engines
+        spl_autoload_register(function ($className) {
+            if (strpos($className, 'tvImagePlus\\CropEngines\\') === false)
+                return;
 
+            $class = str_replace('tvImagePlus\\CropEngines\\', '', $className);
+            $path = dirname(__FILE__) . '/lib/CropEngines/' . $class . '.php';
+            if (is_readable($path))
+                include $path;
+
+        });
+
+        // Do some basic intelligent sniffing
+            if( ! CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)
+             && ! CropEngines\PhpThumbOf::engineRequirementsMet($this->modx) ){
+                // Handle unmet dependencies
+                $this->config['has_unmet_dependencies'] = TRUE;
+            }
+    }
 
     /**
      * Load the lexicon topic
      *
      * @todo Do it properly with MODx.lang _()
      */
-    private function loadLexicon(){
+    private function loadLexicon()
+    {
         $lexicon = $this->modx->lexicon;
         $modx = $this->modx;
         $mgr_lang = $modx->getOption('manager_language');
 
         $lexicon->load('tvimageplus');
 
-        if(in_array($mgr_lang, $lexicon->getLanguageList('tvimageplus'))){
+        if (in_array($mgr_lang, $lexicon->getLanguageList('tvimageplus'))) {
             $lang = $mgr_lang;
-        }
-        else{
+        } else {
             $lang = 'en';
         }
 
         $this->config['lexicon'] = $lexicon->getFileTopic($lang, 'tvimageplus');
-    }//
-    
+    }
+
     /**
      * Get a map of MediaSource id => baseUrl
      *
@@ -109,13 +132,12 @@ class tvImagePlus
         };
     }
 
-
     /**
      * Gather info about the TV
      *
      * @param ImagePlusInputRender $render
      * @param                      $value
-     * @param array                $params
+     * @param array $params
      * @return object
      */
     public function loadTvConfig(ImagePlusInputRender $render, $value, array $params)
@@ -170,59 +192,47 @@ class tvImagePlus
         return $data;
     }
 
-
     /**
      * Render supporting javascript to try and help it work with MIGX etc
      */
     public function includeScriptAssets()
     {
-        $this->modx->regClientCSS($this->config['assets_url'].'mgr/css/jquery/jquery.jcrop.min.css');
-        $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tvimageplus.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tvimageplus.panel.input.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tvimageplus.window.editor.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tvimageplus.migx_renderer.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tools/JSON2.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/jquery/jquery.min.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/jquery/jquery.jcrop.min.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'].'mgr/js/tvimageplus.jquery.imagecrop.js');
+        $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/jquery/jquery.jcrop.min.css');
+        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/tvimageplus.js');
+        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/tvimageplus.panel.input.js');
+        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/tvimageplus.window.editor.js');
+        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/tvimageplus.migx_renderer.js');
+        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/tools/JSON2.js');
+        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/jquery/jquery.min.js');
+        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/jquery/jquery.jcrop.min.js');
+        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/tvimageplus.jquery.imagecrop.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
-                .' tvImagePlus.config = '.json_encode($this->config).';'
-                .' for(i in tvImagePlus.config.lexicon){ MODx.lang[i] = tvImagePlus.config.lexicon[i] }'
-                .'</script>');
+        . ' tvImagePlus.config = ' . json_encode($this->config) . ';'
+        . ' for(i in tvImagePlus.config.lexicon){ MODx.lang[i] = tvImagePlus.config.lexicon[i] }'
+        . '</script>');
     }
-
 
     /**
      * Return a scaled, cached version of the source image for front-end use
      *
-     * @param string         $json
-     * @param array          $opts
+     * @param string $json
+     * @param array $opts
      * @param modTemplateVar $tv
      * @internal param array $params
      * @return string
      */
     public function getImageURL($json, $opts = array(), modTemplateVar $tv)
     {
-        // Register a micro autoloader for in-house engines
-        spl_autoload_register(function($className){
-            if(strpos($className,'tvImagePlus\\CropEngines\\') === false)
-                return;
-
-            $class = str_replace('tvImagePlus\\CropEngines\\','',$className);
-            $path = dirname(__FILE__).'/lib/CropEngines/'.$class.'.php';
-            if(is_readable($path))
-                include $path;
-
-        });
 
         // Check system settings for crop engine override
-        $engineClass = $this->modx->getOption('tvimageplus.crop_engine_class',null,false);
+        $engineClass = $this->modx->getOption('tvimageplus.crop_engine_class', null, false);
 
         // Do some basic intelligent sniffing
-        if(!$engineClass){
-            if($this->snippetExists('phpthumbsup')){
+        if (!$engineClass) {
+            if( CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)) {
                 $engineClass = '\\tvImagePlus\\CropEngines\\PhpThumbsUp';
-            } else {
+            }
+            else if( CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
                 $engineClass = '\\tvImagePlus\\CropEngines\\PhpThumbOf';
             }
         }
@@ -233,14 +243,13 @@ class tvImagePlus
         $cropEngine = new $engineClass($this->modx);
 
         // Check crop engine is usable
-        if(!$cropEngine->engineRequirementsMet()){
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR,"Image+ :: Requirements not met for Crop Engine [{$engineClass}]");
+        if (!$cropEngine->engineRequirementsMet()) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Image+ :: Requirements not met for Crop Engine [{$engineClass}]");
             return 'IMAGE+ ERROR - requirements not met for crop engine';
         }
 
-        return $cropEngine->getImageUrl($json,$opts,$tv);
+        return $cropEngine->getImageUrl($json, $opts, $tv);
     }
-
 
     /**
      * Check if a snippet exists by name
@@ -248,15 +257,13 @@ class tvImagePlus
      * @param string $snippet Name of snippet to check for
      * @return bool
      */
-    protected function snippetExists($snippet){
-        $obj = $this->modx->getObject('modSnippet',array(
+    protected function snippetExists($snippet)
+    {
+        $obj = $this->modx->getObject('modSnippet', array(
             'name' => $snippet
         ));
         return $obj instanceof modSnippet;
     }
 
-
 }
-
-; // end class tvImagePlus
 define('tvimageplus', true);

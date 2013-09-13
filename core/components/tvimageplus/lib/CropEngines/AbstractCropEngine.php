@@ -33,6 +33,7 @@ abstract class AbstractCropEngine
      */
     protected $modx;
 
+
     public function __construct(\modX $modx)
     {
         $this->modx = $modx;
@@ -43,9 +44,13 @@ abstract class AbstractCropEngine
      * Checks that all requirements are met for using
      * this engine
      *
+     * @param \modX $modx
      * @return bool True if engine is usable
      */
-    abstract public function engineRequirementsMet();
+    public static function engineRequirementsMet(\modX $modx)
+    {
+        return true;
+    }
 
 
     /**

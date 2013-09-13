@@ -11,4 +11,5 @@ Ext.onReady(function(){
         });
  });
 {/literal}
+$.merge(true,tvImagePlus.config,{$config});
 </script>

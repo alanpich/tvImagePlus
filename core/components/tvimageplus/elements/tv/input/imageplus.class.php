@@ -57,7 +57,9 @@ class ImagePlusInputRender extends modTemplateVarInputRender {
         $this->setPlaceholder('mediasource',$this->tv->getSource('web')->get('id'));
         $this->setPlaceholder('tvparams',json_encode($this->getInputOptions()));
 
-        $this->setPlaceholder('imgData',$this->getImageDataJSON($value,$params)); 
+        $this->setPlaceholder('imgData',$this->getImageDataJSON($value,$params));
+
+        $this->setPlaceholder('config',json_encode($this->helper->config));
     	
     }
     

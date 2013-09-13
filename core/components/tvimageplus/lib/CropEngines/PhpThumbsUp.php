@@ -32,21 +32,20 @@ namespace tvImagePlus\CropEngines;
  * @package tvImagePlus
  * @subpackage tvImagePlus\CropEngines
  */
-class PhpThumbsUp extends AbstractCropEngine {
-
-
+class PhpThumbsUp extends AbstractCropEngine
+{
     /**
      * Checks that all requirements are met for using
      * this engine
      *
+     * @param \modX $modx
      * @return bool True if engine is usable
      */
-    public function engineRequirementsMet(){
-        $pto = $this->modx->getObject('modSnippet', array('name' => 'phpthumbsup'));
+    public static function engineRequirementsMet(\modX $modx)
+    {
+        $pto = $modx->getObject('modSnippet', array('name' => 'phpthumbsup'));
         return $pto instanceof \modSnippet;
     }
-
-
 
     /**
      * Parse image+ data and return a url for the cropped
@@ -57,15 +56,16 @@ class PhpThumbsUp extends AbstractCropEngine {
      * @param \modTemplateVar $tv
      * @return string
      */
-    public function getImageUrl($json, $opts = array(), \modTemplateVar $tv){
+    public function getImageUrl($json, $opts = array(), \modTemplateVar $tv)
+    {
 
         // Parse json to object
         $data = json_decode($json);
 
         // If data is null, json was invalid or empty.
         // This is almost certainly because the TV is empty
-        if(is_null($data)){
-            $this->modx->log(\xPDO::LOG_LEVEL_INFO,"Image+ TV renderer failed to parse JSON");
+        if (is_null($data)) {
+            $this->modx->log(\xPDO::LOG_LEVEL_INFO, "Image+ TV renderer failed to parse JSON");
             return $tv->default_text;
         }
 
@@ -81,7 +81,7 @@ class PhpThumbsUp extends AbstractCropEngine {
 
         // Prepare arguments for phpthumbof snippet call
         $params = array(
-                        'w' => $data->targetWidth,
+            'w' => $data->targetWidth,
             'h' => $data->targetHeight,
             'far' => true,
             'sx' => $data->crop->x,
@@ -92,7 +92,7 @@ class PhpThumbsUp extends AbstractCropEngine {
 
         // Add in output render params
         $options = array();
-        if(isset($opts['phpThumbParams'])){
+        if (isset($opts['phpThumbParams'])) {
             $optParams = explode('&', $opts['phpThumbParams']);
             foreach ($optParams as $oP) {
                 if (empty($oP)) {
@@ -118,7 +118,7 @@ class PhpThumbsUp extends AbstractCropEngine {
             )
         );
 
-        $url = str_replace('%2F','/',$url);
+        $url = str_replace('%2F', '/', $url);
 
         // If an output chunk is selected, parse that
         if (isset($opts['outputChunk']) && !empty($opts['outputChunk'])) {
@@ -135,6 +135,5 @@ class PhpThumbsUp extends AbstractCropEngine {
         };
 
     }
-
 
 }

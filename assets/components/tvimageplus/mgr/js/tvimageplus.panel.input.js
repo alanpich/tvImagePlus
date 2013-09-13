@@ -30,6 +30,11 @@ tvImagePlus.panel.input = function(config) {
     this.create_imageBrowser();
     this.create_imagePreview();
     this.create_altTextField();
+
+    // Warn if has no dependencies
+    if(tvImagePlus.config.has_unmet_dependencies){
+        tvImagePlus.warnAboutUnmetDependencies()
+    }
     
     
     Ext.apply(config,{
@@ -162,7 +167,6 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      * Render form elements to page
      */
     ,on_Render: function(){
-
     }//
     
     /**

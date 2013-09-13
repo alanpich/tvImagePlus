@@ -1,5 +1,5 @@
 <?php
-/**
+/**!
  * Copyright 2013 by Alan Pich <alan.pich@gmail.com>
  *
  * This file is part of tvImagePlus
@@ -32,21 +32,20 @@ namespace tvImagePlus\CropEngines;
  * @package tvImagePlus
  * @subpackage tvImagePlus\CropEngines
  */
-class PhpThumbOf extends AbstractCropEngine {
-
-
+class PhpThumbOf extends AbstractCropEngine
+{
     /**
      * Checks that all requirements are met for using
      * this engine
      *
+     * @param \modX $modx
      * @return bool True if engine is usable
      */
-    public function engineRequirementsMet(){
-        $pto = $this->modx->getObject('modSnippet', array('name' => 'phpthumbof'));
+    public static function engineRequirementsMet(\modX $modx)
+    {
+        $pto = $modx->getObject('modSnippet', array('name' => 'phpthumbof'));
         return $pto instanceof \modSnippet;
     }
-
-
 
     /**
      * Parse image+ data and return a url for the cropped
@@ -57,15 +56,16 @@ class PhpThumbOf extends AbstractCropEngine {
      * @param \modTemplateVar $tv
      * @return string
      */
-    public function getImageUrl($json, $opts = array(), \modTemplateVar $tv){
+    public function getImageUrl($json, $opts = array(), \modTemplateVar $tv)
+    {
 
         // Parse json to object
         $data = json_decode($json);
 
         // If data is null, json was invalid or empty.
         // This is almost certainly because the TV is empty
-        if(is_null($data)){
-            $this->modx->log(\xPDO::LOG_LEVEL_INFO,"Image+ TV renderer failed to parse JSON");
+        if (is_null($data)) {
+            $this->modx->log(\xPDO::LOG_LEVEL_INFO, "Image+ TV renderer failed to parse JSON");
             return $tv->default_text;
         }
 
@@ -93,7 +93,7 @@ class PhpThumbOf extends AbstractCropEngine {
 
         // Add in output render params
         $options = array();
-        if(isset($opts['phpThumbParams'])){
+        if (isset($opts['phpThumbParams'])) {
             $optParams = explode('&', $opts['phpThumbParams']);
             foreach ($optParams as $oP) {
                 if (empty($oP)) {
@@ -131,9 +131,8 @@ class PhpThumbOf extends AbstractCropEngine {
         } else {
             // Otherwise return raw url
             return $url;
-        };
+        }
 
     }
-
 
 }

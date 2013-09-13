@@ -48,6 +48,27 @@ Ext.extend(tvImagePlus,Ext.Component,{
         };
         return url;
 
+    },
+
+    warnAboutUnmetDependencies: function(){
+        var warningWindow = MODx.load({
+             xtype: 'modx-window'
+            ,title: "&nbsp;&nbsp;&nbsp;Image+ Warning - Unmet Dependencies&nbsp;&nbsp;&nbsp;"
+            ,modal: true
+            ,padding: 25
+            ,allowDrop: false
+            ,resizable: true
+            ,collapsible: true
+            ,maximizable: true
+            ,buttons: [{
+                text: _('ok')
+                ,handler: function(L) { L.ownerCt.ownerCt.close(); }
+            }]
+            ,html:  "<h3>You don't have any crop engines!</h3>"+
+                    "<p>Before you can use Image+, you need at least one Crop Engine installed to handle image manipulation.</p>"+
+                    "<p>A quick fix is to install either phpThumbOf or phpThumbsUp from the MODX Package Repository</p>"
+        })
+        warningWindow.show()
     }
 });
 Ext.reg('imageplus',tvImagePlus);
