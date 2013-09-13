@@ -2,8 +2,10 @@
  Image+ TV type changelog
 -------------------------
 
+
 # v2.2
 --------
+ :: Added gui warning of missing dependencies
  :: Added PhpThumbsUp crop engine
  :: Refactored to allow changing of crop engines
  :: Added grid renderer for MIGX backend

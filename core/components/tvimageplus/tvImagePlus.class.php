@@ -243,7 +243,7 @@ class tvImagePlus
         $cropEngine = new $engineClass($this->modx);
 
         // Check crop engine is usable
-        if (!$cropEngine->engineRequirementsMet()) {
+        if (!$cropEngine->engineRequirementsMet($this->modx)) {
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Image+ :: Requirements not met for Crop Engine [{$engineClass}]");
             return 'IMAGE+ ERROR - requirements not met for crop engine';
         }
