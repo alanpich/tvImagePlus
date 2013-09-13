@@ -251,19 +251,19 @@ class tvImagePlus
         return $cropEngine->getImageUrl($json, $opts, $tv);
     }
 
-    /**
-     * Check if a snippet exists by name
-     *
-     * @param string $snippet Name of snippet to check for
-     * @return bool
-     */
-    protected function snippetExists($snippet)
-    {
-        $obj = $this->modx->getObject('modSnippet', array(
-            'name' => $snippet
-        ));
-        return $obj instanceof modSnippet;
-    }
+//    /**
+//     * Check if a snippet exists by name
+//     *
+//     * @param string $snippet Name of snippet to check for
+//     * @return bool
+//     */
+//    protected function snippetExists($snippet)
+//    {
+//        $obj = $this->modx->getObject('modSnippet', array(
+//            'name' => $snippet
+//        ));
+//        return $obj instanceof modSnippet;
+//    }
 
 }
 define('tvimageplus', true);
