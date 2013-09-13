@@ -30,10 +30,20 @@ public $dataStr;
      * @todo Do it properly with MODx.lang _()
      */
     private function loadLexicon(){
-        // This should be enough aaaarrrrrgh!!!!!
-       $this->modx->lexicon->load('tvimageplus');
-       $lex = $this->modx->lexicon->getFileTopic($this->modx->cultureKey,'tvimageplus');
-       $this->config['lexicon'] = $lex;
+        $lexicon = $this->modx->lexicon;
+        $modx = $this->modx;
+        $mgr_lang = $modx->getOption('manager_language');
+
+        $lexicon->load('tvimageplus');
+
+        if(in_array($mgr_lang, $lexicon->getLanguageList('tvimageplus'))){
+            $lang = $mgr_lang;
+        }
+        else{
+            $lang = 'en';
+        }
+
+        $this->config['lexicon'] = $lexicon->getFileTopic($lang, 'tvimageplus');
     }//
     
     /**
