@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Image+ Template Variable</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="assets/shadowbox/shadowbox.css" />
+    <link rel="stylesheet" href="assets/css/highlight.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/shadowbox/shadowbox.js"></script>
+    <script type="text/javascript">
+        Shadowbox.init({
+            handleOversize: "drag",
+            modal: false
+        });
+
+        $(function(){
+            console.log(document.location);
+            var cur_url = document.location.pathname.substr(1);
+            var sidebarLinks = $('#sidebar .nav li a');
+            for(var k=0;k<sidebarLinks.length;k++){
+                var link = $(sidebarLinks[k])
+                if(cur_url == link.attr('href')){
+                    link.parent().addClass('active');
+                } else {
+                    link.parent().removeClass('active');
+                }
+            }
+        })
+
+        
+    </script>
+</head>
+<body>
+
+<div id="mobile-nav" class="collapse" >
+    <div class="container">
+        <ul class="nav nav-stacked nav-inverse">
+            <li class="active"><a href="index.html">Overview</a></li>
+            <li><a href="installation.html">Installation</a></li>
+            <li><a href="building-from-source.html">Building from source</a></li>
+            <li><a href="getting-started.html">Getting Started</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="zen-header hidden-lg hidden-md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                Image+
+                <button type="button" class="btn btn-link pull-right" data-toggle="collapse" data-target="#mobile-nav">
+                    <!--<span class="glyphicon glyphicon-align-justify"></span>-->
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-2">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="body">
+
+
+
+    <div class="row">
+
+
+        <!-- SIDEBAR --------------------------------------------------------- -->
+        {% include sidebar.html %}
+
+
+
+
+        <div class="col-lg-8">
+            <h1 class="page-title hidden-lg hidden-md">{{page.title}}</h1><hr />
+            <div id="content">
+                {{content}}
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+</div>
+
+
+</body>
+</html>

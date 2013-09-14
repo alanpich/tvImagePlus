@@ -1,0 +1,7 @@
+baseurl: /tvimageplus/
+url: https://alanpich.github.io/tvimageplus
+author: Alan Pich
+
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "hard_wrap", "tables", "autolink", "strikethrough", "superscript", "with_toc_data"]
