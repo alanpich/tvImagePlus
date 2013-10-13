@@ -59,13 +59,16 @@ class tvImagePlus
             null,
             $this->modx->getOption('assets_url') . 'components/tvimageplus/'
         );
+        $assets_path = $this->modx->getOption('tvimageplus.assets_path', null, $this->modx->getOption('assets_path') . 'components/tvimageplus/');
         $this->config = array(
             'core_path' => $core,
             'assets_url' => $assets,
+            'assets_path' => $assets_path,
             'connectorUrl' => $assets . 'mgr/connector.php',
             'sources' => array(),
             'crop_icon' => $this->modx->getOption('tvimageplus.crop_icon', null, $assets . "mgr/icons/icon.crop.png"),
             'has_unmet_dependencies' => false,
+            'cache_path' => $this->modx->getOption('tvimageplus.cache_path', null, $assets . 'cache/'),
         );
     }
 
@@ -87,11 +90,12 @@ class tvImagePlus
         });
 
         // Do some basic intelligent sniffing
-            if( ! CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)
-             && ! CropEngines\PhpThumbOf::engineRequirementsMet($this->modx) ){
-                // Handle unmet dependencies
-                $this->config['has_unmet_dependencies'] = TRUE;
-            }
+        if (!CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)
+            && !CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)
+        ) {
+            // Handle unmet dependencies
+            $this->config['has_unmet_dependencies'] = TRUE;
+        }
     }
 
     /**
@@ -221,49 +225,110 @@ class tvImagePlus
      * @internal param array $params
      * @return string
      */
-    public function getImageURL($json, $opts = array(), modTemplateVar $tv)
+    public function getImageURL($resId, $tvId)
     {
-
-        // Check system settings for crop engine override
-        $engineClass = $this->modx->getOption('tvimageplus.crop_engine_class', null, false);
-
-        // Do some basic intelligent sniffing
-        if (!$engineClass) {
-            if( CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)) {
-                $engineClass = '\\tvImagePlus\\CropEngines\\PhpThumbsUp';
-            }
-            else if( CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
-                $engineClass = '\\tvImagePlus\\CropEngines\\PhpThumbOf';
-            }
-        }
-
-        /**
-         * @var tvImagePlus\CropEngines\AbstractCropEngine $cropEngine
-         */
-        $cropEngine = new $engineClass($this->modx);
-
-        // Check crop engine is usable
-        if (!$cropEngine->engineRequirementsMet($this->modx)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Image+ :: Requirements not met for Crop Engine [{$engineClass}]");
-            return 'IMAGE+ ERROR - requirements not met for crop engine';
-        }
-
-        return $cropEngine->getImageUrl($json, $opts, $tv);
+        $path = $this->getCachePath();
+        $file = $this->getCacheFileName($resId, $tvId);
+        /** @var modMediaSource $ms */
+        $ms = $this->modx->getObject('modMediaSource', 1);
+        $ms->initialize();
+        $url = str_replace('//', '/', $ms->getObjectUrl($path . $file));
+        return $url;
     }
 
-//    /**
-//     * Check if a snippet exists by name
-//     *
-//     * @param string $snippet Name of snippet to check for
-//     * @return bool
-//     */
-//    protected function snippetExists($snippet)
-//    {
-//        $obj = $this->modx->getObject('modSnippet', array(
-//            'name' => $snippet
-//        ));
-//        return $obj instanceof modSnippet;
-//    }
+    /**
+     * Get the path to an image cache relative to mediasource root
+     *
+     * @param int $resId Resource id
+     * @param int $tvId  Template Variable id
+     * @return string
+     */
+    public function getImagePath($resId, $tvId)
+    {
+        return $this->getCachePath() . $this->getCacheFileName($resId, $tvId);
+    }
+
+    public function getCachePath()
+    {
+        return $this->config['cache_path'];
+    }
+
+    public function getCacheFileName($resId, $tvId)
+    {
+        return "cache-" . md5($resId . '-' . $tvId) . ".jpg";
+    }
+
+
+    /**
+     * Generate a resized image using phpThumb
+     *
+     * @param mixed $sourceImg Image data from source image (NOT the filepath)
+     * @param array $opts phpThumb parameters
+     * @return bool|string
+     */
+    public function generateImage($sourceImg, $opts)
+    {
+        if (!class_exists('modPhpThumb')) {
+            require $this->modx->getOption('core_path') . 'model/phpthumb/modphpthumb.class.php';
+        }
+        $phpThumb = new phpThumb();
+        $phpThumb->setSourceData($sourceImg);
+        $phpThumb->setParameter('config_cache_source_enabled', false);
+
+        // Crop dimensions
+        foreach ($opts as $key => $val) {
+            $phpThumb->setParameter($key, $val);
+        }
+
+
+        // Generate!
+        if ($phpThumb->GenerateThumbnail()) {
+            $tmpFile = sys_get_temp_dir() . '/tvimageplus-' . time() . microtime(true) . '.tmp.jpg';
+            $phpThumb->RenderToFile($tmpFile);
+            $img = file_get_contents($tmpFile);
+            unlink($tmpFile);
+            $this->cleanupMess();
+            return $img;
+        }
+    }
+
+    /**
+     * This method exists because phpThumb seems to create an empty file
+     * in the tvimageplus/mgr assets directory whenever it generated a
+     * thumbnail. I can't find any setting to stop it doing this, and it
+     * refuses to clean up after itself, hence this ballache of a manual
+     * clean
+     */
+    protected function cleanupMess()
+    {
+        $pattern = $this->config['assets_path'] . 'mgr/pThumb*';
+        foreach (glob($pattern) as $file) {
+            unlink($file);
+        }
+    }
+
+
+    /**
+     * Write an image to a file, The file name is
+     * generated from the Resource and TV ids
+     *
+     * @param int $resId Id of the resource this tv belongs to
+     * @param int $tvId Id of the TV this image is for
+     * @param mixed $img Image data
+     * @return string
+     */
+    public function cacheImage($resId, $tvId, $img)
+    {
+        $path = $this->getCachePath();
+        $file = $this->getCacheFileName($resId, $tvId);
+        $ms = $this->modx->getObject('modMediaSource', 1);
+
+        $ms->initialize();
+        $ms->removeObject($path . $file);
+        $ms->createObject($path, $file, $img);
+        return $path . $file;
+    }
 
 }
+
 define('tvimageplus', true);

@@ -180,7 +180,6 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             this.tvimageplus.crop.height = this.tvimageplus.targetHeight;
         }
 
-
         // If server returns 800x600 or higher, image may be larger
         //  so need to get size manually
         if (img.image_width >= 800 || img.image_height >= 600) {
@@ -262,9 +261,13 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      */, updateExternalField: function () {
         //  console.log(this.updateTo);
 
-
         var TV = {
-            sourceImg: this.tvimageplus.sourceImg, crop: this.tvimageplus.crop, targetWidth: this.tvimageplus.targetWidth, targetHeight: this.tvimageplus.targetHeight, altTag: this.tvimageplus.altTag
+            sourceImg: this.tvimageplus.sourceImg,
+            crop: this.tvimageplus.crop,
+            targetWidth: this.tvimageplus.targetWidth,
+            targetHeight: this.tvimageplus.targetHeight,
+            altTag: this.tvimageplus.altTag,
+            resource: MODx.activePage.resource
         }
         var json = JSON.stringify(TV, null, '  ');
 
@@ -380,7 +383,11 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
 
         this.editorWindow = null;
         this.updateDisplay();
-    }, updatePreviewImage: function () {
+        this.generateThumbCache();
+    },
+
+
+    updatePreviewImage: function () {
         if (!this.tvimageplus.sourceImg || this.tvimageplus.crop.width == 0) {
             this.imagePreview.hide();
             return;
@@ -392,7 +399,33 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
             this.imagePreview.el.dom.src = url;
             this.imagePreview.show()
         }
-        ;
+    },
+
+    /**
+     * Generate the thumb file now, so the load isn't
+     * on the frontend user
+     */
+    generateThumbCache: function(){
+        var cnf = this.tvimageplus;
+
+        MODx.Ajax.request({
+            url: tvImagePlus.config.connectorUrl,
+            params: {
+                action: 'generateImage',
+                tv: cnf.tv.id,
+                res: MODx.activePage.resource,
+                x: cnf.crop.x,
+                y: cnf.crop.y,
+                w: cnf.crop.width,
+                h: cnf.crop.height,
+                img: cnf.sourceImg.src,
+                ms: cnf.sourceImg.source
+            },
+            success: function(a){
+                console.log('dine');
+            }
+        })
+
     }
 
 });

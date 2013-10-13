@@ -2,6 +2,11 @@
  Image+ TV type changelog
 -------------------------
 
+# v2.2.1
+--------
+ :: Moved thumbnail generation to mgr interface to relieve stress on front end
+ :: Separated image caching from the modx cache to avoid wiping them all when
+    the MODX cache is cleared
 
 # v2.2
 --------
