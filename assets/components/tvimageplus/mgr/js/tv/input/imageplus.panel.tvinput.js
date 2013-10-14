@@ -1,0 +1,267 @@
+ImagePlus.panel.TVInput = function(config) {
+    config = config || {};
+
+    /** xtype of component to use for image selection */
+    var xtypeSourceImageSelect = 'imageplus-combo-browser';
+
+    /**
+     * Config defaults
+     */
+    Ext.apply(config,{
+        border: false
+        ,baseCls: 'modx-formpanel'
+        ,cls: 'container'
+        ,tvElId: config.tvElId || false
+        ,value: config.value || ''
+        ,tv: config.tv || {
+            url: '',
+            alt: '',
+            uid: 0,
+            version: '3.0.0'
+        }
+        ,image: config.image || {
+            mediasource: 1,
+            path: '',
+            crop_x: 0,
+            crop_y: 0,
+            crop_w: 0,
+            crop_h: 0,
+            output_width: 0,
+            output_height: 0
+        }
+        ,cropData: {
+            mediasource: 0,
+            path: 0,
+            crop_x: 0,
+            crop_y: 0,
+            crop_w: 0,
+            crop_h: 0,
+            output_width: 0,
+            output_height: 0,
+            url: ''
+        }
+        ,listeners: {
+            afterrender: {fn:this.onAfterRender,scope:this}
+        }
+        ,items: [{
+            xtype: 'compositefield',
+            width: 400,
+            items:[{
+                xtype: xtypeSourceImageSelect,
+                source: config.image.mediasource || 1,
+                openTo: ImagePlus.getPathDir(config.image.path) || '',
+                value:  config.image.path || '',
+                listeners: {
+                    imageReady: {fn:this.onSourceImageSelected,scope:this},
+                    busy: {fn: this.onBusy,scope:this}
+                }
+            },{
+                xtype: 'button',
+                text: 'Edit Image',
+                id: 'imageplus-button-editimage'
+            }]
+        },{
+            xtype: 'imageplus-panel-previewimage'
+        },{
+            xtype: 'textfield',
+            id: 'imageplus-textfield-alttext',
+            fieldLabel: 'Alt Text',
+            listeners: {
+                change: {fn:this.onUpdateAltTextField,scope:this}
+            }
+        }]
+    });
+    ImagePlus.panel.TVInput.superclass.constructor.call(this,config);
+
+};
+Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
+
+
+    /**
+     * Fires once the panel has been rendered onto the page
+     *
+     * @returns void
+     */
+    onAfterRender: function(){
+        this.loadMask = new Ext.LoadMask(this.container,{
+            msg: 'Please wait...'
+        });
+
+        this.previewImage = this.getComponent('imageplus-panel-previewimage');
+        this.altTextField = this.getComponent('imageplus-textfield-alttext');
+        this.altTextField.setValue(this.tv.alt);
+
+        this.editButton = this.getComponent('imageplus-button-editimage');
+
+        if(this.tv.uid > 0){
+            this.onInitializationComplete();
+        } else {
+            this.initializeTV();
+        }
+    },
+
+    onInitializationComplete: function(){
+        this.onReady();
+        this.updateTVInput();
+        this.updatePreviewImage();
+    },
+
+    /**
+     * Fires once an image has been selected, and
+     * loaded into the browser for manipulation
+     *
+     * @param img {Image}
+     * @returns void
+     */
+    onSourceImageSelected: function(img,data){
+        this.cropData.mediasource = data.ms;
+        this.cropData.path = data.path;
+        this.tv.url = img.src;
+        this.onReady();
+        this.updateTVInput();
+        this.updatePreviewImage();
+        this.persistData();
+    },
+
+
+    /**
+     * Fired when the component is set to 'busy',
+     * blocking interaction from the user and
+     * displaying a please-wait message
+     *
+     * @returns void
+     */
+    onBusy: function(){
+        this.loadMask.show();
+    },
+
+
+    /**
+     * Fired when the component stops being 'busy',
+     * and can allow user interaction again
+     *
+     * @returns void
+     */
+    onReady: function(){
+        this.loadMask.hide();
+    },
+
+    /**
+     * Fired when the alt-text field value has changed
+     *
+     * @returns void
+     */
+    onUpdateAltTextField: function(){
+        this.tv.alt = this.altTextField.getValue();
+        this.updateTVInput();
+    },
+
+    /**
+     * Initialize the TV by getting a uid for it
+     *
+     * @returns void
+     */
+    initializeTV: function(){
+        this.onBusy();
+        setTimeout(function(that){ return function(){
+            MODx.Ajax.request({
+                url: ImagePlus.config.connector_url,
+                params: {
+                    action: 'initialize'
+                },
+                listeners: {
+                    success: {fn: function(response){
+                        console.log(response);
+                        that.tv.uid = response.object.id;
+                        that.onInitializationComplete();
+                    },scope:that}
+                }
+            })
+        }}(this),1000);
+    },
+
+    /**
+     * Writes tv data back into tv field as json
+     */
+    updateTVInput: function(){
+        if(this.tvElId !== false){
+            if(!this.tv.version){this.tv.version = '3.0.0'}
+            var json = Ext.util.JSON.encode(this.tv);
+            var tvEl = document.getElementById(this.tvElId);
+            var currentJson = tvEl.value;
+
+            if(json != currentJson){
+                document.getElementById(this.tvElId).value = json;
+                var parent = Ext.getCmp('modx-panel-resource');
+                if(parent){
+                    parent.fireEvent('fieldChange');
+                }
+            }
+        }
+    },
+
+    /**
+     * Update the preview image display
+     *
+     * @param img
+     */
+    updatePreviewImage: function(){
+        var scaledSrc = ImagePlus.image.scaleToWidth(this.tv.url,300,function(that){return function(src){
+            console.log(src);
+            that.previewImage.setSrc(src);
+        }}(this));
+    },
+
+
+    /**
+     * Update the data stored in the database with the current settings
+     *
+     * @returns void
+     */
+    persistData: function(){
+        this.onBusy();
+        var data = {
+            tv: this.tv,
+            crop: this.cropData
+        };
+
+        MODx.Ajax.request({
+            url: ImagePlus.config.connector_url,
+            params: {
+                action: 'update',
+                uid: this.tv.uid,
+                data: Ext.util.JSON.encode(data)
+            },
+            listeners: {
+                success: {fn:this.onPersistDataSuccess,scope:this},
+                failure: {fn:this.onPersistDataError,scope:this}
+            }
+        })
+    },
+
+
+    /**
+     * Fires when a persistData call is successful
+     *
+     * @returns void
+     */
+    onPersistDataSuccess: function(response){
+        console.log(response);
+        this.tv = response.object.tv;
+        this.updateTVInput();
+        this.updatePreviewImage();
+        this.onReady();
+    },
+
+    /**
+     * Fires when a persistData call throws an error
+     *
+     * @returns void
+     */
+    onPersistDataError: function(){
+        this.onReady();
+    }
+
+
+});
+Ext.reg('imageplus-panel-tvinput',ImagePlus.panel.TVInput);

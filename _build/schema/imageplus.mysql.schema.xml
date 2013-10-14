@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="imageplus" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
+
+    <object class="imagePlusImage" table="imageplus_images" extends="xPDOSimpleObject">
+
+        <field key="mediasource" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="path" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+        <field key="crop_x" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="crop_y" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="crop_w" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="crop_h" dbtype="int" precision="11" phptype="integer" null="false" />
+
+        <field key="output_width" dbtype="int" precision="11" phptype="integer" null="false" />
+        <field key="output_height" dbtype="int" precision="11" phptype="integer" null="false" />
+
+        <field key="url" dbtype="varchar" precision="255" phptype="string" null="false" />
+
+        <aggregate alias="MediaSource" class="modMediaSource" local="mediasource" foreign="id" cardinality="one" owner="foreign" />
+
+    </object>
+
+</model>
