@@ -103,6 +103,7 @@ class ModxService
 
         $this->javascript('imageplus.js');
         $this->javascript('imageplus.image.js');
+        $this->javascript('lib/stackblur.js');
         $this->javascript('lib/split.js');
         $this->stylesheet('imageplus.css');
         $this->modx->regClientStartupHTMLBlock(
