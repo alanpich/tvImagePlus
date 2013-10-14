@@ -28,6 +28,12 @@ ImagePlus.window.CropTool = function(config) {
             w: 20,
             h: 20
         },
+        minCrop: [150,150],
+        enforceMinCrop: true,
+        cropTooSmall: false,
+        cropMoveEventThreshold: 333,
+        cropBg: '#000',
+        cropSmBg: '#400',
         items: [{
             html: '<img src="'+config.img.src+'" class="imageplus-croptool-inner" width="100%" />',
             border:false,
@@ -46,7 +52,7 @@ ImagePlus.window.CropTool = function(config) {
 Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
 
     onAfterRender: function(){
-        this.cropToolInner = $('.imageplus-croptool-inner',this.el.dom);
+        this.cropToolDiv = $('.imageplus-croptool-inner',this.el.dom).first();
     },
 
     onAfterShow: function(){
@@ -59,10 +65,6 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
 
         var maxWidth = $(window).outerWidth() - 30;
         var maxHeight = $(window).outerHeight() - 200;
-
-        console.log('MAX: ',maxWidth,maxHeight);
-
-
 
         if(acceptableWidth > maxWidth){
             // Calculate height for this width
@@ -77,35 +79,78 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
             acceptableWidth = this.img.width / heightScaleRatio;
         }
 
-        console.log(acceptableWidth,acceptableHeight);
-
         this.setSize(acceptableWidth,acceptableHeight);
-
-
-        this.cropToolInner.Jcrop({
+        this.cropTool = jQuery.Jcrop(this.cropToolDiv);
+        this.cropTool.setOptions({
             bgOpacity: 0.1,
             bgColor: '#000',
-            minSize: [20,20],
+            minSize: this.enforceMinCrop? this.minCrop : [10,10],
+            trueSize: [this.img.width,this.img.height],
             boxWidth: acceptableWidth,
             boxHeight: acceptableHeight,
-            trueSize: [this.img.width,this.img.height],
             onSelect: function(that){return function(crop){
-                that.onCropChange(crop);
-            }}(this)
+                that.onCropSet(crop);
+            }}(this),
+            onChange: ImagePlus.throttle(this.onCropMove,this.cropMoveEventThreshold,this)
         });
+
+
+        var zoom = Math.round( (1 / this.cropTool.getScaleFactor()[0]) * 100);
+
+        this.setTitle('Image+' + '  <small>('+zoom+'%)</small>');
+        console.log(this.title);
 
         this.syncSize();
         this.center();
     },
 
 
-    onCropChange: function(crop){
+    /**
+     * Fired when the crop is released,
+     * currently stores the location inside
+     * the component but doesn't trigger a
+     * save event
+     *
+     * @param crop
+     */
+    onCropSet: function(crop){
         this.crop = {
             x: Math.round(crop.x),
             y: Math.round(crop.y),
             w: Math.round(crop.w),
             h: Math.round(crop.h)
         }
+    },
+
+    /**
+     * Fired as the crop selection is being changed
+     * by the user.
+     *
+     * Currently used to notify the user that they are
+     * trying to crop an area smaller than the required
+     * output size, resulting in upscaling and shit images.
+     * @issue #14
+     *
+     * @param crop {Object}
+     */
+    onCropMove: function(crop){
+        var w=0,h=1,
+            bgColor = this.cropBg;
+
+        if( crop.w < this.minCrop[w] || crop.h < this.minCrop[h]){
+
+            // Crop size is too small, show a warning
+            bgColor = this.cropSmBg;
+            this.cropTooSmall = true;
+
+        } else {
+            bgColor = this.cropBg;
+            this.cropTooSmall = false;
+        }
+
+        this.cropTool.setOptions({
+            bgColor: bgColor
+        });
     },
 
     save: function(){

@@ -184,7 +184,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      */
     showCropTool: function(){
 
-        if(this.cropTool){ this.cropTool.destroy() }
+        if(this.$cropToolDiv){ this.$cropToolDiv.destroy() }
 
 
         var img = new Image();
@@ -197,13 +197,13 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
     },
 
     _showCropTool: function(img){
-        this.cropTool = new ImagePlus.window.CropTool({
+        this.$cropToolDiv = new ImagePlus.window.CropTool({
             img: img,
             listeners: {
                 save: {fn:this.onCropChange,scope:this}
             }
         });
-        this.cropTool.show();
+        this.$cropToolDiv.show();
     },
 
     onCropChange: function(crop){
@@ -245,7 +245,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      */
     updatePreviewImage: function(){
         var scaledSrc = ImagePlus.image.scaleToWidth(this.tv.url,300,function(that){return function(src){
-            console.log(src);
             that.previewImage.setSrc(src);
         }}(this));
     },
