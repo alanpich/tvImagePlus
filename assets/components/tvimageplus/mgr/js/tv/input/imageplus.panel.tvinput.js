@@ -29,17 +29,6 @@ ImagePlus.panel.TVInput = function(config) {
             output_width: 0,
             output_height: 0
         }
-        ,cropData: {
-            mediasource: 0,
-            path: 0,
-            crop_x: 0,
-            crop_y: 0,
-            crop_w: 0,
-            crop_h: 0,
-            output_width: 0,
-            output_height: 0,
-            url: ''
-        }
         ,listeners: {
             afterrender: {fn:this.onAfterRender,scope:this}
         }
@@ -58,7 +47,9 @@ ImagePlus.panel.TVInput = function(config) {
             },{
                 xtype: 'button',
                 text: 'Edit Image',
-                id: 'imageplus-button-editimage'
+                id: 'imageplus-button-editimage',
+                scope: this,
+                handler: this.showCropTool
             }]
         },{
             xtype: 'imageplus-panel-previewimage'
@@ -75,7 +66,6 @@ ImagePlus.panel.TVInput = function(config) {
 
 };
 Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
-
 
     /**
      * Fires once the panel has been rendered onto the page
@@ -100,6 +90,12 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         }
     },
 
+    /**
+     * Fired when AJAX initialization is complete
+     * and the TV is ready for use
+     *
+     * @returns void
+     */
     onInitializationComplete: function(){
         this.onReady();
         this.updateTVInput();
@@ -114,15 +110,15 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @returns void
      */
     onSourceImageSelected: function(img,data){
-        this.cropData.mediasource = data.ms;
-        this.cropData.path = data.path;
+        this.image.mediasource = data.ms;
+        this.image.path = data.path;
+        this.sourceDataUrl = '/'+this.image.path;
         this.tv.url = img.src;
         this.onReady();
         this.updateTVInput();
         this.updatePreviewImage();
         this.persistData();
     },
-
 
     /**
      * Fired when the component is set to 'busy',
@@ -134,7 +130,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
     onBusy: function(){
         this.loadMask.show();
     },
-
 
     /**
      * Fired when the component stops being 'busy',
@@ -180,8 +175,51 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         }}(this),1000);
     },
 
+
+    /**
+     * Create & display a cropping tool for
+     * editing the image crop dimensions
+     *
+     * @returns void
+     */
+    showCropTool: function(){
+
+        if(this.cropTool){ this.cropTool.destroy() }
+
+
+        var img = new Image();
+        //noinspection JSValidateTypes
+        img.onload = function(ths){return function(){
+                ths._showCropTool(this);
+            }}(this);
+            img.src = this.getSourceImageUrl();
+
+    },
+
+    _showCropTool: function(img){
+        this.cropTool = new ImagePlus.window.CropTool({
+            img: img,
+            listeners: {
+                save: {fn:this.onCropChange,scope:this}
+            }
+        });
+        this.cropTool.show();
+    },
+
+    onCropChange: function(crop){
+        console.log("Input panel has received new crop coords!",crop);
+        this.image.crop_x =  crop.x;
+        this.image.crop_y =  crop.y;
+        this.image.crop_w =  crop.w;
+        this.image.crop_h =  crop.h;
+
+        this.persistData();
+    },
+
     /**
      * Writes tv data back into tv field as json
+     *
+     * @returns void
      */
     updateTVInput: function(){
         if(this.tvElId !== false){
@@ -203,7 +241,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
     /**
      * Update the preview image display
      *
-     * @param img
+     * @returns void
      */
     updatePreviewImage: function(){
         var scaledSrc = ImagePlus.image.scaleToWidth(this.tv.url,300,function(that){return function(src){
@@ -211,7 +249,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
             that.previewImage.setSrc(src);
         }}(this));
     },
-
 
     /**
      * Update the data stored in the database with the current settings
@@ -222,7 +259,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         this.onBusy();
         var data = {
             tv: this.tv,
-            crop: this.cropData
+            crop: this.image
         };
 
         MODx.Ajax.request({
@@ -238,7 +275,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
             }
         })
     },
-
 
     /**
      * Fires when a persistData call is successful
@@ -260,6 +296,15 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      */
     onPersistDataError: function(){
         this.onReady();
+    },
+
+    /**
+     * Get the URL to this TV's source image
+     *
+     * @returns {String}
+     */
+    getSourceImageUrl: function(){
+        return ImagePlus.getMediaSourceRelativeUrl(this.image.mediasource,this.image.path);
     }
 
 

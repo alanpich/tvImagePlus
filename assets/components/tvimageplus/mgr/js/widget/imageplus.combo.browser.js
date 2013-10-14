@@ -6,10 +6,7 @@ ImagePlus.combo.Browser = function(config) {
         multiple: false,
         allowedFileTypes: 'png,jpg,jpeg,gif'
     });
-
-    console.log(config);
     ImagePlus.combo.Browser.superclass.constructor.call(this,config);
-
 
     this.on('select',this.onFileSelected,this);
 };

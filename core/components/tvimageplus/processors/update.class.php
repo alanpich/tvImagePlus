@@ -9,6 +9,8 @@ class ImagePlusUpdateProcessor extends ImagePlus\Processor\AbstractProcessor {
             return $this->failure("Invalud uid {$uid}");
 
         $image = $this->imagePlus->getImage($uid);
+        if(!$image)
+            return $this->failure("Unable to load ImagePlusImage #{$uid}");
 
         $json = $this->getProperty('data');
         if(!$json)
@@ -22,6 +24,17 @@ class ImagePlusUpdateProcessor extends ImagePlus\Processor\AbstractProcessor {
         if(isset($data->crop->path)){
             $image->set('path',$data->crop->path);
         }
+        if(isset($data->crop->crop_x))
+            $image->set('crop_x',$data->crop->crop_x);
+        if(isset($data->crop->crop_y))
+            $image->set('crop_y',$data->crop->crop_y);
+        if(isset($data->crop->crop_w))
+            $image->set('crop_w',$data->crop->crop_w);
+        if(isset($data->crop->crop_h))
+            $image->set('crop_h',$data->crop->crop_h);
+        
+
+
 
         if(!$image->save())
             return $this->failure("Failed to save image");

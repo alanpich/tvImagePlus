@@ -51,15 +51,16 @@ class imagePlusImage extends xPDOSimpleObject
     public function getOriginalImageData()
     {
         $msId = $this->get('mediasource');
-        if ($msId < 1) {
-            return '';
+        $path = $this->get('path');
+        if ($msId < 1 || is_null($path) || !strlen($path) ) {
+            return null;
         }
 
         /** @var modMediaSource $ms */
         $ms = $this->xpdo->getObject('modMediaSource', $msId);
         $ms->initialize();
 
-        $info = $ms->getObjectContents($this->get('path'));
+        $info = $ms->getObjectContents($path);
 
         $i = exif_imagetype($info['path']);
 
@@ -96,10 +97,11 @@ class imagePlusImage extends xPDOSimpleObject
             return false;
         }
 
-        $this->imagePlus->generateImageCache($this);
+        if($this->get('crop_w')<1 || $this->get('crop_h')<1){
+            return true;
+        }
 
-
-        return true;
+        return $this->imagePlus->generateImageCache($this);
     }
 
 }

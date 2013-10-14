@@ -1,6 +1,9 @@
 <?php
 namespace ImagePlus\TV;
 
+use ImagePlus\Configuration\ImageData;
+use ImagePlus\Configuration\TVData;
+
 class InputRender extends \modTemplateVarInputRender
 {
     /** @var \ImagePlus\ModxService */
@@ -46,16 +49,20 @@ class InputRender extends \modTemplateVarInputRender
     {
         $json = $value;
 
-        $tvData = json_decode($json);
-        if(is_null($tvData))
-            return;
+        $imageData = new ImageData();
+        $tvData = new TVData();
 
-        $uid = $tvData->uid;
-        $image = $this->imagePlus->getImage($uid);
-        $imageData = $image->toArray();
-
+        $jsonData = json_decode($json);
+        if(!is_null($jsonData)){
+            $tvData->fromArray($jsonData);
+            $image = $this->imagePlus->getImage($tvData->uid);
+            if($image){
+                $imageData->fromArray($image->toArray());
+            }
+        }
 
         $this->setPlaceholder('imageJSON',json_encode($imageData));
+        $this->setPlaceholder('tvJSON',json_encode($tvData));
 
         $data = (object)array(
             'value' => addslashes($json),

@@ -41,7 +41,7 @@ class ModxService
 
         // Ensure the db tables exist
         $mgr = $this->modx->getManager();
-//        $mgr->createObjectContainer('imagePlusImage');
+  //      $mgr->createObjectContainer('imagePlusImage');
 
         // Load cache manager
         $msId = $this->config['cache_source'];
@@ -86,7 +86,12 @@ class ModxService
         $this->includeCoreScriptAssets();
         $this->javascript('widget/imageplus.combo.browser.js');
         $this->javascript('widget/imageplus.panel.previewimage.js');
+        $this->javascript('widget/imageplus.window.croptool.js');
+        $this->javascript('lib/jquery.min.js');
+        $this->javascript('lib/jquery.Jcrop.min.js');
+        $this->javascript('lib/jquery.color.js');
         $this->javascript('tv/input/imageplus.panel.tvinput.js');
+        $this->stylesheet('jquery.Jcrop.min.css');
     }
 
     /**
@@ -159,25 +164,38 @@ class ModxService
      */
     public function generateImageCache(\imagePlusImage $image)
     {
+        $uid = $image->get('id');
+
         $phpThumb = new \modPhpThumb($this->modx,array());
 
         // Grab the original image
         $original = $image->getOriginalImageData();
 
+        if(is_null($original))
+            return false;
+
         $phpThumb->setSourceData($original->content,$original->name);
         $phpThumb->setParameter('w',400);
+        $phpThumb->setParameter('sx',$image->get('crop_x'));
+        $phpThumb->setParameter('sy',$image->get('crop_y'));
+        $phpThumb->setParameter('sw',$image->get('crop_w'));
+        $phpThumb->setParameter('sh',$image->get('crop_h'));
+        $phpThumb->setParameter('zc',true);
 
 
         $img = false;
         if($phpThumb->GenerateThumbnail()){
             $phpThumb->RenderOutput();
             $img = $phpThumb->outputImageData;
+        } else {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR,"[Image+] Failed to generate image for #{$uid}");
         }
 
         $this->removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly();
 
         $this->cacheManager->writeCacheFile($image,$img);
 
+        return true;
     }
 
     /**

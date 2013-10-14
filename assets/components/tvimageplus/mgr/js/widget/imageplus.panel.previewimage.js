@@ -18,9 +18,9 @@ Ext.extend(ImagePlus.panel.PreviewImage,Ext.Panel,{
     onAfterRender: function(){
         this.img = document.createElement('img');
         this.img.className = 'imageplus-previewimage';
+        this.img.width = 300;
+        this.img.style.width="300px";
         this.body.appendChild(this.img);
-
-
     },
 
     setSrc: function(src){

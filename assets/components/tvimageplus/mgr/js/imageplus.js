@@ -4,7 +4,16 @@ var ImagePlus = function(config) {
 };
 Ext.extend(ImagePlus,Ext.Component,{
     page:{},window:{},grid:{},tree:{},panel:{},combo:{},config: {},
+    mediaSourceUrlMap: {
+        1: '/'
+    },
 
+    /**
+     * Strip the last part of a file path and return the rest
+     *
+     * @param p {String}
+     * @returns {String}
+     */
     getPathDir: function(p){
         if(p == undefined){
             return undefined;
@@ -12,7 +21,12 @@ Ext.extend(ImagePlus,Ext.Component,{
         var bits = p.split('/');
         bits.pop();
         return bits.join('/');
+    },
+
+    getMediaSourceRelativeUrl: function(ms,path){
+        return this.mediaSourceUrlMap[ms]+path;
     }
+
 });
 Ext.reg('ImagePlus',ImagePlus);
 ImagePlus = new ImagePlus();
