@@ -12,18 +12,20 @@ class ImagePlusRegenerateProcessor extends ImagePlus\Processor\AbstractProcessor
         // Get all images
         $images = $this->imagePlus->getImages();
 
-        $total = 0;
+        $done = 0;
+        $total = count($images);
 
         foreach($images as $image){
             $this->imagePlus->generateImageCache($image);
-            $total++;
+            $this->modx->log(xPDO::LOG_LEVEL_INFO,"[Image+] Generated {$done}/{$total} images");
+            $done++;
         }
 
 
         $this->imagePlus->removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly();
 
         return $this->success('Regeneration complete',array(
-            'total' => $total,
+            'total' => $done,
         ));
     }
 
