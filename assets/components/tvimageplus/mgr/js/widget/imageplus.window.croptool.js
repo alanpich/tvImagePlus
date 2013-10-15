@@ -96,9 +96,7 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
 
 
         var zoom = Math.round( (1 / this.cropTool.getScaleFactor()[0]) * 100);
-
         this.setTitle('Image+' + '  <small>('+zoom+'%)</small>');
-        console.log(this.title);
 
         this.syncSize();
         this.center();

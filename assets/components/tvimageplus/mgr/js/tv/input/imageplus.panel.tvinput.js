@@ -206,13 +206,17 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         this.$cropToolDiv.show();
     },
 
+
+    /**
+     * Fired when the image crop has been changed
+     * 
+     * @param crop
+     */
     onCropChange: function(crop){
-        console.log("Input panel has received new crop coords!",crop);
         this.image.crop_x =  crop.x;
         this.image.crop_y =  crop.y;
         this.image.crop_w =  crop.w;
         this.image.crop_h =  crop.h;
-
         this.persistData();
     },
 
@@ -281,7 +285,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @returns void
      */
     onPersistDataSuccess: function(response){
-        console.log(response);
         this.tv = response.object.tv;
         this.updateTVInput();
         this.updatePreviewImage();
