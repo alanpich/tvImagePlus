@@ -16,20 +16,23 @@ ImagePlus.window.CropTool = function(config) {
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,scope: this
-            ,handler: function() { this.close(); }
+            ,handler: function() {
+                this.fireEvent('close');
+                this.close();
+            }
         },{
             text: config.saveBtnText || _('save')
             ,scope: this
             ,handler: this.save
         }],
-        crop: {
+        crop: config.crop||{
             x: 0,
             y: 0,
-            w: 20,
-            h: 20
+            w: 60,
+            h: 40
         },
-        minCrop: [150,150],
-        enforceMinCrop: true,
+        minCrop: [500,200],
+        enforceMinCrop: false,
         cropTooSmall: false,
         cropMoveEventThreshold: 333,
         cropBg: '#000',
@@ -47,7 +50,7 @@ ImagePlus.window.CropTool = function(config) {
     this.on('afterrender',this.onAfterRender,this);
     this.on('show',this.onAfterShow,this);
 
-    this.addEvents('save');
+    this.addEvents('save','close');
 };
 Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
 
@@ -78,7 +81,7 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
             acceptableHeight = maxHeight;
             acceptableWidth = this.img.width / heightScaleRatio;
         }
-
+console.log(this.crop)
         this.setSize(acceptableWidth,acceptableHeight);
         this.cropTool = jQuery.Jcrop(this.cropToolDiv);
         this.cropTool.setOptions({
@@ -93,6 +96,15 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
             }}(this),
             onChange: ImagePlus.throttle(this.onCropMove,this.cropMoveEventThreshold,this)
         });
+        console.log(this.cropTool);
+//        var scaleRatio = this.cropTool.getRa
+        this.cropTool.setSelect([
+                this.crop.crop_x,
+                this.crop.crop_y,
+                this.crop.crop_x + this.crop.crop_w,
+                this.crop.crop_y + this.crop.crop_h
+            ]
+        )
 
 
         var zoom = Math.round( (1 / this.cropTool.getScaleFactor()[0]) * 100);

@@ -11,6 +11,7 @@ ImagePlus.panel.TVInput = function(config) {
         border: false
         ,baseCls: 'modx-formpanel'
         ,cls: 'container'
+        ,anchor: 300
         ,tvElId: config.tvElId || false
         ,value: config.value || ''
         ,tv: config.tv || {
@@ -73,9 +74,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @returns void
      */
     onAfterRender: function(){
-        this.loadMask = new Ext.LoadMask(this.container,{
-            msg: 'Please wait...'
-        });
 
         this.previewImage = this.getComponent('imageplus-panel-previewimage');
         this.altTextField = this.getComponent('imageplus-textfield-alttext');
@@ -128,7 +126,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @returns void
      */
     onBusy: function(){
-        this.loadMask.show();
+        this.getLoadMask().show();
     },
 
     /**
@@ -138,7 +136,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @returns void
      */
     onReady: function(){
-        this.loadMask.hide();
+        this.getLoadMask().hide();
     },
 
     /**
@@ -175,6 +173,20 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         }}(this),1000);
     },
 
+    /**
+     * Returns the load mask component, initializing
+     * it if it doesn't already exist
+     *
+     * @returns {Ext.LoadMask}
+     */
+    getLoadMask: function(){
+        if(!this.loadMask){
+            this.loadMask = new Ext.LoadMask(this.container,{
+                msg: 'Please wait...'
+            });
+        }
+        return this.loadMask;
+    },
 
     /**
      * Create & display a cropping tool for
@@ -186,6 +198,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 
         if(this.$cropToolDiv){ this.$cropToolDiv.destroy() }
 
+        this.onBusy();
 
         var img = new Image();
         //noinspection JSValidateTypes
@@ -196,20 +209,35 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 
     },
 
+    /**
+     * Does the leg work of initializing the CropTool
+     *
+     * @param img {Image}
+     */
     _showCropTool: function(img){
         this.$cropToolDiv = new ImagePlus.window.CropTool({
             img: img,
+            crop: {
+                crop_x: this.image.crop_x,
+                crop_y: this.image.crop_y,
+                crop_w: this.image.crop_w,
+                crop_h: this.image.crop_h
+            },
             listeners: {
-                save: {fn:this.onCropChange,scope:this}
+                save: {fn:this.onCropChange,scope:this},
+                close: {fn:function(){
+                    this.onReady();
+                },scope:this}
             }
         });
+        this.onBusy();
         this.$cropToolDiv.show();
     },
 
 
     /**
      * Fired when the image crop has been changed
-     * 
+     *
      * @param crop
      */
     onCropChange: function(crop){
