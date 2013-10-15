@@ -11,7 +11,7 @@ ImagePlus.window.CropTool = function(config) {
         collapsible: false,
         maximizable: false,
         allowDrop: false,
-        title: "Image+",
+        title: _('tvimageplus.editor_title'),
         width: config.img.width || 450
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
@@ -132,8 +132,8 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
 
         this.cropTool = jQuery.Jcrop(this.cropToolDiv,cropToolOptions)
 
-        var zoom = Math.round( (1 / this.cropTool.getScaleFactor()[0]) * 100);
-        this.setTitle('Image+' + '  <small>('+zoom+'%)</small>');
+//        var zoom = Math.round( (1 / this.cropTool.getScaleFactor()[0]) * 100);
+//        this.setTitle('Image+' + '  <small>('+zoom+'%)</small>');
 
         this.setWidth(acceptableWidth+2);
         this.syncSize();
@@ -203,14 +203,13 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
             this.close();
         }
 
+
+
         if(this.cropTooSmall){
-            var msg = Ext.MessageBox.confirm(
-                'Warning: Crop Selection too small',
-                'The crop area you have selected is smaller than the size needed for this image.'
-                 +'This means the image will be scaled up to fit. Please don\'t do this, it\'ll make the site look terrible',
-                save_actual,
-                this
-            )
+
+            var titleText = [ _('warning'),' ',_('tvimageplus.err_crop_too_small')].join('');
+            var bodyText =  [ _('tvimageplus.err_crop_too_small_desc') ,'<br /><br />', _('tvimageplus.are_you_sure')].join('');
+            var msg = Ext.MessageBox.confirm( titleText, bodyText, save_actual, this)
         } else {
             save_actual.apply(this,[saveButtonId]);
         }

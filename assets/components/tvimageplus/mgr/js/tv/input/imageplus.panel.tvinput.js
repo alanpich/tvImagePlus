@@ -48,7 +48,7 @@ ImagePlus.panel.TVInput = function(config) {
                 }
             },{
                 xtype: 'button',
-                text: 'Edit Image',
+                text: _('tvimageplus.edit_image'),
                 id: 'imageplus-button-editimage',
                 scope: this,
                 handler: this.showCropTool
@@ -180,10 +180,12 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      *
      * @returns {Ext.LoadMask}
      */
-    getLoadMask: function(){
+    getLoadMask: function(msg){
+        msg = msg || _('tvimageplus.please_wait');
+
         if(!this.loadMask){
             this.loadMask = new Ext.LoadMask(this.container,{
-                msg: 'Please wait...'
+                msg: msg
             });
         }
         return this.loadMask;

@@ -5,6 +5,14 @@ $_lang['imageplus'] = "Image+";
 
 $_lang['tvimageplus.editor_title'] = 'Image+ Editor';
 $_lang['tvimageplus.edit_image'] = 'Edit Image';
+$_lang['tvimageplus.are_you_sure'] = 'Are you sure you want to do this?';
+$_lang['tvimageplus.please_wait'] = 'Please wait...';
+
+
+/** TV input render */
+$_lang['tvimageplus.err_crop_too_small'] = 'Crop selection is too small';
+$_lang['tvimageplus.err_crop_too_small_desc'] = 'The crop area you have selected is smaller than the size needed for this image.'
+                                               .'This means the image will be scaled up to fit. <br /><br /><strong>Please don\'t do this, it will make the site look terrible.</strong>';
 
 /** Input options render **/
 $_lang['tvimageplus.targetwidth'] = 'Target Width';
