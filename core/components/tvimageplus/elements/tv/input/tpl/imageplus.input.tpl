@@ -7,7 +7,10 @@ MODx.load({
     tvElId:  {/literal}'tv{$tv->id}'{literal},
     renderTo: {/literal}'imageplus-wrapper-{$tv->id}'{literal},
     image: {/literal}{$imageJSON}{literal},
+
     tv: {/literal}{$tvJSON}{literal},
+    params: {/literal}{$paramsJSON}{literal}
+
 })
 </script>
 {/literal}

@@ -34,14 +34,14 @@ class ModxService
         $this->modx->lexicon->load('tvimageplus:default');
 
         // Load the phpThumb class
-        $this->modx->loadClass('modPhpThumb',$this->modx->getOption('core_path').'model/phpthumb/',true,true);
+        $this->modx->loadClass('modPhpThumb', $this->modx->getOption('core_path') . 'model/phpthumb/', true, true);
 
         // Load the xPDO package
         $this->modx->addPackage('imageplus', $this->config['model_path']);
 
         // Ensure the db tables exist
         $mgr = $this->modx->getManager();
-  //      $mgr->createObjectContainer('imagePlusImage');
+        //      $mgr->createObjectContainer('imagePlusImage');
 
         // Load cache manager
         $msId = $this->config['cache_source'];
@@ -88,6 +88,7 @@ class ModxService
         $this->javascript('widget/imageplus.panel.previewimage.js');
         $this->javascript('widget/imageplus.window.croptool.js');
         $this->javascript('lib/jquery.min.js');
+//        $this->javascript('lib/jquery.Jcrop.js');
         $this->javascript('lib/jquery.Jcrop.min.js');
         $this->javascript('lib/jquery.color.js');
         $this->javascript('tv/input/imageplus.panel.tvinput.js');
@@ -111,11 +112,13 @@ class ModxService
         $this->javascript('lib/stackblur.js');
         $this->javascript('lib/split.js');
         $this->stylesheet('imageplus.css');
-        $this->modx->regClientStartupHTMLBlock(
-            '<script>
-                        ImagePlus.config = ' . $this->config->toJSON() . ';
-        </script>'
-        );
+        $this->modx->regClientStartupHTMLBlock('<script>
+            ImagePlus.config = ' . $this->config->toJSON() . ';
+        </script>');
+        $this->modx->regClientStartupHTMLBlock("<script>
+            MODx.lang = Ext.apply(MODx.lang, " . $this->getLexiconJSON(). ");
+        </script>");
+
 
         self::$core_javascripts_included = true;
     }
@@ -161,39 +164,40 @@ class ModxService
      * Generate an cropped image cache for an Image
      *
      * @param \imagePlusImage $image
+     * @return bool
      */
     public function generateImageCache(\imagePlusImage $image)
     {
         $uid = $image->get('id');
 
-        $phpThumb = new \modPhpThumb($this->modx,array());
+        $phpThumb = new \modPhpThumb($this->modx, array());
 
         // Grab the original image
         $original = $image->getOriginalImageData();
 
-        if(is_null($original))
+        if (is_null($original))
             return false;
 
-        $phpThumb->setSourceData($original->content,$original->name);
-        $phpThumb->setParameter('w',400);
-        $phpThumb->setParameter('sx',$image->get('crop_x'));
-        $phpThumb->setParameter('sy',$image->get('crop_y'));
-        $phpThumb->setParameter('sw',$image->get('crop_w'));
-        $phpThumb->setParameter('sh',$image->get('crop_h'));
-        $phpThumb->setParameter('zc',true);
+        $phpThumb->setSourceData($original->content, $original->name);
+        $phpThumb->setParameter('w', 400);
+        $phpThumb->setParameter('sx', $image->get('crop_x'));
+        $phpThumb->setParameter('sy', $image->get('crop_y'));
+        $phpThumb->setParameter('sw', $image->get('crop_w'));
+        $phpThumb->setParameter('sh', $image->get('crop_h'));
+        $phpThumb->setParameter('zc', true);
 
 
         $img = false;
-        if($phpThumb->GenerateThumbnail()){
+        if ($phpThumb->GenerateThumbnail()) {
             $phpThumb->RenderOutput();
             $img = $phpThumb->outputImageData;
         } else {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR,"[Image+] Failed to generate image for #{$uid}");
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Failed to generate image for #{$uid}");
         }
 
         $this->removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly();
 
-        $this->cacheManager->writeCacheFile($image,$img);
+        $this->cacheManager->writeCacheFile($image, $img);
 
         return true;
     }
@@ -211,10 +215,18 @@ class ModxService
          * assets/components/tvimageplus/mgr because that is
          * where the connector is. Kill them, kill them all!!!
          */
-        $path = $this->config['assets_path'].'mgr/';
-        foreach(glob("{$path}pThumb*") as $file){
+        $path = $this->config['assets_path'] . 'mgr/';
+        foreach (glob("{$path}pThumb*") as $file) {
             unlink($file);
         }
+    }
+
+
+    protected function getLexiconJSON()
+    {
+        $lex = $this->modx->lexicon;
+        $ip = $lex->getFileTopic('en','tvimageplus');
+        return json_encode($ip);
     }
 
 

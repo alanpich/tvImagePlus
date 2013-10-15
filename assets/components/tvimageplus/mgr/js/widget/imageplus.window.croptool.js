@@ -15,6 +15,7 @@ ImagePlus.window.CropTool = function(config) {
         width: config.img.width || 450
         ,buttons: [{
             text: config.cancelBtnText || _('cancel')
+            ,id: 'imageplus-croptool-button-cancel'
             ,scope: this
             ,handler: function() {
                 this.fireEvent('close');
@@ -23,6 +24,7 @@ ImagePlus.window.CropTool = function(config) {
         },{
             text: config.saveBtnText || _('save')
             ,scope: this
+            ,id: 'imageplus-croptool-button-save'
             ,handler: this.save
         }],
         crop: config.crop||{
@@ -31,7 +33,7 @@ ImagePlus.window.CropTool = function(config) {
             w: 60,
             h: 40
         },
-        minCrop: [500,200],
+        minCrop: config.minCrop || [500,200],
         enforceMinCrop: false,
         cropTooSmall: false,
         cropMoveEventThreshold: 333,
@@ -60,6 +62,30 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
 
     onAfterShow: function(){
 
+//        console.log('aaaaarge');
+//        setTimeout(function(that){return function(){
+//           that.getCropTool().setSelect([
+//                that.crop.crop_x,
+//                that.crop.crop_y,
+//                that.crop.crop_x + that.crop.crop_w,
+//                that.crop.crop_y + that.crop.crop_h
+//            ])
+//        }}(this),500)
+
+
+        this.getCropTool().setSelect([
+            this.crop.crop_x,
+            this.crop.crop_y,
+            this.crop.crop_x + this.crop.crop_w,
+            this.crop.crop_y + this.crop.crop_h
+        ])
+    },
+
+
+    getCropTool: function(opts){
+        if(this.cropTool){
+            this.cropTool.destroy();
+        }
         // Calculate maximum safest size for window
         var imgRatio = this.img.width / this.img.height;
 
@@ -73,18 +99,21 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
             // Calculate height for this width
             var scaleRatio = this.img.width / maxWidth;
             acceptableWidth = maxWidth;
-            acceptableHeight = this.img.height / scaleRatio;
+            acceptableHeight = Math.round(this.img.height / scaleRatio);
         }
 
         if(acceptableHeight > maxHeight){
             var heightScaleRatio = this.img.height / maxHeight;
             acceptableHeight = maxHeight;
-            acceptableWidth = this.img.width / heightScaleRatio;
+            acceptableWidth = Math.round(this.img.width / heightScaleRatio);
         }
-console.log(this.crop)
-        this.setSize(acceptableWidth,acceptableHeight);
-        this.cropTool = jQuery.Jcrop(this.cropToolDiv);
-        this.cropTool.setOptions({
+
+
+        /**
+         * Options to pass to Jcrop constructor
+         * @type {{}}
+         */
+        var cropToolOptions = {
             bgOpacity: 0.1,
             bgColor: '#000',
             minSize: this.enforceMinCrop? this.minCrop : [10,10],
@@ -95,23 +124,22 @@ console.log(this.crop)
                 that.onCropSet(crop);
             }}(this),
             onChange: ImagePlus.throttle(this.onCropMove,this.cropMoveEventThreshold,this)
-        });
-        console.log(this.cropTool);
-//        var scaleRatio = this.cropTool.getRa
-        this.cropTool.setSelect([
-                this.crop.crop_x,
-                this.crop.crop_y,
-                this.crop.crop_x + this.crop.crop_w,
-                this.crop.crop_y + this.crop.crop_h
-            ]
-        )
+        }
+        // If both dimension constraints are set, fix the aspect ratio
+        if(this.minCrop[0] > 0 && this.minCrop[1] > 0){
+            cropToolOptions.aspectRatio = this.minCrop[0] / this.minCrop[1];
+        }
 
+        this.cropTool = jQuery.Jcrop(this.cropToolDiv,cropToolOptions)
 
         var zoom = Math.round( (1 / this.cropTool.getScaleFactor()[0]) * 100);
         this.setTitle('Image+' + '  <small>('+zoom+'%)</small>');
 
+        this.setWidth(acceptableWidth+2);
         this.syncSize();
         this.center();
+
+        return this.cropTool;
     },
 
 
@@ -164,8 +192,30 @@ console.log(this.crop)
     },
 
     save: function(){
-        this.fireEvent('save',this.crop);
-        this.close();
+
+        var saveButtonId =  'yes';
+
+
+        var save_actual = function(btnId){
+            if(btnId!=='yes'&&btnId!=true)
+                return;
+                this.fireEvent('save',this.crop);
+            this.close();
+        }
+
+        if(this.cropTooSmall){
+            var msg = Ext.MessageBox.confirm(
+                'Warning: Crop Selection too small',
+                'The crop area you have selected is smaller than the size needed for this image.'
+                 +'This means the image will be scaled up to fit. Please don\'t do this, it\'ll make the site look terrible',
+                save_actual,
+                this
+            )
+        } else {
+            save_actual.apply(this,[saveButtonId]);
+        }
+
+
     }
 });
 Ext.reg('imageplus-window-croptool',ImagePlus.window.CropTool);

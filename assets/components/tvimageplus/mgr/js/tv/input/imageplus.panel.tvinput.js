@@ -20,6 +20,7 @@ ImagePlus.panel.TVInput = function(config) {
             uid: 0,
             version: '3.0.0'
         }
+        ,params: config.params || {}
         ,image: config.image || {
             mediasource: 1,
             path: '',
@@ -215,8 +216,19 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @param img {Image}
      */
     _showCropTool: function(img){
+
+        // Check for a fixed ratio
+        var enforceMinCrop = false;
+        if( (this.params.targetWidth || 0) > 0 || (this.params.targetHeight || 0) > 0 ){
+        //    enforceMinCrop = true;
+        }
+
+
+
         this.$cropToolDiv = new ImagePlus.window.CropTool({
             img: img,
+            minCrop: [this.params.targetWidth,this.params.targetHeight],
+            enforceMinCrop: enforceMinCrop,
             crop: {
                 crop_x: this.image.crop_x,
                 crop_y: this.image.crop_y,

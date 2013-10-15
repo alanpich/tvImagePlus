@@ -14,6 +14,7 @@
  * @event   OnTVOutputPropertiesList
  * @event   OnTVOutputRenderPropertiesList
  * @event   OnDocFormRender
+ * @event   OnManagerPageBeforeRender
  *
  */
 
@@ -47,4 +48,9 @@ switch ($modx->event->name) {
         $imagePlus = $modx->getService('imagePlus','ImagePlus',$corePath);
         $imagePlus->includeScriptAssets();
         break;
+    case 'OnManagerPageBeforeRender':
+        $imagePlus = $modx->getService('imagePlus','ImagePlus',$corePath);
+        $imagePlus->includeCoreScriptAssets();
+        break;
+
 };
