@@ -12,7 +12,6 @@ class ImagePlusInitializeProcessor extends ImagePlus\Processor\AbstractProcessor
                 'id' => $newImageId
             ));
 
-        return $this->failure('ImagePlusInitializeProcessor::process has not been implemented yet');
     }
 }
 return 'ImagePlusInitializeProcessor';

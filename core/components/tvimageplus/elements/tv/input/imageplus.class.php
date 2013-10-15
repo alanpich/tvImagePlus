@@ -1,5 +1,8 @@
 <?php
 
+if(!class_exists('ImagePlus\TV\InputRender'))
+    require dirname(dirname(dirname(dirname(__FILE__)))).'/lib/autoload.php';
+
 class ImagePlusInputRender extends ImagePlus\TV\InputRender
 {
     /**

@@ -66,6 +66,8 @@ ImagePlus.panel.TVInput = function(config) {
     });
     ImagePlus.panel.TVInput.superclass.constructor.call(this,config);
 
+    this.image.output_width = this.params.targetWidth || this.image.output_width;
+    this.image.output_height = this.params.targetHeight || this.image.output_height;
 };
 Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 
@@ -165,7 +167,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
                 },
                 listeners: {
                     success: {fn: function(response){
-                        console.log(response);
                         that.tv.uid = response.object.id;
                         that.onInitializationComplete();
                     },scope:that}

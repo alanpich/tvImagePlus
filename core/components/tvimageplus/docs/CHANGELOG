@@ -1,0 +1,46 @@
+-------------------------
+ Image+ TV type changelog
+-------------------------
+
+# v2.2.1
+--------
+ :: Moved thumbnail generation to mgr interface to relieve stress on front end
+ :: Separated image caching from the modx cache to avoid wiping them all when
+    the MODX cache is cleared
+
+# v2.2
+--------
+ :: Added gui warning of missing dependencies
+ :: Added PhpThumbsUp crop engine
+ :: Refactored to allow changing of crop engines
+ :: Added grid renderer for MIGX backend
+ :: Confirmed to work with Articles [#21]
+ :: Now works with MIGX [#15]
+ :: TV Default Value is now output if TV is empty
+ :: TV Reset button now works [#22]
+ :: Added image preloader to accurately get image size on upload.
+    - This is because Modx File Manager will not report accurate
+      image size for images above 800x600 [#8]
+ :: Added option to put an icon on TV input 'crop' button. [#16]
+    - Create a system setting called tvimageplus.crop_icon and
+      populate it with the url to the desired icon png
+ :: Added system setting override for core_path and assets_url [#25]
+ :: Added Czech translation (@TheBoxer)
+ :: Added Danish translation (@Flygenring)
+ :: Added German translation (@KristianP)
+ :: Added Spanish translation (Nico Telfer)
+ :: Added French translation (@rtripault)
+ :: Added Hungarian translation (Kristof Kotai)
+ :: Added Italian translation (@tillilab)
+ :: Added Dutch translation (@Mark-H)
+ :: Added Russian translation (@Alroniks)
+
+# v2.1
+--------
+ :: Fixed bug with non-default media sources
+ :: Added field for additional phpThumb parameters to output renderer
+ :: Added option to specify a chunk for output formatting (fields: url,alt,width,height)
+
+# v2.0
+-------
+Complete rewrite

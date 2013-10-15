@@ -27,3 +27,11 @@ $_lang['tvimageplus.phpThumbParams'] = 'Additional phpThumb parameters';
 $_lang['tvimageplus.phpThumbParams_desc'] = 'Add additional filters etc for phpThumb. Documentation can be found <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">here</a>.';
 $_lang['tvimageplus.outputChunk'] = 'Output chunk';
 $_lang['tvimageplus.outputChunk_desc'] = 'Select a chunk for tv output. Leave blank for raw url output';
+
+/** Cache regenerator render */
+$_lang['tvimageplus.regenerate_cache'] = 'Regenerate Image+ cache';
+$_lang['tvimageplus.regenerating_cache'] = 'Regenerating Image+ cache... this could take a while...';
+$_lang['tvimageplus.regenerate_cache_desc'] = 'Regenerates cropped images for all Image+ TVs';
+$_lang['tvimageplus.regenerate_cache_simple_button'] = 'Start simple regeneration';
+
+

@@ -74,6 +74,9 @@ class CacheManager
         $filename = $this->getImageFileName($uid);
         $path = str_replace($filename,'',$this->getImagePath($uid));
 
+        if(!strlen($filename))
+            return false;
+
         // Ensure dir exists
         $this->ms->createContainer($path,'/');
         // Write file

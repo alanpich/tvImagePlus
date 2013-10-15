@@ -25,8 +25,19 @@ Ext.extend(ImagePlus,Ext.Component,{
 
     getMediaSourceRelativeUrl: function(ms,path){
         return this.mediaSourceUrlMap[ms]+path;
-    }
+    },
 
+
+    showRegenerateCacheWindow: function(){
+
+        if(!this.regenerateCacheWindow){
+            this.regenerateCacheWindow = MODx.load({
+                xtype: 'imageplus-window-regeneratecache'
+            })
+        }
+        this.regenerateCacheWindow.show();
+
+    }
 });
 Ext.reg('ImagePlus',ImagePlus);
 ImagePlus = new ImagePlus();

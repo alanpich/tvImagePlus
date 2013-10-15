@@ -32,8 +32,10 @@ class ImagePlusUpdateProcessor extends ImagePlus\Processor\AbstractProcessor {
             $image->set('crop_w',$data->crop->crop_w);
         if(isset($data->crop->crop_h))
             $image->set('crop_h',$data->crop->crop_h);
-        
-
+        if(isset($data->crop->output_width))
+            $image->set('output_width',$data->crop->output_width);
+        if(isset($data->crop->output_height))
+            $image->set('output_height',$data->crop->output_height);
 
 
         if(!$image->save())
@@ -44,6 +46,9 @@ class ImagePlusUpdateProcessor extends ImagePlus\Processor\AbstractProcessor {
             'original' => $image->getOriginalImageUrl(),
             'version' => $this->imagePlus->version,
         ));
+
+        $this->imagePlus->removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly();
+
 
         return $this->success('TV Updated',(object)array(
             'tv' => $tvData

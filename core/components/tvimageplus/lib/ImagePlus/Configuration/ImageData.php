@@ -11,8 +11,8 @@ class ImageData
     public $crop_y;
     public $crop_w;
     public $crop_h;
-    public $target_width;
-    public $target_height;
+    public $output_width;
+    public $output_height;
 
 
     /**

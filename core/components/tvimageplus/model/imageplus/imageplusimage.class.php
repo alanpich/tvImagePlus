@@ -62,6 +62,9 @@ class imagePlusImage extends xPDOSimpleObject
 
         $info = $ms->getObjectContents($path);
 
+        if(!is_readable($info['path']))
+            return null;
+
         $i = exif_imagetype($info['path']);
 
         $img = (object)array(

@@ -62,6 +62,18 @@ class ModxService
         return $this->modx->getObject('imagePlusImage', $uid);
     }
 
+    public function getImages($filter = array())
+    {
+        return $this->modx->getCollection('imagePlusImage',$filter);
+    }
+
+    public function createImage($data)
+    {
+        $img = $this->modx->newObject('imagePlusImage');
+        $img->fromArray($data);
+        return $img;
+    }
+
 
     /**
      * Get the absolute URL to a cached image by id
@@ -109,6 +121,8 @@ class ModxService
 
         $this->javascript('imageplus.js');
         $this->javascript('imageplus.image.js');
+        $this->javascript('imageplus.migx_renderer.js');
+        $this->javascript('widget/imageplus.window.regeneratecache.js');
         $this->javascript('lib/stackblur.js');
         $this->javascript('lib/split.js');
         $this->stylesheet('imageplus.css');
@@ -116,7 +130,7 @@ class ModxService
             ImagePlus.config = ' . $this->config->toJSON() . ';
         </script>');
         $this->modx->regClientStartupHTMLBlock("<script>
-            MODx.lang = Ext.apply(MODx.lang, " . $this->getLexiconJSON(). ");
+            MODx.lang = Ext.apply(MODx.lang, " . $this->getLexiconJSON() . ");
         </script>");
 
 
@@ -179,7 +193,11 @@ class ModxService
             return false;
 
         $phpThumb->setSourceData($original->content, $original->name);
-        $phpThumb->setParameter('w', 400);
+
+        if ($image->get('output_width') > 0)
+            $phpThumb->setParameter('w', $image->get('output_width'));
+        if ($image->get('output_height') > 0)
+            $phpThumb->setParameter('h', $image->get('output_height'));
         $phpThumb->setParameter('sx', $image->get('crop_x'));
         $phpThumb->setParameter('sy', $image->get('crop_y'));
         $phpThumb->setParameter('sw', $image->get('crop_w'));
@@ -195,8 +213,6 @@ class ModxService
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Failed to generate image for #{$uid}");
         }
 
-        $this->removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly();
-
         $this->cacheManager->writeCacheFile($image, $img);
 
         return true;
@@ -207,7 +223,7 @@ class ModxService
      *
      * @return void
      */
-    protected function removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly()
+    public function removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly()
     {
         /**
          * phpThumb creates cache files in the directory where
@@ -225,7 +241,7 @@ class ModxService
     protected function getLexiconJSON()
     {
         $lex = $this->modx->lexicon;
-        $ip = $lex->getFileTopic('en','tvimageplus');
+        $ip = $lex->getFileTopic('en', 'tvimageplus');
         return json_encode($ip);
     }
 
