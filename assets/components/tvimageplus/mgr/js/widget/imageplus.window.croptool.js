@@ -7,13 +7,20 @@ ImagePlus.window.CropTool = function(config) {
     Ext.applyIf(config,{
         modal: true,
         closeAction: 'destroy',
+        closable: false,
         resizable: false,
         collapsible: false,
         maximizable: false,
         allowDrop: false,
         title: _('tvimageplus.editor_title'),
-        width: config.img.width || 450
-        ,buttons: [{
+        width: config.img.width || 450,
+        minCrop: config.minCrop || [500,200],
+        enforceMinCrop: false,
+        cropTooSmall: false,
+        cropMoveEventThreshold: 333,
+        cropBg: '#000',
+        cropSmBg: '#400',
+        buttons: [{
             text: config.cancelBtnText || _('cancel')
             ,id: 'imageplus-croptool-button-cancel'
             ,scope: this
@@ -33,12 +40,6 @@ ImagePlus.window.CropTool = function(config) {
             w: 60,
             h: 40
         },
-        minCrop: config.minCrop || [500,200],
-        enforceMinCrop: false,
-        cropTooSmall: false,
-        cropMoveEventThreshold: 333,
-        cropBg: '#000',
-        cropSmBg: '#400',
         items: [{
             html: '<img src="'+config.img.src+'" class="imageplus-croptool-inner" width="100%" />',
             border:false,
@@ -61,17 +62,6 @@ Ext.extend(ImagePlus.window.CropTool,MODx.Window,{
     },
 
     onAfterShow: function(){
-
-//        console.log('aaaaarge');
-//        setTimeout(function(that){return function(){
-//           that.getCropTool().setSelect([
-//                that.crop.crop_x,
-//                that.crop.crop_y,
-//                that.crop.crop_x + that.crop.crop_w,
-//                that.crop.crop_y + that.crop.crop_h
-//            ])
-//        }}(this),500)
-
 
         this.getCropTool().setSelect([
             this.crop.crop_x,

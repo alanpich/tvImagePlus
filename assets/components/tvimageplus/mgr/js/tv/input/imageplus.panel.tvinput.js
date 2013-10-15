@@ -241,6 +241,9 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
                 save: {fn:this.onCropChange,scope:this},
                 close: {fn:function(){
                     this.onReady();
+                },scope:this},
+                destroy: {fn:function(){
+                    this.onReady();
                 },scope:this}
             }
         });
