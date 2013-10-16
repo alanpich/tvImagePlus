@@ -47,7 +47,7 @@ class ImagePlusUpdateProcessor extends ImagePlus\Processor\AbstractProcessor {
             'version' => $this->imagePlus->version,
         ));
 
-        $this->imagePlus->removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly();
+  //      $this->imagePlus->removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly();
 
 
         return $this->success('TV Updated',(object)array(

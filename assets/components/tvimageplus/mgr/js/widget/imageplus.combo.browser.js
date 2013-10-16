@@ -2,10 +2,11 @@ ImagePlus.combo.Browser = function(config) {
     config = config || {};
 
     Ext.applyIf(config,{
-        hideSourceCombo: true,
+        hideSourceCombo: false,
         multiple: false,
         allowedFileTypes: 'png,jpg,jpeg,gif'
     });
+
     ImagePlus.combo.Browser.superclass.constructor.call(this,config);
 
     this.on('select',this.onFileSelected,this);
@@ -17,11 +18,10 @@ Ext.extend(ImagePlus.combo.Browser,MODx.combo.Browser,{
         var absUrl = '/'+imgData.fullRelativeUrl;
 
         this.fireEvent('busy');
-
         var data = {
             absUrl: absUrl,
             ms: this.source,
-            path: imgData.fullRelativeUrl
+            path: imgData.relativeUrl
         }
 
         var img = new Image();

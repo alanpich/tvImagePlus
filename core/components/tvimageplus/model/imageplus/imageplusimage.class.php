@@ -97,6 +97,7 @@ class imagePlusImage extends xPDOSimpleObject
     public function save($cacheFlag = null)
     {
         if (!parent::save()) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR,"[Image+] Failed to save xPDOObject for Image #".$this->get('id'));
             return false;
         }
 

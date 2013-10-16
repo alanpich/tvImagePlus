@@ -63,11 +63,11 @@ class ImagePlusInstallResolver
     public function update($options)
     {
         /*
-         * Upgrade script for versions  < v3.0
+         * Upgrade script for versions  < v2.9.61
          */
-        if (version_compare($this->getInstalledVersion(), '3.0.0', '<')) {
+        if (version_compare($this->getInstalledVersion(), '2.9.61', '<')) {
             // Upgrade v2.x setups to v3.x
-            $success = include $this->getCorePath().'upgrade/upgrade.3.0.0.php';
+            $success = include $this->getCorePath().'upgrade/upgrade.2.9.61.php';
             if(!$success)
                 return false;
 
