@@ -46,7 +46,6 @@ include PKG_BUILD . 'data/transport.plugin.ImagePlus.php';
 
 // Package core and assets directories ------------------------------------------------------------
 $modx->log(modX::LOG_LEVEL_INFO, 'Packaging core & assets directories...');
-$vehicle = $builder->createVehicle($plugin, $attributes);
 $vehicle->resolve('file',array(
     'source' => PKG_ASSETS,
     'target' => "return MODX_ASSETS_PATH . 'components/';",

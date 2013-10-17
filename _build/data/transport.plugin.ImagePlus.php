@@ -71,4 +71,3 @@ $attributes= array(
 );
 $vehicle = $builder->createVehicle($plugin, $attributes);
 $modx->log(modX::LOG_LEVEL_INFO,'Added ImagePlus plugin');
-$builder->putVehicle($vehicle);
