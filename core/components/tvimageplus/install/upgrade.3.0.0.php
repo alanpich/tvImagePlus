@@ -1,28 +1,17 @@
 <?php
+
 /**
- * ImagePlus Upgrade Script
- *
- * @versions lt v3.0.0
+ * Upgrade script for ImagePlus v2.9.89
  */
-
-/** @var ImagePlusInstallResolver $this */
-
-$this->warn("Upgrading from pre-v3.0.0");
-set_time_limit(0);
-
-class ImagePlusUpgrade_3_0_0 extends ImagePlus\AbstractUpgradeScript
+class ImagePlus_Upgrade_2_9_89 extends ImagePlus\Install\Script
 {
-
     protected $imagePlusTvNames = array();
 
     /**
-     * Run the upgrade
-     * @return bool
+     * The main script
      */
-    public function run()
+    public function process()
     {
-        $this->installDbTable();
-
         $this->removeOldRouterPlugin();
 
         $this->upgradeTVValues();
@@ -32,15 +21,6 @@ class ImagePlusUpgrade_3_0_0 extends ImagePlus\AbstractUpgradeScript
     }
 
 
-    /**
-     * Create the new database table
-     */
-    protected function installDbTable()
-    {
-        $manager = $this->modx->getManager();
-        $manager->createObjectContainer('imagePlusImage');
-        $this->warn("New database schema imported");
-    }
 
 
     /**
@@ -51,8 +31,8 @@ class ImagePlusUpgrade_3_0_0 extends ImagePlus\AbstractUpgradeScript
     {
         /** @var modPlugin $oldPlugin */
         $oldPlugin = $this->modx->getObject('modPlugin', array(
-            'name' => 'ImagePlusRouter'
-        ));
+                'name' => 'ImagePlusRouter'
+            ));
         if ($oldPlugin instanceof modPlugin) {
             $oldPlugin->remove();
             $this->warn("Legacy plugin removed");
@@ -67,8 +47,8 @@ class ImagePlusUpgrade_3_0_0 extends ImagePlus\AbstractUpgradeScript
     {
         // Find all image+ TVs
         $tvs = $this->modx->getCollection('modTemplateVar', array(
-            'type' => 'imageplus'
-        ));
+                'type' => 'imageplus'
+            ));
         $this->warn("Updating TV values for " . count($tvs) . " TVs");
         /** @var modTemplateVar $tv */
         foreach ($tvs as $tv) {
@@ -189,8 +169,6 @@ class ImagePlusUpgrade_3_0_0 extends ImagePlus\AbstractUpgradeScript
         return $tvData;
     }
 
-
 }
 
-$script = new ImagePlusUpgrade_3_0_0($this->modx);
-return $script->run();
+return 'ImagePlus_Upgrade_2_9_89';

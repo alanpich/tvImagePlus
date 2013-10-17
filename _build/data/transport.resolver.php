@@ -23,15 +23,9 @@ class ImagePlusInstallResolver
     public function run($options)
     {
         if ($this->modx) {
-            switch ($options[xPDOTransport::PACKAGE_ACTION]) {
-                case xPDOTransport::ACTION_INSTALL:
-                    return $this->install($options);
-                    break;
-
-                case xPDOTransport::ACTION_UPGRADE:
-                    return $this->update($options);
-                    break;
-            }
+            $installer = new ImagePlus\Install\UpgradeController($this->modx,'tvimageplus');
+            $installer->setScriptDirectory($this->imagePlus->config['install_dir']);
+            return $installer->run();
         } else {
             return true;
         }
