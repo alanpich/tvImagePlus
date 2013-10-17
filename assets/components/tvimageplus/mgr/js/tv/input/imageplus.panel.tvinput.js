@@ -39,7 +39,7 @@ ImagePlus.panel.TVInput = function(config) {
             output_height: 0
         }
         ,listeners: {
-            afterrender: {fn:this.onAfterRender,scope:this}
+            afterrender: this.onAfterRender
         }
         ,items: [{
             xtype: 'compositefield',
@@ -100,11 +100,13 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 
         this.editButton = this.getComponent('imageplus-button-editimage');
 
-        if(this.tv.uid > 0){
-            this.onInitializationComplete();
-        } else {
-            this.initializeTV();
-        }
+        Ext.onReady(function(){
+            if(this.tv.uid > 0){
+                this.onInitializationComplete();
+            } else {
+                this.initializeTV();
+            }
+        },this);
     },
 
     /**
@@ -175,20 +177,19 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      */
     initializeTV: function(){
         this.onBusy();
-        setTimeout(function(that){ return function(){
-            MODx.Ajax.request({
-                url: ImagePlus.config.connector_url,
-                params: {
-                    action: 'initialize'
-                },
-                listeners: {
-                    success: {fn: function(response){
-                        that.tv.uid = response.object.id;
-                        that.onInitializationComplete();
-                    },scope:that}
-                }
-            })
-        }}(this),1000);
+        MODx.Ajax.request({
+            url: ImagePlus.config.connector_url,
+            params: {
+                action: 'initialize'
+            },
+            listeners: {
+                success: {fn: function(response){
+                    console.log(this.id);
+                    this.tv.uid = response.object.id;
+                    this.onInitializationComplete();
+                },scope:this}
+            }
+        })
     },
 
     /**
