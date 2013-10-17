@@ -121,10 +121,8 @@ class UpgradeController
         if(!$this->scriptDirSearched)
             throw new Exception("Scripts not loaded. You need to setScriptDirectory() before you run()");
 
-
-        $this->modx->log(xPDO::LOG_LEVEL_WARN,"Upgrading Image+ from v{$this->installedVersion} to v{$this->newVersion}");
-
-        $this->modx->log(xPDO::LOG_LEVEL_ERROR,"Scripts: ".print_r($this->scripts,1));
+        if(!$this->firstInstall)
+            $this->modx->log(xPDO::LOG_LEVEL_WARN,"Upgrading Image+ from v{$this->installedVersion} to v{$this->newVersion}");
 
         try {
             foreach ($this->scripts as $versionStr => $tasks) {

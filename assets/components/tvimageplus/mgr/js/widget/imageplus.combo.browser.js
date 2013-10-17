@@ -20,7 +20,8 @@ Ext.extend(ImagePlus.combo.Browser,MODx.combo.Browser,{
         this.fireEvent('busy');
         var data = {
             absUrl: absUrl,
-            ms: this.source,
+            // DIRTY, DIRTY HACK!!!
+            ms: parseInt(imgData.image.split('').reverse().join('').split('=').shift()),
             path: imgData.relativeUrl
         }
 

@@ -4,12 +4,19 @@ ImagePlus.panel.TVInput = function(config) {
     /** xtype of component to use for image selection */
     var xtypeSourceImageSelect = 'imageplus-combo-browser';
 
+    var defaultMediaSource = 1;
+    if(config.params.defaultMediaSource !== undefined)
+        defaultMediaSource = config.params.defaultMediaSource;
+    if(config.image.crop_w>0&&config.image.crop_h>0)
+        defaultMediaSource = config.image.mediasource
+
     /**
      * Config defaults
      */
     Ext.apply(config,{
         border: false
         ,baseCls: 'modx-formpanel'
+        ,id: 'imageplus-tv-'+config.tvElId
         ,cls: 'container'
         ,anchor: 300
         ,tvElId: config.tvElId || false
@@ -22,7 +29,7 @@ ImagePlus.panel.TVInput = function(config) {
         }
         ,params: config.params || {}
         ,image: config.image || {
-            mediasource: 1,
+            mediasource: defaultMediaSource,
             path: '',
             crop_x: 0,
             crop_y: 0,
@@ -39,7 +46,7 @@ ImagePlus.panel.TVInput = function(config) {
             width: 400,
             items:[{
                 xtype: xtypeSourceImageSelect,
-                source: config.image.mediasource || 1,
+                source: defaultMediaSource,
                 openTo: ImagePlus.getPathDir(config.image.path) || '',
                 value:  config.image.path || '',
                 listeners: {
@@ -68,6 +75,7 @@ ImagePlus.panel.TVInput = function(config) {
 
     this.image.output_width = this.params.targetWidth || this.image.output_width;
     this.image.output_height = this.params.targetHeight || this.image.output_height;
+
 };
 Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 
@@ -78,9 +86,17 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      */
     onAfterRender: function(){
 
+        // Show the actual tv value input field if in debug mode
+        if(!parseInt(ImagePlus.config.debug)){
+            document.getElementById(this.tvElId).style.display = 'none';
+        }
+
         this.previewImage = this.getComponent('imageplus-panel-previewimage');
         this.altTextField = this.getComponent('imageplus-textfield-alttext');
         this.altTextField.setValue(this.tv.alt);
+        if(!this.params.allowAltTag){
+            this.altTextField.hide();
+        }
 
         this.editButton = this.getComponent('imageplus-button-editimage');
 
@@ -209,6 +225,10 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         img.onload = function(ths){return function(){
                 ths._showCropTool(this);
             }}(this);
+        img.onerror = function(ths){return function(){
+                MODx.msg.alert("Image+ Error","Unable to load the image, sorry");
+                ths.onReady();
+            }}(this)
             img.src = this.getSourceImageUrl();
 
     },
