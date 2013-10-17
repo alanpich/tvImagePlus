@@ -76,6 +76,27 @@ ImagePlus.panel.TVInput = function(config) {
     this.image.output_width = this.params.targetWidth || this.image.output_width;
     this.image.output_height = this.params.targetHeight || this.image.output_height;
 
+
+    Ext.onReady(function(){
+        if(this.tv.uid > 0){
+            this.onInitializationComplete();
+        } else {
+            this.onBusy();
+            Ext.Ajax.request({
+                url: ImagePlus.config.connector_url,
+                params: {
+                    action: 'initialize'
+                },
+                callback: function(options,success,response){
+                    var data = Ext.util.JSON.decode(response.responseText);
+                    this.tv.uid = data.object.id;
+                    this.onInitializationComplete();
+                },
+                scope:this
+            })
+        }
+    },this);
+
 };
 Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 
@@ -99,14 +120,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         }
 
         this.editButton = this.getComponent('imageplus-button-editimage');
-
-        Ext.onReady(function(){
-            if(this.tv.uid > 0){
-                this.onInitializationComplete();
-            } else {
-                this.initializeTV();
-            }
-        },this);
     },
 
     /**
@@ -170,27 +183,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         this.updateTVInput();
     },
 
-    /**
-     * Initialize the TV by getting a uid for it
-     *
-     * @returns void
-     */
-    initializeTV: function(){
-        this.onBusy();
-        MODx.Ajax.request({
-            url: ImagePlus.config.connector_url,
-            params: {
-                action: 'initialize'
-            },
-            listeners: {
-                success: {fn: function(response){
-                    console.log(this.id);
-                    this.tv.uid = response.object.id;
-                    this.onInitializationComplete();
-                },scope:this}
-            }
-        })
-    },
 
     /**
      * Returns the load mask component, initializing
