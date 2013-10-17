@@ -24,6 +24,7 @@ class ImagePlus_Install_2_9_89 extends ImagePlus\Install\Script
     {
         $this->log("Creating DB tables");
         $manager = $this->modx->getManager();
+        $this->modx->addPackage('imageplus');
         $manager->createObjectContainer('imagePlusImage');
     }
 

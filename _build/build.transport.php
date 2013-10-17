@@ -74,6 +74,9 @@ $builder->setPackageAttributes(
         'license' => file_get_contents(PKG_CORE.'docs/LICENSE'),
         'readme' => Tools::parseReadmeTpl(PKG_CORE.'docs/README.tpl'),
         'changelog' => file_get_contents(PKG_CORE.'docs/CHANGELOG'),
+        'setup-options' => array(
+            'source' => PKG_BUILD.'data/transport.options.php',
+        ),
     )
 );
 

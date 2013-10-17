@@ -45,6 +45,7 @@ class ImagePlus_Upgrade_2_9_89 extends ImagePlus\Install\Script
      */
     protected function upgradeTVValues()
     {
+        $this->modx->addPackage('imageplus');
         // Find all image+ TVs
         $tvs = $this->modx->getCollection('modTemplateVar', array(
                 'type' => 'imageplus'
