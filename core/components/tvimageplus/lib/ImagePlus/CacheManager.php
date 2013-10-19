@@ -72,19 +72,41 @@ class CacheManager
     {
         $uid = $image->get('id');
         $filename = $this->getImageFileName($uid);
-        $path = str_replace($filename,'',$this->getImagePath($uid));
+        $path = str_replace($filename, '', $this->getImagePath($uid));
 
-        if(!strlen($filename))
+        if (!strlen($filename)) {
             return false;
+        }
 
         // Ensure dir exists
-        $this->ms->createContainer($path,'/');
+        $this->ms->createContainer($path, '/');
         // Write file
-        $this->ms->removeObject($path.$filename);
-        return $this->ms->createObject($path,$filename,$data);
+        $this->ms->removeObject($path . $filename);
+        return $this->ms->createObject($path, $filename, $data);
 
     }
 
+
+    /**
+     * Check if a cache file exists for an image
+     *
+     * @param int $uid ID of image
+     * @return bool
+     */
+    public function cacheFileExists($uid)
+    {
+        $path = $this->getImagePath($uid);
+        if(strlen($path)){
+
+            $base = $this->ms->getBasePath();
+            $full = $base . $path;
+
+            if(file_exists($full)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     /**

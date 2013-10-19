@@ -5,7 +5,7 @@ var ImagePlus = function(config) {
 Ext.extend(ImagePlus,Ext.Component,{
     page:{},window:{},grid:{},tree:{},panel:{},combo:{},config: {},
     mediaSourceUrlMap: {
-        1: '/'
+        1: '/',
     },
 
     /**

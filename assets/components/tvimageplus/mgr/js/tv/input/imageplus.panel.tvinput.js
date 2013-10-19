@@ -4,12 +4,19 @@ ImagePlus.panel.TVInput = function(config) {
     /** xtype of component to use for image selection */
     var xtypeSourceImageSelect = 'imageplus-combo-browser';
 
+    var defaultMediaSource = 1;
+    if(config.params.defaultMediaSource !== undefined)
+        defaultMediaSource = config.params.defaultMediaSource;
+    if(config.image.crop_w>0&&config.image.crop_h>0)
+        defaultMediaSource = config.image.mediasource
+
     /**
      * Config defaults
      */
     Ext.apply(config,{
         border: false
         ,baseCls: 'modx-formpanel'
+        ,id: 'imageplus-tv-'+config.tvElId
         ,cls: 'container'
         ,anchor: 300
         ,tvElId: config.tvElId || false
@@ -22,7 +29,7 @@ ImagePlus.panel.TVInput = function(config) {
         }
         ,params: config.params || {}
         ,image: config.image || {
-            mediasource: 1,
+            mediasource: defaultMediaSource,
             path: '',
             crop_x: 0,
             crop_y: 0,
@@ -32,14 +39,14 @@ ImagePlus.panel.TVInput = function(config) {
             output_height: 0
         }
         ,listeners: {
-            afterrender: {fn:this.onAfterRender,scope:this}
+            afterrender: this.onAfterRender
         }
         ,items: [{
             xtype: 'compositefield',
             width: 400,
             items:[{
                 xtype: xtypeSourceImageSelect,
-                source: config.image.mediasource || 1,
+                source: defaultMediaSource,
                 openTo: ImagePlus.getPathDir(config.image.path) || '',
                 value:  config.image.path || '',
                 listeners: {
@@ -68,6 +75,28 @@ ImagePlus.panel.TVInput = function(config) {
 
     this.image.output_width = this.params.targetWidth || this.image.output_width;
     this.image.output_height = this.params.targetHeight || this.image.output_height;
+
+
+    Ext.onReady(function(){
+        if(this.tv.uid > 0){
+            this.onInitializationComplete();
+        } else {
+            this.onBusy();
+            Ext.Ajax.request({
+                url: ImagePlus.config.connector_url,
+                params: {
+                    action: 'initialize'
+                },
+                callback: function(options,success,response){
+                    var data = Ext.util.JSON.decode(response.responseText);
+                    this.tv.uid = data.object.id;
+                    this.onInitializationComplete();
+                },
+                scope:this
+            })
+        }
+    },this);
+
 };
 Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 
@@ -78,17 +107,19 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      */
     onAfterRender: function(){
 
+        // Show the actual tv value input field if in debug mode
+        if(!parseInt(ImagePlus.config.debug)){
+            document.getElementById(this.tvElId).style.display = 'none';
+        }
+
         this.previewImage = this.getComponent('imageplus-panel-previewimage');
         this.altTextField = this.getComponent('imageplus-textfield-alttext');
         this.altTextField.setValue(this.tv.alt);
+        if(!this.params.allowAltTag){
+            this.altTextField.hide();
+        }
 
         this.editButton = this.getComponent('imageplus-button-editimage');
-
-        if(this.tv.uid > 0){
-            this.onInitializationComplete();
-        } else {
-            this.initializeTV();
-        }
     },
 
     /**
@@ -152,28 +183,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         this.updateTVInput();
     },
 
-    /**
-     * Initialize the TV by getting a uid for it
-     *
-     * @returns void
-     */
-    initializeTV: function(){
-        this.onBusy();
-        setTimeout(function(that){ return function(){
-            MODx.Ajax.request({
-                url: ImagePlus.config.connector_url,
-                params: {
-                    action: 'initialize'
-                },
-                listeners: {
-                    success: {fn: function(response){
-                        that.tv.uid = response.object.id;
-                        that.onInitializationComplete();
-                    },scope:that}
-                }
-            })
-        }}(this),1000);
-    },
 
     /**
      * Returns the load mask component, initializing
@@ -209,6 +218,10 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         img.onload = function(ths){return function(){
                 ths._showCropTool(this);
             }}(this);
+        img.onerror = function(ths){return function(){
+                MODx.msg.alert("Image+ Error","Unable to load the image, sorry");
+                ths.onReady();
+            }}(this)
             img.src = this.getSourceImageUrl();
 
     },

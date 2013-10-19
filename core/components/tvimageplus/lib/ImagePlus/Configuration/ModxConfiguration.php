@@ -35,6 +35,7 @@ class ModxConfiguration implements \ArrayAccess
             'connector_url' => $mgr_url.'connector.php',
             'cache_source' => 1,
             'cache_path' => 'assets/components/tvimageplus/cache/',
+            'debug' => false
         );
     }
 

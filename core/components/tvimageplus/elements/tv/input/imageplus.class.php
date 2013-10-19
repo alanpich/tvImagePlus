@@ -41,7 +41,7 @@ class ImagePlusInputRender extends ImagePlus\TV\InputRender
             }
         };
 
-        //@TODO Implement new frontend form element that returns true/false instead of "Yes"/"No"
+        //@TODO Implement new frontend form element that returns 1/0 instead of "Yes"/"No"
         if(isset($params['allowAltTag'])){
             $p =& $params['allowAltTag'];
             $p = ( $p=='Yes' || $p=='true' || (int)$p==1 || $p === true) ? true : false;
@@ -50,8 +50,10 @@ class ImagePlusInputRender extends ImagePlus\TV\InputRender
             $p =& $params['allowBlank'];
             $p =  ($p=='Yes' || $p=='true' || (int)$p==1 || $p === true) ? true : false;
         }
-        $params['targetWidth'] = (int)$params['targetWidth'];
-        $params['targetHeight'] = (int)$params['targetHeight'];
+
+        $params['targetWidth'] = @(int)$params['targetWidth'];
+        $params['targetHeight'] = @(int)$params['targetHeight'];
+        $params['defaultMediaSource'] = $this->tv->getSource('web')->get('id');
 
         $this->setPlaceholder('imageJSON',json_encode($imageData));
         $this->setPlaceholder('tvJSON',json_encode($tvData));
