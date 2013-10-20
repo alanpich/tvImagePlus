@@ -66,6 +66,7 @@ ImagePlus.panel.TVInput = function(config) {
             xtype: 'textfield',
             id: 'imageplus-textfield-alttext',
             fieldLabel: 'Alt Text',
+            width: 300,
             listeners: {
                 change: {fn:this.onUpdateAltTextField,scope:this}
             }
