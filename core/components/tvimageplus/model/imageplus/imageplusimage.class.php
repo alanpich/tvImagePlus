@@ -121,4 +121,75 @@ class imagePlusImage extends xPDOSimpleObject
         return $this->imagePlus->generateImageCache($this);
     }
 
+
+    /**
+     * Render output as a URL with an mtime parameter
+     * for cachebusting
+     *
+     * @return string
+     */
+    public function renderUrl()
+    {
+        return $this->getCacheUrl();
+    }
+
+    /**
+     * Render a snippet using this image's data as params
+     * and return the output
+     *
+     * @param string|int $snippet Name or ID of snippet
+     * @return string
+     */
+    public function renderSnippet($snippet)
+    {
+        $params = $this->asParams();
+        if(is_numeric($snippet)){
+            $snippet = $this->modx->getObject('modSnippet',$snippet);
+            if($snippet instanceof modSnippet){
+                return $snippet->process($params);
+            } else {
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR,"Snippet {$snippet} does not exist");
+            }
+        } else {
+            return $this->modx->runSnippet($snippet,$params);
+        }
+        return '';
+    }
+
+    /**
+     * Render a chunk using this image's data as params
+     * and return the input
+     *
+     * @param string|int $chunk Name or ID of the chunk
+     * @return string
+     */
+    public function renderChunk($chunk)
+    {
+        $params = $this->asParams();
+        if(is_numeric($chunk)){
+            $chunk = $this->modx->getObject('modChunk',$chunk);
+            if($chunk instanceof modChunk){
+                return $chunk->process($params);
+            } else {
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR,"Chunk {$chunk} does not exist");
+            }
+        } else {
+            return $this->modx->parseChunk($chunk,$params);
+        }
+        return '';
+    }
+
+    /**
+     * Render image as a base-64 encoded dataUri
+     *
+     * @return string
+     */
+    public function renderDataUri()
+    {
+        $cm = $this->imagePlus->cacheManager;
+        $file = $cm->getCacheFile($this);
+        //@TODO Finish this method
+        return json_encode($file);
+   }
+
 }

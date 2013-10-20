@@ -89,12 +89,17 @@ class CacheManager
     }
 
 
-    public function readCacheFile(\imagePlusImage $image)
+    public function getCacheFile(\imagePlusImage $image)
     {
         $uid = $image->get('id');
         $filename = $this->getImageFileName($uid);
         $path = str_replace($filename, '', $this->getImagePath($uid));
-        $img = $this->ms->getObjectContents($path . $filename);
+        return $this->ms->getObjectContents($path . $filename);
+    }
+
+    public function readCacheFile(\imagePlusImage $image)
+    {
+        $img = $this->getCacheFile($image);
         return $img['content'];
     }
 
