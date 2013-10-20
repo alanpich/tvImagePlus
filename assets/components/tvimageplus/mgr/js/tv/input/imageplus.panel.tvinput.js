@@ -39,7 +39,8 @@ ImagePlus.panel.TVInput = function(config) {
             output_height: 0
         }
         ,listeners: {
-            afterrender: this.onAfterRender
+            afterrender: this.onAfterRender,
+            beforerender: {fn: this.onBeforeRender, scope: this}
         }
         ,items: [{
             xtype: 'compositefield',
@@ -47,6 +48,7 @@ ImagePlus.panel.TVInput = function(config) {
             items:[{
                 xtype: xtypeSourceImageSelect,
                 source: defaultMediaSource,
+                id: config.tvElId+'-fileselect',
                 openTo: ImagePlus.getPathDir(config.image.path) || '',
                 value:  config.image.path || '',
                 listeners: {
@@ -79,6 +81,7 @@ ImagePlus.panel.TVInput = function(config) {
 
 
     Ext.onReady(function(){
+
         if(this.tv.uid > 0){
             this.onInitializationComplete();
         } else {
@@ -96,10 +99,29 @@ ImagePlus.panel.TVInput = function(config) {
                 scope:this
             })
         }
+
+        // Validation on page save
+        Ext.getCmp('modx-panel-resource').on('save',this.validate,this)
+
     },this);
 
 };
 Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
+
+    /**
+     * Fires just before the TV is rendered
+     */
+    onBeforeRender: function(){
+        if(!this.tvField){
+            this.tvField = MODx.load({
+                xtype: 'hidden'
+                ,name: 'tv'+this.tvId
+                ,hiddenName: 'tv'+this.tvId
+            })
+        }
+        this.insert(0,this.tvField);
+    },
+
 
     /**
      * Fires once the panel has been rendered onto the page
@@ -107,7 +129,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @returns void
      */
     onAfterRender: function(){
-
         // Show the actual tv value input field if in debug mode
         if(!parseInt(ImagePlus.config.debug)){
             document.getElementById(this.tvElId).style.display = 'none';
@@ -154,7 +175,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         this.image.mediasource = data.ms;
         this.image.path = data.path;
         this.sourceDataUrl = '/'+this.image.path;
-        this.tv.url = img.src;
+//        this.tv.url = img.src;
         this.onReady();
         this.updateTVInput();
         this.updatePreviewImage();
@@ -231,7 +252,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
                 MODx.msg.alert("Image+ Error","Unable to load the image, sorry");
                 ths.onReady();
             }}(this)
-            img.src = this.getSourceImageUrl();
+        img.src = this.getSourceImageUrl();
 
     },
 
@@ -247,8 +268,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         if( (this.params.targetWidth || 0) > 0 || (this.params.targetHeight || 0) > 0 ){
         //    enforceMinCrop = true;
         }
-
-
 
         this.$cropToolDiv = new ImagePlus.window.CropTool({
             img: img,
@@ -285,6 +304,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         this.image.crop_y =  crop.y;
         this.image.crop_w =  crop.w;
         this.image.crop_h =  crop.h;
+        this.validate();
         this.persistData();
     },
 
@@ -298,10 +318,10 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
             if(!this.tv.version){this.tv.version = '3.0.0'}
             var json = Ext.util.JSON.encode(this.tv);
             var tvEl = document.getElementById(this.tvElId);
-            var currentJson = tvEl.value;
+            var currentJson = this.tvField.getValue();
 
             if(json != currentJson){
-                document.getElementById(this.tvElId).value = json;
+                this.tvField.setValue(json);
                 var parent = Ext.getCmp('modx-panel-resource');
                 if(parent){
                     parent.fireEvent('fieldChange');
@@ -381,7 +401,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * Reset the TV to empty
      */
     clear: function(){
-        console.log(this);
         this.image = {
             mediasource: MODx.config.default_media_source,
             path: '',
@@ -399,6 +418,33 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
             uid: 0,
             version: '3.0.0'
         };
+        Ext.getCmp(this.tvElId+'-fileselect').setValue('');
+        Ext.getCmp('modx-panel-resource').fireEvent('tv-reset');
+    },
+
+    /**
+     * Validate the field (if this TV is marked as required)
+     */
+    validate: function(){
+        if(!this.params.allowBlank){
+            if(this.image.crop_w==0||this.image.crop_h==0){
+                this.markInvalid();
+                return false;
+            } else {
+                this.clearInvalid();
+            }
+        }
+        return true;
+    },
+
+    markInvalid: function(){
+        var inp = Ext.getCmp(this.tvElId+'-fileselect');
+        inp.markInvalid(_('field_required'));
+    },
+
+    clearInvalid: function(){
+        var inp = Ext.getCmp(this.tvElId+'-fileselect');
+        inp.clearInvalid();
     }
 
 

@@ -32,7 +32,6 @@ Ext.extend(ImagePlus.panel.PreviewImage,Ext.Panel,{
     },
 
     onImageDoesNotExist: function(){
-        console.log('arse');
         this.img.style.display="none";
     }
 

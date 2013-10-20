@@ -1,4 +1,3 @@
-<input id="tv{$tv->id}" name="tv{$tv->id}" value="{$tvData->value}" />
 <div id="imageplus-wrapper-{$tv->id}"></div>
 {literal}
 <script>
@@ -10,7 +9,10 @@ MODx.load({
     image: {/literal}{$imageJSON}{literal},
 
     tv: {/literal}{$tvJSON}{literal},
-    params: {/literal}{$paramsJSON}{literal}
+    params: {/literal}{$paramsJSON}{literal},
+    onDirtyForm: function(){
+        console.warn('Wtf is onDirtyForm?');
+    }
 
 })
 </script>

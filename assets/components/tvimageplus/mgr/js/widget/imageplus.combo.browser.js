@@ -5,6 +5,7 @@ ImagePlus.combo.Browser = function(config) {
         hideSourceCombo: false,
         multiple: false,
         allowedFileTypes: 'png,jpg,jpeg,gif'
+        ,msgTarget: 'under'
     });
 
     ImagePlus.combo.Browser.superclass.constructor.call(this,config);
@@ -35,7 +36,7 @@ Ext.extend(ImagePlus.combo.Browser,MODx.combo.Browser,{
 
     onImageDownloaded: function(img,data){
         this.fireEvent('imageReady',img,data);
-    }
+    },
 
 
 });
