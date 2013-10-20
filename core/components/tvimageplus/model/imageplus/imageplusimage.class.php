@@ -104,6 +104,11 @@ class imagePlusImage extends xPDOSimpleObject
     {
         $this->set('mtime',time());
 
+        // If crop width & height is zero, image is killed so delete cache file
+        if($this->get('crop_width')==0&&$this->get('crop_height')==0){
+            $this->imagePlus->cacheManager->deleteCacheFile($this);
+        }
+
         if (!parent::save()) {
             $this->modx->log(xPDO::LOG_LEVEL_ERROR,"[Image+] Failed to save xPDOObject for Image #".$this->get('id'));
             return false;

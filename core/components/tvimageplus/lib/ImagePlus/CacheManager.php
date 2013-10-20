@@ -94,8 +94,16 @@ class CacheManager
         $uid = $image->get('id');
         $filename = $this->getImageFileName($uid);
         $path = str_replace($filename, '', $this->getImagePath($uid));
-        $img = $this->ms->getObjectContents($path.$filename);
+        $img = $this->ms->getObjectContents($path . $filename);
         return $img['content'];
+    }
+
+    public function deleteCacheFile(\imagePlusImage $image)
+    {
+        $uid = $image->get('id');
+        $filename = $this->getImageFileName($uid);
+        $path = str_replace($filename, '', $this->getImagePath($uid));
+        return $this->ms->removeObject($path.$filename);
     }
 
 

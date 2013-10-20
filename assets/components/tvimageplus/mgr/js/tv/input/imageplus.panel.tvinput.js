@@ -113,6 +113,14 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
             document.getElementById(this.tvElId).style.display = 'none';
         }
 
+        // Bind reset button
+        var resetBtn = document.getElementById('modx-tv-reset-'+this.tvId);
+        if(resetBtn){
+            $(resetBtn).click(function(ths){return function(){
+                ths.clear();
+            }}(this))
+        }
+
         this.previewImage = this.getComponent('imageplus-panel-previewimage');
         this.altTextField = this.getComponent('imageplus-textfield-alttext');
         this.altTextField.setValue(this.tv.alt);
@@ -367,6 +375,30 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      */
     getSourceImageUrl: function(){
         return ImagePlus.getMediaSourceRelativeUrl(this.image.mediasource,this.image.path);
+    },
+
+    /**
+     * Reset the TV to empty
+     */
+    clear: function(){
+        console.log(this);
+        this.image = {
+            mediasource: MODx.config.default_media_source,
+            path: '',
+            crop_x: 0,
+            crop_y: 0,
+            crop_w: 0,
+            crop_h: 0,
+            output_width: 0,
+            output_height: 0
+        };
+        this.persistData();
+        this.tv = {
+            url: '',
+            alt: '',
+            uid: 0,
+            version: '3.0.0'
+        };
     }
 
 

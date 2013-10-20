@@ -5,6 +5,7 @@
 MODx.load({
     xtype: 'imageplus-panel-tvinput',
     tvElId:  {/literal}'tv{$tv->id}'{literal},
+    tvId: {/literal}{$tv->id}{literal},
     renderTo: {/literal}'imageplus-wrapper-{$tv->id}'{literal},
     image: {/literal}{$imageJSON}{literal},
 

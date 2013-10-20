@@ -21,11 +21,19 @@ Ext.extend(ImagePlus.panel.PreviewImage,Ext.Panel,{
         this.img.width = 300;
         this.img.style.width="300px";
         this.body.appendChild(this.img);
+        this.img.onerror = function(ths){return function(){
+            ths.onImageDoesNotExist();
+        }}(this)
     },
 
     setSrc: function(src){
-
         this.img.src = src
+        this.img.style.display="block";
+    },
+
+    onImageDoesNotExist: function(){
+        console.log('arse');
+        this.img.style.display="none";
     }
 
 });
