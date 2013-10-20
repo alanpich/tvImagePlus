@@ -38,10 +38,22 @@
     <!-- Target: build transport package               -->
     <!-- ============================================  -->
     <target name="build" description="Build transport package">
-        <property name="cmd.build-package" value="php _build/build.transport.php" />
+        <property name="cmd.build-package" value="php /vagrant/_build/build.transport.php" />
         <echo msg="Building transport package..." level="warning" />
+
         <exec command="vagrant ssh -c '${cmd.build-package}'"
-              passthru="true" />
+              passthru="true"
+              returnProperty="success"/>
+
+        <if>
+            <equals arg1="${success}" arg2="0" />
+            <then>
+                <echo msg="Schema built successfully" level="warning" />
+            </then>
+            <else>
+                <echo msg="Schema build failed" level="error" />
+            </else>
+        </if>
     </target>
 
 
