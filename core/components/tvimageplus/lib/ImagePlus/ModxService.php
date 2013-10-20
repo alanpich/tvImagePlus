@@ -64,7 +64,7 @@ class ModxService
 
     public function getImages($filter = array())
     {
-        return $this->modx->getCollection('imagePlusImage',$filter);
+        return $this->modx->getCollection('imagePlusImage', $filter);
     }
 
     public function createImage($data)
@@ -123,12 +123,14 @@ class ModxService
         $this->javascript('imageplus.image.js');
         $this->javascript('imageplus.migx_renderer.js');
         $this->javascript('widget/imageplus.window.regeneratecache.js');
+        $this->javascript('widget/imageplus.combo.snippet.js');
+        $this->javascript('widget/imageplus.combo.chunk.js');
         $this->javascript('lib/stackblur.js');
         $this->javascript('lib/split.js');
         $this->stylesheet('imageplus.css');
         $this->modx->regClientStartupHTMLBlock('<script>
             ImagePlus.config = ' . $this->config->toJSON() . ';
-            ImagePlus.mediaSourceUrlMap = '. json_encode($this->getMediaSourceBaseUrls()).';
+            ImagePlus.mediaSourceUrlMap = ' . json_encode($this->getMediaSourceBaseUrls()) . ';
         </script>');
         $this->modx->regClientStartupHTMLBlock("<script>
             MODx.lang = Ext.apply(MODx.lang, " . $this->getLexiconJSON() . ");
@@ -136,6 +138,29 @@ class ModxService
 
 
         self::$core_javascripts_included = true;
+    }
+
+
+    /**
+     * Load the contents of a javascript file, wrap it in <script>
+     * tags, and return the string ready to write onto a page
+     *
+     * @param string $file JS file (also used as identifier slug)
+     * @param string $path [optional] Path to js file if not default
+     * @throws \Exception
+     * @return string
+     */
+    public function javascriptAsInlineScript($file, $path = null)
+    {
+        if (is_null($path)) {
+            $path = $this->config['assets_path'] . 'mgr/js/';
+        }
+        $filePath = rtrim($path,'/').'/'.ltrim($file,'/');
+        if(!is_readable($filePath))
+            throw new \Exception("Unable to load javascript file $filePath");
+
+        $content = file_get_contents($filePath);
+        return "<script>{$content}</script>";
     }
 
     /**
@@ -190,13 +215,13 @@ class ModxService
         // Grab the original image
         $original = $image->getOriginalImageData();
 
-        if (is_null($original)){
-            $this->modx->log(\xPDO::LOG_LEVEL_ERROR,"[Image+] Failed to generate image for #{$uid} as source image at [".$image->get('source').':'.$image->get('path')."] is null");
+        if (is_null($original)) {
+            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, "[Image+] Failed to generate image for #{$uid} as source image at [" . $image->get('source') . ':' . $image->get('path') . "] is null");
             return false;
         }
 
         $phpThumb->setSourceData($original->content, $original->name);
-        $phpThumb->setParameter('cache_source_enabled',false);
+        $phpThumb->setParameter('cache_source_enabled', false);
 
         if ($image->get('output_width') > 0)
             $phpThumb->setParameter('w', $image->get('output_width'));
@@ -206,9 +231,9 @@ class ModxService
         $phpThumb->setParameter('sy', $image->get('crop_y'));
         $phpThumb->setParameter('sw', $image->get('crop_w'));
         $phpThumb->setParameter('sh', $image->get('crop_h'));
-        $phpThumb->setParameter('q',95);
+        $phpThumb->setParameter('q', 95);
 
-        if($image->get('output_width')>0&&$image->get('output_height')>0){
+        if ($image->get('output_width') > 0 && $image->get('output_height') > 0) {
             $phpThumb->setParameter('zc', false);
         } else {
             $phpThumb->setParameter('zc', true);
@@ -274,7 +299,7 @@ class ModxService
     {
         $array = array();
         $sources = $this->modx->getCollection('modMediaSource');
-        foreach($sources as $src){
+        foreach ($sources as $src) {
             /** @var \modFileMediaSource $src */
             $src->initialize();
             $array[$src->get('id')] = $src->getBaseUrl();
