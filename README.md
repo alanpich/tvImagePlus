@@ -1,9 +1,7 @@
 # Image+ v3.0 #
 ## Advanced Image Template Variable
 
-## v3.0 is not backwards compatible with v2.x
-
-## yet
+## v3.0 is not backwards compatible with v2.x (yet)
 
 Advanced image TV input type for MODx Revolution.
 The required dimensions for the image can (optionally)
