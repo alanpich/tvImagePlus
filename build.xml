@@ -6,8 +6,44 @@
     <!-- ============================================  -->
     <!-- Target: list available targets                -->
     <!-- ============================================  -->
-    <target name="help">
+    <target name="help" hidden="true">
         <exec command="phing -l -q" passthru="true"/>
     </target>
+
+
+    <!-- ============================================  -->
+    <!-- Target: build xPDO schema                     -->
+    <!-- ============================================  -->
+    <target name="schema" description="Build xPDO schema">
+        <property name="cmd.build-schema" value="php /vagrant/_build/build.schema.php" />
+        <echo msg="Building xPDO schema..." level="warning" />
+
+        <exec command="vagrant ssh -c '${cmd.build-schema}'"
+              returnProperty="success"
+              passthru="true"/>
+
+        <if>
+            <equals arg1="${success}" arg2="0" />
+            <then>
+                <echo msg="Schema built successfully" level="warning" />
+            </then>
+            <else>
+                <echo msg="Schema build failed" level="error" />
+            </else>
+        </if>
+
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: build transport package               -->
+    <!-- ============================================  -->
+    <target name="build" description="Build transport package">
+        <property name="cmd.build-package" value="php _build/build.transport.php" />
+        <echo msg="Building transport package..." level="warning" />
+        <exec command="vagrant ssh -c '${cmd.build-package}'"
+              passthru="true" />
+    </target>
+
+
 
 </project>
