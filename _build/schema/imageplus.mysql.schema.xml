@@ -15,6 +15,8 @@
         <field key="output_height" dbtype="int" precision="11" phptype="integer" null="false" />
 
         <field key="url" dbtype="varchar" precision="255" phptype="string" null="false" />
+        <field key="mtime" dbtype="int" precision="11" phptype="integer" null="false" />
+
 
         <aggregate alias="MediaSource" class="modMediaSource" local="mediasource" foreign="id" cardinality="one" owner="foreign" />
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Build File" default="help">
+    <property name="path" value="${project.basedir}"/>
+
+
+    <!-- ============================================  -->
+    <!-- Target: list available targets                -->
+    <!-- ============================================  -->
+    <target name="help">
+        <exec command="phing -l -q" passthru="true"/>
+    </target>
+
+</project>

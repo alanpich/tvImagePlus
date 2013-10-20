@@ -87,6 +87,19 @@ class imagePlusImage extends xPDOSimpleObject
         return $this->imagePlus->cacheManager->getImageUrl($this->get('id'));
     }
 
+    /**
+     * Return a timestamp of when the cache file was generated
+     *
+     * @return int
+     */
+    public function getCacheMTime()
+    {
+        $path = $this->imagePlus->cacheManager->getImagePath($this->get('uid'));
+        if(!is_readable($path))
+            return 0;
+        return filemtime($path);
+    }
+
 
     /**
      * Override default save method to also regenerate cache image

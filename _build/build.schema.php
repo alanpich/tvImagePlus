@@ -28,5 +28,5 @@ if (!is_dir($modelDir)) { $modx->log(modX::LOG_LEVEL_ERROR,"Model directory not 
 if (!file_exists($schemaFile)) { $modx->log(modX::LOG_LEVEL_ERROR,"Schema file not found! [{$schemaFile}]"); die(); }
 $generator->parseSchema($schemaFile,$modelDir);
 
-echo 'Done.';
+echo "\n";
 exit();
