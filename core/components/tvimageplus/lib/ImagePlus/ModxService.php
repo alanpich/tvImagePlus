@@ -245,6 +245,7 @@ class ModxService
             $phpThumb->RenderOutput();
             $img = $phpThumb->outputImageData;
             $this->cacheManager->writeCacheFile($image, $img);
+            $this->removePhpThumbTempFilesCosItDoesntCleanUpAfterItselfProperly();
         } else {
             $this->modx->log(\xPDO::LOG_LEVEL_ERROR, "[Image+] Failed to generate image for #{$uid}");
             return false;

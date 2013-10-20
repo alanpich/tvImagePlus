@@ -84,20 +84,13 @@ class imagePlusImage extends xPDOSimpleObject
      */
     public function getCacheUrl()
     {
-        return $this->imagePlus->cacheManager->getImageUrl($this->get('id'));
+        return $this->imagePlus->cacheManager->getImageUrl($this->get('id')) .'?v='.$this->get('mtime');
     }
 
-    /**
-     * Return a timestamp of when the cache file was generated
-     *
-     * @return int
-     */
-    public function getCacheMTime()
+
+    public function getAsDataUri()
     {
-        $path = $this->imagePlus->cacheManager->getImagePath($this->get('uid'));
-        if(!is_readable($path))
-            return 0;
-        return filemtime($path);
+        return $this->imagePlus->cacheManager->readCacheFile($this);
     }
 
 
@@ -109,6 +102,8 @@ class imagePlusImage extends xPDOSimpleObject
      */
     public function save($cacheFlag = null)
     {
+        $this->set('mtime',time());
+
         if (!parent::save()) {
             $this->modx->log(xPDO::LOG_LEVEL_ERROR,"[Image+] Failed to save xPDOObject for Image #".$this->get('id'));
             return false;

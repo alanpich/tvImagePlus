@@ -14,7 +14,7 @@ class CacheManager
      * Cache manager bound to a media source
      *
      * @param \modMediaSource $mediaSource Media source to use
-     * @param string          $basePath    Base path relative to media source root
+     * @param string $basePath    Base path relative to media source root
      */
     public function __construct(\modMediaSource $mediaSource, $basePath = '/')
     {
@@ -82,8 +82,20 @@ class CacheManager
         $this->ms->createContainer($path, '/');
         // Write file
         $this->ms->removeObject($path . $filename);
-        return $this->ms->createObject($path, $filename, $data);
 
+        $success = $this->ms->createObject($path, $filename, $data);
+        return $success;
+
+    }
+
+
+    public function readCacheFile(\imagePlusImage $image)
+    {
+        $uid = $image->get('id');
+        $filename = $this->getImageFileName($uid);
+        $path = str_replace($filename, '', $this->getImagePath($uid));
+        $img = $this->ms->getObjectContents($path.$filename);
+        return $img['content'];
     }
 
 
@@ -96,12 +108,12 @@ class CacheManager
     public function cacheFileExists($uid)
     {
         $path = $this->getImagePath($uid);
-        if(strlen($path)){
+        if (strlen($path)) {
 
             $base = $this->ms->getBasePath();
             $full = $base . $path;
 
-            if(file_exists($full)){
+            if (file_exists($full)) {
                 return true;
             }
         }

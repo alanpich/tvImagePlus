@@ -23,22 +23,4 @@ class OutputRender extends \modTemplateVarOutputRender
         $this->imagePlus = $this->modx->getService('imagePlus', 'ImagePlus', $path);
     }
 
-
-    public function process($value, array $params = array())
-    {
-        $data = json_decode($value);
-
-        if(isset($data->uid)){
-            $uid = $data->uid;
-            $image = $this->imagePlus->getImage($uid);
-            if(!empty($image)){
-
-                if($this->imagePlus->cacheManager->cacheFileExists($uid)){
-                    return $image->getCacheUrl();
-                }
-            }
-        }
-        return '';
-    }
-
 } 

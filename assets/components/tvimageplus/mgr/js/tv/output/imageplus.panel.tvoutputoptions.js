@@ -1,11 +1,7 @@
 ImagePlus.panel.TVOutputOptions = function(config) {
     config = config || {};
-
     config.params = config.params || {}
 
-    /**
-     * Config defaults
-     */
     Ext.apply(config,{
         layout: 'form'
         ,autoHeight: true
@@ -21,10 +17,21 @@ ImagePlus.panel.TVOutputOptions = function(config) {
 };
 Ext.extend(ImagePlus.panel.TVOutputOptions,MODx.Panel,{
 
+    /**
+     * Marks the MODX TV form as 'dirty' to enable
+     * the 'Save' button
+     *
+     * @returns void
+     */
     onFieldChange: function(){
         Ext.getCmp('modx-panel-tv').markDirty();
     },
 
+    /**
+     * Render all the elements for the panel
+     *
+     * @returns void
+     */
     renderElements: function(){
 
         this.typeSelectCombo = MODx.load({
@@ -38,16 +45,17 @@ Ext.extend(ImagePlus.panel.TVOutputOptions,MODx.Panel,{
             }
         });
 
-        var hr = {
+        var line = {
             html: '<hr />'
             ,border: false
         };
 
         this.add([
-                this.typeSelectCombo,
-                hr,
+                this.typeSelectCombo,line,
+                this.getUrlRenderPanel(),
                 this.getSnippetRenderPanel(),
-                this.getChunkRenderPanel()
+                this.getChunkRenderPanel(),
+                this.getDataUriRenderPanel()
             ]);
 
         this.onChangeRenderType(true);
@@ -57,6 +65,8 @@ Ext.extend(ImagePlus.panel.TVOutputOptions,MODx.Panel,{
     /**
      * Generate the panel for controlling
      * and describing Snippet output render
+     *
+     * @returns void
      */
     getSnippetRenderPanel: function(){
         if(!this.snippetRenderPanel){
@@ -101,6 +111,8 @@ Ext.extend(ImagePlus.panel.TVOutputOptions,MODx.Panel,{
     /**
      * Generate the panel for controlling
      * and describing Chunk output render
+     *
+     * @returns void
      */
     getChunkRenderPanel: function(){
         if(!this.chunkRenderPanel){
@@ -131,6 +143,7 @@ Ext.extend(ImagePlus.panel.TVOutputOptions,MODx.Panel,{
                         '<tr><td><pre><code>[[+height]]</code></pre></td><td><pre><code>'+_('tvimageplus.placeholder.height')+'</code></pre></td></tr>' +
                         '<tr><td><pre><code>[[+mtime]]</code></pre></td><td><pre><code>'+_('tvimageplus.placeholder.mtime')+'</code></pre></td></tr>' +
                         '<tr><td><pre><code>[[+original]]</code></pre></td><td><pre><code>'+_('tvimageplus.placeholder.original')+'</code></pre></td></tr>' +
+                        '<tr><td><pre><code>[[+alt]]</code></pre></td><td><pre><code>'+_('tvimageplus.placeholder.alt')+'</code></pre></td></tr>' +
                         '</tbody>' +
                         '</table>',
                     border: false
@@ -140,8 +153,58 @@ Ext.extend(ImagePlus.panel.TVOutputOptions,MODx.Panel,{
         return this.chunkRenderPanel;
     },
 
+    /**
+     * Generate the panel for controlling and
+     * describing the URL output type
+     *
+     * @returns void
+     */
+    getUrlRenderPanel: function(){
+        if(!this.urlRenderPanel){
+            this.urlRenderPanel = MODx.load({
+                xtype: 'panel',
+                layout: 'form',
+                anchor: '97%',
+                border: false,
+                items: [{
+                    html: '<p>'+ _('tvimageplus.output_render.url.info') + '</p>'
+                    ,border: false
+                }]
+            })
+        }
+        return this.urlRenderPanel;
+    },
+
+    /**
+     * Generate the panel for displaying info about
+     * the DataURI render type
+     *
+     * @returns void
+     */
+    getDataUriRenderPanel: function(){
+        if(!this.dataUriRenderPanel){
+            this.dataUriRenderPanel = MODx.load({
+                xtype: 'panel',
+                layout: 'form',
+                anchor: '97%',
+                border: false,
+                items: [{
+                    html: '<p>'+ _('tvimageplus.output_render.datauri.info') + '</p>'
+                    ,border: false
+                }]
+            })
+        }
+        return this.dataUriRenderPanel;an
+    },
 
 
+    /**
+     * Fired when the Image+ Output Type is changed.
+     * Shows/hides the relevant additional fields
+     *
+     * @param suppressChangeEvent
+     * @returns void
+     */
     onChangeRenderType: function(suppressChangeEvent){
         var type = this.typeSelectCombo.getValue().toLowerCase();
         if(suppressChangeEvent!==true)
@@ -152,16 +215,36 @@ Ext.extend(ImagePlus.panel.TVOutputOptions,MODx.Panel,{
             case 'snippet':
                 this.getSnippetRenderPanel().show();
                 this.getChunkRenderPanel().hide();
+                this.getUrlRenderPanel().hide();
+                this.getDataUriRenderPanel().hide();
                 break;
 
             case 'chunk':
                 this.getSnippetRenderPanel().hide();
                 this.getChunkRenderPanel().show();
+                this.getUrlRenderPanel().hide();
+                this.getDataUriRenderPanel().hide();
+                break;
+
+            case 'url':
+                this.getSnippetRenderPanel().hide();
+                this.getChunkRenderPanel().hide();
+                this.getUrlRenderPanel().show();
+                this.getDataUriRenderPanel().hide();
+                break;
+
+            case 'datauri':
+                this.getSnippetRenderPanel().hide();
+                this.getChunkRenderPanel().hide();
+                this.getUrlRenderPanel().hide();
+                this.getDataUriRenderPanel().show();
                 break;
 
             default:
                 this.getSnippetRenderPanel().hide();
                 this.getChunkRenderPanel().hide();
+                this.getUrlRenderPanel().hide();
+                this.getDataUriRenderPanel().hide();
                 break;
 
         }
