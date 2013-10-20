@@ -22,7 +22,6 @@
         });
 
         $(function(){
-            console.log(document.location);
             var cur_url = document.location.pathname.substr(1);
             var sidebarLinks = $('#sidebar .nav li a');
             for(var k=0;k<sidebarLinks.length;k++){
@@ -40,32 +39,9 @@
 </head>
 <body>
 
-<div id="mobile-nav" class="collapse" >
-    <div class="container">
-        <ul class="nav nav-stacked nav-inverse">
-            <li class="active"><a href="index.html">Overview</a></li>
-            <li><a href="installation.html">Installation</a></li>
-            <li><a href="building-from-source.html">Building from source</a></li>
-            <li><a href="getting-started.html">Getting Started</a></li>
-        </ul>
-    </div>
-</div>
 
-<div class="zen-header hidden-lg hidden-md">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                Image+
-                <button type="button" class="btn btn-link pull-right" data-toggle="collapse" data-target="#mobile-nav">
-                    <!--<span class="glyphicon glyphicon-align-justify"></span>-->
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                </button>
-            </div>
-            <div class="col-md-2 col-sm-2 col-xs-2">
-            </div>
-        </div>
-    </div>
-</div>
+{% include mobile-nav.html %}
+
 
 <div class="container" id="body">
 
@@ -97,8 +73,8 @@
 </div>
 
 
-<a href="https://github.com/alanpich/tvImagePlus" target="_BLANK">
-    <img style="position: absolute; position:fixed; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+<a href="https://github.com/alanpich/tvImagePlus" target="_BLANK" class="hidden-xs hidden-sm">
+    <img style="position: absolute; position:fixed; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub">
 </a>
 
 </body>

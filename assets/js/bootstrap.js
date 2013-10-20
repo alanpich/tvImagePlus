@@ -521,6 +521,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     if (this.options.parent) this.$parent = $(this.options.parent)
     if (this.options.toggle) this.toggle()
+
   }
 
   Collapse.DEFAULTS = {

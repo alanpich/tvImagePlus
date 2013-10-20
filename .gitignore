@@ -1,2 +1,5 @@
 .idea
 _site
+*.transport.zip
+config.core.php
+assets/components
