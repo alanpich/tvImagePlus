@@ -3,3 +3,4 @@ _site
 *.transport.zip
 config.core.php
 assets/components
+.vagrant
