@@ -38,14 +38,14 @@ $uid = $data->uid;
 $image = $imagePlus->getImage($uid);
 
 // Extract render type
-$bits = explode(':',str_replace(' ','',strlolower($options)),2);
-$type = array_shift($bits);
+$bits = explode(':',str_replace(' ','',strtolower($options)),2);
+$outputType = array_shift($bits);
 
 // Render output
 switch($outputType){
 
 	case 'snippet':
-		if(!count($bits)<1){
+		if(count($bits)<1){
 			$modx->log(xPDO::LOG_LEVEL_ERROR,"[Image+] Snippet name not specified");
 			return '';
 		}
@@ -54,7 +54,7 @@ switch($outputType){
 		break;
 
 	case 'chunk':
-		if(!count($bits)<1){
+		if(count($bits)<1){
 			$modx->log(xPDO::LOG_LEVEL_ERROR,"[Image+] Chunk name not specified");
 			return '';
 		}

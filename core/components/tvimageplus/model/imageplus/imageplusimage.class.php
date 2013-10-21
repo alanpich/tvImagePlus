@@ -1,7 +1,7 @@
 <?php
 class ImagePlusImage extends xPDOSimpleObject
 {
-    /** @var \xPDO */
+    /** @var \modX */
     protected $modx;
 
     /** @var ImagePlus\ModxService */
@@ -123,6 +123,31 @@ class ImagePlusImage extends xPDOSimpleObject
 
 
     /**
+     * Parse TV value and return an array of data
+     * about the TV image
+     *
+     * @param bool $ignoreSelf If true, don't add $this to array
+     * @return array
+     */
+    protected function asParams($ignoreSelf = false)
+    {
+        $array = array(
+            'uid' => $this->get('id'),
+            'url' => $this->getCacheUrl(),
+            'width' => $this->get('output_width'),
+            'height' => $this->get('output_height'),
+            'mtime' => $this->get('mtime'),
+            'original' => $this->getOriginalImageUrl(),
+        );
+        if(!$ignoreSelf)
+            $array['image'] = $this;
+
+        return $array;
+    }
+
+
+
+    /**
      * Render output as a URL with an mtime parameter
      * for cachebusting
      *
@@ -165,7 +190,7 @@ class ImagePlusImage extends xPDOSimpleObject
      */
     public function renderChunk($chunk)
     {
-        $params = $this->asParams();
+        $params = $this->asParams(true);
         if(is_numeric($chunk)){
             $chunk = $this->modx->getObject('modChunk',$chunk);
             if($chunk instanceof modChunk){
