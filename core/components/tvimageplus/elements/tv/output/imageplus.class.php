@@ -133,7 +133,7 @@ if (!class_exists('ImagePlusOutputRender')) {
             if(empty($data) || !isset($data['image']))
                 return '';
 
-            /** @var imagePlusImage $image */
+            /** @var ImagePlusImage $image */
             $image = $data['image'];
             $content = $image->getAsDataUri();
             $base64 = '';

@@ -98,7 +98,7 @@ Ext.extend(ImagePlus.panel.TVOutputOptions,MODx.Panel,{
                         ' * @param int            $height    '+_('tvimageplus.placeholder.height')+'\n'+
                         ' * @param int            $mtime     '+_('tvimageplus.placeholder.mtime')+'\n'+
                         ' * @param string         $original  '+_('tvimageplus.placeholder.original')+'\n'+
-                        ' * @param imagePlusImage $image     '+_('tvimageplus.placeholder.image')+'\n'+
+                        ' * @param ImagePlusImage $image     '+_('tvimageplus.placeholder.image')+'\n'+
                         ' */',
                     border: false
                 }]

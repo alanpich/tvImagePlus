@@ -64,11 +64,11 @@ class CacheManager
     /**
      * Write data to a file for an image
      *
-     * @param \imagePlusImage $image
+     * @param \ImagePlusImage $image
      * @param                 $data
      * @return bool
      */
-    public function writeCacheFile(\imagePlusImage $image, $data)
+    public function writeCacheFile(\ImagePlusImage $image, $data)
     {
         $uid = $image->get('id');
         $filename = $this->getImageFileName($uid);
@@ -89,7 +89,7 @@ class CacheManager
     }
 
 
-    public function getCacheFile(\imagePlusImage $image)
+    public function getCacheFile(\ImagePlusImage $image)
     {
         $uid = $image->get('id');
         $filename = $this->getImageFileName($uid);
@@ -97,13 +97,13 @@ class CacheManager
         return $this->ms->getObjectContents($path . $filename);
     }
 
-    public function readCacheFile(\imagePlusImage $image)
+    public function readCacheFile(\ImagePlusImage $image)
     {
         $img = $this->getCacheFile($image);
         return $img['content'];
     }
 
-    public function deleteCacheFile(\imagePlusImage $image)
+    public function deleteCacheFile(\ImagePlusImage $image)
     {
         $uid = $image->get('id');
         $filename = $this->getImageFileName($uid);

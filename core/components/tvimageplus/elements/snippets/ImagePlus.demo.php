@@ -8,7 +8,7 @@
  * @param int            $height    Image height
  * @param int            $mtime     Timestamp when cached image was generated
  * @param string         $original  Absolute URL to the original (source) image
- * @param imagePlusImage $image     xPDOObject representing the image (Advanced use only)
+ * @param ImagePlusImage $image     xPDOObject representing the image (Advanced use only)
  */
 
 return $url;

@@ -1,5 +1,5 @@
 <?php
-class imagePlusImage extends xPDOSimpleObject
+class ImagePlusImage extends xPDOSimpleObject
 {
     /** @var \xPDO */
     protected $modx;

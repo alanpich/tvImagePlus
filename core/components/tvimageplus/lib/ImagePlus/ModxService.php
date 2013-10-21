@@ -41,7 +41,7 @@ class ModxService
 
         // Ensure the db tables exist
         $mgr = $this->modx->getManager();
-        //      $mgr->createObjectContainer('imagePlusImage');
+        //      $mgr->createObjectContainer('ImagePlusImage');
 
         // Load cache manager
         $msId = $this->config['cache_source'];
@@ -52,24 +52,24 @@ class ModxService
 
 
     /**
-     * Retrieve an imagePlusImage object by id
+     * Retrieve an ImagePlusImage object by id
      *
      * @param int $uid Id of image
-     * @return \imagePlusImage|null
+     * @return \ImagePlusImage|null
      */
     public function getImage($uid)
     {
-        return $this->modx->getObject('imagePlusImage', $uid);
+        return $this->modx->getObject('ImagePlusImage', $uid);
     }
 
     public function getImages($filter = array())
     {
-        return $this->modx->getCollection('imagePlusImage', $filter);
+        return $this->modx->getCollection('ImagePlusImage', $filter);
     }
 
     public function createImage($data)
     {
-        $img = $this->modx->newObject('imagePlusImage');
+        $img = $this->modx->newObject('ImagePlusImage');
         $img->fromArray($data);
         return $img;
     }
@@ -203,10 +203,10 @@ class ModxService
     /**
      * Generate an cropped image cache for an Image
      *
-     * @param \imagePlusImage $image
+     * @param \ImagePlusImage $image
      * @return bool
      */
-    public function generateImageCache(\imagePlusImage $image)
+    public function generateImageCache(\ImagePlusImage $image)
     {
         $uid = $image->get('id');
 

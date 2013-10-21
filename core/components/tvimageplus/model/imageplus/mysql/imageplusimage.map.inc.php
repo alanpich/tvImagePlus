@@ -1,5 +1,5 @@
 <?php
-$xpdo_meta_map['imagePlusImage']= array (
+$xpdo_meta_map['ImagePlusImage']= array (
   'package' => 'imageplus',
   'version' => '1.1',
   'table' => 'imageplus_images',

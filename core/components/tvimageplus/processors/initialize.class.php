@@ -4,7 +4,7 @@ class ImagePlusInitializeProcessor extends ImagePlus\Processor\AbstractProcessor
 
     public function process(){
 
-        $newImage = $this->modx->newObject('imagePlusImage');
+        $newImage = $this->modx->newObject('ImagePlusImage');
         $newImage->save();
         $newImageId = $newImage->get('id');
 
