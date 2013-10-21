@@ -82,7 +82,7 @@ ImagePlus.panel.TVInput = function(config) {
 
     Ext.onReady(function(){
 
-        if(this.tv.uid > 0){
+        if(this.tv.uid !== undefined && parseInt(this.tv.uid) > 0){
             this.onInitializationComplete();
         } else {
             this.onBusy();
