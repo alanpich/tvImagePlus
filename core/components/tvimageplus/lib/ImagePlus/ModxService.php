@@ -96,13 +96,15 @@ class ModxService
     public function includeScriptAssets()
     {
         $this->includeCoreScriptAssets();
-        $this->javascript('widget/imageplus.combo.browser.js');
-        $this->javascript('widget/imageplus.panel.previewimage.js');
-        $this->javascript('widget/imageplus.window.croptool.js');
+//        $this->javascript('widget/imageplus.combo.browser.js');
+//        $this->javascript('widget/imageplus.panel.previewimage.js');
+//        $this->javascript('widget/imageplus.window.croptool.js');
         $this->javascript('lib/jquery.min.js');
 //        $this->javascript('lib/jquery.Jcrop.js');
-        $this->javascript('lib/jquery.Jcrop.min.js');
-        $this->javascript('lib/jquery.color.js');
+//        $this->javascript('lib/jquery.Jcrop.min.js');
+//        $this->javascript('lib/jquery.color.js');
+        $this->javascript('lib/dropzone.js');
+        $this->javascript('widget/modx.panel.dropzone.js');
         $this->javascript('tv/input/imageplus.panel.tvinput.js');
         $this->stylesheet('jquery.Jcrop.min.css');
     }
