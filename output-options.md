@@ -3,13 +3,26 @@ layout: master
 title: Output Options
 ---
 
-## Image+ TV Output type
+# Output Options
+---------------------------
+The simplest way to display an *Image+* TV on your page is to use the
+**TV Output type**. This will automatically format the output anywhere you
+use the TV tag.
+
+If you want to use different renders for the same TV accross your site, you
+can alternatively use the **Output Filter**.
+
+
+## TV Output type
 ---------------------------
 
 The *Image+* **TV Output Type** offers several different method of rendering
 an image onto a page. The default, and simplest of these is URL, which will
 output a simple url onto the page pointing to you image. Other options are
 available for more advanced and dynamic usage of the TV.
+
+To use the TV Output Type, select *Image+* as the Output Type on the TV.
+
 
 ### URL
 ---------
@@ -65,3 +78,39 @@ If for whatever reason you can't load your image in the normal way, you can also
 output the image as a [Data URI](http://en.wikipedia.org/wiki/Data_URI_scheme). This will mean it is available as soon as the DOM
 loads, but may slow down your page load time as the amount of data it outputs can
 be very large.
+
+
+
+## Output Filter
+-----------------
+*Image+* also comes with a snippet to use an an output filter in your templates.
+This means that you can use the same TV, and output it in many different formats
+accross the site.
+
+To use the output filter, it is important that you **set the TV Output Type as 'default'**,
+or MODX will get into a right mess.
+
+The Output Filter snippet has the same rendering options as the TV Output Type (above), and can be
+used as follows:
+
+#### URL
+````html
+<img src="[[*myTV:image]]" />
+- or -
+<img src="[[*myTV:image=`url`]]" />
+````
+
+#### Chunk
+````html
+[[*myTv:image=`chunk:myChunkName`]]
+````
+
+#### Snippet
+````html
+[[*myTv:image=`snippet:mySnippetName`]]
+````
+
+#### Data URI
+````html
+<img src="[[*myTv:image=`datauri`]]" />
+````
