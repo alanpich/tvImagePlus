@@ -97,6 +97,7 @@ class ModxService
     {
         $this->includeCoreScriptAssets();
         $this->javascript('widget/imageplus.combo.browser.js');
+        $this->javascript('widget/imageplus.combo.easyupload.js');
         $this->javascript('widget/imageplus.panel.previewimage.js');
         $this->javascript('widget/imageplus.window.croptool.js');
         $this->javascript('lib/jquery.min.js');

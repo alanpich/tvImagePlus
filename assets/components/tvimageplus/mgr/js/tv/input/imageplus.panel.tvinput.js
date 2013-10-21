@@ -2,7 +2,7 @@ ImagePlus.panel.TVInput = function(config) {
     config = config || {};
 
     /** xtype of component to use for image selection */
-    var xtypeSourceImageSelect = 'imageplus-combo-browser';
+    var xtypeSourceImageSelect = config.params.imageSelector || 'imageplus-combo-browser';
 
     var defaultMediaSource = 1;
     if(config.params.defaultMediaSource !== undefined)
@@ -18,7 +18,6 @@ ImagePlus.panel.TVInput = function(config) {
         ,baseCls: 'modx-formpanel'
         ,id: 'imageplus-tv-'+config.tvElId
         ,cls: 'container'
-        ,anchor: 300
         ,tvElId: config.tvElId || false
         ,value: config.value || ''
         ,tv: config.tv || {
@@ -42,36 +41,33 @@ ImagePlus.panel.TVInput = function(config) {
             afterrender: this.onAfterRender,
             beforerender: {fn: this.onBeforeRender, scope: this}
         }
+        ,defaults: {
+            border: false
+        }
+        ,layout: 'column'
+        ,width: 400
         ,items: [{
-            xtype: 'compositefield',
-            width: 400,
-            items:[{
-                xtype: xtypeSourceImageSelect,
-                source: defaultMediaSource,
-                id: config.tvElId+'-fileselect',
-                openTo: ImagePlus.getPathDir(config.image.path) || '',
-                value:  config.image.path || '',
-                listeners: {
-                    imageReady: {fn:this.onSourceImageSelected,scope:this},
-                    busy: {fn: this.onBusy,scope:this}
-                }
+            html: '<div id="" style="width:300px; min-height:1px;"><img src="http://localhost:8080/assets/components/tvimageplus/cache/231.jpg?v=1382374359" width="300" /></div>',
+            border: false,
+            width: 300
+        },{
+            xtype: 'panel',
+            padding: 0,
+            margin: 0,
+            border: false,
+            items: [{
+                xtype: 'button',
+                icon: MODx.config.manager_url+'/templates/default/images/restyle/icons/file_upload.png',
+                tooltip: 'Upload an image from your computer'
             },{
                 xtype: 'button',
-                text: _('tvimageplus.edit_image'),
-                id: 'imageplus-button-editimage',
-                scope: this,
-                handler: this.showCropTool
+                icon: MODx.config.manager_url+'/templates/default/images/restyle/icons/folder_explore.png',
+                tooltip: 'Use an image that has already been uploaded'
+            },MODx.PanelSpacer,{
+                xtype: 'button',
+                icon: MODx.config.manager_url+'/templates/default/images/restyle/icons/picture.png',
+                tooltip: 'Edit image'
             }]
-        },{
-            xtype: 'imageplus-panel-previewimage'
-        },{
-            xtype: 'textfield',
-            id: 'imageplus-textfield-alttext',
-            fieldLabel: 'Alt Text',
-            width: 300,
-            listeners: {
-                change: {fn:this.onUpdateAltTextField,scope:this}
-            }
         }]
     });
     ImagePlus.panel.TVInput.superclass.constructor.call(this,config);
@@ -440,8 +436,32 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
     clearInvalid: function(){
         var inp = Ext.getCmp(this.tvElId+'-fileselect');
         inp.clearInvalid();
-    }
+    },
 
+
+    getSourceImageSelectToolConfig: function(xtypeSourceImageSelect,config){
+            return {
+                xtype: 'compositefield',
+                width: 600,
+                items:[{
+                    xtype: 'imageplus-combo-browser',
+                    source: MODx.default_media_source,
+                    id: config.tvElId+'-fileselect',
+                    openTo: ImagePlus.getPathDir(config.image.path) || '',
+                    value:  config.image.path || '',
+                    listeners: {
+                        imageReady: {fn:this.onSourceImageSelected,scope:this},
+                        busy: {fn: this.onBusy,scope:this}
+                    }
+                },{
+                    xtype: 'button',
+                    text: _('tvimageplus.edit_image'),
+                    id: 'imageplus-button-editimage',
+                    scope: this,
+                    handler: this.showCropTool
+                }]
+            }
+    }
 
 });
 Ext.reg('imageplus-panel-tvinput',ImagePlus.panel.TVInput);

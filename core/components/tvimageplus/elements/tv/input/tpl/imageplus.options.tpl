@@ -26,7 +26,8 @@
             id: 'inopt_targetWidth{/literal}{$tv}{literal}',
             value: params['targetWidth'] || '',
             anchors: '98%',
-            listeners: oc
+            listeners: oc,
+            width: 300
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'inopt_targetWidth{/literal}{$tv}{literal}'
@@ -39,7 +40,8 @@
             id: 'inopt_targetHeight{/literal}{$tv}{literal}',
             value: params['targetHeight'] || '',
             anchors: '98%',
-            listeners: oc
+            listeners: oc,
+            width: 300
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'inopt_targetHeight{/literal}{$tv}{literal}'
@@ -53,7 +55,8 @@
             value: (params['allowAltTag'] || false),
             labelAlign: 'left',
             anchors: '98%',
-            listeners: oc
+            listeners: oc,
+            width: 300
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'inopt_allowAltTag{/literal}{$tv}{literal}'
@@ -70,11 +73,44 @@
             value: (params['allowBlank'] || false),
             labelAlign: 'left',
             anchors: '98%',
-            listeners: oc
+            listeners: oc,
+            width: 300
+        },{
+            xtype: MODx.expandHelp ? 'label' : 'hidden'
+            ,forId: 'inopt_allowBlank{/literal}{$tv}{literal}'
+            ,html: 'Force the user to select an image before saving a resource'
+            ,cls: 'desc-under'
+        },{
+            xtype: 'modx-combo',
+            fieldLabel: _('tvimageplus.image_selector'),
+            name: 'inopt_imageSelector',
+            hiddenName: 'inopt_imageSelector',
+            id: 'inopt_imageSelector{/literal}{$tv}{literal}',
+            value: (params['imageSelector'] || 'imageplus-combo-browser'),
+            labelAlign: 'left',
+            anchors: '98%',
+            listeners: oc,
+            editable: false,
+            mode: 'local',
+            allowBlank: false,
+//            forceSelection: true,
+//            autoSelect: true,
+            store: new Ext.data.ArrayStore({
+                id:{/literal}'tv-{$tv}'{literal},
+                fields: ['value','name'],
+                idIndex: 0,
+                data: [
+                    ['imageplus-combo-browser', _('tvimageplus.image-selector.browser')],
+                    ['imageplus-combo-easyupload', _('tvimageplus.image-selector.easyupload')]
+                ]
+            }),
+            valueField: 'value',
+            displayField: 'name',
+            width: 300
         },{
             xtype: MODx.expandHelp ? 'label' : 'hidden'
             ,forId: 'inopt_allowAltTag{/literal}{$tv}{literal}'
-            ,html: _('tvimageplus.allowAltTag_desc')
+            ,html: _('tvimageplus.image_selector_desc')
             ,cls: 'desc-under'
         }]
         ,renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'

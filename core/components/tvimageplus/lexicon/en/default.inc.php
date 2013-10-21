@@ -1,6 +1,7 @@
 <?php
 
 $_lang['imageplus'] = "Image+";
+$_lang['tvimageplus'] = "Image+";
 
 
 $_lang['tvimageplus.editor_title'] = 'Image+ Editor';
@@ -21,6 +22,10 @@ $_lang['tvimageplus.targetheight'] = 'Target Height';
 $_lang['tvimageplus.targetheight_desc'] = 'The target height for the output image';
 $_lang['tvimageplus.allowAltTag'] = 'Alt tag field';
 $_lang['tvimageplus.allowAltTag_desc'] = 'Allow user to enter a title/alt-tag for the image';
+$_lang['tvimageplus.image_selector'] = 'Image selector';
+$_lang['tvimageplus.image_selector_desc'] = 'Either the MODX browser, or a direct upload from user\'s computer';
+$_lang['tvimageplus.image-selector.browser'] = 'MODX File Browser';
+$_lang['tvimageplus.image-selector.easyupload'] = 'Direct Image Upload';
 
 /** Output options render **/
 $_lang['tvimageplus.output_options'] = 'Image+ Rendering Options';
@@ -40,8 +45,6 @@ $_lang['tvimageplus.output_render.snippet'] = 'Snippet';
 $_lang['tvimageplus.output_render.snippet.info'] = 'The selected snippet will be called and passed the following parameters:';
 $_lang['tvimageplus.output_render.datauri'] = 'Data URI';
 $_lang['tvimageplus.output_render.datauri.info'] = 'Base64 encodes the image as a Data URI so the image is available as soon as the DOM is loaded.';
-
-
 $_lang['tvimageplus.select_chunk'] = 'Select chunk';
 $_lang['tvimageplus.select_snippet'] = 'Select snippet';
 
