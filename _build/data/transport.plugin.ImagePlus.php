@@ -55,19 +55,7 @@ $events[] = $event;
 $plugin->addMany($events);
 unset($events);
 
-/* create vehicle for plugin */
-$attributes= array(
-    xPDOTransport::UNIQUE_KEY => 'name',
-    xPDOTransport::PRESERVE_KEYS => false,
-    xPDOTransport::UPDATE_OBJECT => true,
-    xPDOTransport::RELATED_OBJECTS => true,
-    xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-        'PluginEvents' => array(
-            xPDOTransport::PRESERVE_KEYS => true,
-            xPDOTransport::UPDATE_OBJECT => false,
-            xPDOTransport::UNIQUE_KEY => array('pluginid','event'),
-        ),
-    ),
-);
-$vehicle = $builder->createVehicle($plugin, $attributes);
 $modx->log(modX::LOG_LEVEL_INFO,'Added ImagePlus plugin');
+
+
+$plugins = array($plugin);

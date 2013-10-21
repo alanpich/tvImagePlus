@@ -2,7 +2,7 @@
 
 define('PKG_NAME',"ImagePlus");
 define('PKG_NAMESPACE',"tvimageplus");
-define('PKG_VERSION',"3.0.0");
+define('PKG_VERSION',"3.0.1");
 define('PKG_RELEASE',"beta");
 
 

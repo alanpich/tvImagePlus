@@ -38,10 +38,30 @@ $builder->createPackage(PKG_NAMESPACE, PKG_VERSION, PKG_RELEASE);
 $builder->registerNamespace(PKG_NAMESPACE, false, true, '{core_path}components/' . PKG_NAMESPACE . '/');
 
 
+// Create the element category --------------------------------------------------------------------
+include PKG_BUILD . 'data/transport.category.php';
+/** @var modCategory $category */
+/** @var array $category_attr */
 
 // Create the plugin object -----------------------------------------------------------------------
 include PKG_BUILD . 'data/transport.plugin.ImagePlus.php';
+/** @var array $plugins */
+$category->addMany($plugins);
 
+// Create snippet elements ------------------------------------------------------------------------
+include PKG_BUILD . 'data/transport.snippets.php';
+/** @var array $snippets */
+$category->addMany($snippets);
+
+// Create snippet elements ------------------------------------------------------------------------
+include PKG_BUILD . 'data/transport.chunks.php';
+/** @var array $chunks */
+$category->addMany($chunks);
+
+
+
+// Create transport vehicle -----------------------------------------------------------------------
+$vehicle = $builder->createVehicle($category, $category_attr);
 
 
 // Package core and assets directories ------------------------------------------------------------

@@ -1,6 +1,12 @@
 -------------------------
  Image+ TV type changelog
 -------------------------
+# v3.0.1-beta
+--------
+ :: NOT CURRENTLY COMPATIBLE WITH v2.x - Upgrade script coming soon
+ :: Added image snippet to allow multiple output types per TV
+ :: Now allows users to select undersized crop areas (with a warning)
+ :: Add mtime to image url for cachebusting
 
 # v2.2.1
 --------
