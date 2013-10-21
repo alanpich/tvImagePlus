@@ -3,6 +3,10 @@ layout: master
 title: Image+ ModX Component
 ---
 
+<div class="hidden-sm hidden-xs" style="height:4em;"></div>
+
+<h1 class="hidden-lg" style="margin-top:0; margin-bottom:1em;">Image+ Template Variable</h1>
+
 Image+ is an extension for MODX Revolution that enables image cropping and advanced
 options for images used in Template Variables (TVs).
 

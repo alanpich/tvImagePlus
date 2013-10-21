@@ -3,7 +3,7 @@ layout: master
 title: Configuration
 ---
 
-## Configuring an Image+ TV
+# Configuring an Image+ TV
 ----------------------------
 
 *Image+* gives developers more control over the final size and

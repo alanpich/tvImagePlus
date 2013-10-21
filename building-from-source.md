@@ -3,6 +3,8 @@ layout: master
 title: Building from Source
 ---
 
+# Building from source
+------------------------
 For some people, stable public releases just aren't enough. If you are one of those
 who would rather cling onto the bleeding edge of progress, you can also build your
 own transport package from the source code hosted on GitHub, ensuring you get all the

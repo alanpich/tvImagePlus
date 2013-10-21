@@ -3,7 +3,7 @@ layout: master
 title: Getting Started
 ---
 
-## Getting started with Image+
+# Getting started with Image+
 -------------------------------
 
 

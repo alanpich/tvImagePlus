@@ -3,7 +3,7 @@ layout: master
 title: System Settings
 ---
 
-## System Settings
+# System Settings
 -------------------------------
 
 Several *Image+* settings can be overridden using

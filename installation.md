@@ -3,6 +3,9 @@ layout: master
 title: Installation
 ---
 
+# Installation Guide
+-----------------------
+
 ### Installing from MODX Extras Repository
 -------------------------------------------
 Search for Image+ in the Package Manager of a MODX installation, then install it in the same way you would install other extras.

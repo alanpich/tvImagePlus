@@ -3,7 +3,7 @@ layout: master
 title: Contributors
 ---
 
-## Contributors
+# Contributors
 -------------------------------
 
 The Image+ project was started in 2012, and is still maintained by [Alan Pich](http://github.com/alanpich).
