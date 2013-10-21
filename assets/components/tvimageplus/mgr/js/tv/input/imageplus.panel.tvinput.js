@@ -129,11 +129,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @returns void
      */
     onAfterRender: function(){
-        // Show the actual tv value input field if in debug mode
-        if(!parseInt(ImagePlus.config.debug)){
-            document.getElementById(this.tvElId).style.display = 'none';
-        }
-
         // Bind reset button
         var resetBtn = document.getElementById('modx-tv-reset-'+this.tvId);
         if(resetBtn){
