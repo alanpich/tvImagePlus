@@ -21,8 +21,7 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
     on_render: function(){
         this.el.setStyle({
             width: this.width+"px",
-            height: this.height+"px",
-            boxSizing: 'border-box'
+            height: this.height+"px"
         });
 
         this.el.addClass(this.cls);
@@ -92,7 +91,7 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
         this.dropzone = new Dropzone(this.dropzoneEl.dom,{
             url: ImagePlus.config.connector_url
             ,paramName: 'file'
-            ,acceptedFiles: ['.jpg','.png','.gif','.jpeg'].join(',')
+            ,acceptedFiles: ['.jpg','.png','.gif','.jpeg','.JPG','.PNG','.GIF','.JPEG'].join(',')
             ,maxFiles: 1
             ,headers: this.headers
             ,previewsContainer: this.devNull.dom
@@ -112,8 +111,21 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
         this.dropzone = dropzone;
         console.log('dropzone init\'d');
 
+        dropzone.on('addedfile',Ext.createDelegate(function(){
+            console.log('added a file');
+        },this));
         dropzone.on('sending',Ext.createDelegate(this.onUploadStart,this));
         dropzone.on('success',Ext.createDelegate(this.onUploadDone,this));
+        dropzone.on('error',Ext.createDelegate(this.onDropzoneError,this));
+        dropzone.on('uploadprogress',Ext.createDelegate(this.onUploadProgress,this));
+    },
+
+    onDropzoneError: function(file,err,xhr){
+        console.error(err);
+    },
+
+    onUploadProgress: function(file,progress,bytesSent){
+        console.log(progress);
     },
 
     /**
@@ -122,6 +134,7 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
      * @returns void
      */
     onUploadStart: function(file,xhr,formData){
+        console.log('upload starting');
         formData.append('action','upload');
         formData.append('uid',this.uid);
         formData.append('HTTP_MODAUTH',MODx.siteId);
@@ -138,17 +151,14 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
 
         if(response.success === false){
             MODx.msg.alert("Image+ Error","Failed to upload file :(");
-            this.dropzone.removeAllFiles(true);
-            this.dropzone.disable();
-            this.dropzone.enable();
-            return;
+        } else {
+            // Upload was successful...
+            var img = response.object;
+            this.fireEvent('imageuploaded',img);
         }
 
 
-        // Upload was successful...
-        var img = response.object;
-        this.fireEvent('imageuploaded',img);
-
+        console.log(this.dropzone);
 
         this.dropzone.removeAllFiles(true);
         this.dropzone.disable();
@@ -183,7 +193,7 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
             src: img.src
         });
         var ratio = img.width / img.height;
-        this.el.setHeight( this.getWidth() / ratio );
+        this.el.setHeight( (this.getWidth() / ratio) + 4 );
         this.el.addClass('has-image');
     },
 

@@ -216,7 +216,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
             img.onerror = function(cb){return function(){
                 cb(false,this);
             }}(cb)
-        img.src = url;
+        img.src = url+'?t='+new Date().getTime();
     }
 
 
