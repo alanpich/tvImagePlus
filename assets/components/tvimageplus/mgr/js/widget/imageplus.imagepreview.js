@@ -18,12 +18,17 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Component, {
         this.el.setStyle({
             width: this.width+"px",
             height: this.height+"px",
-            border: "4px dashed #ddd",
-            borderRadius: '10px',
             boxSizing: 'border-box'
         });
 
         this.el.addClass(this.cls);
+
+        // Add image preview
+        this.img = new Ext.Element(document.createElement('img'));
+        this.img.set({
+            width: '100%'
+        });
+        this.el.appendChild(this.img);
 
         // Add text
         if(this.text){
@@ -42,6 +47,21 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Component, {
     },
     getHeight: function(){
         return this.el.getHeight();
+    },
+
+
+    /**
+     * Pass the Image object to show in preview
+     *
+     * @param img {Image}
+     */
+    setImage: function(img){
+        this.img.set({
+            src: img.src
+        });
+        var ratio = img.width / img.height;
+        this.el.setHeight( this.getWidth() / ratio );
+        this.el.addClass('has-image');
     }
 });
 Ext.reg('imageplus-imagepreview', ImagePlus.ImagePreview);
