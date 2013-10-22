@@ -97,9 +97,7 @@ Ext.extend(MODx.panel.Dropzone,MODx.Panel,{
             '   Drop file here or click to upload' +
             '</span>' +
             '</div>' +
-            '</td><td valign="top" id="'+this.buttonPanelId+'" class="modx-panel-dropzone-button-panel">' +
-            '</td>' +
-            '</tr></tbody></table>'
+            '</td></tr></tbody></table>'
     },
 
     /**

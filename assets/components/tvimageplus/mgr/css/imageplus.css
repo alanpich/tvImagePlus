@@ -10,18 +10,17 @@
 }
 
 
-.modx-panel-dropzone {
-    width: 250px;
-    height: 75px;
-    margin: 10px;
-    margin-left: 0;
+.ip-imagepreview {
     border: 4px dashed #ddd;
     border-radius: 10px;
     position: relative;
+    cursor: pointer;
+}
+.ip-imagepreview:hover {
+    background-color: #fafaff;
 }
 
-
-.modx-panel-dropzone .message {
+.ip-imagepreview-text {
     text-align:center;
     font-size:1.2em;
     font-weight:bold;
@@ -32,7 +31,16 @@
     margin-left: -4em;
     width: 50%;
     color: #ccc;
+    text-shadow: 1px 1px #fff;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
 }
+
 
 .modx-panel-dropzone-image-panel {
     vertical-align: top;
@@ -57,4 +65,14 @@
 }
 .modx-panel-dropzone-button-panel a.hover-red:hover {
     color: #c00;
+}
+
+
+
+.imageplus-ui-button i {
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    -ms-transition: color 0.3s;
+    transition: color 0.3s;
 }
