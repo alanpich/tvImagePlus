@@ -12,7 +12,7 @@
 
 .modx-panel-dropzone {
     width: 250px;
-    height: 150px;
+    height: 75px;
     margin: 10px;
     margin-left: 0;
     border: 4px dashed #ddd;
@@ -28,8 +28,33 @@
     position: absolute;
     top: 50%;
     left:50%;
-    margin-top: -2em;
+    margin-top: -1em;
     margin-left: -4em;
     width: 50%;
     color: #ccc;
+}
+
+.modx-panel-dropzone-image-panel {
+    vertical-align: top;
+}
+
+.modx-panel-dropzone-button-panel {
+    padding-top:10px;
+    text-align:center;
+}
+.modx-panel-dropzone-button-panel a {
+    display: block;
+    font-size: 16px;
+    color: #aaa;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: color 0.23s;
+}
+.modx-panel-dropzone-button-panel a:hover {
+    color: #444;
+    margin:auto;
+    margin-bottom: 5px;
+}
+.modx-panel-dropzone-button-panel a.hover-red:hover {
+    color: #c00;
 }

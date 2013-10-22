@@ -106,7 +106,9 @@ class ModxService
         $this->javascript('lib/dropzone.js');
         $this->javascript('widget/modx.panel.dropzone.js');
         $this->javascript('tv/input/imageplus.panel.tvinput.js');
+
         $this->stylesheet('jquery.Jcrop.min.css');
+        $this->stylesheet('font-awesome.min.css');
     }
 
     /**

@@ -90,16 +90,17 @@ Ext.extend(MODx.panel.Dropzone,MODx.Panel,{
     getRenderHTML: function(){
         this.divId = Ext.id();
         return '<table><tbody><tr>' +
-            '<td>' +
+            '<td class="modx-panel-dropzone-image-panel">' +
             '<div id="'+this.divId+'" class="modx-dropzone">' +
             '<span class="message" style="pointer-events:none;">' +
             '   Drop file here or click to upload' +
             '</span>' +
             '</div>' +
-            '</td><td valign="top" style="padding-top: 10px">' +
-            '<button class="btn">U</button>' +
-            '<button class="btn">E</button>' +
-            '<button class="btn">C</button>' +
+            '</td><td valign="top" class="modx-panel-dropzone-button-panel">' +
+            '<a><i class="icon-upload-alt"></i></a>' +
+            '<a><i class="icon-folder-open-alt"></i></a>' +
+            '<a><i class="icon-crop"></i></a>' +
+            '<a class="hover-red"><i class="icon-remove"></i></a>' +
             '</td>' +
             '</tr></tbody></table>'
     },
