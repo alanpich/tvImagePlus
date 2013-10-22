@@ -3,7 +3,7 @@ var ImagePlus = function(config) {
     ImagePlus.superclass.constructor.call(this,config);
 };
 Ext.extend(ImagePlus,Ext.Component,{
-    page:{},window:{},grid:{},tree:{},panel:{},combo:{},config: {},
+    page:{},window:{},grid:{},tree:{},panel:{},combo:{},config: {}, form:{},
     mediaSourceUrlMap: {
         1: '/',
     },

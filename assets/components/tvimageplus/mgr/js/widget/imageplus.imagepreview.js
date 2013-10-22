@@ -4,15 +4,18 @@ ImagePlus.ImagePreview = function (config) {
     Ext.applyIf(config, {
         width: 300,
         height: 120,
-        text: false,
+        unstyled: true,
+        margin:0,
+        padding:0,
         cls: 'ip-imagepreview',
-        text: 'Upload an image',
+        text: 'Drop files here or click to upload',
         textCls: 'ip-imagepreview-text'
     })
     ImagePlus.ImagePreview.superclass.constructor.call(this, config);
     this.on('render',this.on_render,this);
+    this.addEvents('imageuploaded');
 };
-Ext.extend(ImagePlus.ImagePreview, Ext.Component, {
+Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
 
 
     on_render: function(){
@@ -43,20 +46,137 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Component, {
             })
             this.el.appendChild(this.textEl);
         }
+
+
+        // Create dropzone
+        this.createDropzone();
     },
 
+    /**
+     * Width of the component
+     *
+     * @returns {Number}
+     */
     getWidth: function(){
         return this.el.getWidth();
     },
+
+    /**
+     * Height of the component
+     *
+     * @returns {Number}
+     */
     getHeight: function(){
         return this.el.getHeight();
     },
 
 
+    createDropzone: function(){
+
+        this.dropzoneEl = new Ext.Element(document.createElement('div'));
+        this.dropzoneEl.setStyle({
+            position: 'absolute',
+            top: '0px',
+            left: '0px',
+            width: '100%',
+            height: '100%'
+        });
+        this.el.appendChild(this.dropzoneEl);
+
+        this.devNull = new Ext.Element(document.createElement('div'));
+        this.devNull.setStyle({
+            display: 'none'
+        });
+        this.el.appendChild(this.devNull);
+
+        this.dropzone = new Dropzone(this.dropzoneEl.dom,{
+            url: ImagePlus.config.connector_url
+            ,paramName: 'file'
+            ,acceptedFiles: ['.jpg','.png','.gif','.jpeg'].join(',')
+            ,maxFiles: 1
+            ,headers: this.headers
+            ,previewsContainer: this.devNull.dom
+            ,uploadMultiple: false
+            ,init: function(ths){return function(){
+                ths.onDropzoneInit(this);
+            }}(this)
+        });
+    },
+
+    /**
+     * Binds events to dropzone uploader
+     *
+     * @param dropzone {Dropzone}
+     */
+    onDropzoneInit: function(dropzone){
+        this.dropzone = dropzone;
+        console.log('dropzone init\'d');
+
+        dropzone.on('sending',Ext.createDelegate(this.onUploadStart,this));
+        dropzone.on('success',Ext.createDelegate(this.onUploadDone,this));
+    },
+
+    /**
+     * Fired when uploading starts
+     *
+     * @returns void
+     */
+    onUploadStart: function(file,xhr,formData){
+        formData.append('action','upload');
+        formData.append('uid',this.uid);
+        formData.append('HTTP_MODAUTH',MODx.siteId);
+        this.showLoadMask("Uploading...");
+    },
+
+    /**
+     * Fired when uploading is complete
+     */
+    onUploadDone: function(file,json){
+        var response = Ext.util.JSON.decode(json);
+        this.hideLoadMask();
+        console.log(response);
+
+        if(response.success === false){
+            MODx.msg.alert("Image+ Error","Failed to upload file :(");
+            this.dropzone.removeAllFiles(true);
+            this.dropzone.disable();
+            this.dropzone.enable();
+            return;
+        }
+
+
+        // Upload was successful...
+        var img = response.object;
+        this.fireEvent('imageuploaded',img);
+
+
+        this.dropzone.removeAllFiles(true);
+        this.dropzone.disable();
+        this.dropzone.enable();
+
+    },
+
+
+    showLoadMask: function(msg){
+        if(this.loadMask)
+            this.loadMask.destroy();
+
+        this.loadMask = new Ext.LoadMask(this.el,{
+            msg: msg
+        });
+        this.loadMask.show();
+    },
+
+    hideLoadMask: function(){
+        this.loadMask.hide();
+        this.loadMask.destroy();
+    },
+
     /**
      * Pass the Image object to show in preview
      *
      * @param img {Image}
+     * @returns void
      */
     setImage: function(img){
         this.img.set({
@@ -67,6 +187,12 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Component, {
         this.el.addClass('has-image');
     },
 
+
+    /**
+     * Clear the preview image
+     *
+     * @returns void
+     */
     clearImage: function(){
         this.img.set({
             src: ImagePlus.config.mgr_url+'css/spacer.gif'

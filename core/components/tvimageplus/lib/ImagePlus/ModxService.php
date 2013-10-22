@@ -131,8 +131,8 @@ class ModxService
         $this->javascript('imageplus.image.js');
         $this->javascript('imageplus.migx_renderer.js');
         $this->javascript('widget/imageplus.window.regeneratecache.js');
-        $this->javascript('widget/imageplus.combo.snippet.js');
-        $this->javascript('widget/imageplus.combo.chunk.js');
+        $this->javascript('widget/combo/imageplus.combo.snippet.js');
+        $this->javascript('widget/combo/imageplus.combo.chunk.js');
         $this->javascript('lib/stackblur.js');
         $this->javascript('lib/split.js');
         $this->stylesheet('imageplus.css');

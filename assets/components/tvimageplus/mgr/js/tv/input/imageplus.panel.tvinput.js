@@ -13,7 +13,8 @@ ImagePlus.panel.TVInput = function(config) {
             marginTop: '10px'
         }
         ,items: [
-            this.createPreviewPanel(),{
+            this.createPreviewPanel(),
+        {
             xtype: 'imageplus-panel-imagecontrols'
             ,width: 30
             ,margin: 0
@@ -55,12 +56,14 @@ ImagePlus.panel.TVInput = function(config) {
 };
 Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 
+
     createPreviewPanel: function(){
         if(!this.previewPanel){
             this.previewPanel = MODx.load({
                 xtype: 'imageplus-imagepreview'
                 ,width: 300
                 ,height: 85
+                ,uid: 1
 //                ,text: 'Drop files here or click to upload'
 //            ,url: ImagePlus.config.connector_url
 //            ,params: {
@@ -69,7 +72,19 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 //            ,unstyled: true
             });
         }
+        this.previewPanel.on('imageuploaded',Ext.createDelegate(function(data){
+            this.onSourceImageSelected(
+                data.mediasource,
+                data.path,
+                ImagePlus.mediaSourceUrlMap[data.mediasource] + data.url
+            );
+        },this));
         return this.previewPanel;
+    },
+
+
+    createUploadForm: function(){
+      return {}
     },
 
     /**
@@ -101,6 +116,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      */
     uploadImage: function(){
         alert('Show file uploader');
+        console.log(this.uploadForm);
     },
 
     /**
