@@ -62,6 +62,14 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Component, {
         var ratio = img.width / img.height;
         this.el.setHeight( this.getWidth() / ratio );
         this.el.addClass('has-image');
+    },
+
+    clearImage: function(){
+        this.img.set({
+            src: ImagePlus.config.mgr_url+'css/spacer.gif'
+        });
+        this.el.setHeight(this.height);
+        this.el.removeClass('has-image');
     }
 });
 Ext.reg('imageplus-imagepreview', ImagePlus.ImagePreview);

@@ -118,7 +118,29 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @return void
      */
     clearData: function(){
-        alert('clear out data');
+        // Set the source image defaults
+        this.sourceImage = {
+            mediasource: null,
+            path: null,
+            url: null,
+            width: null,
+            height: null,
+            ratio: null
+        }
+
+        // Set the actual image defaults
+        this.image = {
+            url: null,
+            img: null,
+            crop_x: 0,
+            crop_y: 0,
+            crop_w: 0,
+            crop_h: 0,
+            width: 0,
+            height: 0
+        }
+
+        this.previewPanel.clearImage();
     },
 
     /**
@@ -155,7 +177,6 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         this.sourceImage.height = img.height;
         this.sourceImage.ratio = img.width/img.height;
 
-        console.log("Source Image set ",this.sourceImage);
         this.previewPanel.setImage(img);
     },
 
