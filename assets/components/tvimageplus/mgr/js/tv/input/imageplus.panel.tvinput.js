@@ -61,7 +61,7 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
                 xtype: 'imageplus-imagepreview'
                 ,width: 300
                 ,height: 85
-                ,text: 'Drop files here or click to upload'
+//                ,text: 'Drop files here or click to upload'
 //            ,url: ImagePlus.config.connector_url
 //            ,params: {
 //                action: 'image/upload'

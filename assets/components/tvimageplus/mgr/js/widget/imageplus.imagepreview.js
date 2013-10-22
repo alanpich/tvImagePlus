@@ -6,6 +6,7 @@ ImagePlus.ImagePreview = function (config) {
         height: 120,
         text: false,
         cls: 'ip-imagepreview',
+        text: 'Upload an image',
         textCls: 'ip-imagepreview-text'
     })
     ImagePlus.ImagePreview.superclass.constructor.call(this, config);
@@ -36,6 +37,8 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Component, {
             this.textEl.dom.innerHTML = this.text
             this.textEl.addClass(this.textCls);
             this.textEl.setStyle({
+                textAlign: 'center',
+                width: '150px',
                 pointerEvents: 'none'
             })
             this.el.appendChild(this.textEl);
