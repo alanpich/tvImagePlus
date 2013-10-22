@@ -89,6 +89,7 @@ Ext.extend(MODx.panel.Dropzone,MODx.Panel,{
 
     getRenderHTML: function(){
         this.divId = Ext.id();
+        this.buttonPanelId = Ext.id();
         return '<table><tbody><tr>' +
             '<td class="modx-panel-dropzone-image-panel">' +
             '<div id="'+this.divId+'" class="modx-dropzone">' +
@@ -96,11 +97,7 @@ Ext.extend(MODx.panel.Dropzone,MODx.Panel,{
             '   Drop file here or click to upload' +
             '</span>' +
             '</div>' +
-            '</td><td valign="top" class="modx-panel-dropzone-button-panel">' +
-            '<a><i class="icon-upload-alt"></i></a>' +
-            '<a><i class="icon-folder-open-alt"></i></a>' +
-            '<a><i class="icon-crop"></i></a>' +
-            '<a class="hover-red"><i class="icon-remove"></i></a>' +
+            '</td><td valign="top" id="'+this.buttonPanelId+'" class="modx-panel-dropzone-button-panel">' +
             '</td>' +
             '</tr></tbody></table>'
     },
@@ -128,6 +125,45 @@ Ext.extend(MODx.panel.Dropzone,MODx.Panel,{
         this.div = document.getElementById(this.divId);
         this.div.className = 'modx-panel-dropzone';
         this.createDropzone();
+
+        /*
+         '<a><i class="icon-upload-alt"></i></a>' +
+         '<a><i class="icon-folder-open-alt"></i></a>' +
+         '<a><i class="icon-crop"></i></a>' +
+         '<a class="hover-red"><i class="icon-remove"></i></a>' +
+         */
+
+        this.buttonPanel = document.getElementById(this.buttonPanelId);
+
+        this.createUploadButton();
+        this.createBrowseButton();
+        this.createCropButton();
+        this.createClearButton();
+
+    },
+
+    createClearButton: function(){
+        this.clearButton = $('<a class="hover-red"><i class="icon-remove"></i></a>')[0];
+        $(this.clearButton).on('click',Ext.createDelegate(this.onClearButtonClick,this));
+        this.buttonPanel.appendChild(this.clearButton);
+    },
+
+    createUploadButton: function(){
+        this.uploadButton = $('<a><i class="icon-upload-alt"></i></a>')[0];
+        $(this.uploadButton).on('click',Ext.createDelegate(this.onUploadButtonClick,this));
+        this.buttonPanel.appendChild(this.uploadButton);
+    },
+
+    createBrowseButton: function(){
+        this.browseButton = $('<a><i class="icon-folder-open-alt"></i></a>')[0];
+        $(this.browseButton).on('click',Ext.createDelegate(this.onBrowseButtonClick,this));
+        this.buttonPanel.appendChild(this.browseButton);
+    },
+
+    createCropButton: function(){
+        this.cropButton = $('<a><i class="icon-crop"></i></a>')[0];
+        $(this.cropButton).on('click',Ext.createDelegate(this.onCropButtonClick,this));
+        this.buttonPanel.appendChild(this.cropButton);
     },
 
     /**
@@ -152,6 +188,23 @@ Ext.extend(MODx.panel.Dropzone,MODx.Panel,{
                 ths.onDropzoneInit(this);
             }}(this)
         });
+    },
+
+
+    onClearButtonClick: function(){
+        console.log('clear');
+    },
+
+    onUploadButtonClick: function(){
+        console.log('upload');
+    },
+
+    onBrowseButtonClick: function(){
+        console.log('browse');
+    },
+
+    onCropButtonClick: function(){
+        console.log('crop');
     },
 
     /**
