@@ -7,7 +7,8 @@ ImagePlus.ImagePreview = function (config) {
         unstyled: true,
         margin:0,
         padding:0,
-        cls: 'ip-imagepreview',
+        fileParam: 'file',
+        cls: '',
         text: 'Drop files here or click to upload',
         textCls: 'ip-imagepreview-text'
     })
@@ -19,36 +20,59 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
 
 
     on_render: function(){
+
+        // Set up the main panel element
         this.el.setStyle({
             width: this.width+"px",
-            height: this.height+"px"
+            height: this.height+"px",
+            position: 'relative'
         });
+        this.el.addClass('ip-imagepreview '+this.cls);
 
-        this.el.addClass(this.cls);
+        this.$el = $(this.el.dom);
 
-        // Add image preview
-        this.img = new Ext.Element(document.createElement('img'));
-        this.img.set({
-            width: '100%'
-        });
-        this.el.appendChild(this.img);
+
+//        // Add image preview
+//        this.img = new Ext.Element(document.createElement('img'));
+//        this.img.set({
+//            width: '100%'
+//        });
+//        this.el.appendChild(this.img);
 
         // Add text
-        if(this.text){
-            this.textEl = new Ext.Element(document.createElement('p'))
-            this.textEl.dom.innerHTML = this.text
-            this.textEl.addClass(this.textCls);
-            this.textEl.setStyle({
-                textAlign: 'center',
-                width: '150px',
-                pointerEvents: 'none'
-            })
-            this.el.appendChild(this.textEl);
-        }
+//        if(this.text){
+//            this.textEl = new Ext.Element(document.createElement('p'))
+//            this.textEl.dom.innerHTML = this.text
+//            this.textEl.addClass(this.textCls);
+//            this.textEl.setStyle({
+//                textAlign: 'center',
+//                width: '150px',
+//                pointerEvents: 'none'
+//            })
+//            this.el.appendChild(this.textEl);
+//        }
+//
 
+        // Set up droppable files (if supported)
+        this.$el.find('.x-plain-body').fileapi({
+            url: ImagePlus.config.connector_url,
+            autoUpload: true,
+            accept: 'image/*',
+            multiple: false,
+            data: {
+                action: 'upload',
+                siteId: MODx.siteId
+            },
+            paramName: this.fileParam,
+            maxFiles: 1,
+            dnd: {
+                // DropZone: selector or element
+                el: this.$el,
+                // Hover class
+                hover: 'dnd_hover'
+            }
+        })
 
-        // Create dropzone
-        this.createDropzone();
     },
 
     /**
@@ -70,59 +94,25 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
     },
 
 
-    createDropzone: function(){
-
-        this.dropzoneEl = new Ext.Element(document.createElement('div'));
-        this.dropzoneEl.setStyle({
-            position: 'absolute',
-            top: '0px',
-            left: '0px',
-            width: '100%',
-            height: '100%'
-        });
-        this.el.appendChild(this.dropzoneEl);
-
-        this.devNull = new Ext.Element(document.createElement('div'));
-        this.devNull.setStyle({
-            display: 'none'
-        });
-        this.el.appendChild(this.devNull);
-
-        this.dropzone = new Dropzone(this.dropzoneEl.dom,{
-            url: ImagePlus.config.connector_url
-            ,paramName: 'file'
-            ,acceptedFiles: ['.jpg','.png','.gif','.jpeg','.JPG','.PNG','.GIF','.JPEG'].join(',')
-            ,maxFiles: 1
-            ,headers: this.headers
-            ,previewsContainer: this.devNull.dom
-            ,uploadMultiple: false
-            ,init: function(ths){return function(){
-                ths.onDropzoneInit(this);
-            }}(this)
-        });
-    },
-
     /**
-     * Binds events to dropzone uploader
+     * Initialize the dropzone if the browser
+     * supports it
      *
-     * @param dropzone {Dropzone}
+     * @returns void
      */
-    onDropzoneInit: function(dropzone){
-        this.dropzone = dropzone;
-        console.log('dropzone init\'d');
+    initFileDrop: function(){
+        if (FileAPI.support.dnd) {
+            this.$el.dnd(function (over) {
+                console.log(this);
+            }, function (files) {
+                console.log('dropFiles:', files);
+                onFiles(files);
+            });
+        }
 
-        dropzone.on('addedfile',Ext.createDelegate(function(){
-            console.log('added a file');
-        },this));
-        dropzone.on('sending',Ext.createDelegate(this.onUploadStart,this));
-        dropzone.on('success',Ext.createDelegate(this.onUploadDone,this));
-        dropzone.on('error',Ext.createDelegate(this.onDropzoneError,this));
-        dropzone.on('uploadprogress',Ext.createDelegate(this.onUploadProgress,this));
     },
 
-    onDropzoneError: function(file,err,xhr){
-        console.error(err);
-    },
+
 
     onUploadProgress: function(file,progress,bytesSent){
         console.log(progress);
@@ -157,12 +147,6 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
             this.fireEvent('imageuploaded',img);
         }
 
-
-        console.log(this.dropzone);
-
-        this.dropzone.removeAllFiles(true);
-        this.dropzone.disable();
-        this.dropzone.enable();
 
     },
 

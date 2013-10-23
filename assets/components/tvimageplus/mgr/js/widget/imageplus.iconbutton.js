@@ -10,7 +10,7 @@ ImagePlus.IconButton = function(config){
     });
     ImagePlus.IconButton.superclass.constructor.call(this,config);
 
-    this.addEvents('click');
+    this.addEvents('click','mouseover','mouseout');
     this.on('render',this.on_render,this);
 };
 Ext.extend(ImagePlus.IconButton,Ext.Component,{
@@ -30,10 +30,12 @@ Ext.extend(ImagePlus.IconButton,Ext.Component,{
         this.el.on('mouseenter',function(){
             this.el.addClass('hover');
             this.iconEl.setStyle('color',this.hoverColor);
+            this.fireEvent('mouseover');
         },this);
         this.el.on('mouseleave',function(){
             this.el.removeClass('hover');
             this.iconEl.setStyle('color',this.color);
+            this.fireEvent('mouseout');
         },this);
 
 

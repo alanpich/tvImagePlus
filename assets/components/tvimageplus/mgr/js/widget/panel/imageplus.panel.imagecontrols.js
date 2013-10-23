@@ -11,12 +11,8 @@ ImagePlus.panel.ImageControls = function (config) {
             }
         }
         ,items: [{
+            xtype: 'imageplus-uploadbutton',
             icon: 'icon-upload-alt'
-            ,listeners: {
-                click: {fn: function(){
-                    this.fireEvent('upload')
-                },scope:this}
-            }
         },{
             icon: 'icon-folder-open-alt'
             ,listeners: {

@@ -140,7 +140,6 @@
   border: 4px dashed #ddd;
   border-radius: 10px;
   position: relative;
-  cursor: pointer;
   /* Background text */
   /* Hide text when an image exists */ }
   .ip-imagepreview:hover {
@@ -149,6 +148,14 @@
     border: 4px solid #fff; }
   .ip-imagepreview > .x-plain-bwrap {
     height: 0px; }
+  .ip-imagepreview > input {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    cursor: pointer !important;
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0); }
   .ip-imagepreview .ip-imagepreview-text {
     text-align: center;
     font-size: 1.2em;
@@ -177,3 +184,12 @@
   -o-transition: color 0.3s;
   -ms-transition: color 0.3s;
   transition: color 0.3s; }
+
+input.ip-upload {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 100%;
+  cursor: pointer !important;
+  opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0); }

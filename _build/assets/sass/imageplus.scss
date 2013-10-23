@@ -4,7 +4,6 @@
   border: 4px dashed #ddd;
   border-radius: 10px;
   position: relative;
-  cursor: pointer;
 
   &:hover {
     background-color: #fafaff;
@@ -16,6 +15,16 @@
 
   >.x-plain-bwrap {
     height: 0px;
+  }
+
+  > input {
+    position: absolute;
+    right:0px;
+    top: 0px;
+    width: 100%;
+    cursor: pointer !important;
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
   }
 
 
@@ -56,4 +65,15 @@
   -o-transition: color 0.3s;
   -ms-transition: color 0.3s;
   transition: color 0.3s;
+}
+
+
+input.ip-upload {
+  position: absolute;
+  right:0px;
+  top: 0px;
+  width: 100%;
+  cursor: pointer !important;
+  opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
 }
