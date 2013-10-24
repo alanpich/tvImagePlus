@@ -22,7 +22,7 @@ Ext.extend(ImagePlus.IconButton,Ext.Component,{
 
         this.el.addClass('imageplus-ui-button');
         this.el.setStyle({
-            cursor: 'pointer'
+            cursor: 'pointer',
         });
 
         this.el.setStyle(this.style);

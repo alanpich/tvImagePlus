@@ -52,26 +52,26 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
 //            this.el.appendChild(this.textEl);
 //        }
 //
-
-        // Set up droppable files (if supported)
-        this.$el.find('.x-plain-body').fileapi({
-            url: ImagePlus.config.connector_url,
-            autoUpload: true,
-            accept: 'image/*',
-            multiple: false,
-            data: {
-                action: 'upload',
-                siteId: MODx.siteId
-            },
-            paramName: this.fileParam,
-            maxFiles: 1,
-            dnd: {
-                // DropZone: selector or element
-                el: this.$el,
-                // Hover class
-                hover: 'dnd_hover'
-            }
-        })
+//
+//        // Set up droppable files (if supported)
+//        this.$el.find('.x-plain-body').fileapi({
+//            url: ImagePlus.config.connector_url,
+//            autoUpload: true,
+//            accept: 'image/*',
+//            multiple: false,
+//            data: {
+//                action: 'upload',
+//                siteId: MODx.siteId
+//            },
+//            paramName: this.fileParam,
+//            maxFiles: 1,
+//            dnd: {
+//                // DropZone: selector or element
+//                el: this.$el,
+//                // Hover class
+//                hover: 'dnd_hover'
+//            }
+//        })
 
     },
 
