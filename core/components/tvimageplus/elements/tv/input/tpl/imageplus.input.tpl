@@ -1,4 +1,5 @@
 <div id="imageplus-wrapper-{$tv->id}"></div>
+<div id="imageplus-tmp-value-{$tv-id}">{$tv->value}</div>
 {literal}
 <script>
 MODx.load({

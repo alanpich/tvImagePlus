@@ -1,35 +1,24 @@
 ImagePlus.panel.TVInput = function(config) {
     config = config || {};
 
-    Ext.apply(config,{
+    Ext.applyIf(config,{
         border: false
         ,baseCls: 'modx-formpanel'
         ,layout: 'column'
-        ,width: 360
-        ,border: false
+        ,width: 390
         ,margin: 0
         ,padding:0
+        ,isBusy: false
+        ,tvElId: false
         ,style: {
             marginTop: '10px'
         }
         ,items: [
             this.createPreviewPanel(),
-        {
-            xtype: 'imageplus-panel-imagecontrols'
-            ,width: 30
-            ,margin: 0
-            ,padding:0
-            ,listeners: {
-                 upload: {fn: this.uploadImage,scope:this}
-                ,browse: {fn: this.browseImages,scope: this}
-                ,crop: {fn: this.cropImage,scope:this}
-                ,clear: {fn: this.clearData,scope:this}
-            }
-        }]
-
+            this.createControlButtons()
+        ]
     });
     ImagePlus.panel.TVInput.superclass.constructor.call(this,config);
-
 
     // Set the source image defaults
     this.sourceImage = {
@@ -57,19 +46,112 @@ ImagePlus.panel.TVInput = function(config) {
 Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
 
 
+    afterRender: function(){
+        this.supr().afterRender.call(this);
+
+        // Show loading mask while initializing
+       this.mask("Initializing...");
+
+        // Check that this TV has been initialized
+        // and is ready to use
+        Ext.onReady(Ext.createDelegate(this.initialize,this));
+    },
+
+
+    /**
+     * Initializes a fresh TV for use
+     *
+     * @returns void
+     */
+    initialize: function(){
+
+        // Grab the tv input element
+        var elId = 'imageplus-tmp-value-'+this.tvId,
+            tmpEl = document.getElementById(elId),
+            tvValue = tmpEl.innerHTML,
+            tvId = this.tvId;
+
+        tmpEl.parentNode.removeChild(tmpEl);
+
+        Ext.Ajax.request({
+            url: ImagePlus.config.connector_url,
+            params: {
+                action: 'initialize',
+                value: tvValue,
+                tvId: tvId
+            },
+            scope: this,
+            success: this.onInitializeResponse
+        });
+    },
+
+    /**
+     * Handles the response from server to complete
+     * the TV intialization
+     *
+     * @returns void
+     */
+    onInitializeResponse: function(response,options){
+        console.log("RESPONSE ",arguments);
+
+        this.onInitializationComplete();
+    },
+
+
+    /**
+     * Fired once the TV has confirmed to itself
+     * that it is fully ready to perform its function.
+     *
+     * @returns void
+     */
+    onInitializationComplete: function(){
+        // Create the FineUploader
+        Ext.defer(this.createUploader,1000,this);
+
+        // We're ready! Hide the loadmask!
+        this.unmask();
+    },
+
+
+    /**
+     * Create a loadMask when the TV is busy
+     *
+     * @param msg {String} The message to display
+     * @returns void
+     */
+    mask: function(msg){
+        msg = msg||'Loading...';
+        this.loadMask = new Ext.LoadMask(this.previewPanel.el,{
+            msg: msg,
+            removeMask: true
+        });
+        this.loadMask.show();
+        this.isBusy = true;
+    },
+
+    /**
+     * Remove the loadMask to resume normal operation
+     *
+     * @returns void
+     */
+    unmask: function(){
+        if(this.loadMask){
+            this.loadMask.hide();
+            this.loadMask.destroy();
+        }
+        this.isBusy = false;
+    },
+
+    /**
+     * Create the Image Preview panel
+     *
+     * @returns {ImagePlus.panel.ImagePreview}
+     */
     createPreviewPanel: function(){
         if(!this.previewPanel){
             this.previewPanel = MODx.load({
-                xtype: 'imageplus-imagepreview'
+                xtype: 'imageplus-panel-imagepreview'
                 ,width: 300
-                ,height: 85
-                ,uid: 1
-//                ,text: 'Drop files here or click to upload'
-//            ,url: ImagePlus.config.connector_url
-//            ,params: {
-//                action: 'image/upload'
-//            }
-//            ,unstyled: true
             });
         }
         this.previewPanel.on('imageuploaded',Ext.createDelegate(function(data){
@@ -82,9 +164,66 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
         return this.previewPanel;
     },
 
+    /**
+     * Create the panel holding the control buttons,
+     * and attach listeners to the events it emits
+     *
+     * @returns {ImagePlus.panel.ImageControls}
+     */
+    createControlButtons: function(){
+        this.controlButtons = MODx.load({
+            xtype: 'imageplus-panel-imagecontrols',
+            listeners: {
+                browse: {fn: this.browseImages,scope: this}
+                ,crop: {fn: this.cropImage,scope:this}
+                ,clear: {fn: this.clearData,scope:this}
+            }
+        });
+        return this.controlButtons;
+    },
 
-    createUploadForm: function(){
-      return {}
+
+    /**
+     * Create an instance of FineUploader to use
+     * for uploading files
+     *
+     * @returns void
+     */
+    createUploader: function(){
+        // Gather the DOM elements for bindings
+        var previewEl = this.previewPanel.el.dom,
+            buttonEl = this.controlButtons.uploadButton.el.dom;
+
+        this.uploader = new qq.FineUploaderBasic({
+            debug: true,
+            request: {
+                endpoint: ImagePlus.config.connector_url,
+                params: {
+                    action: 'upload',
+                    HTTP_MODAUTH: MODx.siteId,
+                    inputName: 'file'
+                }
+            },
+            allowedExtensions: [
+                'jpg','jpeg',
+                'png',
+                'gif'
+            ],
+            // The 'click me' element
+            button: previewEl,
+            extraButtons: [{
+                element: buttonEl
+            }],
+            camera: {
+                ios: true
+            },
+            paste: {
+                targetElement: previewEl
+            },
+            callbacks: {
+                onUpload: Ext.createDelegate(this.onUploadDone,this)
+            }
+        });
     },
 
     /**
@@ -93,6 +232,8 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @returns void
      */
     browseImages: function(){
+        if(this.isBusy) return;
+
         if(!this.fileBrowser){
             this.fileBrowser = MODx.load({
                 xtype: 'modx-browser'
@@ -110,21 +251,12 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
     },
 
     /**
-     * Show a file uploaded to select image from computer
-     *
-     * @returns void
-     */
-    uploadImage: function(){
-        alert('Show file uploader');
-        console.log(this.uploadForm);
-    },
-
-    /**
      * Show the image cropping window
      *
      * @returns void
      */
     cropImage: function(){
+        if(this.isBusy) return;
         alert('show crop window');
     },
 
@@ -134,6 +266,8 @@ Ext.extend(ImagePlus.panel.TVInput,MODx.Panel,{
      * @return void
      */
     clearData: function(){
+        if(this.isBusy) return;
+
         // Set the source image defaults
         this.sourceImage = {
             mediasource: null,

@@ -15,6 +15,7 @@ ImagePlus.ImagePreview = function (config) {
     ImagePlus.ImagePreview.superclass.constructor.call(this, config);
     this.on('render',this.on_render,this);
     this.addEvents('imageuploaded');
+
 };
 Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
 
@@ -32,48 +33,47 @@ Ext.extend(ImagePlus.ImagePreview, Ext.Panel, {
         this.$el = $(this.el.dom);
 
 
-//        // Add image preview
-//        this.img = new Ext.Element(document.createElement('img'));
-//        this.img.set({
-//            width: '100%'
-//        });
-//        this.el.appendChild(this.img);
-
-        // Add text
-//        if(this.text){
-//            this.textEl = new Ext.Element(document.createElement('p'))
-//            this.textEl.dom.innerHTML = this.text
-//            this.textEl.addClass(this.textCls);
-//            this.textEl.setStyle({
-//                textAlign: 'center',
-//                width: '150px',
-//                pointerEvents: 'none'
-//            })
-//            this.el.appendChild(this.textEl);
-//        }
-//
-
-        // Set up droppable files (if supported)
-        this.$el.find('.x-plain-body').fileapi({
-            url: ImagePlus.config.connector_url,
-            autoUpload: true,
-            accept: 'image/*',
-            multiple: false,
-            data: {
-                action: 'upload',
-                siteId: MODx.siteId
-            },
-            paramName: this.fileParam,
-            maxFiles: 1,
-            dnd: {
-                // DropZone: selector or element
-                el: this.$el,
-                // Hover class
-                hover: 'dnd_hover'
-            }
-        })
+        setTimeout(Ext.createDelegate(this.createUploader,this),200);
 
     },
+
+    /**
+     * Create the FineUploader instance to handle
+     * file uploads
+     *
+     * @returns void
+     */
+    createUploader: function(){
+        console.log("HTTP_MODAUTH",MODx.siteId);
+            this.uploader = new qq.FineUploaderBasic({
+                debug: true,
+                request: {
+                    endpoint: ImagePlus.config.connector_url,
+                    params: {
+                        action: 'upload',
+                        HTTP_MODAUTH: MODx.siteId,
+                        inputName: 'file'
+                    }
+                },
+                allowedExtensions: [
+                    'jpg','jpeg',
+                    'png',
+                    'gif'
+                ],
+                // The 'click me' element
+                button: this.el.dom,
+                camera: {
+                    ios: true
+                },
+                paste: {
+                    targetElement: this.el.dom
+                },
+                callbacks: {
+                    onUpload: Ext.createDelegate(this.onUploadDone,this)
+                }
+            })
+    },
+
 
     /**
      * Width of the component

@@ -96,14 +96,16 @@ class ModxService
     public function includeScriptAssets()
     {
         $this->includeCoreScriptAssets();
+        $this->javascript('lib/fineuploader-4.0.3/fineuploader-4.0.3.min.js');
+//        $this->stylesheet('../js/lib/fineuploader-4.0.3/fineuploader-4.0.3.min.css');
 //        $this->javascript('widget/imageplus.combo.browser.js');
 //        $this->javascript('widget/imageplus.panel.previewimage.js');
 //        $this->javascript('widget/imageplus.window.croptool.js');
-        $this->javascript('lib/dropzone.js');
+//        $this->javascript('lib/dropzone.js');
         $this->javascript('widget/imageplus.iconbutton.js');
-        $this->javascript('widget/imageplus.imagepreview.js');
+        $this->javascript('widget/panel/imageplus.panel.imagepreview.js');
         $this->javascript('widget/panel/imageplus.panel.imagecontrols.js');
-        $this->javascript('widget/panel/modx.panel.dropzone.js');
+//        $this->javascript('widget/panel/modx.panel.dropzone.js');
 
         $this->javascript('lib/jquery.min.js');
 //        $this->javascript('lib/jquery.Jcrop.js');
@@ -111,7 +113,7 @@ class ModxService
 //        $this->javascript('lib/jquery.color.js');
         $this->javascript('tv/input/imageplus.panel.tvinput.js');
 
-        $this->stylesheet('jquery.Jcrop.min.css');
+//        $this->stylesheet('jquery.Jcrop.min.css');
         $this->stylesheet('font-awesome.min.css');
     }
 
@@ -130,10 +132,8 @@ class ModxService
         $this->javascript('imageplus.js');
         $this->javascript('imageplus.image.js');
         $this->javascript('imageplus.migx_renderer.js');
-        $this->javascript('widget/imageplus.window.regeneratecache.js');
         $this->javascript('widget/combo/imageplus.combo.snippet.js');
         $this->javascript('widget/combo/imageplus.combo.chunk.js');
-        $this->javascript('lib/stackblur.js');
         $this->javascript('lib/split.js');
         $this->stylesheet('imageplus.css');
         $this->modx->regClientStartupHTMLBlock('<script>
