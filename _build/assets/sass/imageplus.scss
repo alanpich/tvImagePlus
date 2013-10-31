@@ -1,9 +1,11 @@
 @import "jcrop";
+@import "fineuploader";
 
 .ip-imagepreview {
   border: 4px dashed #ddd;
   border-radius: 10px;
   position: relative;
+  min-height: 85px;
 
   &:hover {
     background-color: #fafaff;
@@ -17,26 +19,16 @@
     height: 0px;
   }
 
-  > input {
-    position: absolute;
-    right:0px;
-    top: 0px;
-    width: 100%;
-    cursor: pointer !important;
-    opacity: 0;
-    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
-  }
-
 
   /* Background text */
-  .ip-imagepreview-text {
+  label {
     text-align:center;
     font-size:1.2em;
     font-weight:bold;
     position: absolute;
     top: 50%;
     left:50%;
-    margin-top: -0.5em;
+    margin-top: -1.5em;
     margin-left: -75px;
     width: 50%;
     color: #ccc;
@@ -50,7 +42,7 @@
   }
 
   /* Hide text when an image exists */
-  &.has-image .ip-imagepreview-text {
+  &.has-image label {
     display:none;
   }
 
