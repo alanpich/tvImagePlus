@@ -2,7 +2,7 @@
 
 // Load up the modx instance
 define('MODX_API_MODE', true);
-require '/var/www/index.php';
+require '/var/www/modx/index.php';
 
 /**
  * @var modX $modx
