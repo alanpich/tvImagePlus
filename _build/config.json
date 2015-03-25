@@ -1,0 +1,37 @@
+{
+  "name": "ImagePlus",
+  "lowCaseName": "imageplus",
+  "description": "Advanced Image template variable input type",
+  "author": "Alan Pich",
+  "version": "2.2.1",
+  "package": {
+    "elements": {
+      "chunks": [
+        {
+          "name": "ImagePlus.demo",
+          "file": "imageplus.demo.html",
+          "description": "Demo output chunk for Image+."
+        }
+      ],
+      "plugins": [
+        {
+          "name": "ImagePlus",
+          "file": "imageplus.plugin.php",
+          "description": "Image+ runtime hooks - registers custom TV input & output types and includes javascripts on document edit pages.",
+          "events": [
+            "OnTVInputPropertiesList",
+            "OnTVInputRenderList",
+            "OnTVOutputRenderList",
+            "OnTVOutputRenderPropertiesList",
+            "OnDocFormRender"
+          ]
+        }
+      ]
+    }
+  },
+  "build": {
+    "readme": "docs/readme.txt",
+    "license": "docs/license.txt",
+    "changelog": "docs/changelog.txt"
+  }
+}
