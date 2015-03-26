@@ -3,7 +3,7 @@
   "lowCaseName": "imageplus",
   "description": "Advanced Image template variable input type",
   "author": "Alan Pich",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "package": {
     "elements": {
       "chunks": [
@@ -25,6 +25,13 @@
             "OnTVOutputRenderPropertiesList",
             "OnDocFormRender"
           ]
+        }
+      ],
+      "snippets": [
+        {
+          "name": "ImagePlus",
+          "file": "imageplus.snippet.php",
+          "description": "Outputfilter as alternative to Image+ TV Output Type"
         }
       ]
     }

@@ -44,8 +44,8 @@ switch ($modx->event->name) {
         $modx->event->output($corePath . 'elements/tv/output/options/');
         break;
     case 'OnDocFormRender':
-        include $corePath."tvImagePlus.class.php";
-        $helper = new tvImagePlus($modx);
+        include $corePath."imageplus.class.php";
+        $helper = new ImagePlus($modx);
         $helper->includeScriptAssets();
         break;
 };

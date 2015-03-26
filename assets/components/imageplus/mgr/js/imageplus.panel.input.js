@@ -1,28 +1,28 @@
 /**
  * Copyright 2013 by Alan Pich <alan.pich@gmail.com>
  *
- * This file is part of tvImagePlus
+ * This file is part of ImagePlus
  *
- * tvImagePlus is free software; you can redistribute it and/or modify it under the
+ * ImagePlus is free software; you can redistribute it and/or modify it under the
  * terms of the GNU General Public License as published by the Free Software
  * Foundation; either version 2 of the License, or (at your option) any later
  * version.
  *
- * tvImagePlus is distributed in the hope that it will be useful, but WITHOUT ANY
+ * ImagePlus is distributed in the hope that it will be useful, but WITHOUT ANY
  * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
  * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * tvImagePlus; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
+ * ImagePlus; if not, write to the Free Software Foundation, Inc., 59 Temple Place,
  * Suite 330, Boston, MA 02111-1307 USA
  *
- * @package tvImagePlus
+ * @package ImagePlus
  * @author Alan Pich <alan.pich@gmail.com>
  * @copyright Alan Pich 2013
  */
 
 
-tvImagePlus.panel.input = function (config) {
+ImagePlus.panel.input = function (config) {
     config = config || {};
     this.imageplus = config.imageplus;
 
@@ -33,8 +33,8 @@ tvImagePlus.panel.input = function (config) {
     this.create_altTextField();
 
     // Warn if has no dependencies
-    if (tvImagePlus.config.has_unmet_dependencies) {
-        tvImagePlus.warnAboutUnmetDependencies()
+    if (ImagePlus.config.has_unmet_dependencies) {
+        ImagePlus.warnAboutUnmetDependencies()
     }
 
 
@@ -61,12 +61,12 @@ tvImagePlus.panel.input = function (config) {
             ]
         }]
     });
-    tvImagePlus.panel.input.superclass.constructor.call(this, config);
+    ImagePlus.panel.input.superclass.constructor.call(this, config);
 
 
     this.listenForResetEvent();
 };
-Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
+Ext.extend(ImagePlus.panel.input, MODx.Panel, {
 
 
     /**
@@ -89,7 +89,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
     create_editButton: function () {
 
         this.editButton = new Ext.Button({
-            text: _('imageplus.edit_image'), handler: this.editImage, scope: this, icon: tvImagePlus.config.crop_icon, style: { marginRight: '5px' }
+            text: _('imageplus.edit_image'), handler: this.editImage, scope: this, icon: ImagePlus.config.crop_icon, style: { marginRight: '5px' }
         })
     }//
 
@@ -213,7 +213,7 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
      * Manually get image size
      * @return void
      */, manual_getImageSize: function () {
-        var baseUrl = tvImagePlus.config['sources'][this.imageplus.sourceImg.source].url;
+        var baseUrl = ImagePlus.config['sources'][this.imageplus.sourceImg.source].url;
         var img = new Image();
         img.onload = (function (ths) {
             return function () {
@@ -405,4 +405,4 @@ Ext.extend(tvImagePlus.panel.input, MODx.Panel, {
     }
 
 });
-Ext.reg('imageplus-panel-input', tvImagePlus.panel.input);
+Ext.reg('imageplus-panel-input', ImagePlus.panel.input);
