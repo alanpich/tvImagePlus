@@ -54,7 +54,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender {
         $this->setPlaceholder('tvValue',$value);
 
 
-        $this->setPlaceholder('mediasource',$this->tv->getSource('web')->get('id'));
+        $this->setPlaceholder('mediasource',$this->tv->get('source'));
         $this->setPlaceholder('tvparams',json_encode($this->getInputOptions()));
 
         $this->setPlaceholder('imgData',$this->getImageDataJSON($value,$params));
@@ -71,13 +71,13 @@ private function getImageDataJSON($value,$params){
 		$data = new stdClass;
 		
 		// Grab MediaSource info
-		$MS = $this->tv->getSource('web')->toArray();
-		$data->mediasource = new stdClass;
-		$data->mediasource->id = $MS['id'];
-		$data->mediasource->path = !isset($MS['properties']['basePath'])? $this->modx->getOption('base_path') : $MS['properties']['basePath']['value'];
-		$data->mediasource->url = !isset($MS['properties']['baseUrl'])? $this->modx->getOption('base_url') : $MS['properties']['baseUrl']['value'];
-		unset($MS);
 		
+        $source = $this->modx->getObject('modMediaSource', $this->tv->get('source'));
+        $properties = $source->getProperties();
+        $data->mediasource = new stdClass;
+        $data->mediasource->id = $source->get('id');
+        $data->mediasource->path = (isset($properties['basePath'])) ? $properties['basePath']['value'] : $this->modx->getOption('base_path');
+        $data->mediasource->url = (isset($properties['baseUrl'])) ? $properties['baseUrl']['value'] : $this->modx->getOption('base_url');
 		// Grab constraint info
 		$data->constraint = new stdClass;
 		$data->constraint->width =  empty($params['targetWidth']) ? 0 : (int) $params['targetWidth'];

@@ -144,7 +144,7 @@ class ImagePlus
     {
         $data = new stdClass;
         // Grab the ID of the assigned mediasource
-        $data->mediaSource = $render->tv->getSource('web')->get('id');
+        $data->mediaSource = $render->tv->get('source');
         // Grab TV info
         $data->tv = new stdClass;
         $data->tv->id = $render->tv->get('id');
