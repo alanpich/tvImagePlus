@@ -1,6 +1,6 @@
 <?php
 /**
- * Output filter as alternative to Image+ TV Output Type
+ * Snippet as alternative to Image+ TV Output Type
  *
  * @package imageplus
  * @author  Alan Pich <alan.pich@gmail.com>
@@ -13,40 +13,42 @@
 $path = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
 $imagePlus = $modx->getService('imageplus', 'ImagePlus', $path);
 
-// If tag is empty, return nothing
-if (!strlen($input))
-    return '';
+$tvname = $modx->getOption('tvname', $scriptProperties, '');
+$docid = $modx->getOption('docid', $scriptProperties, $modx->resource->get('id'));
+$type = $modx->getOption('type', $scriptProperties, '');
+$options = $modx->getOption('options', $scriptProperties, '');
+$tpl = $modx->getOption('tpl', $scriptProperties, 'ImagePlus.image');
 
-// Attempt to decode the input value as json
-$data = json_decode($input);
-if (is_null($data)) {
-    $this->modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Unable to decode json - are you sure this is an ImagePlus TV?");
-    return '';
-}
+$tv = $modx->getObject('modTemplateVar', array('name' => $tvname));
+if ($tv) {
+    /* get the raw content of the TV */
+    $value = $tv->getValue($docid);
 
-// Extract render type
-$outputParams = explode(':', $options, 2);
-$outputType = array_shift($outputParams);
+    // Attempt to decode the input value as json
+    $data = json_decode($value);
+    if (is_null($data)) {
+        $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Unable to decode json - are you sure this is an ImagePlus TV?");
+        return '';
+    }
 
-// Render output
-switch ($outputType) {
-    case 'pthumb':
-        // Run pthumb snippet
-        $params = (!empty($outputParams)) ? '&' . trim(array_shift($outputParams), '&') : '';
-        $crop = array(
-            'sx' => $data->crop->x,
-            'sy' => $data->crop->y,
-            'sw' => $data->crop->width,
-            'sh' => $data->crop->height,
-        );
-
-        $params = http_build_query($crop) . $params;
-        $output = $modx->runSnippet('pthumb', array(
-            'input' => $data->sourceImg->src,
-            'options' => $params
-        ));
-        break;
-    default:
-        $output = $imagePlus->getImageURL($input);
+    // Render output
+    switch ($type) {
+        case 'check':
+            $output = ($data->sourceImg->src) ? 'image' : 'noimage';
+            break;
+        case 'tpl':
+            $output = ($data->sourceImg->src) ? $modx->getChunk($tpl, array(
+                'url' => $imagePlus->getImageURL($value, array('phpThumbParams' => $options)),
+                'alt' => $data->altTag
+            )) : '';
+            break;
+        case 'thumb':
+        default:
+            $output = $imagePlus->getImageURL($value, array('phpThumbParams' => $options));
+            break;
+    }
+} else {
+    $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Template Variable '{$tvname}' not found.");
+    $output = '';
 }
 return $output;

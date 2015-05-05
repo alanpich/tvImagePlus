@@ -3,14 +3,19 @@
   "lowCaseName": "imageplus",
   "description": "Advanced Image template variable input type",
   "author": "Alan Pich",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "package": {
     "elements": {
       "chunks": [
         {
           "name": "ImagePlus.demo",
           "file": "imageplus.demo.html",
-          "description": "Demo output chunk for Image+."
+          "description": "Demo chunk for Image+ template variable output."
+        },
+        {
+          "name": "ImagePlus.image",
+          "file": "imageplus.image.html",
+          "description": "Demo chunk for Image+ snippet output."
         }
       ],
       "plugins": [
@@ -31,7 +36,7 @@
         {
           "name": "ImagePlus",
           "file": "imageplus.snippet.php",
-          "description": "Outputfilter as alternative to Image+ TV Output Type"
+          "description": "Snippet as alternative to Image+ TV Output Type"
         }
       ]
     }

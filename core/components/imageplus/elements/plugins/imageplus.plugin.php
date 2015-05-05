@@ -17,35 +17,25 @@
  *
  */
 
-$corePath = $modx->getOption(
-    'imageplus.core_path',
-    null,
-    $modx->getOption('core_path', null, MODX_CORE_PATH) . 'components/imageplus/'
-);
-$assetsUrl = $modx->getOption(
-    'imageplus.assets_url',
-    null,
-    $modx->getOption('assets_url', null, MODX_ASSETS_URL) . 'components/imageplus/js/mgr/'
-);
+$path = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
+$imagePlus = $modx->getService('imageplus', 'ImagePlus', $path);
 
 $modx->lexicon->load('imageplus:default');
 
 switch ($modx->event->name) {
     case 'OnTVInputRenderList':
-        $modx->event->output($corePath . 'elements/tv/input/');
+        $modx->event->output($path . 'elements/tv/input/');
         break;
     case 'OnTVOutputRenderList':
-        $modx->event->output($corePath . 'elements/tv/output/');
+        $modx->event->output($path . 'elements/tv/output/');
         break;
     case 'OnTVInputPropertiesList':
-        $modx->event->output($corePath . 'elements/tv/input/options/');
+        $modx->event->output($path . 'elements/tv/input/options/');
         break;
     case 'OnTVOutputRenderPropertiesList':
-        $modx->event->output($corePath . 'elements/tv/output/options/');
+        $modx->event->output($path . 'elements/tv/output/options/');
         break;
     case 'OnDocFormRender':
-        include $corePath."imageplus.class.php";
-        $helper = new ImagePlus($modx);
-        $helper->includeScriptAssets();
+        $imagePlus->includeScriptAssets();
         break;
 };

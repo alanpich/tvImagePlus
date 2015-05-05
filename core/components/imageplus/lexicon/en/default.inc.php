@@ -19,3 +19,5 @@ $_lang['imageplus.phpThumbParams'] = 'Additional phpThumb parameters';
 $_lang['imageplus.phpThumbParams_desc'] = 'Add additional filters etc for phpThumb. Documentation can be found <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">here</a>.';
 $_lang['imageplus.outputChunk'] = 'Output chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Select a chunk for tv output. Leave blank for raw url output';
+$_lang['imageplus.generateUrl'] = 'Generate thumb url';
+$_lang['imageplus.generateUrl_desc'] = '(Optional) The thumb url is maybe not necessary, if you generate the thumbnail in output chunk i.e. by the phpthumbof output filter.';

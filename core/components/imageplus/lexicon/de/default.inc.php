@@ -19,3 +19,5 @@ $_lang['imageplus.phpThumbParams'] = 'phpThumb Parameter';
 $_lang['imageplus.phpThumbParams_desc'] = '(Optional) Geben Sie zusätzliche phpThumb Parameter an. Mehr Informationen zu phpThumb Parametern erhalten Sie <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">hier</a>.';
 $_lang['imageplus.outputChunk'] = 'Ausgabe Chunk';
 $_lang['imageplus.outputChunk_desc'] = '(Optional) Wählen Sie einen Ausgabe Chunk aus. Wenn kein Wert angebeben ist wird der Bildpfad ausgegeben.';
+$_lang['imageplus.generateUrl'] = 'Thumbnail URL generieren';
+$_lang['imageplus.generateUrl_desc'] = '(Optional) Die Thumbnail URL eventuell wird nicht benötigt, wenn das Thumbnail im Ausgabe Chunk z.B. mit einem phpthumbof output filter generiert wird';

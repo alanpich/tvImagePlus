@@ -21,16 +21,22 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @copyright Alan Pich 2013
  */
+class ImagePlusOutputRender extends modTemplateVarOutputRender
+{
 
-class ImagePlusOutputRender extends modTemplateVarOutputRender {
+    public function process($value, array $params = array())
+    {
+        // Load the helper library if its not already here
+        if (!class_exists('ImagePlus')) {
+            require_once $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/') . 'imageplus.class.php';
+        };
 
-    public function process($value,array $params = array()) {
-    	// Load the helper library if its not already here
-    	if(!class_exists('ImagePlus')){ require_once $this->modx->getOption('imageplus.core_path',null,$this->modx->getOption('core_path').'components/imageplus/').'imageplus.class.php'; };
-    	$this->helper = new ImagePlus($this->modx);
+        $this->helper = new ImagePlus($this->modx);
+        return $this->helper->getImageURL($value, $params, $this->tv);
 
-    	return $this->helper->getImageURL($value,$params,$this->tv);
     }//
 
-};
+}
+
+;
 return 'ImagePlusOutputRender';

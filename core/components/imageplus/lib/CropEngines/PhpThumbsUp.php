@@ -77,62 +77,74 @@ class PhpThumbsUp extends AbstractCropEngine
         $source->initialize();
 
         // Grab absolute system path to image
-        $imgPath = $data->sourceImg->src;
+        $imgPath = $source->getBasePath() . $data->sourceImg->src;
 
         // Prepare arguments for phpthumbof snippet call
-        $params = array(
-            'w' => $data->targetWidth,
-            'h' => $data->targetHeight,
-            'far' => true,
+        $cropParams = array(
             'sx' => $data->crop->x,
             'sy' => $data->crop->y,
             'sw' => $data->crop->width,
-            'sh' => $data->crop->height
+            'sh' => $data->crop->height,
         );
+        $params = array_merge($cropParams, array(
+            'w' => $data->targetWidth,
+            'h' => $data->targetHeight,
+            'far' => true
+        ));
 
-        // Add in output render params
-        $options = array();
-        if (isset($opts['phpThumbParams'])) {
-            $optParams = explode('&', $opts['phpThumbParams']);
-            foreach ($optParams as $oP) {
-                if (empty($oP)) {
-                    continue;
+        // Add phpThumbParams to phpthumbsup snippet call arguments
+        $phpThumbParams = $this->modx->getOption('phpThumbParams', $opts, '');
+        $optParams = array();
+        if ($phpThumbParams) {
+            parse_str($phpThumbParams, $optParams);
+            foreach ($optParams as $key => $val) {
+                if (empty($val)) {
+                    unset($optParams[$key]);
                 };
-                $bits = explode('=', $oP);
-                $params[$bits[0]] = $bits[1];
             }
-
-            foreach ($params as $key => $val) {
-                $options[] = $key . '=' . $val;
-            };
         };
-        $options = implode('&', $options);
+        $options = ($optParams) ? http_build_query(array_merge($cropParams, $optParams)) : http_build_query(array_merge($params, $optParams));
+        $cropOptions = http_build_query($cropParams);
 
-
-        // Call phpthumbof for url
-        $url = $this->modx->runSnippet(
-            'phpthumbsup',
-            array(
-                'options' => $options,
-                'input' => $imgPath
-            )
-        );
+        // Call phpthumbsup for url
+        $generateUrl = $this->modx->getOption('generateUrl', $opts, 1);
+        if ($generateUrl) {
+            $url = $this->modx->runSnippet(
+                'phpthumbsup',
+                array(
+                    'options' => $options,
+                    'input' => $imgPath
+                )
+            );
+        } else {
+            $url = '';
+        }
 
         $url = str_replace('%2F', '/', $url);
 
         // If an output chunk is selected, parse that
-        if (isset($opts['outputChunk']) && !empty($opts['outputChunk'])) {
+        $outputChunk = $this->modx->getOption('outputChunk', $opts, '');
+        if ($outputChunk) {
             $chunkParams = array(
                 'url' => $url,
                 'alt' => $data->altTag,
                 'width' => $data->targetWidth,
-                'height' => $data->targetHeight
+                'height' => $data->targetHeight,
+                'source.src' => $imgPath,
+                'source.width' => $data->sourceImg->width,
+                'source.height' => $data->sourceImg->height,
+                'crop.width' => $data->crop->width,
+                'crop.height' => $data->crop->height,
+                'crop.x' => $data->crop->x,
+                'crop.y' => $data->crop->y,
+                'options' => $options,
+                'crop.options' => $cropOptions
             );
-            return $this->modx->getChunk($opts['outputChunk'], $chunkParams);
+            return $this->modx->getChunk($outputChunk, $chunkParams);
         } else {
             // Otherwise return raw url
             return $url;
-        };
+        }
 
     }
 
