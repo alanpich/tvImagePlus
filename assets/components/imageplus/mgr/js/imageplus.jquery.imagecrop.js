@@ -21,68 +21,68 @@
  * @copyright Alan Pich 2013
  */
 
-
-ImagePlus.jquery.ImageCrop= function(config) {
+ImagePlus.jquery.ImageCrop = function (config) {
     config = config || {};
     this.imageplus = config.imageplus;
     this.window = config.window;
     this.imageDOMid = Ext.id();
-    
-    Ext.apply(config,{
-        cropData: this.imageplus.crop
-        ,collapsable: false
-        ,items: [{
-            html: '<img id="'+this.imageDOMid+'" src="'+this.window.getImageUrl()+'" />'
-        }]
-        ,listeners: {
-            'afterRender':{fn:this.on_afterRender,scope:this}
-            ,'destroy': {fn:function(){this.cropper.destroy()},scope:this}
+
+    Ext.apply(config, {
+        cropData: this.imageplus.crop,
+        collapsable: false,
+        items: [{
+            html: '<img id="' + this.imageDOMid + '" src="' + this.window.getImageUrl() + '" />'
+        }],
+        listeners: {
+            afterRender: {fn: this.on_afterRender, scope: this},
+            destroy: {
+                fn: function () {
+                    this.cropper.destroy()
+                }, scope: this
+            }
         }
     });
-    ImagePlus.jquery.ImageCrop.superclass.constructor.call(this,config);
+    ImagePlus.jquery.ImageCrop.superclass.constructor.call(this, config);
 };
 Ext.extend(ImagePlus.jquery.ImageCrop, Ext.Panel, {
 
-    
-    
-    on_afterRender: function(){
-            this.initJcrop.defer(10, this)
-        }// 
-        
-    ,initJcrop: function(){
-            this.$image = $('#'+this.imageDOMid)
-                          .data('ext',this.window);
-            
-            var conf = {
-                minSize: this.window.getMinCropSize()
-                ,aspectRatio: this.window.getAspectRatio()
-                ,setSelect: this.window.getCropCoords()
-                ,outerImage: this.window.getOuterImageUrl()
-                ,onSelect: function(ext){
-                        return function(crop){
-                            ext.on_cropChange({
-                                x: crop.x,
-                                y: crop.y,
-                                width: crop.w,
-                                height: crop.h
-                            })
-                        }
-                    }(this.window)
-            };
-            this.$image.Jcrop(conf,function(ths){ return function(){
-                    ths.cropper = this;
-                    this.setOptions({
-                        outerImage: ths.window.getOuterImageUrl()
-                        ,bgOpacity: 0.5
+    on_afterRender: function () {
+        this.initJcrop.defer(10, this)
+    },
+
+    initJcrop: function () {
+        this.$image = $('#' + this.imageDOMid).data('ext', this.window);
+
+        var conf = {
+            minSize: this.window.getMinCropSize(),
+            aspectRatio: this.window.getAspectRatio(),
+            setSelect: this.window.getCropCoords(),
+            outerImage: this.window.getOuterImageUrl(),
+            onSelect: function (ext) {
+                return function (crop) {
+                    ext.on_cropChange({
+                        x: crop.x,
+                        y: crop.y,
+                        width: crop.w,
+                        height: crop.h
                     })
-            }}(this))
-        }//
-        
-    ,get_image: function(){
-            return this.$image;
-        }//
-    
-    
-    
-  });
-Ext.reg('imageplus-jquery-imagecrop',ImagePlus.jquery.ImageCrop);
+                }
+            }(this.window)
+        };
+        this.$image.Jcrop(conf, function (ths) {
+            return function () {
+                ths.cropper = this;
+                this.setOptions({
+                    outerImage: ths.window.getOuterImageUrl(),
+                    bgOpacity: 0.5
+                })
+            }
+        }(this))
+    },
+
+    get_image: function () {
+        return this.$image;
+    }
+
+});
+Ext.reg('imageplus-jquery-imagecrop', ImagePlus.jquery.ImageCrop);

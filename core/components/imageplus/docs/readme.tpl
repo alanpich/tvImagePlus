@@ -1,15 +1,9 @@
----------------------
- Image+ TV type 
----------------------
- Version:  {$version}
- Author:   Alan Pich <alan.pich@gmailg.com>
- License:  GNU GPLv2
- Date:     {$date}
- Build:    {$commit}
- 
- Dependencies: phpThumbOf <http://modx.com/extras/package/phpthumbof>
-     
+Image+ TV type
+==============
 
+Author:      Alan Pich <alan.pich@gmailg.com>
+Contributor: Thomas Jakobi <thomas.jakobi@partout.info>
+License:     GNU GPLv2
 
 Advanced image TV input type for MODx Revolution.
 The required dimensions for the image can (optionally) 
@@ -19,9 +13,10 @@ they can then use a graphical tool to crop the image
 to the required dimensions/proportions.
 
 Usage
----------
-Install via package manager
-Create a TV with input & output types of Image+
+-----
+Install via package manager and Create a TV with input & output types of Image+
 
 Full documentation can be found at
-https://github.com/alanpich/tvImagePlus
+https://github.com/Jako/ImagePlus
+
+Dependencies: MODX Cropping Engine i.e. pthumb <http://modx.com/extras/package/pthumb>

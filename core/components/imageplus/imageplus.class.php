@@ -64,7 +64,6 @@ class ImagePlus
             'assets_url' => $assets,
             'connectorUrl' => $assets . 'mgr/connector.php',
             'sources' => array(),
-            'crop_icon' => $this->modx->getOption('imageplus.crop_icon', null, $assets . "mgr/icons/icon.crop.png"),
             'has_unmet_dependencies' => false,
         );
     }
@@ -87,11 +86,12 @@ class ImagePlus
         });
 
         // Do some basic intelligent sniffing
-            if( ! CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)
-             && ! CropEngines\PhpThumbOf::engineRequirementsMet($this->modx) ){
-                // Handle unmet dependencies
-                $this->config['has_unmet_dependencies'] = TRUE;
-            }
+        if (!CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)
+            && !CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)
+        ) {
+            // Handle unmet dependencies
+            $this->config['has_unmet_dependencies'] = TRUE;
+        }
     }
 
     /**
@@ -197,6 +197,7 @@ class ImagePlus
      */
     public function includeScriptAssets()
     {
+        $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/imageplus.css');
         $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/jquery/jquery.jcrop.min.css');
         $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.js');
         $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.panel.input.js');
@@ -207,9 +208,9 @@ class ImagePlus
         $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/jquery/jquery.jcrop.min.js');
         $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.jquery.imagecrop.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
-        . ' ImagePlus.config = ' . json_encode($this->config) . ';'
-        . ' for(i in ImagePlus.config.lexicon){ MODx.lang[i] = ImagePlus.config.lexicon[i] }'
-        . '</script>');
+            . ' ImagePlus.config = ' . json_encode($this->config) . ';'
+            . ' for(i in ImagePlus.config.lexicon){ MODx.lang[i] = ImagePlus.config.lexicon[i] }'
+            . '</script>');
     }
 
     /**
@@ -223,16 +224,14 @@ class ImagePlus
      */
     public function getImageURL($json, $opts = array(), modTemplateVar $tv)
     {
-
         // Check system settings for crop engine override
         $engineClass = $this->modx->getOption('imageplus.crop_engine_class', null, false);
 
         // Do some basic intelligent sniffing
         if (!$engineClass) {
-            if( CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)) {
+            if (CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)) {
                 $engineClass = '\\ImagePlus\\CropEngines\\PhpThumbsUp';
-            }
-            else if( CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
+            } else if (CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
                 $engineClass = '\\ImagePlus\\CropEngines\\PhpThumbOf';
             }
         }
@@ -250,20 +249,6 @@ class ImagePlus
 
         return $cropEngine->getImageUrl($json, $opts, $tv);
     }
-
-//    /**
-//     * Check if a snippet exists by name
-//     *
-//     * @param string $snippet Name of snippet to check for
-//     * @return bool
-//     */
-//    protected function snippetExists($snippet)
-//    {
-//        $obj = $this->modx->getObject('modSnippet', array(
-//            'name' => $snippet
-//        ));
-//        return $obj instanceof modSnippet;
-//    }
-
 }
+
 define('imageplus', true);

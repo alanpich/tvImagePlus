@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2013 by Alan Pich <alan.pich@gmail.com>
  *
@@ -21,104 +22,104 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @copyright Alan Pich 2013
  */
+class ImagePlusInputRender extends modTemplateVarInputRender
+{
+    /* @var ImagePlus $imageplus */
+    private $imageplus;
 
-class ImagePlusInputRender extends modTemplateVarInputRender {
-    
-    /* @var ImagePlus $helper */
-    private $helper;
-    
-    public function getTemplate() {
-    	  return dirname(__FILE__).'/tpl/imageplus.inputrender.tpl';
-    }//
-    
-    
-    public function getLexiconTopics(){
+    public function getTemplate()
+    {
+        return dirname(__FILE__) . '/tpl/imageplus.inputrender.tpl';
+    }
+
+    public function getLexiconTopics()
+    {
         return array('imageplus:default');
-    }//
-    
-    
-    public function process($value,array $params = array()) {
+    }
+
+    public function process($value, array $params = array())
+    {
         $this->modx->lexicon->load('imageplus:default');
-        
-        // Load helper class
-        if(!class_exists('ImagePlus')){
-            require $this->modx->getOption('imageplus.core_path',null,$this->modx->getOption('core_path').'components/imageplus/').'imageplus.class.php'; };
-        $this->helper = new ImagePlus($this->modx);
+
+        // Load imageplus class
+        if (!class_exists('ImagePlus')) {
+            require $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/') . 'imageplus.class.php';
+        };
+        $this->imageplus = new ImagePlus($this->modx);
 
         // Load required javascripts & register global config
-        $this->helper->includeScriptAssets();
+        $this->imageplus->includeScriptAssets();
 
         // Prepare tv config for jsonification
-        $tvConfig = $this->helper->loadTvConfig($this,$value,$params);
-        $this->setPlaceholder('imageplusconfig',json_encode($tvConfig));
-        $this->setPlaceholder('tvValue',$value);
+        $tvConfig = $this->imageplus->loadTvConfig($this, $value, $params);
+        $this->setPlaceholder('imageplusconfig', json_encode($tvConfig));
+        $this->setPlaceholder('tvValue', $value);
 
+        $this->setPlaceholder('mediasource', $this->tv->get('source'));
+        $this->setPlaceholder('tvparams', json_encode($this->getInputOptions()));
 
-        $this->setPlaceholder('mediasource',$this->tv->get('source'));
-        $this->setPlaceholder('tvparams',json_encode($this->getInputOptions()));
+        $this->setPlaceholder('imgData', $this->getImageDataJSON($value, $params));
 
-        $this->setPlaceholder('imgData',$this->getImageDataJSON($value,$params));
-
-        $this->setPlaceholder('config',json_encode($this->helper->config));
-    	
+        $this->setPlaceholder('config', json_encode($this->imageplus->config));
     }
-    
-    
-private function getImageDataJSON($value,$params){
-		$I = json_decode($value);
-		$Opts = $this->getInputOptions();
-		
-		$data = new stdClass;
-		
-		// Grab MediaSource info
-		
+
+    private function getImageDataJSON($value, $params)
+    {
+        $value = json_decode($value);
+
+        $data = new stdClass;
+
+        // Grab MediaSource info
         $source = $this->modx->getObject('modMediaSource', $this->tv->get('source'));
         $properties = $source->getProperties();
         $data->mediasource = new stdClass;
         $data->mediasource->id = $source->get('id');
         $data->mediasource->path = (isset($properties['basePath'])) ? $properties['basePath']['value'] : $this->modx->getOption('base_path');
         $data->mediasource->url = (isset($properties['baseUrl'])) ? $properties['baseUrl']['value'] : $this->modx->getOption('base_url');
-		// Grab constraint info
-		$data->constraint = new stdClass;
-		$data->constraint->width =  empty($params['targetWidth']) ? 0 : (int) $params['targetWidth'];
-		$data->constraint->height = empty($params['targetHeight'])? 0 : (int) $params['targetHeight'];
-		
-		// Generate ratio value
-		if( $data->constraint->width >0 && $data->constraint->height >0 ){
-			// If both width/height constraints set, use that for ratio calc
-			$data->constraint->ratio = $data->constraint->width/$data->constraint->height;
-		} else 
-		if( isset($I->source->width) && isset($I->source->height) ){
-			// Use source image size for ratio
-			$data->constraint->ratio = $I->source->width / $I->source->height;
-		} else {
-			// Fail safe (and square)
-			$data->constraint->ratio = false;
-		};
-		
-		// Grab source image info (if it exists yet)
-		if( isset($I->source) ){
-			$data->source = new stdClass;
-			$data->source->height = $I->source->height;
-			$data->source->width = $I->source->width;
-			$data->source->path = $I->source->path;
-			$data->source->filename = $I->source->filename;
-			$data->source->size = $I->source->size;
-		} else {
-			$data->source = false;
-		};
-		
-		// Grab crop params (if they exist yet)
-		if( isset($I->crop)){
-			$data->crop = new stdClass;
-			$data->crop->x = $I->crop->x;
-			$data->crop->y = $I->crop->y;
-			$data->crop->width = $I->crop->width;
-			$data->crop->height = $I->crop->height;
-		};
-			
-		return json_encode($data);
-    }//
+        // Grab constraint info
+        $data->constraint = new stdClass;
+        $data->constraint->width = empty($params['targetWidth']) ? 0 : (int)$params['targetWidth'];
+        $data->constraint->height = empty($params['targetHeight']) ? 0 : (int)$params['targetHeight'];
+
+        // Generate ratio value
+        if ($data->constraint->width > 0 && $data->constraint->height > 0) {
+            // If both width/height constraints set, use that for ratio calc
+            $data->constraint->ratio = $data->constraint->width / $data->constraint->height;
+        } else {
+
+            if (isset($value->source->width) && isset($value->source->height)) {
+                // Use source image size for ratio
+                $data->constraint->ratio = $value->source->width / $value->source->height;
+            } else {
+                // Fail safe (and square)
+                $data->constraint->ratio = false;
+            };
+        }
+
+        // Grab source image info (if it exists yet)
+        if (isset($value->source)) {
+            $data->source = new stdClass;
+            $data->source->height = $value->source->height;
+            $data->source->width = $value->source->width;
+            $data->source->path = $value->source->path;
+            $data->source->filename = $value->source->filename;
+            $data->source->size = $value->source->size;
+        } else {
+            $data->source = false;
+        };
+
+        // Grab crop params (if they exist yet)
+        if (isset($value->crop)) {
+            $data->crop = new stdClass;
+            $data->crop->x = $value->crop->x;
+            $data->crop->y = $value->crop->y;
+            $data->crop->width = $value->crop->width;
+            $data->crop->height = $value->crop->height;
+        };
+
+        return json_encode($data);
+    }
 
 }
+
 return 'ImagePlusInputRender';

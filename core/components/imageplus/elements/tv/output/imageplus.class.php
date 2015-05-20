@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2013 by Alan Pich <alan.pich@gmail.com>
  *
@@ -23,20 +24,16 @@
  */
 class ImagePlusOutputRender extends modTemplateVarOutputRender
 {
-
     public function process($value, array $params = array())
     {
-        // Load the helper library if its not already here
+        // Load the imageplus library if its not already here
         if (!class_exists('ImagePlus')) {
             require_once $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/') . 'imageplus.class.php';
         };
 
-        $this->helper = new ImagePlus($this->modx);
-        return $this->helper->getImageURL($value, $params, $this->tv);
-
-    }//
-
+        $this->imageplus = new ImagePlus($this->modx);
+        return $this->imageplus->getImageURL($value, $params, $this->tv);
+    }
 }
 
-;
 return 'ImagePlusOutputRender';

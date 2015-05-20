@@ -22,55 +22,61 @@
  */
 
 
-var ImagePlus = function(config) {
+var imagePlus = function (config) {
     config = config || {};
-    ImagePlus.superclass.constructor.call(this,config);
+    imagePlus.superclass.constructor.call(this, config);
 };
-Ext.extend(ImagePlus,Ext.Component,{
-    page:{},window:{},grid:{},tree:{},panel:{},combo:{},config: {},jquery:{},
 
-    generateThumbUrl: function(params){
+Ext.extend(imagePlus, Ext.Component, {
+    page: {}, window: {}, grid: {}, tree: {}, panel: {}, combo: {}, config: {}, jquery: {}, form: {},
+
+    generateThumbUrl: function (params) {
         return this.generatePhpThumbOfUrl(params);
     },
 
-    generatePhpThumbOfUrl: function(params){
-        var url = MODx.config.connectors_url+'system/phpthumb.php?imageplus=1'
+    generatePhpThumbOfUrl: function (params) {
+        var url = MODx.config.connectors_url + 'system/phpthumb.php?imageplus=1';
         var defaults = {
-            wctx: 'mgr'
-            ,f: 'png'
-            ,q: 90
-            ,w: 150
-            ,source: 1
+            wctx: 'mgr',
+            f: 'png',
+            q: 90,
+            w: 150,
+            source: 1
         };
-        for(i in params){ defaults[i] = params[i]};
-        for(i in defaults){
-            url+= '&'+i+'='+defaults[i];
+        for (var i in params) {
+            defaults[i] = params[i]
+        }
+        for (i in defaults) {
+            url += '&' + i + '=' + defaults[i];
         }
         return url;
 
     },
 
-    warnAboutUnmetDependencies: function(){
+    warnAboutUnmetDependencies: function () {
         var warningWindow = MODx.load({
-             xtype: 'modx-window'
-            ,title: "&nbsp;&nbsp;&nbsp;Image+ Warning - Unmet Dependencies&nbsp;&nbsp;&nbsp;"
-            ,modal: true
-            ,padding: 25
-            ,allowDrop: false
-            ,resizable: true
-            ,collapsible: true
-            ,maximizable: true
-            ,buttons: [{
-                text: _('ok')
-                ,handler: function(L) { L.ownerCt.ownerCt.close(); }
-            }]
-            ,html:  "<h3>You don't have any crop engines!</h3>"+
-                    "<p>Before you can use Image+, you need at least one Crop Engine installed to handle image manipulation.</p>"+
-                    "<p>A quick fix is to install either phpThumbOf or phpThumbsUp from the MODX Package Repository</p>"
+            xtype: 'modx-window',
+            title: "&nbsp;&nbsp;&nbsp;Image+ Warning - Unmet Dependencies&nbsp;&nbsp;&nbsp;",
+            modal: true,
+            padding: 25,
+            allowDrop: false,
+            resizable: true,
+            collapsible: true,
+            maximizable: true,
+            buttons: [{
+                text: _('ok'),
+                handler: function (L) {
+                    L.ownerCt.ownerCt.close();
+                }
+            }],
+            html: "<h3>You don't have any crop engines!</h3>" +
+            "<p>Before you can use Image+, you need at least one Crop Engine installed to handle image manipulation.</p>" +
+            "<p>A quick fix is to install either pThumb, phpThumbOf or phpThumbsUp from the MODX Package Repository</p>"
         });
         warningWindow.show();
     }
 });
-Ext.reg('imageplus',ImagePlus);
-ImagePlus = new ImagePlus();
+Ext.reg('imageplus', imagePlus);
+
+ImagePlus = new imagePlus();
 

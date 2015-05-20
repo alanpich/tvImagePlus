@@ -22,16 +22,18 @@
  * @copyright Alan Pich 2013
  */
 
-$root = $modx->getOption('imageplus.core_path',null,$modx->getOption('core_path').'components/imageplus/');
-if(!class_exists('ImagePlus')){ require $root.'imageplus.class.php'; };
-$helper = new ImagePlus($modx);
+/** @var \modX $modx */
+$root = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
+if (!class_exists('ImagePlus')) {
+    require $root . 'imageplus.class.php';
+};
+$imageplus = new ImagePlus($modx);
 
 $modx->lexicon->load('imageplus:default');
-$a = print_r($this->getInputProperties(),1);
+$a = print_r($this->getInputProperties(), 1);
 
-$modx->controller->setPlaceholder('t_width',$a);
-$modx->controller->setPlaceholder('imagepluslexicon',json_encode($helper->config['lexicon']));
+$modx->controller->setPlaceholder('t_width', $a);
+$modx->controller->setPlaceholder('imagepluslexicon', json_encode($imageplus->config['lexicon']));
 $modx->controller->addLexiconTopic('imageplus:default');
 
-
-return $modx->smarty->fetch($root.'elements/tv/input/tpl/imageplus.options.tpl');
+return $modx->smarty->fetch($root . 'elements/tv/input/tpl/imageplus.options.tpl');

@@ -22,166 +22,172 @@
  */
 
 
-ImagePlus.window.Editor = function(config) {
+ImagePlus.window.Editor = function (config) {
     config = config || {};
     this.imageplus = config.imageplus;
     this.inputPanel = config.inputPanel;
     this.displayRatio = config.displayRatio;
-	
-	var cropSettings = {
-		x: this.imageplus.crop.x,
-		y: this.imageplus.crop.y,
-		width: this.imageplus.crop.width,
-		height: this.imageplus.crop.height
-	}
-    
-    Ext.apply(config,{
-        bodyStyle: { 'padding': '0'},
-        border: false
-        ,crop: cropSettings
-        ,resizable: false
-        ,closeAction: 'close'
-        ,listeners: {
-            'close': {fn: this.on_close,scope:this}
-            ,'success': {fn:function(){console.log('success')}}
-            ,'show': {fn:this.on_show,scope:this}
-        }
-        ,items: [{
-            xtype: 'imageplus-jquery-imagecrop'
-            ,imageplus: this.imageplus
-            ,initialWidth: this.getDisplayWidth()
-            ,initialHeight: this.getDisplayHeight()
-            ,imageUrl: this.getImageUrl()
-            ,window: this
-            ,listeners: {
-                'change': {fn: this.on_cropChange,scope:this}
-            }
-            ,cropData: this.imageplus.crop
-        }]
-        ,buttonAlign: 'right'
-        ,buttons: [{
-            text: _('cancel')
-            ,handler: this.closeFromEditor
-            ,scope: this    
-        },{      
-            text: _('update')
-            ,handler: this.updateFromEditor
-            ,scope: this
+
+    var cropSettings = {
+        x: this.imageplus.crop.x,
+        y: this.imageplus.crop.y,
+        width: this.imageplus.crop.width,
+        height: this.imageplus.crop.height
+    };
+
+    Ext.apply(config, {
+        bodyStyle: {'padding': '0'},
+        border: false,
+        crop: cropSettings,
+        resizable: false,
+        closeAction: 'close',
+        listeners: {
+            'close': {fn: this.on_close, scope: this},
+            'success': {
+                fn: function () {
+                    console.log('success')
+                }
+            },
+            'show': {fn: this.on_show, scope: this}
+        },
+        items: [{
+            xtype: 'imageplus-jquery-imagecrop',
+            imageplus: this.imageplus,
+            initialWidth: this.getDisplayWidth(),
+            initialHeight: this.getDisplayHeight(),
+            imageUrl: this.getImageUrl(),
+            window: this,
+            listeners: {
+                'change': {fn: this.on_cropChange, scope: this}
+            },
+            cropData: this.imageplus.crop
+        }],
+        buttonAlign: 'right',
+        buttons: [{
+            text: _('cancel'),
+            handler: this.closeFromEditor,
+            scope: this
+        }, {
+            text: _('update'),
+            handler: this.updateFromEditor,
+            scope: this
         }]
     });
-    ImagePlus.window.Editor.superclass.constructor.call(this,config);
+    ImagePlus.window.Editor.superclass.constructor.call(this, config);
 };
 Ext.extend(ImagePlus.window.Editor, Ext.Window, {
-    
+
     // Get the required width of the cropper
-    getDisplayWidth: function(){
+    getDisplayWidth: function () {
         return Math.round(this.imageplus.sourceImg.width * this.displayRatio);
-    }//
-    ,getDisplayHeight: function(){
+    },
+    getDisplayHeight: function () {
         return Math.round(this.imageplus.sourceImg.height * this.displayRatio);
     }
-    
+
     /**
      * Get a url to image resized for window
-     */
-    ,getImageUrl: function(){ 
-        var url = this.inputPanel.generateThumbUrl({
-                src: this.imageplus.sourceImg.src
-                ,w: this.getDisplayWidth()
-                ,h: this.getDisplayHeight()
-            })
-        return url;
-    }//
-    
-    ,getOuterImageUrl: function(){
-        var url = this.inputPanel.generateThumbUrl({
-                src: this.imageplus.sourceImg.src
-                ,w: this.getDisplayWidth()
-                ,h: this.getDisplayHeight()
-                ,'fltr[]': 'blur|25'
-            })
-        return url;
-    }//
-    
-    ,getMinCropSize: function(){
-        return [ 
-            this.imageplus.targetWidth * this.displayRatio
-            ,this.imageplus.targetHeight * this.displayRatio
+     */,
+    getImageUrl: function () {
+        return this.inputPanel.generateThumbUrl({
+            src: this.imageplus.sourceImg.src,
+            w: this.getDisplayWidth(),
+            h: this.getDisplayHeight()
+        });
+    },
+
+    getOuterImageUrl: function () {
+        return this.inputPanel.generateThumbUrl({
+            src: this.imageplus.sourceImg.src,
+            w: this.getDisplayWidth(),
+            h: this.getDisplayHeight(),
+            'fltr[]': 'blur|25'
+        });
+    },
+
+    getMinCropSize: function () {
+        return [
+            this.imageplus.targetWidth * this.displayRatio,
+            this.imageplus.targetHeight * this.displayRatio
         ]
-    }
-    
-    ,getMinCropWidth: function(){
+    },
+
+    getMinCropWidth: function () {
         return this.imageplus.targetWidth * this.displayRatio;
-    }
-    ,getMinCropHeight: function(){
+    },
+    getMinCropHeight: function () {
         return this.imageplus.targetHeight * this.displayRatio;
-    }
-    ,getInitialCropX: function(){
+    },
+    getInitialCropX: function () {
         return this.imageplus.crop.x * this.displayRatio;
-    }
-    ,getInitialCropY: function(){
+    },
+    getInitialCropY: function () {
         return this.imageplus.crop.y * this.displayRatio;
-    }
-    ,getInitialCropWidth: function(){
-        if(this.imageplus.crop.width==0){
+    },
+    getInitialCropWidth: function () {
+        if (this.imageplus.crop.width == 0) {
             return this.imageplus.targetWidth * this.displayRatio;
         } else {
             return this.imageplus.crop.width * this.displayRatio;
-        };
-    }
-    ,getInitialCropHeight: function(){
-        if(this.imageplus.crop.height==0){
+        }
+    },
+    getInitialCropHeight: function () {
+        if (this.imageplus.crop.height == 0) {
             return this.imageplus.targetHeight * this.displayRatio
         } else {
             return this.imageplus.crop.height * this.displayRatio;
-        };
-    }
-    ,getAspectRatio: function(){
-        if( this.imageplus.targetWidth>0 && this.imageplus.targetHeight>0){
+        }
+    },
+    getAspectRatio: function () {
+        if (this.imageplus.targetWidth > 0 && this.imageplus.targetHeight > 0) {
             return this.imageplus.targetWidth / this.imageplus.targetHeight;
-        } else { return false}
+        } else {
+            return false
+        }
+    },
+
+    getCropCoords: function () {
+        var W = this.getInitialCropWidth();
+        var H = this.getInitialCropHeight();
+        if (W == 0 || H == 0) {
+            return false;
+        }
+        var X = this.getInitialCropX();
+        var Y = this.getInitialCropY();
+        return [X, Y, (X + W), (Y + H)];
     }
-    
-    ,getCropCoords: function(){
-            var W = this.getInitialCropWidth();
-            var H = this.getInitialCropHeight();
-            if(W==0||H==0){ return false; }
-            var X = this.getInitialCropX();
-            var Y = this.getInitialCropY();
-            return [X,Y,(X+W),(Y+H)];
-    }
-    
+
     /**
      * Handle window closing
-     */
-    ,on_close: function(){
-        this.inputPanel.editorWindow = false; 
-    }
-    
-    ,on_show: function(){
-        this.center.defer(150,this);
+     */,
+    on_close: function () {
+        this.inputPanel.editorWindow = false;
+    },
+
+    on_show: function () {
+        this.center.defer(150, this);
     }//
-    
+
     /**
      * Handle crop area change
-     */
-    ,on_cropChange: function(data){
-        this.crop.height = Math.round(data.height/this.displayRatio);
-        this.crop.width = Math.round(data.width/this.displayRatio);
-        this.crop.x = Math.round(data.x/this.displayRatio);
-        this.crop.y = Math.round(data.y/this.displayRatio);
-    }
-    
-    ,updateFromEditor: function(){
+     */,
+    on_cropChange: function (data) {
+        this.crop.height = Math.round(data.height / this.displayRatio);
+        this.crop.width = Math.round(data.width / this.displayRatio);
+        this.crop.x = Math.round(data.x / this.displayRatio);
+        this.crop.y = Math.round(data.y / this.displayRatio);
+    },
+
+    updateFromEditor: function () {
         this.inputPanel.updateFromEditor(this.crop);
         this.close();
+    },
+    closeFromEditor: function () {
+        this.crop.width = this.imageplus.crop.width;
+        this.crop.height = this.imageplus.crop.height;
+        this.crop.x = this.imageplus.crop.x;
+        this.crop.y = this.imageplus.crop.y;
+        this.close();
     }
-    ,closeFromEditor: function() {
-		this.crop.width = this.imageplus.crop.width;
-		this.crop.height = this.imageplus.crop.height;
-		this.crop.x = this.imageplus.crop.x;
-		this.crop.y = this.imageplus.crop.y;
-		this.close();
-	}
 });
-Ext.reg('imageplus-window-editor',ImagePlus.window.Editor);
+Ext.reg('imageplus-window-editor', ImagePlus.window.Editor);

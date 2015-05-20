@@ -3,7 +3,7 @@
 // <![CDATA[
 var tvip_lex = {$imagepluslexicon};
 {literal}
-for(i in tvip_lex){ MODx.lang[i] = tvip_lex[i];};
+for(i in tvip_lex){ MODx.lang[i] = tvip_lex[i];}
 
 var params = {
 {/literal}{foreach from=$params key=k item=v name='p'}

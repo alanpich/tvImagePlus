@@ -23,17 +23,18 @@
  */
 
 /** @var \modX $modx */
-$root = $modx->getOption('imageplus.core_path',null,$modx->getOption('core_path').'components/imageplus/');
-if(!class_exists('ImagePlus')){ require $root.'imageplus.class.php'; };
-$helper = new ImagePlus($modx);
+$root = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
+if (!class_exists('ImagePlus')) {
+    require $root . 'imageplus.class.php';
+};
+$imageplus = new ImagePlus($modx);
 
 $modx->lexicon->load('imageplus:default');
-$a = print_r($this->getProperties(),1);
+$a = print_r($this->getProperties(), 1);
 
-$modx->controller->setPlaceholder('t_width',$a);
-$modx->controller->setPlaceholder('imagepluslexicon',json_encode($helper->config['lexicon']));
-$modx->controller->setPlaceholder('imageplus',$helper);
+$modx->controller->setPlaceholder('t_width', $a);
+$modx->controller->setPlaceholder('imagepluslexicon', json_encode($imageplus->config['lexicon']));
+$modx->controller->setPlaceholder('imageplus', $imageplus);
 $modx->controller->addLexiconTopic('imageplus:default');
 
-
-return $modx->smarty->fetch($root.'elements/tv/output/tpl/imageplus.options.tpl');
+return $modx->smarty->fetch($root . 'elements/tv/output/tpl/imageplus.options.tpl');
