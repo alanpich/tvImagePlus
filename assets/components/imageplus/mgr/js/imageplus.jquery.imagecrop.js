@@ -34,7 +34,7 @@ ImagePlus.jquery.ImageCrop = function (config) {
             html: '<img id="' + this.imageDOMid + '" src="' + this.window.getImageUrl() + '" />'
         }],
         listeners: {
-            afterRender: {fn: this.on_afterRender, scope: this},
+            afterRender: {fn: this.onAfterRender, scope: this},
             destroy: {
                 fn: function () {
                     this.cropper.destroy()
@@ -46,7 +46,7 @@ ImagePlus.jquery.ImageCrop = function (config) {
 };
 Ext.extend(ImagePlus.jquery.ImageCrop, Ext.Panel, {
 
-    on_afterRender: function () {
+    onAfterRender: function () {
         this.initJcrop.defer(10, this)
     },
 

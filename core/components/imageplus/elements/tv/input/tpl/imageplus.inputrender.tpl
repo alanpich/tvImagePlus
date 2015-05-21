@@ -1,16 +1,13 @@
-<textarea style="display: none" name="tv{$tv->id}" id="tv{$tv->id}" value=""/>{$tv->value}</textarea>
-<div id="imageplus-panel-input-div-{$tv->id}"></div>
-<script type="text/javascript">
-    {literal}
+<textarea class="imageplus-hidden-textarea" name="tv{$tv->id}" id="tv{$tv->id}" value=""/>{$tv->value}</textarea>
+<div id="imageplus-panel-input-div-{$tv->id}" class="imageplus-panel-input"></div>
+<script type="text/javascript">{literal}
     Ext.onReady(function () {
-        MODx.load({
-            {/literal}
+        MODx.load({{/literal}
             xtype: 'imageplus-panel-input',
             renderTo: 'imageplus-panel-input-div-{$tv->id}',
             imageplus: {$imageplusconfig},
-            updateTo: 'tv{$tv->id}', {literal}
+            hiddenField: 'tv{$tv->id}',{literal}
         });
-    });
-    {/literal}
-    $.merge(true, ImagePlus.config, {$config});
+    });{/literal}
+    $.merge(ImagePlus.config, {$config});
 </script>

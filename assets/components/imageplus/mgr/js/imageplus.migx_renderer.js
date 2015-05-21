@@ -21,16 +21,16 @@
  * @copyright Alan Pich 2013
  */
 
-ImagePlus.MIGX_Renderer = function(json){
-    if(!json.length) return '';
+ImagePlus.MIGX_Renderer = function (json) {
+    if (!json.length) return '';
     var data = JSON.parse(json);
     var url = ImagePlus.generateThumbUrl({
-        src: data.sourceImg.src
-        ,source: data.sourceImg.source
-        ,sw: data.crop.width
-        ,sh: data.crop.height
-        ,sx: data.crop.x
-        ,sy: data.crop.y
+        src: data.sourceImg.src,
+        source: data.sourceImg.source,
+        sw: data.crop.width,
+        sh: data.crop.height,
+        sx: data.crop.x,
+        sy: data.crop.y
     })
-    return '<img src="'+url+'" style="max-width:100%; height:auto;" />';
+    return '<img src="' + url + '" style="max-width:100%; height:auto;" />';
 }

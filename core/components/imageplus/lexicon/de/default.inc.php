@@ -8,11 +8,15 @@ $_lang['imageplus.edit_image'] = 'Bild bearbeiten';
 
 /** Input options render **/
 $_lang['imageplus.targetwidth'] = 'Ausgabebreite';
-$_lang['imageplus.targetwidth_desc'] = '(Optional) Gibt die Ausgabebreite des Bildes an';
+$_lang['imageplus.targetwidth_desc'] = '(Optional) Gibt die Ausgabebreite des Bildes an. Das hochgeladene Bild muss mindestens diese Breite haben.';
 $_lang['imageplus.targetheight'] = 'Ausgabehöhe';
-$_lang['imageplus.targetheight_desc'] = '(Optional) Gibt die Ausgabehöhe des Bildes an';
+$_lang['imageplus.targetheight_desc'] = '(Optional) Gibt die Ausgabehöhe des Bildes an. Das hochgeladene Bild muss mindestens diese Höhe haben.';
+$_lang['imageplus.targetRatio'] = 'Target Aspect Ratio';
+$_lang['imageplus.targetRatio_desc'] = '(Optional) Gibt das Seitenverhältnis des Bildes an. Wenn die Ausgabebreite und die Ausgabehöhe des Bildes angegeben sind, wird dieser Wert ignoriert.';
+$_lang['imageplus.thumbnailWidth'] = 'Thumbnail Width';
+$_lang['imageplus.thumbnailWidth_desc'] = '(Optional) The thumbnail width of the image in the template variable panel.';
 $_lang['imageplus.allowAltTag'] = 'Alternatives Textfeld anzeigen';
-$_lang['imageplus.allowAltTag_desc'] = '(Optional) Ermöglicht die Eingabe eines Alt oder Title Tag';
+$_lang['imageplus.allowAltTag_desc'] = '(Optional) Ermöglicht die Eingabe eines Alt oder Title Tag.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'phpThumb Parameter';

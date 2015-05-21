@@ -22,3 +22,7 @@
 .x-form-field-wrap .x-form-trigger.x-form-crop-trigger:before {
     content: "\f125";
 }
+
+.imageplus-hidden-textarea {
+    display: none;
+}

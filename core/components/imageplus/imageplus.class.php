@@ -155,6 +155,9 @@ class ImagePlus
         // Dimension constraints
         $data->targetWidth = (int)$params['targetWidth'];
         $data->targetHeight = (int)$params['targetHeight'];
+        $data->targetRatio = $params['targetRatio'];
+        // Thumbnail width options
+        $data->thumbnailWidth = (isset($params['thumbnailWidth']) && intval($params['thumbnailWidth'])) ? intval($params['thumbnailWidth']) : 400;
         // Alt-tag options
         $data->altTagOn = (isset($params['allowAltTag']) && $params['allowAltTag'] == 'Yes');
 
@@ -172,6 +175,7 @@ class ImagePlus
             $data->sourceImg->height = 0;
             $data->sourceImg->src = '';
             $data->sourceImg->source = 1;
+            // Alt-tag
             $data->altTag = ($data->altTagOn ? '' : false);
         } else {
             // Crop data
@@ -186,6 +190,7 @@ class ImagePlus
             $data->sourceImg->height = $saved->sourceImg->height;
             $data->sourceImg->src = $saved->sourceImg->src;
             $data->sourceImg->source = $saved->sourceImg->source;
+            // Alt-tag
             $data->altTag = ($data->altTagOn ? (isset($saved->altTag) ? $saved->altTag : '') : false);
         }
 

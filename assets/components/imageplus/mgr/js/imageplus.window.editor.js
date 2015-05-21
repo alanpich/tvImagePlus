@@ -139,10 +139,14 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
         }
     },
     getAspectRatio: function () {
-        if (this.imageplus.targetWidth > 0 && this.imageplus.targetHeight > 0) {
-            return this.imageplus.targetWidth / this.imageplus.targetHeight;
+        if (this.imageplus.targetRatio) {
+            return this.imageplus.targetRatio;
         } else {
-            return false
+            if (this.imageplus.targetWidth > 0 && this.imageplus.targetHeight > 0) {
+                return this.imageplus.targetWidth / this.imageplus.targetHeight;
+            } else {
+                return false
+            }
         }
     },
 

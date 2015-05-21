@@ -6,9 +6,14 @@ Changelog
     - Inline Trigger fields
     - Bugfix for fireResourceFormChange issue
     - Some better styling
+    - Updated Jcrop plugin and jQuery
+    - Set thumbnail width in template variable panel
+    - Set crop aspect ratio in template variable input options
+    - Bugfix for a Firefox display issue
+    - Respect context settings for media sources
 
 - 2.2.x
-    - Added gui warning of missing dependencies
+    - Added GUI warning of missing dependencies
     - Added PhpThumbsUp crop engine
     - Refactored to allow changing of crop engines
     - Added grid renderer for MIGX backend

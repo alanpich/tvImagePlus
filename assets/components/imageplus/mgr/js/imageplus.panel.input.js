@@ -37,19 +37,14 @@ ImagePlus.panel.input = function (config) {
 
     Ext.apply(config, {
         border: false,
-        baseCls: 'modx-formpanel',
-        cls: 'container',
-        updateTo: config.updateTo,
-        width: '100%',
+        baseCls: 'modx-panel',
+        hiddenField: config.hiddenField,
+        width: '400px',
         items: [{
             xtype: 'compositefield',
             anchor: '98%',
             hideLabel: true,
             listeners: {
-                'render': {
-                    fn: this.on_Render,
-                    scope: this
-                },
                 'afterRender': {
                     fn: this.onAfterRender,
                     scope: this
@@ -79,7 +74,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         var resourcePanel = Ext.getCmp('modx-panel-resource');
         resourcePanel.on('tv-reset', function (changed) {
             if (changed.id = this.imageplus.tv.id) {
-                this.on_Reset();
+                this.onReset();
             }
         }, this);
     },
@@ -93,8 +88,8 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         openToPath.pop();
         openToPath = openToPath.join('/');
 
-        var _this = this;
         // Create browser component
+        var _this = this;
         this.imageBrowser = new ImagePlus.combo.Browser({
             value: this.imageplus.sourceImg.src,
             source: this.imageplus.mediaSource,
@@ -140,7 +135,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                     fn: this.onAltTagChange,
                     scope: this
                 }
-            }, width: 300, style: {
+            }, width: 400, style: {
                 marginBottom: '5px'
             }
         })
@@ -151,7 +146,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             wctx: 'mgr',
             f: 'png',
             q: 90,
-            w: 150,
+            w: this.imageplus.thumbnailWidth,
             source: this.imageplus.sourceImg.source
         };
         for (var i in params) {
@@ -166,16 +161,10 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     /**
      * Fires when the TV field is reset
      */
-    on_Reset: function () {
+    onReset: function () {
         this.imageBrowser.setValue('');
         this.imageplus.sourceImg = false;
         this.updatePreviewImage.defer(10, this);
-    },
-
-    /**
-     * Render form elements to page
-     */
-    on_Render: function () {
     },
 
     /**
@@ -226,7 +215,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
      */
     onAltTagChange: function (field, value) {
         this.imageplus.altTag = value;
-        this.updateExternalField();
+        this.updateHiddenField();
     },
 
     /**
@@ -274,15 +263,15 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.lastFileLabel = this.imageplus.sourceImg.src;
 
         this.updatePreviewImage.defer(10, this);
-        this.updateExternalField();
+        this.updateHiddenField();
     },
 
 
     /**
-     * Update updateTo field input field value
+     * Update hidden field value
      */
-    updateExternalField: function () {
-        //  console.log(this.updateTo);
+    updateHiddenField: function () {
+        //  console.log(this.hiddenField);
         var TV = {
             sourceImg: this.imageplus.sourceImg,
             crop: this.imageplus.crop,
@@ -292,18 +281,19 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         };
         var json = JSON.stringify(TV, null, '  ');
 
-        var external = document.getElementById(this.updateTo);
+        var external = document.getElementById(this.hiddenField);
         var current = external.value || '';
         if (current == '') {
             current = external.innerHTML;
         }
+        current = JSON.stringify(JSON.parse(current), null, '  ');
 
         // Has value changed or is source image empty?
         if (current == json || this.imageplus.sourceImg.src == '') {
             return;
         }
-        if (document.getElementById(this.updateTo)) {
-            document.getElementById(this.updateTo).value = json;
+        if (document.getElementById(this.hiddenField)) {
+            document.getElementById(this.hiddenField).value = json;
         }
 
         // Mark resource as dirty
@@ -378,8 +368,8 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         if (this.imagePreview.el) {
             jQuery(this.imagePreview.el.dom).attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==');
         }
-        document.getElementById(this.updateTo).innerHTML = '';
-        document.getElementById(this.updateTo).value = '';
+        document.getElementById(this.hiddenField).innerHTML = '';
+        document.getElementById(this.hiddenField).value = '';
         this.imageBrowser.setValue('');
         MODx.fireResourceFormChange();
     },
@@ -404,7 +394,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.oldSourceImg.crop.y = crop.y;
         this.oldSourceImg.crop.width = crop.width;
         this.oldSourceImg.crop.height = crop.height;
-
 
         this.editorWindow = null;
         this.updateDisplay();

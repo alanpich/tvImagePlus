@@ -37,6 +37,35 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         return array('imageplus:default');
     }
 
+    // Override the default TV render because of a isnumeric/intval bug,
+    // that does not allow a floatval in the input options
+    public function render($value, array $params = array())
+    {
+        $this->setPlaceholder('tv',$this->tv);
+        $this->setPlaceholder('id',$this->tv->get('id'));
+        $this->setPlaceholder('ctx',isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');
+        $this->setPlaceholder('params',$params);
+
+        if (!empty($params)) {
+            foreach ($params as $k => $v) {
+                if ($v === 'true') {
+                    $params[$k] = TRUE;
+                } elseif ($v === 'false') {
+                    $params[$k] = FALSE;
+                } elseif (is_numeric($v) && ((int) $v == $v)) {
+                    $params[$k] = intval($v);
+                } elseif (is_numeric($v)) {
+                    $params[$k] = (float)($v);
+                }
+            }
+        }
+        $this->getLexiconTopics();
+        $output = $this->process($value, $params);
+
+        $tpl = $this->getTemplate();
+        return !empty($tpl) ? $this->modx->controller->fetchTemplate($tpl) : $output;
+    }
+
     public function process($value, array $params = array())
     {
         $this->modx->lexicon->load('imageplus:default');
@@ -44,7 +73,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         // Load imageplus class
         if (!class_exists('ImagePlus')) {
             require $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/') . 'imageplus.class.php';
-        };
+        }
         $this->imageplus = new ImagePlus($this->modx);
 
         // Load required javascripts & register global config
@@ -76,24 +105,28 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         $data->mediasource->id = $source->get('id');
         $data->mediasource->path = (isset($properties['basePath'])) ? $properties['basePath']['value'] : $this->modx->getOption('base_path');
         $data->mediasource->url = (isset($properties['baseUrl'])) ? $properties['baseUrl']['value'] : $this->modx->getOption('base_url');
+
         // Grab constraint info
         $data->constraint = new stdClass;
         $data->constraint->width = empty($params['targetWidth']) ? 0 : (int)$params['targetWidth'];
         $data->constraint->height = empty($params['targetHeight']) ? 0 : (int)$params['targetHeight'];
+        $data->constraint->ratio = empty($params['targetRatio']) ? false : $params['targetRatio'];
 
         // Generate ratio value
         if ($data->constraint->width > 0 && $data->constraint->height > 0) {
             // If both width/height constraints set, use that for ratio calc
             $data->constraint->ratio = $data->constraint->width / $data->constraint->height;
         } else {
-
-            if (isset($value->source->width) && isset($value->source->height)) {
-                // Use source image size for ratio
-                $data->constraint->ratio = $value->source->width / $value->source->height;
-            } else {
-                // Fail safe (and square)
-                $data->constraint->ratio = false;
-            };
+            // If ratio is not set
+            if (!$data->constraint->ratio) {
+                if (isset($value->source->width) && isset($value->source->height)) {
+                    // Use source image size for ratio
+                    $data->constraint->ratio = $value->source->width / $value->source->height;
+                } else {
+                    // Fail safe (and square)
+                    $data->constraint->ratio = false;
+                }
+            }
         }
 
         // Grab source image info (if it exists yet)
@@ -106,7 +139,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
             $data->source->size = $value->source->size;
         } else {
             $data->source = false;
-        };
+        }
 
         // Grab crop params (if they exist yet)
         if (isset($value->crop)) {
@@ -115,7 +148,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
             $data->crop->y = $value->crop->y;
             $data->crop->width = $value->crop->width;
             $data->crop->height = $value->crop->height;
-        };
+        }
 
         return json_encode($data);
     }
