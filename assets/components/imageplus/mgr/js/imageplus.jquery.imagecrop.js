@@ -31,14 +31,19 @@ ImagePlus.jquery.ImageCrop = function (config) {
         cropData: this.imageplus.crop,
         collapsable: false,
         items: [{
+            border: false,
             html: '<img id="' + this.imageDOMid + '" src="' + this.window.getImageUrl() + '" />'
         }],
         listeners: {
-            afterRender: {fn: this.onAfterRender, scope: this},
+            afterRender: {
+                fn: this.onAfterRender,
+                scope: this
+            },
             destroy: {
                 fn: function () {
                     this.cropper.destroy()
-                }, scope: this
+                },
+                scope: this
             }
         }
     });

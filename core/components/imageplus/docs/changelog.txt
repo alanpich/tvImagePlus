@@ -2,7 +2,7 @@ Changelog
 ================================================================================
 
 - 2.3.x
-    - MODX 2.3 compatibility (and dropping 2.2 compatibility)
+    - MODX 2.3 compatibility
     - Inline Trigger fields
     - Bugfix for fireResourceFormChange issue
     - Some better styling

@@ -52,7 +52,8 @@ ImagePlus.panel.input = function (config) {
             },
             items: [this.imageBrowser]
         }, {
-            cls: 'modx-tv-image-preview',
+            cls: 'modx-tv-image-preview imageplus-image-preview',
+            border: false,
             items: [
                 this.imagePreview,
                 this.altTextField
@@ -282,11 +283,8 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         var json = JSON.stringify(TV, null, '  ');
 
         var external = document.getElementById(this.hiddenField);
-        var current = external.value || '';
-        if (current == '') {
-            current = external.innerHTML;
-        }
-        current = JSON.stringify(JSON.parse(current), null, '  ');
+        var current = external.value || external.innerHTML || '';
+        current = (current != '') ? JSON.stringify(JSON.parse(current), null, '  ') : '';
 
         // Has value changed or is source image empty?
         if (current == json || this.imageplus.sourceImg.src == '') {
@@ -353,7 +351,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 displayRatio: ratio,
                 width: (imgW * ratio + 20),
                 crop: this.imageplus.crop,
-                padding: '10px'
+                padding: 10
             });
 
             // Show the window

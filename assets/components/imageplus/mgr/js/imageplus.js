@@ -56,7 +56,7 @@ Ext.extend(imagePlus, Ext.Component, {
     warnAboutUnmetDependencies: function () {
         var warningWindow = MODx.load({
             xtype: 'modx-window',
-            title: "&nbsp;&nbsp;&nbsp;Image+ Warning - Unmet Dependencies&nbsp;&nbsp;&nbsp;",
+            title: "Image+ Warning – Unmet Dependencies",
             modal: true,
             padding: 25,
             allowDrop: false,

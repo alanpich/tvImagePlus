@@ -16,12 +16,21 @@
     display: inline-block;
 }
 
-.x-form-field-wrap .x-form-trigger.x-form-clear-trigger:before {
-    content: "\f00d";
+.x-form-field-wrap .x-form-clear-trigger {
+    background-image: url(../images/clear-trigger.png);
 }
 
-.x-form-field-wrap .x-form-trigger.x-form-crop-trigger:before {
-    content: "\f125";
+.x-form-field-wrap .x-form-crop-trigger {
+    background-image: url(../images/crop-trigger.png);
+}
+
+.x-form-field-wrap .x-form-image-trigger {
+    background-image: url(../images/image-trigger.png);
+}
+
+.imageplus-image-preview {
+    margin-top: 4px;
+    padding-top: 4px;
 }
 
 .imageplus-hidden-textarea {

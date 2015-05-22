@@ -42,15 +42,22 @@ ImagePlus.window.Editor = function (config) {
         resizable: false,
         closeAction: 'close',
         listeners: {
-            'close': {fn: this.on_close, scope: this},
+            'close': {
+                fn: this.onClose,
+                scope: this
+            },
             'success': {
                 fn: function () {
                     console.log('success')
                 }
             },
-            'show': {fn: this.on_show, scope: this}
+            'show': {
+                fn: this.onShow,
+                scope: this
+            }
         },
         items: [{
+            border: false,
             xtype: 'imageplus-jquery-imagecrop',
             imageplus: this.imageplus,
             initialWidth: this.getDisplayWidth(),
@@ -58,7 +65,10 @@ ImagePlus.window.Editor = function (config) {
             imageUrl: this.getImageUrl(),
             window: this,
             listeners: {
-                'change': {fn: this.on_cropChange, scope: this}
+                change: {
+                    fn: this.onCropChange,
+                    scope: this
+                }
             },
             cropData: this.imageplus.crop
         }],
@@ -162,20 +172,19 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
     }
 
     /**
-     * Handle window closing
+     * Handle window
      */,
-    on_close: function () {
+    onClose: function () {
         this.inputPanel.editorWindow = false;
     },
-
-    on_show: function () {
+    onShow: function () {
         this.center.defer(150, this);
     }//
 
     /**
      * Handle crop area change
      */,
-    on_cropChange: function (data) {
+    onCropChange: function (data) {
         this.crop.height = Math.round(data.height / this.displayRatio);
         this.crop.width = Math.round(data.width / this.displayRatio);
         this.crop.x = Math.round(data.x / this.displayRatio);

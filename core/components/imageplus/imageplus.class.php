@@ -59,6 +59,7 @@ class ImagePlus
             null,
             $this->modx->getOption('assets_url') . 'components/imageplus/'
         );
+
         $this->config = array(
             'core_path' => $core,
             'assets_url' => $assets,
@@ -90,7 +91,7 @@ class ImagePlus
             && !CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)
         ) {
             // Handle unmet dependencies
-            $this->config['has_unmet_dependencies'] = TRUE;
+            $this->config['has_unmet_dependencies'] = true;
         }
     }
 
@@ -157,7 +158,8 @@ class ImagePlus
         $data->targetHeight = (int)$params['targetHeight'];
         $data->targetRatio = $params['targetRatio'];
         // Thumbnail width options
-        $data->thumbnailWidth = (isset($params['thumbnailWidth']) && intval($params['thumbnailWidth'])) ? intval($params['thumbnailWidth']) : 400;
+        $vers = $this->modx->getVersionData();
+        $data->thumbnailWidth = (isset($params['thumbnailWidth']) && intval($params['thumbnailWidth'])) ? intval($params['thumbnailWidth']) : (($vers['major_version'] >= 3) ? 400 : 150);
         // Alt-tag options
         $data->altTagOn = (isset($params['allowAltTag']) && $params['allowAltTag'] == 'Yes');
 
@@ -202,7 +204,12 @@ class ImagePlus
      */
     public function includeScriptAssets()
     {
-        $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/imageplus.css');
+        $vers = $this->modx->getVersionData();
+        if ($vers['major_version'] >= 3) {
+            $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/imageplus.css');
+        } else {
+            $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/imageplus-22.css');
+        }
         $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/jquery/jquery.jcrop.min.css');
         $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.js');
         $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.panel.input.js');
