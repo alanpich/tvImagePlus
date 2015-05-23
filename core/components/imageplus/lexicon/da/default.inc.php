@@ -21,7 +21,22 @@ $_lang['imageplus.allowAltTag_desc'] = 'Tillad brugeren at skrive en alternativ 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Ekstra phpThumb parametre';
 $_lang['imageplus.phpThumbParams_desc'] = 'Tilføj ekstra filtre osv. til phpThumb. Dokumentationen kan findes <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">her</a>.';
-$_lang['imageplus.outputChunk'] = 'Output chunk';
+$_lang['imageplus.outputChunk'] = 'Output Chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Vælg en chunk til tv output. Lad feltet være tomt for kun at få en URL';
-$_lang['imageplus.generateUrl'] = 'Generate thumb url';
+$_lang['imageplus.generateUrl'] = 'Generate Thumb URL';
 $_lang['imageplus.generateUrl_desc'] = '(Optional) The thumb url is maybe not necessary, if you generate the thumbnail in output chunk i.e. by the phpthumbof output filter.';
+
+/** Placeholder descriptions */
+$_lang['imageplus.placeholder.url'] = 'URL of the thumbnail image';
+$_lang['imageplus.placeholder.alt'] = 'Alt text';
+$_lang['imageplus.placeholder.width'] = 'Width of the thumbnail image';
+$_lang['imageplus.placeholder.height'] = 'Height of the thumbnail image';
+$_lang['imageplus.placeholder.source.src'] = 'Path to the source image';
+$_lang['imageplus.placeholder.source.width'] = 'Width of the source image';
+$_lang['imageplus.placeholder.source.height'] = 'Height of the source image';
+$_lang['imageplus.placeholder.crop.width'] = 'Crop width of the source image';
+$_lang['imageplus.placeholder.crop.height'] = 'Crop height of the source image';
+$_lang['imageplus.placeholder.crop.x'] = 'Crop x position of the source image';
+$_lang['imageplus.placeholder.crop.y'] = 'Crop y position of the source image';
+$_lang['imageplus.placeholder.options'] = 'Crop engine full option string to generate the thumbnail image';
+$_lang['imageplus.placeholder.crop.options'] = 'Crop engine crop option string to generate the thumbnail image';

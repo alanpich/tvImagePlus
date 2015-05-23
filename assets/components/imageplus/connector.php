@@ -28,15 +28,20 @@
  * @package imageplus
  * @copyright Alan Pich 2012
  */
-require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/config.core.php';
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/config.core.php';
 require_once MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 require_once MODX_CONNECTORS_PATH . 'index.php';
+
+$corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
+$imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+    'core_path' => $corePath
+));
 
 // Load up some lexiconzzzz
 $modx->lexicon->load('imageplus:default');
 
 // Handle request 
 $modx->request->handleRequest(array(
-    'processors_path' => $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/') . 'processors/',
-    'location' => '',
+    'processors_path' => $imageplus->getOption('processorsPath'),
+    'location' => ''
 ));

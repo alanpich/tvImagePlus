@@ -187,7 +187,10 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         }
 
         this.imageplus.sourceImg = {
-            src: img.relativeUrl, width: img.image_width, height: img.image_height, source: this.imageplus.mediaSource
+            src: img.relativeUrl,
+            width: img.image_width,
+            height: img.image_height,
+            source: this.imageplus.mediaSource
         };
 
         // Reset crop rectangle everytime an image is selected to be different from browser
@@ -349,7 +352,8 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 imageplus: this.imageplus,
                 inputPanel: this,
                 displayRatio: ratio,
-                width: (imgW * ratio + 20),
+                width: ((imgW * ratio) + 20),
+                height: ((imgH * ratio) + 20 + 84),
                 crop: this.imageplus.crop,
                 padding: 10
             });

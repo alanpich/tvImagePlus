@@ -10,8 +10,10 @@
  *
  */
 
-$path = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
-$imagePlus = $modx->getService('imageplus', 'ImagePlus', $path);
+$corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
+$imagePlus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+    'core_path' => $corePath
+));
 
 $tvname = $modx->getOption('tvname', $scriptProperties, '');
 $docid = $modx->getOption('docid', $scriptProperties, $modx->resource->get('id'));
@@ -38,13 +40,13 @@ if ($tv) {
             break;
         case 'tpl':
             $output = ($data->sourceImg->src) ? $modx->getChunk($tpl, array(
-                'url' => $imagePlus->getImageURL($value, array('phpThumbParams' => $options)),
+                'url' => $imagePlus->getImageURL($value, array('phpThumbParams' => $options), $tv),
                 'alt' => $data->altTag
             )) : '';
             break;
         case 'thumb':
         default:
-            $output = $imagePlus->getImageURL($value, array('phpThumbParams' => $options));
+            $output = $imagePlus->getImageURL($value, array('phpThumbParams' => $options), $tv);
             break;
     }
 } else {

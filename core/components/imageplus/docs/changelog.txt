@@ -5,12 +5,13 @@ Changelog
     - MODX 2.3 compatibility
     - Inline Trigger fields
     - Bugfix for fireResourceFormChange issue
-    - Some better styling
+    - Some better backend styling
     - Updated Jcrop plugin and jQuery
     - Set thumbnail width in template variable panel
     - Set crop aspect ratio in template variable input options
     - Bugfix for a Firefox display issue
     - Respect context settings for media sources
+    - Center the crop window in the viewport
 
 - 2.2.x
     - Added GUI warning of missing dependencies

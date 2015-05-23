@@ -65,7 +65,7 @@ Ext.extend(ImagePlus.jquery.ImageCrop, Ext.Panel, {
             outerImage: this.window.getOuterImageUrl(),
             onSelect: function (ext) {
                 return function (crop) {
-                    ext.on_cropChange({
+                    ext.onCropChange({
                         x: crop.x,
                         y: crop.y,
                         width: crop.w,

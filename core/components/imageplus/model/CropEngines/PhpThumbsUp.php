@@ -25,14 +25,14 @@
 namespace ImagePlus\CropEngines;
 
 /**
- * Class PhpThumbOf
+ * Class PhpThumbsUp
  *
- * Uses the phpthumbof extra to generate cropped images
+ * Uses the phpthumbsup extra to generate cropped images
  *
  * @package imageplus
  * @subpackage ImagePlus\CropEngines
  */
-class PhpThumbOf extends AbstractCropEngine
+class PhpThumbsUp extends AbstractCropEngine
 {
     /**
      * Checks that all requirements are met for using
@@ -43,7 +43,7 @@ class PhpThumbOf extends AbstractCropEngine
      */
     public static function engineRequirementsMet(\modX $modx)
     {
-        $pto = $modx->getObject('modSnippet', array('name' => 'phpthumbof'));
+        $pto = $modx->getObject('modSnippet', array('name' => 'phpthumbsup'));
         return $pto instanceof \modSnippet;
     }
 
@@ -58,7 +58,6 @@ class PhpThumbOf extends AbstractCropEngine
      */
     public function getImageUrl($json, $opts = array(), \modTemplateVar $tv)
     {
-
         // Parse json to object
         $data = json_decode($json);
 
@@ -92,7 +91,7 @@ class PhpThumbOf extends AbstractCropEngine
             'far' => true
         ));
 
-        // Add phpThumbParams to phpthumbof snippet call arguments
+        // Add phpThumbParams to phpthumbsup snippet call arguments
         $phpThumbParams = $this->modx->getOption('phpThumbParams', $opts, '');
         $optParams = array();
         if ($phpThumbParams) {
@@ -106,11 +105,11 @@ class PhpThumbOf extends AbstractCropEngine
         $options = ($optParams) ? http_build_query(array_merge($cropParams, $optParams)) : http_build_query(array_merge($params, $optParams));
         $cropOptions = http_build_query($cropParams);
 
-        // Call phpthumbof for url
+        // Call phpthumbsup for url
         $generateUrl = $this->modx->getOption('generateUrl', $opts, 1);
         if ($generateUrl) {
             $url = $this->modx->runSnippet(
-                'phpthumbof',
+                'phpthumbsup',
                 array(
                     'options' => $options,
                     'input' => $imgPath
@@ -119,6 +118,8 @@ class PhpThumbOf extends AbstractCropEngine
         } else {
             $url = '';
         }
+
+        $url = str_replace('%2F', '/', $url);
 
         // If an output chunk is selected, parse that
         $outputChunk = $this->modx->getOption('outputChunk', $opts, '');
@@ -143,7 +144,5 @@ class PhpThumbOf extends AbstractCropEngine
             // Otherwise return raw url
             return $url;
         }
-
     }
-
 }

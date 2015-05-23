@@ -24,9 +24,6 @@
  */
 class ImagePlusInputRender extends modTemplateVarInputRender
 {
-    /* @var ImagePlus $imageplus */
-    private $imageplus;
-
     public function getTemplate()
     {
         return dirname(__FILE__) . '/tpl/imageplus.inputrender.tpl';
@@ -59,7 +56,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
                 }
             }
         }
-        $this->getLexiconTopics();
+        $this->_loadLexiconTopics();
         $output = $this->process($value, $params);
 
         $tpl = $this->getTemplate();
@@ -71,16 +68,16 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         $this->modx->lexicon->load('imageplus:default');
 
         // Load imageplus class
-        if (!class_exists('ImagePlus')) {
-            require $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/') . 'imageplus.class.php';
-        }
-        $this->imageplus = new ImagePlus($this->modx);
+        $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
+        $imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+            'core_path' => $corePath
+        ));
 
         // Load required javascripts & register global config
-        $this->imageplus->includeScriptAssets();
+        $imageplus->includeScriptAssets();
 
         // Prepare tv config for jsonification
-        $tvConfig = $this->imageplus->loadTvConfig($this, $value, $params);
+        $tvConfig = $imageplus->loadTvConfig($this, $value, $params);
         $this->setPlaceholder('imageplusconfig', json_encode($tvConfig));
         $this->setPlaceholder('tvValue', $value);
 
@@ -89,7 +86,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
 
         $this->setPlaceholder('imgData', $this->getImageDataJSON($value, $params));
 
-        $this->setPlaceholder('config', json_encode($this->imageplus->config));
+        $this->setPlaceholder('config', json_encode($imageplus->options));
     }
 
     private function getImageDataJSON($value, $params)

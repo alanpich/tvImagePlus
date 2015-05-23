@@ -3,7 +3,7 @@
   "lowCaseName": "imageplus",
   "description": "Advanced Image template variable input type",
   "author": "Alan Pich",
-  "version": "2.3.0-rc3",
+  "version": "2.3.0-rc4",
   "package": {
     "elements": {
       "chunks": [

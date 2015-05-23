@@ -42,18 +42,14 @@ ImagePlus.window.Editor = function (config) {
         resizable: false,
         closeAction: 'close',
         listeners: {
-            'close': {
+            close: {
                 fn: this.onClose,
                 scope: this
             },
-            'success': {
+            success: {
                 fn: function () {
                     console.log('success')
                 }
-            },
-            'show': {
-                fn: this.onShow,
-                scope: this
             }
         },
         items: [{
@@ -169,21 +165,18 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
         var X = this.getInitialCropX();
         var Y = this.getInitialCropY();
         return [X, Y, (X + W), (Y + H)];
-    }
+    },
 
     /**
      * Handle window
-     */,
+     */
     onClose: function () {
         this.inputPanel.editorWindow = false;
     },
-    onShow: function () {
-        this.center.defer(150, this);
-    }//
 
     /**
      * Handle crop area change
-     */,
+     */
     onCropChange: function (data) {
         this.crop.height = Math.round(data.height / this.displayRatio);
         this.crop.width = Math.round(data.width / this.displayRatio);

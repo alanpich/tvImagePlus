@@ -17,25 +17,25 @@
  *
  */
 
-$path = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
-$imagePlus = $modx->getService('imageplus', 'ImagePlus', $path);
-
-$modx->lexicon->load('imageplus:default');
+$corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
+$imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+    'core_path' => $corePath
+));
 
 switch ($modx->event->name) {
     case 'OnTVInputRenderList':
-        $modx->event->output($path . 'elements/tv/input/');
+        $modx->event->output($corePath . 'elements/tv/input/');
         break;
     case 'OnTVOutputRenderList':
-        $modx->event->output($path . 'elements/tv/output/');
+        $modx->event->output($corePath . 'elements/tv/output/');
         break;
     case 'OnTVInputPropertiesList':
-        $modx->event->output($path . 'elements/tv/input/options/');
+        $modx->event->output($corePath . 'elements/tv/input/options/');
         break;
     case 'OnTVOutputRenderPropertiesList':
-        $modx->event->output($path . 'elements/tv/output/options/');
+        $modx->event->output($corePath . 'elements/tv/output/options/');
         break;
     case 'OnDocFormRender':
-        $imagePlus->includeScriptAssets();
+        $imageplus->includeScriptAssets();
         break;
 };

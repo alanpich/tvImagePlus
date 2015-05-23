@@ -1,12 +1,7 @@
 <div id="tv-output-properties-form{$tv}"></div>
 <script type="text/javascript">
     // <![CDATA[
-    var tvip_lex = {$imagepluslexicon};
     {literal}
-    for (var i in tvip_lex) {
-        MODx.lang[i] = tvip_lex[i];
-    }
-
     var params = {
         {/literal}{foreach from=$params key=k item=v name='p'}
         '{$k}': '{$v|escape:"javascript"}'{if NOT $smarty.foreach.p.last}, {/if}
@@ -28,16 +23,17 @@
         labelAlign: 'top',
         items: [{
             xtype: 'textfield',
-            fieldLabel: _('imageplus.phpThumbParams'),
+            fieldLabel: '{/literal}{$imageplus.phpThumbParams}{literal}',
             name: 'prop_phpThumbParams',
             id: 'prop_phpThumbParams{/literal}{$tv}{literal}',
             value: params['phpThumbParams'] || '',
+            anchors: '98%',
             width: '99%',
             listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'prop_phpThumbParams{/literal}{$tv}{literal}',
-            html: _('imageplus.phpThumbParams_desc'),
+            html: '{/literal}{$imageplus.phpThumbParams_desc}{literal}',
             cls: 'desc-under'
         }, {
             xtype: 'modx-combo',
@@ -51,29 +47,31 @@
             valueField: 'name',
             typeAhead: true,
             editable: true,
-            fieldLabel: _('imageplus.outputChunk'),
+            fieldLabel: '{/literal}{$imageplus.outputChunk}{literal}',
             name: 'prop_outputChunk',
             id: 'prop_outputChunk{/literal}{$tv}{literal}',
             value: params['outputChunk'] || '',
+            anchors: '98%',
             width: '99%',
             listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'prop_outputChunk{/literal}{$tv}{literal}',
-            html: _('imageplus.outputChunk_desc'),
+            html: '{/literal}{$imageplus.outputChunk_desc}{literal}',
             cls: 'desc-under'
         }, {
             xtype: 'combo-boolean',
-            fieldLabel: _('imageplus.generateUrl'),
+            fieldLabel: '{/literal}{$imageplus.generateUrl}{literal}',
             name: 'prop_generateUrl',
             id: 'prop_generateUrl{/literal}{$tv}{literal}',
             value: params['generateUrl'] || 1,
+            anchors: '98%',
             width: '99%',
             listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'prop_generateUrl{/literal}{$tv}{literal}',
-            html: _('imageplus.generateUrl_desc'),
+            html: '{/literal}{$imageplus.generateUrl_desc}{literal}',
             cls: 'desc-under'
         }],
         renderTo: 'tv-output-properties-form{/literal}{$tv}{literal}'

@@ -26,13 +26,15 @@ class ImagePlusOutputRender extends modTemplateVarOutputRender
 {
     public function process($value, array $params = array())
     {
-        // Load the imageplus library if its not already here
-        if (!class_exists('ImagePlus')) {
-            require_once $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/') . 'imageplus.class.php';
-        };
+        $this->modx->lexicon->load('imageplus:default');
 
-        $this->imageplus = new ImagePlus($this->modx);
-        return $this->imageplus->getImageURL($value, $params, $this->tv);
+        // Load imageplus class
+        $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
+        $imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+            'core_path' => $corePath
+        ));
+
+        return $imageplus->getImageURL($value, $params, $this->tv);
     }
 }
 

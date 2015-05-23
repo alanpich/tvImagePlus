@@ -26,47 +26,99 @@ use ImagePlus\CropEngines;
 
 class ImagePlus
 {
-
-    public $dataStr;
-
-    /** @var \modX */
+    /**
+     * A reference to the modX instance
+     * @var modX $modx
+     */
     public $modx;
 
-    public $config;
+    /**
+     * The namespace
+     * @var string $namespace
+     */
+    public $namespace = 'imageplus';
 
+    /**
+     * The version
+     * @var string $version
+     */
+    public $version = '2.3.0';
 
-    function __construct(modX &$modx)
+    /**
+     * The class options
+     * @var array $options
+     */
+    public $options = array();
+
+    /**
+     * ImagePlus constructor
+     *
+     * @param modX $modx A reference to the modX instance.
+     * @param array $options An array of options. Optional.
+     */
+    function __construct(modX &$modx, $options = array())
     {
-        $this->modx =& $modx;
-        $this->loadConfig();
-        $this->loadLexicon();
-        $this->loadSourceMap();
-        $this->checkDependencies();
+        $this->modx = &$modx;
+
+        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/delicart/');
+        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/delicart/');
+        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/delicart/');
+
+        // Load some default paths for easier management
+        $this->options = array_merge(array(
+            'namespace' => $this->namespace,
+            'version' => $this->version,
+            'assetsPath' => $assetsPath,
+            'assetsUrl' => $assetsUrl,
+            'cssUrl' => $assetsUrl . 'css/',
+            'jsUrl' => $assetsUrl . 'js/',
+            'imagesUrl' => $assetsUrl . 'images/',
+            'corePath' => $corePath,
+            'modelPath' => $corePath . 'model/',
+            'vendorPath' => $corePath . 'vendor/',
+            'chunksPath' => $corePath . 'elements/chunks/',
+            'pagesPath' => $corePath . 'elements/pages/',
+            'snippetsPath' => $corePath . 'elements/snippets/',
+            'pluginsPath' => $corePath . 'elements/plugins/',
+            'controllersPath' => $corePath . 'controllers/',
+            'processorsPath' => $corePath . 'processors/',
+            'templatesPath' => $corePath . 'templates/',
+            'configPath' => $corePath . 'config/',
+            'countryConfigPath' => $corePath . 'config/countries/',
+            'connectorUrl' => $assetsUrl . 'connector.php',
+        ), $options);
+
+        // set default options
+        $this->options = array_merge($this->options, array(
+            'sources' => $this->loadSourceMap(),
+            'has_unmet_dependencies' => $this->checkDependencies()
+        ));
+
+        $this->modx->lexicon->load('imageplus:default');
     }
 
     /**
-     * Load default configuration
+     * Get a local configuration option or a namespaced system setting by key.
+     *
+     * @param string $key The option key to search for.
+     * @param array $options An array of options that override local options.
+     * @param mixed $default The default value returned if the option is not found locally or as a
+     * namespaced system setting; by default this value is null.
+     * @return mixed The option value or the default value specified.
      */
-    private function loadConfig()
+    public function getOption($key, $options = array(), $default = null)
     {
-        $core = $this->modx->getOption(
-            'imageplus.core_path',
-            null,
-            $this->modx->getOption('core_path') . 'components/imageplus/'
-        );
-        $assets = $this->modx->getOption(
-            'imageplus.assets_url',
-            null,
-            $this->modx->getOption('assets_url') . 'components/imageplus/'
-        );
-
-        $this->config = array(
-            'core_path' => $core,
-            'assets_url' => $assets,
-            'connectorUrl' => $assets . 'mgr/connector.php',
-            'sources' => array(),
-            'has_unmet_dependencies' => false,
-        );
+        $option = $default;
+        if (!empty($key) && is_string($key)) {
+            if ($options != null && array_key_exists($key, $options)) {
+                $option = $options[$key];
+            } elseif (array_key_exists($key, $this->options)) {
+                $option = $this->options[$key];
+            } elseif (array_key_exists("{$this->namespace}.{$key}", $this->modx->config)) {
+                $option = $this->modx->getOption("{$this->namespace}.{$key}");
+            }
+        }
+        return $option;
     }
 
     /**
@@ -76,14 +128,14 @@ class ImagePlus
     {
         // Register a micro autoloader for in-house engines
         spl_autoload_register(function ($className) {
-            if (strpos($className, 'ImagePlus\\CropEngines\\') === false)
+            if (strpos($className, 'ImagePlus\\CropEngines\\') === false) {
                 return;
-
+            }
             $class = str_replace('ImagePlus\\CropEngines\\', '', $className);
-            $path = dirname(__FILE__) . '/lib/CropEngines/' . $class . '.php';
-            if (is_readable($path))
+            $path = realpath(dirname(__FILE__) . '/../cropengines/' . $class . '.php');
+            if (is_readable($path)) {
                 include $path;
-
+            }
         });
 
         // Do some basic intelligent sniffing
@@ -91,46 +143,27 @@ class ImagePlus
             && !CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)
         ) {
             // Handle unmet dependencies
-            $this->config['has_unmet_dependencies'] = true;
+            return true;
         }
-    }
-
-    /**
-     * Load the lexicon topic
-     *
-     * @todo Do it properly with MODx.lang _()
-     */
-    private function loadLexicon()
-    {
-        $lexicon = $this->modx->lexicon;
-        $modx = $this->modx;
-        $mgr_lang = $modx->getOption('manager_language');
-
-        $lexicon->load('imageplus');
-
-        if (in_array($mgr_lang, $lexicon->getLanguageList('imageplus'))) {
-            $lang = $mgr_lang;
-        } else {
-            $lang = 'en';
-        }
-
-        $this->config['lexicon'] = $lexicon->getFileTopic($lang, 'imageplus');
+        return false;
     }
 
     /**
      * Get a map of MediaSource id => baseUrl
      *
-     * @return void
+     * @return array
      */
     private function loadSourceMap()
     {
         $sources = $this->modx->getCollection('sources.modMediaSource');
+        $sourceMap = array();
         foreach ($sources as $source) {
             /** @var modMediaSource $source */
             $source->initialize();
-            $this->config['sources'][$source->get('id')] = new stdClass();
-            $this->config['sources'][$source->get('id')]->url = $source->getBaseUrl();
+            $sourceMap[$source->get('id')] = new stdClass();
+            $sourceMap[$source->get('id')]->url = $source->getBaseUrl();
         };
+        return $sourceMap;
     }
 
     /**
@@ -206,22 +239,21 @@ class ImagePlus
     {
         $vers = $this->modx->getVersionData();
         if ($vers['major_version'] >= 3) {
-            $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/imageplus.css');
+            $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus.css');
         } else {
-            $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/imageplus-22.css');
+            $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus-22.css');
         }
-        $this->modx->regClientCSS($this->config['assets_url'] . 'mgr/css/jquery/jquery.jcrop.min.css');
-        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.panel.input.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.window.editor.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.migx_renderer.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/tools/JSON2.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/jquery/jquery.min.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/jquery/jquery.jcrop.min.js');
-        $this->modx->regClientStartupScript($this->config['assets_url'] . 'mgr/js/imageplus.jquery.imagecrop.js');
+        $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/jquery/jquery.jcrop.min.css');
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.js');
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.panel.input.js');
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.window.editor.js');
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.migx_renderer.js');
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/tools/JSON2.js');
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.min.js');
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.jcrop.min.js');
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.jquery.imagecrop.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
-            . ' ImagePlus.config = ' . json_encode($this->config) . ';'
-            . ' for(i in ImagePlus.config.lexicon){ MODx.lang[i] = ImagePlus.config.lexicon[i] }'
+            . ' ImagePlus.config = ' . json_encode($this->options) . ';'
             . '</script>');
     }
 
@@ -255,8 +287,8 @@ class ImagePlus
 
         // Check crop engine is usable
         if (!$cropEngine->engineRequirementsMet($this->modx)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Image+ :: Requirements not met for Crop Engine [{$engineClass}]");
-            return 'IMAGE+ ERROR - requirements not met for crop engine';
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Requirements not met for crop engine [{$engineClass}]", '', 'Image+');
+            return 'Image+ error - requirements not met for crop engine';
         }
 
         return $cropEngine->getImageUrl($json, $opts, $tv);

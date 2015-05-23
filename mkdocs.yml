@@ -1,0 +1,17 @@
+site_name: Image+ Custom Template Variable
+docs_dir: core/components/imageplus/docs
+site_dir: _build/site
+
+repo_url: https://github.com/Jako/ImagePlus
+
+pages:
+- [index.md, Home]
+- [installation.md, Installation]
+- [getting-started.md, Getting Started]
+- [usage.md, Usage]
+- [contributors.md, Contributors]
+- [donate.md, Donate]
+
+theme: readthedocs
+
+markdown_extensions: [footnotes,tables]
