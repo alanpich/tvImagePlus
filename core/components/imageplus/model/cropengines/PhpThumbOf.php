@@ -85,11 +85,23 @@ class PhpThumbOf extends AbstractCropEngine
             'sw' => $data->crop->width,
             'sh' => $data->crop->height,
         );
-        $params = array_merge($cropParams, array(
-            'w' => $data->targetWidth,
-            'h' => $data->targetHeight,
-            'far' => true
-        ));
+        $params = array();
+        if ($data->targetWidth) {
+            $params = array_merge($params, array(
+                'w' => $data->targetWidth
+            ));
+        }
+        if ($data->targetHeight) {
+            $params = array_merge($params, array(
+                'h' => $data->targetHeight
+            ));
+        }
+        if ($data->targetWidth && $data->targetHeight) {
+            $params = array_merge($params, array(
+                'far' => true
+            ));
+        }
+        $params = array_merge($cropParams, $params);
 
         // Add phpThumbParams to phpthumbof snippet call arguments
         $phpThumbParams = $this->modx->getOption('phpThumbParams', $opts, '');
@@ -102,8 +114,12 @@ class PhpThumbOf extends AbstractCropEngine
                 };
             }
         };
-        $options = ($optParams) ? http_build_query(array_merge($cropParams, $optParams)) : http_build_query(array_merge($params, $optParams));
+        $optParams = ($optParams) ? array_merge($cropParams, $optParams) : array_merge($params, $optParams);
+        $options = http_build_query($optParams);
         $cropOptions = http_build_query($cropParams);
+
+        $data->targetWidth = isset($optParams['w']) ? $optParams['w'] : 0;
+        $data->targetHeight = isset($optParams['h']) ? $optParams['h'] : 0;
 
         // Call phpthumbof for url
         $generateUrl = $this->modx->getOption('generateUrl', $opts, 1);

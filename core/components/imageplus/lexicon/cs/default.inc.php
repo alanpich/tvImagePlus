@@ -29,8 +29,8 @@ $_lang['imageplus.generateUrl_desc'] = '(Optional) The thumb url is maybe not ne
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'URL of the thumbnail image';
 $_lang['imageplus.placeholder.alt'] = 'Alt text';
-$_lang['imageplus.placeholder.width'] = 'Width of the thumbnail image';
-$_lang['imageplus.placeholder.height'] = 'Height of the thumbnail image';
+$_lang['imageplus.placeholder.width'] = 'Width of the thumbnail image (ignored when 0) (ignored when 0)';
+$_lang['imageplus.placeholder.height'] = 'Height of the thumbnail image (ignored when 0)';
 $_lang['imageplus.placeholder.source.src'] = 'Path to the source image';
 $_lang['imageplus.placeholder.source.width'] = 'Width of the source image';
 $_lang['imageplus.placeholder.source.height'] = 'Height of the source image';

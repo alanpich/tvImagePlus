@@ -80,6 +80,20 @@ type | Type of the snippet output. Could be set to `check` [^1], `tpl` [^2] and 
 options | Extended phpThumb options for the image [^4]
 tpl | Template chunk for the snippet output [^5]
 
+**Example**
+
+```
+[[ImagePlus? 
+&tvname=`imageplus` 
+&docid=`1`
+&options=`w=100` 
+&type=`tpl` 
+&tpl=`ImagePlus.demo`
+]]
+```
+
+Will output the content of the template variable with the name *imageplus* of resource *1* and the extended phpThumb option *&w=100* (width: 100px) in the parsed *ImagePlus.demo* chunk.
+
 [^1]: Outputs *image* if the Image+ TV contains an image, otherwise *noimage*.
 [^2]: Outputs the parsed template set by **tpl** property for retreived Image+ TV value (with additional options set by the **options** property) 
 [^3]: Outputs the thumbnail URL for retreived Image+ TV value (with additional options set by the **options** property)

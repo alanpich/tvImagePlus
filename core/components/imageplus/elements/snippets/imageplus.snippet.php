@@ -39,10 +39,10 @@ if ($tv) {
             $output = ($data->sourceImg->src) ? 'image' : 'noimage';
             break;
         case 'tpl':
-            $output = ($data->sourceImg->src) ? $modx->getChunk($tpl, array(
-                'url' => $imagePlus->getImageURL($value, array('phpThumbParams' => $options), $tv),
-                'alt' => $data->altTag
-            )) : '';
+            $output = ($data->sourceImg->src) ? $imagePlus->getImageURL($value, array(
+                'phpThumbParams' => $options,
+                'outputChunk' => $tpl
+            ), $tv) : '';
             break;
         case 'thumb':
         default:
