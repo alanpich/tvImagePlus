@@ -60,9 +60,9 @@ class ImagePlus
     {
         $this->modx = &$modx;
 
-        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/delicart/');
-        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/delicart/');
-        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/delicart/');
+        $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path') . 'components/imageplus/');
+        $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path') . 'components/imageplus/');
+        $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/imageplus/');
 
         // Load some default paths for easier management
         $this->options = array_merge(array(
