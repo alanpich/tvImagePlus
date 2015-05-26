@@ -179,7 +179,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
      * Fired when user has selected an image from the browser
      */
     onImageSelected: function (img) {
-        var diffImg = (!this.imageplus.sourceImg || this.imageplus.sourceImg && this.imageplus.sourceImg.src != img.relativeUrl);
+        var diffImg = (!this.imageplus.sourceImg || (this.imageplus.sourceImg && this.imageplus.sourceImg.src != img.relativeUrl));
 
         this.oldSourceImg = {};
         for (var i in this.imageplus.sourceImg) {
@@ -215,12 +215,12 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         //  so need to get size manually
         if (img.image_width >= 800 || img.image_height >= 600) {
             this.manualGetImageSize();
-        } else {
-            // Update display
-            this.updateDisplay();
-            if (diffImg) {
-                this.editImage();
-            }
+        }
+
+        // Update display
+        this.updateDisplay();
+        if (diffImg) {
+            this.editImage();
         }
     },
 
