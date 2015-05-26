@@ -38,5 +38,5 @@ $_lang['imageplus.placeholder.crop.width'] = 'Crop width of the source image';
 $_lang['imageplus.placeholder.crop.height'] = 'Crop height of the source image';
 $_lang['imageplus.placeholder.crop.x'] = 'Crop x position of the source image';
 $_lang['imageplus.placeholder.crop.y'] = 'Crop y position of the source image';
-$_lang['imageplus.placeholder.options'] = 'Crop engine full option string to generate the thumbnail image';
-$_lang['imageplus.placeholder.crop.options'] = 'Crop engine crop option string to generate the thumbnail image';
+$_lang['imageplus.placeholder.options'] = 'phpThumb option string to generate the thumbnail image';
+$_lang['imageplus.placeholder.crop.options'] = 'phpThumb crop option string to generate the thumbnail image';

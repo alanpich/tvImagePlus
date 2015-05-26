@@ -24,7 +24,7 @@ $_lang['imageplus.phpThumbParams_desc'] = 'További filterek stb hozzáadása a 
 $_lang['imageplus.outputChunk'] = 'Kimeneti chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Válassz ki egy chunk-ot amibe a kimeneteli TV-ket használhatod majd. Hagyd üresen a nyers output-ért';
 $_lang['imageplus.generateUrl'] = 'Generate Thumb URL';
-$_lang['imageplus.generateUrl_desc'] = '(Optional) The thumb url is maybe not necessary, if you generate the thumbnail in output chunk i.e. by the phpthumbof output filter.';
+$_lang['imageplus.generateUrl_desc'] = '(Optional) The thumb url is maybe not necessary, if you generate the thumbnail in output chunk i.e. by a pthumb output filter.';
 
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'URL of the thumbnail image';
@@ -38,5 +38,5 @@ $_lang['imageplus.placeholder.crop.width'] = 'Crop width of the source image';
 $_lang['imageplus.placeholder.crop.height'] = 'Crop height of the source image';
 $_lang['imageplus.placeholder.crop.x'] = 'Crop x position of the source image';
 $_lang['imageplus.placeholder.crop.y'] = 'Crop y position of the source image';
-$_lang['imageplus.placeholder.options'] = 'Crop engine full option string to generate the thumbnail image';
-$_lang['imageplus.placeholder.crop.options'] = 'Crop engine crop option string to generate the thumbnail image';
+$_lang['imageplus.placeholder.options'] = 'phpThumb option string to generate the thumbnail image';
+$_lang['imageplus.placeholder.crop.options'] = 'phpThumb crop option string to generate the thumbnail image';
