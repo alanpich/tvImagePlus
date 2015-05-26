@@ -197,8 +197,18 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         if (diffImg) {
             this.imageplus.crop.x = 0;
             this.imageplus.crop.y = 0;
-            this.imageplus.crop.width = this.imageplus.targetWidth || this.imageplus.sourceImg.width;
-            this.imageplus.crop.height = this.imageplus.targetHeight || this.imageplus.sourceImg.height;
+            if (this.imageplus.targetRatio) {
+                if (this.imageplus.sourceImg.width / this.imageplus.sourceImg.height < this.imageplus.targetRatio) {
+                    this.imageplus.crop.width = this.imageplus.sourceImg.width;
+                    this.imageplus.crop.height = this.imageplus.sourceImg.height / this.imageplus.targetRatio;
+                } else {
+                    this.imageplus.crop.width = this.imageplus.sourceImg.width / this.imageplus.targetRatio;
+                    this.imageplus.crop.height = this.imageplus.sourceImg.height;
+                }
+            } else {
+                this.imageplus.crop.width = this.imageplus.sourceImg.width;
+                this.imageplus.crop.height = this.imageplus.sourceImg.height;
+            }
         }
 
         // If server returns 800x600 or higher, image may be larger
