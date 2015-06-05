@@ -96,7 +96,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         $data = new stdClass;
 
         // Grab MediaSource info
-        $source = $this->modx->getObject('modMediaSource', $this->tv->get('source'));
+        $source = $this->modx->getObject('modMediaSource', ($this->tv->get('source')) ? $this->tv->get('source') : $this->modx->getOption('default_media_source'));
         $properties = $source->getProperties();
         $data->mediasource = new stdClass;
         $data->mediasource->id = $source->get('id');
