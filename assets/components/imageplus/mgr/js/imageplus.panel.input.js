@@ -218,7 +218,9 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         }
 
         // Update display
-        this.updateDisplay();
+        if (!this.updateDisplay()) {
+            return;
+        }
         if (diffImg) {
             this.editImage();
         }
@@ -272,7 +274,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 this.imageBrowser.setValue(this.lastFileLabel || '');
             }
             MODx.msg.alert("Image too small", "The selected image is too small to be used here. Please select a different image");
-            return;
+            return false;
         }
         this.lastFileLabel = this.imageplus.sourceImg.src;
 
