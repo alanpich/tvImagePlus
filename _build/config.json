@@ -3,7 +3,7 @@
   "lowCaseName": "imageplus",
   "description": "Advanced Image template variable input type",
   "author": "Thomas Jakobi",
-  "version": "2.3.0-pl2",
+  "version": "2.3.1",
   "package": {
     "elements": {
       "chunks": [
