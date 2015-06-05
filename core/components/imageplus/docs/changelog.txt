@@ -1,7 +1,12 @@
 Changelog
 ================================================================================
 
-- 2.3.x
+- 2.3.1
+    - Use default_media_source if the media source of the TV is not set (i.e. if it used in a MIGX configuration)
+    - Enable property sets for the ImagePlus Snippet
+    - Don't show the crop window if the image size is invalid
+
+- 2.3.0
     - MODX 2.3 compatibility
     - Inline Trigger fields
     - Bugfix for fireResourceFormChange issue
