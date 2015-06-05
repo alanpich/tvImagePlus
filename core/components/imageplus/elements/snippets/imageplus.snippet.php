@@ -15,11 +15,11 @@ $imagePlus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imag
     'core_path' => $corePath
 ));
 
-$tvname = $modx->getOption('tvname', $scriptProperties, '');
-$docid = $modx->getOption('docid', $scriptProperties, $modx->resource->get('id'));
-$type = $modx->getOption('type', $scriptProperties, '');
-$options = $modx->getOption('options', $scriptProperties, '');
-$tpl = $modx->getOption('tpl', $scriptProperties, 'ImagePlus.image');
+$tvname = $modx->getOption('tvname', $scriptProperties, '', true);
+$docid = $modx->getOption('docid', $scriptProperties, $modx->resource->get('id'), true);
+$type = $modx->getOption('type', $scriptProperties, '', true);
+$options = $modx->getOption('options', $scriptProperties, '', true);
+$tpl = $modx->getOption('tpl', $scriptProperties, 'ImagePlus.image', true);
 
 $tv = $modx->getObject('modTemplateVar', array('name' => $tvname));
 if ($tv) {

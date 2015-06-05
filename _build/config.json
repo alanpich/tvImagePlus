@@ -36,7 +36,29 @@
         {
           "name": "ImagePlus",
           "file": "imageplus.snippet.php",
-          "description": "Snippet as alternative to Image+ TV Output Type"
+          "description": "Snippet as alternative to Image+ TV Output Type",
+          "properties": [
+            {
+              "name": "tvname",
+              "value": ""
+            },
+            {
+              "name": "docid",
+              "value": ""
+            },
+            {
+              "name": "type",
+              "value": ""
+            },
+            {
+              "name": "options",
+              "value": ""
+            },
+            {
+              "name": "tpl",
+              "value": "ImagePlus.image"
+            }
+          ]
         }
       ]
     }
