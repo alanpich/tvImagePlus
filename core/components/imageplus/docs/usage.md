@@ -72,13 +72,13 @@ The Snippet gives you a second option to render the TV value. With the template 
 restricted to one output size per template variable, with the snippet you could generate several sizes. The following 
 properties could be set in the snippet call:
 
-Property | Description
-------------|------------
-tvname | Name of the Image+ TV
-docid | Resource where the Image+ TV value is received from
-type | Type of the snippet output. Could be set to `check` [^1], `tpl` [^2] and `thumb` [^3]
-options | Extended phpThumb options for the image [^4]
-tpl | Template chunk for the snippet output [^5]
+Property | Description | Default
+---------|-------------|--------
+tvname | Name of the Image+ TV | -
+docid | Resource where the Image+ TV value is received from | Current resource
+type | Type of the snippet output. Could be set to `check` [^1], `tpl` [^2] and `thumb` [^3] | thumb
+options | Extended phpThumb options for the image [^4] | -
+tpl | Template chunk for the snippet output [^5] | ImagePlus.image
 
 **Example**
 
