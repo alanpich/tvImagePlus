@@ -13,6 +13,8 @@ Many thanks to everyone else who has contributed to this project:
 * [@KristianP](https://github.com/KristianP)
 * [@silentworks](https://github.com/silentworks)
 * Nico Telfer
+* [@bartholomej](https://github.com/bartholomej)
+* [@Mark-H](https://github.com/Mark-H)
 
 <!-- Piwik -->
 <script type="text/javascript">

@@ -20,19 +20,32 @@ $docid = $modx->getOption('docid', $scriptProperties, $modx->resource->get('id')
 $type = $modx->getOption('type', $scriptProperties, '', true);
 $options = $modx->getOption('options', $scriptProperties, '', true);
 $tpl = $modx->getOption('tpl', $scriptProperties, 'ImagePlus.image', true);
+$value = $modx->getOption('value', $scriptProperties, '', true);
 
-$tv = $modx->getObject('modTemplateVar', array('name' => $tvname));
-if ($tv) {
-    // Get the raw content of the TV
-    $value = $tv->getValue($docid);
-
-    // Attempt to decode the input value as json
+if ($value) {
+    // Attempt to decode the value as json
     $data = json_decode($value);
-    if (is_null($data)) {
-        $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Unable to decode json - are you sure this is an Image+ TV?");
-        return '';
+    if (!$data) {
+        $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Unable to decode the value");
     }
+} else {
+    $tv = $modx->getObject('modTemplateVar', array('name' => $tvname));
+    if ($tv) {
+        // Get the raw content of the TV
+        $value = $tv->getValue($docid);
 
+        // Attempt to decode the input value as json
+        $data = json_decode($value);
+        if (!$data) {
+            $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Unable to decode json - are you sure this is an Image+ TV?");
+        }
+    } else {
+        $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Template Variable '{$tvname}' not found.");
+    }
+}
+
+$output = '';
+if ($data) {
     // Render output
     switch ($type) {
         case 'check':
@@ -46,11 +59,10 @@ if ($tv) {
             break;
         case 'thumb':
         default:
-            $output = $imagePlus->getImageURL($value, array('phpThumbParams' => $options), $tv);
+            $output = $imagePlus->getImageURL($value, array(
+                'phpThumbParams' => $options), $tv
+            );
             break;
     }
-} else {
-    $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Template Variable '{$tvname}' not found.");
-    $output = '';
 }
 return $output;

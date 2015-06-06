@@ -1,6 +1,9 @@
 Changelog
 ================================================================================
 
+- 2.3.2
+    - Added 'value' parameter.
+
 - 2.3.1
     - Use default_media_source if the media source of the TV is not set (i.e. if it used in a MIGX configuration)
     - Enable property sets for the ImagePlus Snippet
