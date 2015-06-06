@@ -74,11 +74,12 @@ properties could be set in the snippet call:
 
 Property | Description | Default
 ---------|-------------|--------
-tvname | Name of the Image+ TV | -
-docid | Resource where the Image+ TV value is received from | Current resource
-type | Type of the snippet output. Could be set to `check` [^1], `tpl` [^2] and `thumb` [^3] | thumb
-options | Extended phpThumb options for the image [^4] | -
-tpl | Template chunk for the snippet output [^5] | ImagePlus.image
+tvname | Name of the Image+ TV. | -
+docid | Resource where the Image+ TV value is received from. | Current resource
+type | Type of the snippet output. Could be set to `check` [^1], `tpl` [^2] and `thumb` [^3]. | thumb
+options | Extended phpThumb options for the image [^4]. | -
+tpl | Template chunk for the snippet output [^5]. | ImagePlus.image
+value | Use your own JSON encoded value for the snippet output. The properties `tvname` and `docid` are ignored. | -
 
 **Example**
 
