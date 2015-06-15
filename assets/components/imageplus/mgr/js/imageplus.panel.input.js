@@ -344,12 +344,15 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             var imgW = this.imageplus.sourceImg.width;
             var imgH = this.imageplus.sourceImg.height;
             var maxH = window.innerHeight * 0.7;
-            var maxW = window.innerWidth * 0.7;
+            var maxW = window.innerWidth * 0.9;
             var ratio;
 
             // Is image taller than screen?
             if (imgH > maxH) {
                 ratio = maxH / imgH
+                if ((imgW*ratio) > maxW) {
+                    ratio = maxW / imgW
+                }
             } else {
                 if (imgW > maxW) {
                     ratio = maxW / imgW
