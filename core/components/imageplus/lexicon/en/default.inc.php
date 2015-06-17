@@ -5,17 +5,18 @@ $_lang['imageplus'] = "Image+";
 
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Edit Image';
+$_lang['imageplus.alt_text'] = 'Alt text';
 
 /** Input options render **/
-$_lang['imageplus.targetwidth'] = 'Target Width';
+$_lang['imageplus.targetwidth'] = 'Target (Minimal) Width';
 $_lang['imageplus.targetwidth_desc'] = '(Optional) The target width for the output image. The uploaded image should have this minimal width.';
-$_lang['imageplus.targetheight'] = 'Target Height';
+$_lang['imageplus.targetheight'] = 'Target (Minimal) Height';
 $_lang['imageplus.targetheight_desc'] = '(Optional) The target height for the output image. The uploaded image should have this minimal height.';
 $_lang['imageplus.targetRatio'] = 'Target Aspect Ratio';
-$_lang['imageplus.targetRatio_desc'] = '(Optional) The target aspect ratio for the output image. If the target height and the targed width are set, this value is ignored.';
+$_lang['imageplus.targetRatio_desc'] = '(Optional) The target aspect ratio for the output image as float value. If the target height and the targed width are set, this value is ignored.';
 $_lang['imageplus.thumbnailWidth'] = 'Thumbnail Width';
 $_lang['imageplus.thumbnailWidth_desc'] = '(Optional) The thumbnail width of the image in the template variable panel.';
-$_lang['imageplus.allowAltTag'] = 'Alt Tag Field';
+$_lang['imageplus.allowAltTag'] = 'Show Alt Tag Field';
 $_lang['imageplus.allowAltTag_desc'] = 'Allow user to enter a title/alt-tag for the image.';
 
 /** Output options render **/

@@ -5,6 +5,7 @@ $_lang['imageplus'] = "Image+";
 
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Edita la imagen';
+$_lang['imageplus.alt_text'] = 'Alt text';
 
 /** Input options render **/
 $_lang['imageplus.targetwidth'] = 'Ancho de la imagen';

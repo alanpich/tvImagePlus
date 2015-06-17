@@ -5,6 +5,7 @@ $_lang['imageplus'] = "Image+";
 
 $_lang['imageplus.editor_title'] = 'Image+ Szerkesztő';
 $_lang['imageplus.edit_image'] = 'Kép szerkesztése';
+$_lang['imageplus.alt_text'] = 'Alt text';
 
 /** Input options render **/
 $_lang['imageplus.targetwidth'] = 'Új szélesség';

@@ -5,6 +5,7 @@ $_lang['imageplus'] = "Image+";
 
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Bild bearbeiten';
+$_lang['imageplus.alt_text'] = 'Alt-Text';
 
 /** Input options render **/
 $_lang['imageplus.targetwidth'] = 'Ausgabebreite';
@@ -16,7 +17,7 @@ $_lang['imageplus.targetRatio_desc'] = '(Optional) Gibt das Seitenverhältnis de
 $_lang['imageplus.thumbnailWidth'] = 'Breite des Thumbnails';
 $_lang['imageplus.thumbnailWidth_desc'] = '(Optional) Breite des Thumbnails im Template Variablen Bereich.';
 $_lang['imageplus.allowAltTag'] = 'Alternatives Textfeld anzeigen';
-$_lang['imageplus.allowAltTag_desc'] = 'Ermöglicht die Eingabe eines Alt oder Title Tag für das Bild.';
+$_lang['imageplus.allowAltTag_desc'] = 'Ermöglicht die Eingabe eines Alt oder Title-Attributes für das Bild.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Zursätzliche phpThumb Parameter';
@@ -28,7 +29,7 @@ $_lang['imageplus.generateUrl_desc'] = '(Optional) Die Thumbnail URL eventuell w
 
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'Thumbnail URL';
-$_lang['imageplus.placeholder.alt'] = 'Alt Text';
+$_lang['imageplus.placeholder.alt'] = 'Alt-Text';
 $_lang['imageplus.placeholder.width'] = 'Breite des Thumbnails (wird ignoriert, wenn 0)';
 $_lang['imageplus.placeholder.height'] = 'Höhe des Thumbnails (wird ignoriert, wenn 0)';
 $_lang['imageplus.placeholder.source.src'] = 'Server-Pfad zum Originalbild';
