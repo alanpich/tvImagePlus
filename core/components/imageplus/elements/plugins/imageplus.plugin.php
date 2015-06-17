@@ -2,19 +2,16 @@
 /**
  * Image+ runtime hooks - registers custom TV input & output types
  * and includes javascripts on document edit pages so that the TV
- * can be used from within MIGX
+ * can be used from within other extras (i.e. MIGX, Collections)
  *
- * @plugin  ImagePlusRouter
  * @package imageplus
- * @locked
+ * @subpackage plugin
  *
  * @event   OnTVInputRenderList
  * @event   OnTVOutputRenderList
  * @event   OnTVInputPropertiesList
- * @event   OnTVOutputPropertiesList
  * @event   OnTVOutputRenderPropertiesList
  * @event   OnDocFormRender
- *
  */
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');

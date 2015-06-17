@@ -24,6 +24,7 @@
         items: [{
             xtype: 'textfield',
             fieldLabel: '{/literal}{$imageplus.phpThumbParams}{literal}',
+            description: MODx.expandHelp ? '' : '{/literal}{$imageplus.phpThumbParams_desc}{literal}',
             name: 'prop_phpThumbParams',
             id: 'prop_phpThumbParams{/literal}{$tv}{literal}',
             value: params['phpThumbParams'] || '',
@@ -48,6 +49,7 @@
             typeAhead: true,
             editable: true,
             fieldLabel: '{/literal}{$imageplus.outputChunk}{literal}',
+            description: MODx.expandHelp ? '' : '{/literal}{$imageplus.outputChunk_desc}{literal}',
             name: 'prop_outputChunk',
             id: 'prop_outputChunk{/literal}{$tv}{literal}',
             value: params['outputChunk'] || '',
@@ -62,6 +64,7 @@
         }, {
             xtype: 'combo-boolean',
             fieldLabel: '{/literal}{$imageplus.generateUrl}{literal}',
+            description: MODx.expandHelp ? '' : '{/literal}{$imageplus.generateUrl_desc}{literal}',
             name: 'prop_generateUrl',
             id: 'prop_generateUrl{/literal}{$tv}{literal}',
             value: params['generateUrl'] || 1,

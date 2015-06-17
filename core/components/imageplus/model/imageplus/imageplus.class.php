@@ -83,8 +83,6 @@ class ImagePlus
             'controllersPath' => $corePath . 'controllers/',
             'processorsPath' => $corePath . 'processors/',
             'templatesPath' => $corePath . 'templates/',
-            'configPath' => $corePath . 'config/',
-            'countryConfigPath' => $corePath . 'config/countries/',
             'connectorUrl' => $assetsUrl . 'connector.php',
         ), $options);
 

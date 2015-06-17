@@ -6,7 +6,8 @@
             xtype: 'imageplus-panel-input',
             renderTo: 'imageplus-panel-input-div-{$tv->id}',
             imageplus: {$imageplusconfig},
-            hiddenField: 'tv{$tv->id}',{literal}
+            lexicon: {$lexicon},
+            hiddenField: 'tv{$tv->id}'{literal}
         });
     });{/literal}
     $.merge(ImagePlus.config, {$config});

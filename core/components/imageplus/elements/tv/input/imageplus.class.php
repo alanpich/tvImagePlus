@@ -26,7 +26,8 @@ class ImagePlusInputRender extends modTemplateVarInputRender
 {
     public function getTemplate()
     {
-        return dirname(__FILE__) . '/tpl/imageplus.inputrender.tpl';
+        $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
+        return $corePath . 'elements/tv/input/tpl/imageplus.render.tpl';
     }
 
     public function getLexiconTopics()
@@ -38,10 +39,10 @@ class ImagePlusInputRender extends modTemplateVarInputRender
     // that does not allow a floatval in the input options
     public function render($value, array $params = array())
     {
-        $this->setPlaceholder('tv',$this->tv);
-        $this->setPlaceholder('id',$this->tv->get('id'));
-        $this->setPlaceholder('ctx',isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');
-        $this->setPlaceholder('params',$params);
+        $this->setPlaceholder('tv', $this->tv);
+        $this->setPlaceholder('id', $this->tv->get('id'));
+        $this->setPlaceholder('ctx', isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');
+        $this->setPlaceholder('params', $params);
 
         if (!empty($params)) {
             foreach ($params as $k => $v) {
@@ -49,7 +50,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
                     $params[$k] = TRUE;
                 } elseif ($v === 'false') {
                     $params[$k] = FALSE;
-                } elseif (is_numeric($v) && ((int) $v == $v)) {
+                } elseif (is_numeric($v) && ((int)$v == $v)) {
                     $params[$k] = intval($v);
                 } elseif (is_numeric($v)) {
                     $params[$k] = (float)($v);
@@ -83,6 +84,8 @@ class ImagePlusInputRender extends modTemplateVarInputRender
 
         $this->setPlaceholder('mediasource', $this->tv->get('source'));
         $this->setPlaceholder('tvparams', json_encode($this->getInputOptions()));
+
+        $this->setPlaceholder('lexicon', json_encode($this->modx->lexicon->fetch('imageplus.', true)));
 
         $this->setPlaceholder('imgData', $this->getImageDataJSON($value, $params));
 

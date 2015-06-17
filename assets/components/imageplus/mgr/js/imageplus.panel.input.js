@@ -128,6 +128,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
      * Create field for alt-text input
      */
     createAltTextField: function () {
+        var _this = this;
         this.altTextField = MODx.load({
             xtype: this.imageplus.altTagOn ? 'textfield' : 'hidden',
             value: this.imageplus.altTag || '',
@@ -135,12 +136,22 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 'change': {
                     fn: this.onAltTagChange,
                     scope: this
+                },
+                'afterrender': function () {
+                    var el = this.getEl();
+                    if (el) {
+                        el.set({'placeholder': _this.lexicon.alt_text});
+                    }
                 }
             }, width: 400, style: {
                 marginBottom: '5px'
             }
         })
     },
+    /**
+     * Fires when the TV field is reset
+     */
+
     generateThumbUrl: function (params) {
         var url = MODx.config.connectors_url + 'system/phpthumb.php?imageplus=1';
         var defaults = {
@@ -350,7 +361,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             // Is image taller than screen?
             if (imgH > maxH) {
                 ratio = maxH / imgH
-                if ((imgW*ratio) > maxW) {
+                if ((imgW * ratio) > maxW) {
                     ratio = maxW / imgW
                 }
             } else {
@@ -363,7 +374,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
 
             this.editorWindow = MODx.load({
                 xtype: 'imageplus-window-editor',
-                title: _('imageplus.editor_title'),
+                title: this.lexicon.editor_title,
                 imageplus: this.imageplus,
                 inputPanel: this,
                 displayRatio: ratio,
