@@ -81,6 +81,7 @@
             xtype: 'combo-boolean',
             fieldLabel: '{/literal}{$imageplus.allowAltTag}{literal}',
             name: 'inopt_allowAltTag',
+            hiddenName: 'inopt_allowAltTag',
             id: 'inopt_allowAltTag{/literal}{$tv}{literal}',
             value: (params['allowAltTag'] || false),
             labelAlign: 'left',

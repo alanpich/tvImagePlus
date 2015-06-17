@@ -194,7 +194,7 @@ class ImagePlus
         $vers = $this->modx->getVersionData();
         $data->thumbnailWidth = (isset($params['thumbnailWidth']) && intval($params['thumbnailWidth'])) ? intval($params['thumbnailWidth']) : (($vers['major_version'] >= 3) ? 400 : 150);
         // Alt-tag options
-        $data->altTagOn = (isset($params['allowAltTag']) && $params['allowAltTag'] == 'Yes');
+        $data->altTagOn = (isset($params['allowAltTag']) && $params['allowAltTag']);
 
         $saved = empty($value) ? null : json_decode($value);
         if (is_null($saved)) {
