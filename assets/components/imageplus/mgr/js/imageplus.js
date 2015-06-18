@@ -38,8 +38,6 @@ Ext.extend(imagePlus, Ext.Component, {
         var url = MODx.config.connectors_url + 'system/phpthumb.php?imageplus=1';
         var defaults = {
             wctx: 'mgr',
-            f: 'png',
-            q: 90,
             w: 150,
             source: 1
         };
