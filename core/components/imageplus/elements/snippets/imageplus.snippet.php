@@ -27,6 +27,7 @@ if ($value) {
     $data = json_decode($value);
     if (!$data) {
         $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Unable to decode the value");
+        $data = json_decode('{"sourceImg":{"src":""}}');
     }
 } else {
     $tv = $modx->getObject('modTemplateVar', array('name' => $tvname));
@@ -38,6 +39,7 @@ if ($value) {
         $data = json_decode($value);
         if (!$data) {
             $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Unable to decode json - are you sure this is an Image+ TV?");
+            $data = json_decode('{"sourceImg":{"src":""}}');
         }
     } else {
         $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Template Variable '{$tvname}' not found.");
@@ -45,24 +47,22 @@ if ($value) {
 }
 
 $output = '';
-if ($data) {
-    // Render output
-    switch ($type) {
-        case 'check':
-            $output = ($data->sourceImg->src) ? 'image' : 'noimage';
-            break;
-        case 'tpl':
-            $output = ($data->sourceImg->src) ? $imagePlus->getImageURL($value, array(
-                'phpThumbParams' => $options,
-                'outputChunk' => $tpl
-            ), $tv) : '';
-            break;
-        case 'thumb':
-        default:
-            $output = $imagePlus->getImageURL($value, array(
-                'phpThumbParams' => $options), $tv
-            );
-            break;
-    }
+// Render output
+switch ($type) {
+    case 'check':
+        $output = ($data->sourceImg->src) ? 'image' : 'noimage';
+        break;
+    case 'tpl':
+        $output = ($data->sourceImg->src) ? $imagePlus->getImageURL($value, array(
+            'phpThumbParams' => $options,
+            'outputChunk' => $tpl
+        ), $tv) : '';
+        break;
+    case 'thumb':
+    default:
+        $output = ($data->sourceImg->src) ? $imagePlus->getImageURL($value, array(
+            'phpThumbParams' => $options
+        ), $tv) : '';
+        break;
 }
 return $output;
