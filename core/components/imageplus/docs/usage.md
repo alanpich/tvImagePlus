@@ -6,23 +6,25 @@ options available for of an *Image+* TV:
 **Target Height/Width**
 
 Images can be constrained to a minimal height and/or width with **Target height** and **Target width**. If both values 
-are set, the target aspect ratio of the output image is calculated with this values.
+are set, the target aspect ratio of the output image is calculated with this values. Both fields have to be filled with 
+an integer value.
 
 **Target Aspect Ratio**
  
 The aspect ratio for the output image could be restricted with **Target Aspect Ratio**. If target height and target 
-width are set, this value is ignored and the calculated aspect ratio of target height and target width is used.
+width are set, this value is ignored and the calculated aspect ratio of target height and target width is used. 
+The field has to be filled with an integer value.
  
 If you set only one value of **Target Height** or **Target Width** and leave empty **Target Aspect Ratio**, the size of 
 the crop is not restricted to any aspect ratio.
 
-**Alt Tag Field**
+**Show Alt Tag Field**
 
 *Image+* TVs can also contain an **Alt Tag Field**, which is an additional text input, that is stored with each image. 
 It could be output alongside the image i.e. as an alt-tag or title-tag.
 
-In order to outpt the alt text in a *Image+* TV placeholder, you will need to select an chunk in the **Output Options**. 
-You could also use the ImagePlus snippet and specify a template chunk in the snippet call options.
+In order to outpt the alt text in a *Image+* TV placeholder, you will need to select an chunk in the **Output 
+Options**. You could also use the ImagePlus snippet and specify a template chunk in the snippet call options.
 
 **Allow Empty**
 
@@ -36,7 +38,7 @@ There are several extended output options available for of an *Image+* TV:
 **Additional phpThumb Parameters**
 
 As default an *Image+* TV returns an relative URL to an cropped (and maybe constrained) image that is scaled by 
-phpThumb. With this output option, you could assign several additional phpThumb parameters that are used to generate 
+phpThumb. With this output option, you could assign several additional phpThumb parameters, that are used to generate 
 the thumbnail image.
 
 **Output Chunk**
