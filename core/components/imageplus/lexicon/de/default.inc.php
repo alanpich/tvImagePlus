@@ -9,13 +9,13 @@ $_lang['imageplus.alt_text'] = 'Alt-Text';
 
 /** Input options render **/
 $_lang['imageplus.targetwidth'] = 'Ausgabebreite';
-$_lang['imageplus.targetwidth_desc'] = '(Optional) Gibt die Ausgabebreite des Bildes an. Das hochgeladene Bild muss mindestens diese Breite haben.';
+$_lang['imageplus.targetwidth_desc'] = '(Optional, Integer) Gibt die Ausgabebreite des Bildes an. Das hochgeladene Bild muss mindestens diese Breite haben.';
 $_lang['imageplus.targetheight'] = 'Ausgabehöhe';
-$_lang['imageplus.targetheight_desc'] = '(Optional) Gibt die Ausgabehöhe des Bildes an. Das hochgeladene Bild muss mindestens diese Höhe haben.';
+$_lang['imageplus.targetheight_desc'] = '(Optional, Integer) Gibt die Ausgabehöhe des Bildes an. Das hochgeladene Bild muss mindestens diese Höhe haben.';
 $_lang['imageplus.targetRatio'] = 'Ausgabe-Seitenverhältnis';
-$_lang['imageplus.targetRatio_desc'] = '(Optional) Gibt das Seitenverhältnis des Bildes an. Wenn die Ausgabebreite und die Ausgabehöhe des Bildes angegeben sind, wird dieser Wert ignoriert.';
+$_lang['imageplus.targetRatio_desc'] = '(Optional, Float) Gibt das Seitenverhältnis des Bildes an. Wenn die Ausgabebreite und die Ausgabehöhe des Bildes angegeben sind, wird dieser Wert ignoriert.';
 $_lang['imageplus.thumbnailWidth'] = 'Breite des Thumbnails';
-$_lang['imageplus.thumbnailWidth_desc'] = '(Optional) Breite des Thumbnails im Template Variablen Bereich.';
+$_lang['imageplus.thumbnailWidth_desc'] = '(Optional, Integer) Breite des Thumbnails im Template Variablen Bereich.';
 $_lang['imageplus.allowAltTag'] = 'Alternatives Textfeld anzeigen';
 $_lang['imageplus.allowAltTag_desc'] = 'Ermöglicht die Eingabe eines Alt oder Title-Attributes für das Bild.';
 

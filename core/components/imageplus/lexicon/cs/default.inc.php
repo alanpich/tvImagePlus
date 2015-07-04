@@ -9,13 +9,13 @@ $_lang['imageplus.alt_text'] = 'Alt text';
 
 /** Input options render **/
 $_lang['imageplus.targetwidth'] = 'Cílová šířka';
-$_lang['imageplus.targetwidth_desc'] = '(Volitelné) Cílová šířka pro výstupní obrázek. Nahraný obrázek by neměl být menší.';
+$_lang['imageplus.targetwidth_desc'] = '(Volitelné, celé číslo) Cílová šířka pro výstupní obrázek. Nahraný obrázek by neměl být menší.';
 $_lang['imageplus.targetheight'] = 'Cílová výška';
-$_lang['imageplus.targetheight_desc'] = '(Volitelné) Cílová výška pro výstupní obrázek. Nahraný obrázek by neměl být menší.';
+$_lang['imageplus.targetheight_desc'] = '(Volitelné, celé číslo) Cílová výška pro výstupní obrázek. Nahraný obrázek by neměl být menší.';
 $_lang['imageplus.targetRatio'] = 'Cílový poměr stran';
-$_lang['imageplus.targetRatio_desc'] = '(Volitelné) Cílový poměr stran výstupního obrázku. Pokud je nastavena cílová výška a šířka, tato hodnota je ignorována.';
+$_lang['imageplus.targetRatio_desc'] = '(Volitelné, plovoucí) Cílový poměr stran výstupního obrázku. Pokud je nastavena cílová výška a šířka, tato hodnota je ignorována.';
 $_lang['imageplus.thumbnailWidth'] = 'Šířka miniatury';
-$_lang['imageplus.thumbnailWidth_desc'] = '(Volitelné) Šířka miniatury v panelu Template variable.';
+$_lang['imageplus.thumbnailWidth_desc'] = '(Volitelné, celé číslo) Šířka miniatury v panelu Template variable.';
 $_lang['imageplus.allowAltTag'] = 'Alt tag';
 $_lang['imageplus.allowAltTag_desc'] = 'Povolit uživatelům zadat title/alt.';
 

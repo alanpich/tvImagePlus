@@ -13,9 +13,9 @@ $_lang['imageplus.targetwidth_desc'] = 'Den ønskede bredde for det færdige bil
 $_lang['imageplus.targetheight'] = 'Højde';
 $_lang['imageplus.targetheight_desc'] = 'Den ønskede højde for det færdige billede';
 $_lang['imageplus.targetRatio'] = 'Target Aspect Ratio';
-$_lang['imageplus.targetRatio_desc'] = '(Optional) The target aspect ratio for the output image. If the target height and the targed width are set, this value is ignored.';
+$_lang['imageplus.targetRatio_desc'] = '(Optional, Float) The target aspect ratio for the output image as float value. If the target height and the targed width are set, this value is ignored.';
 $_lang['imageplus.thumbnailWidth'] = 'Thumbnail Width';
-$_lang['imageplus.thumbnailWidth_desc'] = '(Optional) The thumbnail width of the image in the template variable panel.';
+$_lang['imageplus.thumbnailWidth_desc'] = '(Optional, Integer) The thumbnail width of the image in the template variable panel.';
 $_lang['imageplus.allowAltTag'] = 'Alternativ tekst';
 $_lang['imageplus.allowAltTag_desc'] = 'Tillad brugeren at skrive en alternativ (mouse-over) tekst til billedet';
 

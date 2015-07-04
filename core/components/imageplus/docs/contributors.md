@@ -15,6 +15,8 @@ Many thanks to everyone else who has contributed to this project:
 * Nico Telfer
 * [@bartholomej](https://github.com/bartholomej)
 * [@Mark-H](https://github.com/Mark-H)
+* [@AmaZili](https://github.com/AmaZili)
+* [@inreti](https://github.com/inreti)
 
 <!-- Piwik -->
 <script type="text/javascript">

@@ -13,9 +13,9 @@ $_lang['imageplus.targetwidth_desc'] = 'A készített kép szélessége';
 $_lang['imageplus.targetheight'] = 'Új magasság';
 $_lang['imageplus.targetheight_desc'] = 'A készített kép magassága';
 $_lang['imageplus.targetRatio'] = 'Target Aspect Ratio';
-$_lang['imageplus.targetRatio_desc'] = '(Optional) The target aspect ratio for the output image. If the target height and the targed width are set, this value is ignored.';
+$_lang['imageplus.targetRatio_desc'] = '(Optional, Float) The target aspect ratio for the output image as float value. If the target height and the targed width are set, this value is ignored.';
 $_lang['imageplus.thumbnailWidth'] = 'Thumbnail Width';
-$_lang['imageplus.thumbnailWidth_desc'] = '(Optional) The thumbnail width of the image in the template variable panel.';
+$_lang['imageplus.thumbnailWidth_desc'] = '(Optional, Integer) The thumbnail width of the image in the template variable panel.';
 $_lang['imageplus.allowAltTag'] = 'Alt tag megengedése';
 $_lang['imageplus.allowAltTag_desc'] = 'Megengedni a felhasználónak, hogy beállíthassa a title/alt-tag tulajdonságait a képnek';
 

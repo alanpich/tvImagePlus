@@ -13,7 +13,7 @@ an integer value.
  
 The aspect ratio for the output image could be restricted with **Target Aspect Ratio**. If target height and target 
 width are set, this value is ignored and the calculated aspect ratio of target height and target width is used. 
-The field has to be filled with an integer value.
+The field has to be filled with a float value.
  
 If you set only one value of **Target Height** or **Target Width** and leave empty **Target Aspect Ratio**, the size of 
 the crop is not restricted to any aspect ratio.

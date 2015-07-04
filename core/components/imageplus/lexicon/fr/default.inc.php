@@ -5,7 +5,7 @@ $_lang['imageplus'] = "Image+";
 
 $_lang['imageplus.editor_title'] = 'Éditeur Image+';
 $_lang['imageplus.edit_image'] = 'Éditer l\'image';
-$_lang['imageplus.alt_text'] = 'Texte alt';
+$_lang['imageplus.alt_text'] = 'Texte de l\'attribut Alt';
 
 /** Input options render **/
 $_lang['imageplus.targetwidth'] = 'Largeur';
@@ -13,9 +13,9 @@ $_lang['imageplus.targetwidth_desc'] = 'La largeur souhaitée de l\'image';
 $_lang['imageplus.targetheight'] = 'Hauteur';
 $_lang['imageplus.targetheight_desc'] = 'La hauteur souhaitée de l\'image';
 $_lang['imageplus.targetRatio'] = 'Aspect ratio cible';
-$_lang['imageplus.targetRatio_desc'] = '(Optional) The target aspect ratio for the output image. If the target height and the targed width are set, this value is ignored.';
+$_lang['imageplus.targetRatio_desc'] = '(Optional, Float) The target aspect ratio for the output image as float value. If the target height and the targed width are set, this value is ignored.';
 $_lang['imageplus.thumbnailWidth'] = 'Largeur miniature';
-$_lang['imageplus.thumbnailWidth_desc'] = '(Optionnel) Largeur de la miniature dans le panneau de variable de modèle (TV).';
+$_lang['imageplus.thumbnailWidth_desc'] = '(Optionnel, entier) Largeur de la miniature dans le panneau de variable de modèle (TV).';
 $_lang['imageplus.allowAltTag'] = 'Tag Alt';
 $_lang['imageplus.allowAltTag_desc'] = 'Autorise l\'utilisateur à entrer un titre/tag alt pour l\'image';
 
