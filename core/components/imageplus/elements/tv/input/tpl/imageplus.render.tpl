@@ -10,5 +10,5 @@
             hiddenField: 'tv{$tv->id}'{literal}
         });
     });{/literal}
-    $.merge(ImagePlus.config, {$config});
+    $jIP.merge(ImagePlus.config, {$config});
 </script>

@@ -252,6 +252,7 @@ class ImagePlus
         $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.jquery.imagecrop.js');
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
             . ' ImagePlus.config = ' . json_encode($this->options) . ';'
+            . ' var $jIP = jQuery.noConflict();'
             . '</script>');
     }
 

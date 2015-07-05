@@ -56,7 +56,7 @@ Ext.extend(ImagePlus.jquery.ImageCrop, Ext.Panel, {
     },
 
     initJcrop: function () {
-        this.$image = $('#' + this.imageDOMid).data('ext', this.window);
+        this.$image = $jIP('#' + this.imageDOMid).data('ext', this.window);
 
         var conf = {
             minSize: this.window.getMinCropSize(),

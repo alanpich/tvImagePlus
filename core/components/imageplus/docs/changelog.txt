@@ -1,5 +1,8 @@
 Changelog
-================================================================================
+=========
+
+- 2.3.3
+    - Run jQuery in noConflict mode.
 
 - 2.3.2
     - Added 'value' parameter.
@@ -20,6 +23,10 @@ Changelog
     - Bugfix for a Firefox display issue
     - Respect context settings for media sources
     - Center the crop window in the viewport
+    - Updated Czech translation (@bartholomej)
+    - Updated Dutch translation (@Mark-H)
+    - Updated French translation (@AmaZili)
+    - Updated Russian translation (@Alroniks, serimarda)
 
 - 2.2.x
     - Added GUI warning of missing dependencies
@@ -46,6 +53,7 @@ Changelog
     - Added Italian translation (@tillilab)
     - Added Dutch translation (@Mark-H)
     - Added Russian translation (@Alroniks)
+    - Added French translation (@Alroniks)
 
 - 2.1.x
     - Fixed bug with non-default media sources
