@@ -8,12 +8,12 @@ $_lang['imageplus.edit_image'] = 'Éditer l\'image';
 $_lang['imageplus.alt_text'] = 'Texte de l\'attribut Alt';
 
 /** Input options render **/
-$_lang['imageplus.targetwidth'] = 'Largeur';
-$_lang['imageplus.targetwidth_desc'] = 'La largeur souhaitée de l\'image';
-$_lang['imageplus.targetheight'] = 'Hauteur';
-$_lang['imageplus.targetheight_desc'] = 'La hauteur souhaitée de l\'image';
+$_lang['imageplus.targetwidth'] = 'Largeur  (minimale) de la cible';
+$_lang['imageplus.targetwidth_desc'] = '(Facultatif, entier) La largeur ciblée de l\'image en sortie. L\'image téléchargée devrait avoir cette largeur minimale.';
+$_lang['imageplus.targetheight'] = 'Hauteur  (minimale) de la cible';
+$_lang['imageplus.targetheight_desc'] = '(Facultatif, entier) La hauteur ciblée de l\'image en sortie. L\'image téléchargée devrait avoir cette hauteur minimale.';
 $_lang['imageplus.targetRatio'] = 'Aspect ratio cible';
-$_lang['imageplus.targetRatio_desc'] = '(Optional, Float) The target aspect ratio for the output image as float value. If the target height and the targed width are set, this value is ignored.';
+$_lang['imageplus.targetRatio_desc'] = '(Facultatif, Float) Les proportions ciblée de l\'image en sortie, valeur de type float. Si la hauteur et la largeur de la cible sont définies, cette valeur est ignorée.';
 $_lang['imageplus.thumbnailWidth'] = 'Largeur miniature';
 $_lang['imageplus.thumbnailWidth_desc'] = '(Optionnel, entier) Largeur de la miniature dans le panneau de variable de modèle (TV).';
 $_lang['imageplus.allowAltTag'] = 'Tag Alt';
