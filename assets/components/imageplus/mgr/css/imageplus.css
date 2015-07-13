@@ -3,10 +3,11 @@
     border-radius: 0 3px 3px 0;
     box-shadow: none;
     padding: 0;
-    width: 30px;
+    width: 90px;
     height: 100% !important;
     position: absolute;
     top: 0;
+    right: 0;
 }
 
 .x-form-field-wrap .x-form-triple-triggers .x-form-trigger {
