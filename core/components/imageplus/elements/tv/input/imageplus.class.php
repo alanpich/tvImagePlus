@@ -76,35 +76,50 @@ class ImagePlusInputRender extends modTemplateVarInputRender
 
         // Load required javascripts & register global config
         $imageplus->includeScriptAssets();
-
+        
+        /** @var modMediaSource $source */
+        $source = $this->tv->getSource($this->modx->resource->get('context_key'));
+        if (!$source) return '';
+        if (!$source->getWorkingContext()) {
+            return '';
+        }
+        $source->setRequestProperties($_REQUEST);
+        $source->initialize();
+        
+        $this->setPlaceholder('mediasource',$source->get('id'));        
+        //$this->setPlaceholder('mediasource', $this->tv->get('source'));
+        
         // Prepare tv config for jsonification
         $tvConfig = $imageplus->loadTvConfig($this, $value, $params);
+        $tvConfig->mediaSource = $source->get('id');
         $this->setPlaceholder('imageplusconfig', json_encode($tvConfig));
         $this->setPlaceholder('tvValue', $value);
-
-        $this->setPlaceholder('mediasource', $this->tv->get('source'));
+        
+        
         $this->setPlaceholder('tvparams', json_encode($this->getInputOptions()));
 
         $this->setPlaceholder('lexicon', json_encode($this->modx->lexicon->fetch('imageplus.', true)));
 
-        $this->setPlaceholder('imgData', $this->getImageDataJSON($value, $params));
+        $this->setPlaceholder('imgData', $this->getImageDataJSON($value, $params, $source));
 
         $this->setPlaceholder('config', json_encode($imageplus->options));
     }
 
-    private function getImageDataJSON($value, $params)
+    private function getImageDataJSON($value, $params, &$source)
     {
         $value = json_decode($value);
 
         $data = new stdClass;
 
         // Grab MediaSource info
-        $source = $this->modx->getObject('modMediaSource', ($this->tv->get('source')) ? $this->tv->get('source') : $this->modx->getOption('default_media_source'));
-        $properties = $source->getProperties();
+        //$source = $this->modx->getObject('modMediaSource', ($this->tv->get('source')) ? $this->tv->get('source') : $this->modx->getOption('default_media_source'));
         $data->mediasource = new stdClass;
-        $data->mediasource->id = $source->get('id');
-        $data->mediasource->path = (isset($properties['basePath'])) ? $properties['basePath']['value'] : $this->modx->getOption('base_path');
-        $data->mediasource->url = (isset($properties['baseUrl'])) ? $properties['baseUrl']['value'] : $this->modx->getOption('base_url');
+        if ($source){
+            $properties = $source->getProperties();        
+            $data->mediasource->id = $source->get('id');
+            $data->mediasource->path = (isset($properties['basePath'])) ? $properties['basePath']['value'] : $this->modx->getOption('base_path');
+            $data->mediasource->url = (isset($properties['baseUrl'])) ? $properties['baseUrl']['value'] : $this->modx->getOption('base_url');    
+        }
 
         // Grab constraint info
         $data->constraint = new stdClass;
