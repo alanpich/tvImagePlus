@@ -8,6 +8,7 @@ pre-set ratio. A graphical tool could be used to crop the image to the required 
 
 * MODX Revolution 2.2.4+
 * PHP v5.3+
+* MODX Cropping Engine i.e. [pThumb](http://modx.com/extras/package/pthumb)
 
 ### Features
 
