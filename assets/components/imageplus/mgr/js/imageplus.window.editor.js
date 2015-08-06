@@ -89,11 +89,8 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
     },
     getDisplayHeight: function () {
         return Math.round(this.imageplus.sourceImg.height * this.displayRatio);
-    }
-
-    /**
-     * Get a url to image resized for window
-     */,
+    },
+    // Get a url to image resized for window
     getImageUrl: function () {
         return this.inputPanel.generateThumbUrl({
             src: this.imageplus.sourceImg.src,
@@ -101,7 +98,6 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
             h: this.getDisplayHeight()
         });
     },
-
     getOuterImageUrl: function () {
         return this.inputPanel.generateThumbUrl({
             src: this.imageplus.sourceImg.src,
@@ -110,14 +106,12 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
             'fltr[]': 'blur|25'
         });
     },
-
     getMinCropSize: function () {
         return [
             this.imageplus.targetWidth * this.displayRatio,
             this.imageplus.targetHeight * this.displayRatio
         ]
     },
-
     getMinCropWidth: function () {
         return this.imageplus.targetWidth * this.displayRatio;
     },
@@ -155,7 +149,6 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
             }
         }
     },
-
     getCropCoords: function () {
         var W = this.getInitialCropWidth();
         var H = this.getInitialCropHeight();
@@ -166,24 +159,17 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
         var Y = this.getInitialCropY();
         return [X, Y, (X + W), (Y + H)];
     },
-
-    /**
-     * Handle window
-     */
+    // Handle window
     onClose: function () {
         this.inputPanel.editorWindow = false;
     },
-
-    /**
-     * Handle crop area change
-     */
+    // Handle crop area change
     onCropChange: function (data) {
         this.crop.height = Math.round(data.height / this.displayRatio);
         this.crop.width = Math.round(data.width / this.displayRatio);
         this.crop.x = Math.round(data.x / this.displayRatio);
         this.crop.y = Math.round(data.y / this.displayRatio);
     },
-
     updateFromEditor: function () {
         this.inputPanel.updateFromEditor(this.crop);
         this.close();

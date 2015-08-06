@@ -17,6 +17,7 @@ Many thanks to everyone else who has contributed to this project:
 * [@Mark-H](https://github.com/Mark-H)
 * [@AmaZili](https://github.com/AmaZili)
 * [@inreti](https://github.com/inreti)
+* [@Bruno17](https://github.com/Bruno17)
 
 <!-- Piwik -->
 <script type="text/javascript">

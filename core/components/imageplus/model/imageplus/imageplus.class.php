@@ -175,22 +175,25 @@ class ImagePlus
     public function loadTvConfig(ImagePlusInputRender $render, $value, array $params)
     {
         $data = new stdClass;
-        // Grab the ID of the assigned mediasource
-        //$data->mediaSource = $render->tv->get('source');
+
         // Grab TV info
         $data->tv = new stdClass;
         $data->tv->id = $render->tv->get('id');
         $data->tv->params = $render->getInputOptions();
         $data->tv->value = $value;
+
         // Misc
         $data->allowBlank = (bool)$params['allowBlank'];
+
         // Dimension constraints
         $data->targetWidth = (int)$params['targetWidth'];
         $data->targetHeight = (int)$params['targetHeight'];
         $data->targetRatio = $params['targetRatio'];
+
         // Thumbnail width options
         $vers = $this->modx->getVersionData();
         $data->thumbnailWidth = (isset($params['thumbnailWidth']) && intval($params['thumbnailWidth'])) ? intval($params['thumbnailWidth']) : (($vers['major_version'] >= 3) ? 400 : 150);
+
         // Alt-tag options
         $data->altTagOn = (isset($params['allowAltTag']) && $params['allowAltTag']);
 
@@ -202,12 +205,14 @@ class ImagePlus
             $data->crop->height = 0;
             $data->crop->x = 0;
             $data->crop->y = 0;
+
             // Source image
             $data->sourceImg = new stdClass();
             $data->sourceImg->width = 0;
             $data->sourceImg->height = 0;
             $data->sourceImg->src = '';
             $data->sourceImg->source = 1;
+
             // Alt-tag
             $data->altTag = ($data->altTagOn ? '' : false);
         } else {
@@ -217,12 +222,14 @@ class ImagePlus
             $data->crop->height = $saved->crop->height;
             $data->crop->x = $saved->crop->x;
             $data->crop->y = $saved->crop->y;
+
             // Source image
             $data->sourceImg = new stdClass();
             $data->sourceImg->width = $saved->sourceImg->width;
             $data->sourceImg->height = $saved->sourceImg->height;
             $data->sourceImg->src = $saved->sourceImg->src;
             $data->sourceImg->source = $saved->sourceImg->source;
+
             // Alt-tag
             $data->altTag = ($data->altTagOn ? (isset($saved->altTag) ? $saved->altTag : '') : false);
         }
@@ -242,14 +249,14 @@ class ImagePlus
             $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus-22.css');
         }
         $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/jquery/jquery.jcrop.min.css');
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.js');
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.panel.input.js');
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.window.editor.js');
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.migx_renderer.js');
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/tools/JSON2.js');
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.min.js');
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.jcrop.min.js');
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.jquery.imagecrop.js');
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.js?v=v' . $this->version);
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.panel.input.js?v=v' . $this->version);
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.window.editor.js?v=v' . $this->version);
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.migx_renderer.js?v=v' . $this->version);
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/tools/JSON2.js?v=v' . $this->version);
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.min.js?v=v' . $this->version);
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.jcrop.min.js?v=v' . $this->version);
+        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.jquery.imagecrop.js?v=v' . $this->version);
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
             . ' ImagePlus.config = ' . json_encode($this->options) . ';'
             . ' var $jIP = jQuery.noConflict();'

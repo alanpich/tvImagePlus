@@ -1,11 +1,15 @@
 Changelog
 =========
 
+- 2.3.4
+    - Open crop window automatic after selecting a new image
+    - Bugfix for media source issue in MIGX
+
 - 2.3.3
-    - Run jQuery in noConflict mode.
+    - Run jQuery in noConflict mode
 
 - 2.3.2
-    - Added 'value' parameter.
+    - Added 'value' parameter in the ImagePlus Snippet
 
 - 2.3.1
     - Use default_media_source if the media source of the TV is not set (i.e. if it used in a MIGX configuration)
@@ -38,7 +42,7 @@ Changelog
     - TV Default Value is now output if TV is empty
     - TV Reset button now works [#22]
     - Added image preloader to accurately get image size on upload.
-    - This is because Modx File Manager will not report accurate
+    - This is because MODX File Manager will not report accurate
       image size for images above 800x600 [#8]
     - Added option to put an icon on TV input 'crop' button. [#16]
     - Create a system setting called imageplus.crop_icon and

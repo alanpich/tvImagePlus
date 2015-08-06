@@ -1,0 +1,33 @@
+## Examples
+
+**Image+* could be used for several purposes. On this page you could find some Examples how to use it:
+
+### MIGX
+
+If you want to use *Image+* in MIGX you could define the *Image+* TV properties with a JSON string in the field 'Configs' textarea.
+
+```
+{"targetWidth":""},
+{"targetHeight":""},
+{"targetRatio":""},
+{"thumbnailWidth":"2.5"},
+{"allowAltTag":"2.5"}
+```
+
+You could show the thumbnail in the grid column by setting the renderer to 'ImagePlus.MIGX_Renderer'. At the moment you have to raw edit a MIGX configuration for that.
+
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.partout.info/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 13]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->

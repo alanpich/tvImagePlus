@@ -80,9 +80,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         }, this);
     },
 
-    /**
-     * Create the image browser combo
-     */
+    // Create the image browser combo
     createImageBrowser: function () {
         // Generate opento path
         var openToPath = this.imageplus.sourceImg.src.split('/');
@@ -111,10 +109,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             }
         })
     },
-
-    /**
-     * Create image preview img
-     */
+    // Create image preview img
     createImagePreview: function () {
         this.imagePreview = new Ext.BoxComponent({
             autoEl: {
@@ -123,10 +118,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             }
         });
     },
-
-    /**
-     * Create field for alt-text input
-     */
+    // Create field for alt-text input
     createAltTextField: function () {
         var _this = this;
         this.altTextField = MODx.load({
@@ -148,10 +140,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             }
         })
     },
-    /**
-     * Fires when the TV field is reset
-     */
-
+    // Fires when the TV field is reset
     generateThumbUrl: function (params) {
         var url = MODx.config.connectors_url + 'system/phpthumb.php?imageplus=1';
         var defaults = {
@@ -169,26 +158,17 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         }
         return url;
     },
-
-    /**
-     * Fires when the TV field is reset
-     */
+    // Fires when the TV field is reset
     onReset: function () {
         this.imageBrowser.setValue('');
         this.imageplus.sourceImg = false;
         this.updatePreviewImage.defer(10, this);
     },
-
-    /**
-     * Runs after initial render of panel
-     */
+    // Runs after initial render of panel
     onAfterRender: function () {
         this.updateDisplay();
     },
-
-    /**
-     * Fired when user has selected an image from the browser
-     */
+    // Fired when user has selected an image from the browser
     onImageSelected: function (img) {
         var diffImg = (!this.imageplus.sourceImg || (this.imageplus.sourceImg && this.imageplus.sourceImg.src != img.relativeUrl));
 
@@ -196,14 +176,12 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         for (var i in this.imageplus.sourceImg) {
             this.oldSourceImg[i] = this.imageplus.sourceImg[i];
         }
-
         this.imageplus.sourceImg = {
             src: img.relativeUrl,
             width: img.image_width,
             height: img.image_height,
             source: this.imageplus.mediaSource
         };
-
         // Reset crop rectangle everytime an image is selected to be different from browser
         if (diffImg) {
             this.imageplus.crop.x = 0;
@@ -221,13 +199,10 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 this.imageplus.crop.height = this.imageplus.sourceImg.height;
             }
         }
-
-        // If server returns 800x600 or higher, image may be larger
-        //  so need to get size manually
+        // If server returns 800x600 or higher, image may be larger so need to get size manually
         if (img.image_width >= 800 || img.image_height >= 600) {
             this.manualGetImageSize();
         }
-
         // Update display
         if (!this.updateDisplay()) {
             return;
@@ -236,19 +211,12 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             this.editImage();
         }
     },
-
-    /**
-     * Fired when alt-tag field is changed
-     */
+    // Fired when alt-tag field is changed
     onAltTagChange: function (field, value) {
         this.imageplus.altTag = value;
         this.updateHiddenField();
     },
-
-    /**
-     * Manually get image size
-     * @return void
-     */
+    // Manually get image size
     manualGetImageSize: function () {
         var baseUrl = ImagePlus.config['sources'][this.imageplus.sourceImg.source].url;
         var img = new Image();
@@ -264,10 +232,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         })(this);
         img.src = baseUrl + this.imageplus.sourceImg.src;
     },
-
-    /**
-     * Update the component display on state change
-     */
+    // Update the component display on state change
     updateDisplay: function () {
 
         // Make sure image is large enough to use
@@ -291,12 +256,9 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
 
         this.updatePreviewImage.defer(10, this);
         this.updateHiddenField();
+        return true;
     },
-
-
-    /**
-     * Update hidden field value
-     */
+    // Update hidden field value
     updateHiddenField: function () {
         //  console.log(this.hiddenField);
         var TV = {
@@ -323,11 +285,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         // Mark resource as dirty
         MODx.fireResourceFormChange()
     },
-
-    /**
-     * Checks whether the image is larger than specified crop dimensions
-     * @returns bool
-     */
+    // Checks whether the image is larger than specified crop dimensions
     checkImageIsLargeEnough: function () {
         if (!this.imageplus.sourceImg || this.imageplus == undefined) return true;
 
@@ -343,10 +301,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         }
         return true;
     },
-
-    /**
-     * Launch the editor window
-     */
+    // Launch the editor window
     editImage: function () {
         // Create the editor window (if it doesnt exist)
         if (!this.editorWindow && this.imageplus.sourceImg && this.imageplus.sourceImg.src) {
@@ -388,7 +343,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             this.editorWindow.show();
         }
     },
-
     clearImage: function () {
         this.imageplus.sourceImg = null;
         this.oldSourceImg = null;
@@ -401,10 +355,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.imageBrowser.setValue('');
         MODx.fireResourceFormChange();
     },
-
-    /**
-     * Receive new cropping dimensions from editor
-     */
+    // Receive new cropping dimensions from editor
     updateFromEditor: function (crop) {
         this.imageplus.crop.x = crop.x;
         this.imageplus.crop.y = crop.y;
@@ -426,7 +377,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.editorWindow = null;
         this.updateDisplay();
     },
-
     updatePreviewImage: function () {
         if (!this.imageplus.sourceImg || this.imageplus.crop.width == 0) {
             this.imagePreview.hide();
@@ -466,7 +416,6 @@ ImagePlus.form.TripleTriggerField = Ext.extend(Ext.form.TriggerField, {
      * An additional CSS class used to style the trigger button.  The trigger will always get the
      * class 'x-form-trigger' by default and triggerClass will be appended if specified.
      */
-
     initComponent: function () {
         ImagePlus.form.TripleTriggerField.superclass.initComponent.call(this);
 
@@ -478,11 +427,9 @@ ImagePlus.form.TripleTriggerField = Ext.extend(Ext.form.TriggerField, {
             ]
         };
     },
-
     getTrigger: function (index) {
         return this.triggers[index];
     },
-
     initTrigger: function () {
         var ts = this.trigger.select('.x-form-trigger', true);
         var triggerField = this;
@@ -511,7 +458,6 @@ ImagePlus.form.TripleTriggerField = Ext.extend(Ext.form.TriggerField, {
         }, this);
         this.triggers = ts.elements;
     },
-
     getTriggerWidth: function () {
         var tw = 0;
         Ext.each(this.triggers, function (t, index) {
@@ -525,14 +471,11 @@ ImagePlus.form.TripleTriggerField = Ext.extend(Ext.form.TriggerField, {
         }, this);
         return tw;
     },
-
     // private
     onDestroy: function () {
         Ext.destroy(this.triggers);
         ImagePlus.form.TripleTriggerField.superclass.onDestroy.call(this);
     },
-
-
     /**
      * The function that should handle the trigger's click event.  This method does nothing by default
      * until overridden by an implementing function. See {@link Ext.form.TriggerField#onTriggerClick}
@@ -541,7 +484,6 @@ ImagePlus.form.TripleTriggerField = Ext.extend(Ext.form.TriggerField, {
      * @param {EventObject} e
      */
     onTrigger1Click: Ext.emptyFn,
-
     /**
      * The function that should handle the trigger's click event.  This method does nothing by default
      * until overridden by an implementing function. See {@link Ext.form.TriggerField#onTriggerClick}
@@ -550,7 +492,6 @@ ImagePlus.form.TripleTriggerField = Ext.extend(Ext.form.TriggerField, {
      * @param {EventObject} e
      */
     onTrigger2Click: Ext.emptyFn,
-
     /**
      * The function that should handle the trigger's click event.  This method does nothing by default
      * until overridden by an implementing function. See {@link Ext.form.TriggerField#onTriggerClick}

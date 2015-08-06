@@ -76,32 +76,26 @@ class ImagePlusInputRender extends modTemplateVarInputRender
 
         // Load required javascripts & register global config
         $imageplus->includeScriptAssets();
-        
+
+        // Get Media Source
         /** @var modMediaSource $source */
-        $source = $this->tv->getSource($this->modx->resource->get('context_key'));
+        $source = $this->tv->getSource(($this->modx->resource) ? $this->modx->resource->get('context_key') : 'mgr');
         if (!$source) return '';
         if (!$source->getWorkingContext()) {
             return '';
         }
         $source->setRequestProperties($_REQUEST);
         $source->initialize();
-        
-        $this->setPlaceholder('mediasource',$source->get('id'));        
-        //$this->setPlaceholder('mediasource', $this->tv->get('source'));
-        
+        $this->setPlaceholder('mediasource',$source->get('id'));
+
         // Prepare tv config for jsonification
         $tvConfig = $imageplus->loadTvConfig($this, $value, $params);
         $tvConfig->mediaSource = $source->get('id');
         $this->setPlaceholder('imageplusconfig', json_encode($tvConfig));
         $this->setPlaceholder('tvValue', $value);
-        
-        
         $this->setPlaceholder('tvparams', json_encode($this->getInputOptions()));
-
         $this->setPlaceholder('lexicon', json_encode($this->modx->lexicon->fetch('imageplus.', true)));
-
         $this->setPlaceholder('imgData', $this->getImageDataJSON($value, $params, $source));
-
         $this->setPlaceholder('config', json_encode($imageplus->options));
     }
 
