@@ -34,6 +34,10 @@ class ImagePlusOutputRender extends modTemplateVarOutputRender
             'core_path' => $corePath
         ));
 
+        $params = array_merge(array(
+            'docid' => ($this->modx->resource) ? $this->modx->resource->get('id') : 0
+        ), $params);
+
         return $imageplus->getImageURL($value, $params, $this->tv);
     }
 }

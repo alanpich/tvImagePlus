@@ -54,6 +54,7 @@ switch ($type) {
         break;
     case 'tpl':
         $output = ($data->sourceImg->src) ? $imagePlus->getImageURL($value, array(
+            'docid' => $docid,
             'phpThumbParams' => $options,
             'outputChunk' => $tpl
         ), $tv) : '';
@@ -61,6 +62,7 @@ switch ($type) {
     case 'thumb':
     default:
         $output = ($data->sourceImg->src) ? $imagePlus->getImageURL($value, array(
+            'docid' => $docid,
             'phpThumbParams' => $options
         ), $tv) : '';
         break;

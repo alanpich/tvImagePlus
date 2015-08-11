@@ -64,7 +64,7 @@ class PhpThumbsUp extends AbstractCropEngine
         // If data is null, json was invalid or empty.
         // This is almost certainly because the TV is empty
         if (is_null($data)) {
-            $this->modx->log(\xPDO::LOG_LEVEL_INFO, "Image+ TV renderer failed to parse JSON");
+            $this->modx->log(\xPDO::LOG_LEVEL_INFO, "TV renderer failed to parse JSON", '', 'Image+');
             return $tv->default_text;
         }
 
@@ -73,6 +73,7 @@ class PhpThumbsUp extends AbstractCropEngine
         if (!$source instanceof \modMediaSource) {
             return 'Image+ Error: Invalid Media Source';
         };
+        $this->modx->setPlaceholder('docid', $this->modx->getOption('docid', $opts, 0));
         $source->initialize();
 
         // Grab absolute system path to image
