@@ -1,17 +1,17 @@
 ## Examples
 
-**Image+* could be used for several purposes. On this page you could find some Examples how to use it:
+**Image+* could be used for several purposes. On this page you find some examples how to use it:
 
 ### MIGX
 
-If you want to use *Image+* in MIGX you could define the *Image+* TV properties with a JSON string in the field 'Configs' textarea.
+If you want to use *Image+* in MIGX you could define all *Image+* TV properties with a JSON string in the 'Configs' textarea in the MIGX formtabs field configuration. The following properties are possible.
 
 ```
 {"targetWidth":""},
 {"targetHeight":""},
 {"targetRatio":""},
-{"thumbnailWidth":"2.5"},
-{"allowAltTag":"2.5"}
+{"thumbnailWidth":""},
+{"allowAltTag":""}
 ```
 
 You could show the thumbnail in the grid column by setting the renderer to 'ImagePlus.MIGX_Renderer'. At the moment you have to raw edit a MIGX configuration for that.
