@@ -26,7 +26,7 @@ if ($value) {
     // Attempt to decode the value as json
     $data = json_decode($value);
     if (!$data) {
-        $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Unable to decode the value");
+        $modx->log(xPDO::LOG_LEVEL_ERROR, "Unable to decode the value", '', 'Image+');
         $data = json_decode('{"sourceImg":{"src":""}}');
     }
 } else {
@@ -38,11 +38,11 @@ if ($value) {
         // Attempt to decode the input value as json
         $data = json_decode($value);
         if (!$data) {
-            $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Unable to decode json - are you sure this is an Image+ TV?");
+            $modx->log(xPDO::LOG_LEVEL_ERROR, "Unable to decode json - are you sure this is an Image+ TV?", '', 'Image+');
             $data = json_decode('{"sourceImg":{"src":""}}');
         }
     } else {
-        $modx->log(xPDO::LOG_LEVEL_ERROR, "[Image+] Template Variable '{$tvname}' not found.");
+        $modx->log(xPDO::LOG_LEVEL_ERROR, "Template Variable '{$tvname}' not found.", '', 'Image+');
     }
 }
 
