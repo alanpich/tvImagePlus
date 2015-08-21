@@ -24,15 +24,17 @@
 
 ImagePlus.window.Editor = function (config) {
     config = config || {};
-    this.imageplus = config.imageplus;
+
+    this.image = config.image;
+    this.options = config.options;
     this.inputPanel = config.inputPanel;
     this.displayRatio = config.displayRatio;
 
     var cropSettings = {
-        x: this.imageplus.crop.x,
-        y: this.imageplus.crop.y,
-        width: this.imageplus.crop.width,
-        height: this.imageplus.crop.height
+        x: this.image.crop.x,
+        y: this.image.crop.y,
+        width: this.image.crop.width,
+        height: this.image.crop.height
     };
 
     Ext.apply(config, {
@@ -55,7 +57,7 @@ ImagePlus.window.Editor = function (config) {
         items: [{
             border: false,
             xtype: 'imageplus-jquery-imagecrop',
-            imageplus: this.imageplus,
+            image: this.image,
             initialWidth: this.getDisplayWidth(),
             initialHeight: this.getDisplayHeight(),
             imageUrl: this.getImageUrl(),
@@ -66,7 +68,7 @@ ImagePlus.window.Editor = function (config) {
                     scope: this
                 }
             },
-            cropData: this.imageplus.crop
+            cropData: this.image.crop
         }],
         buttonAlign: 'right',
         buttons: [{
@@ -85,22 +87,22 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
 
     // Get the required width of the cropper
     getDisplayWidth: function () {
-        return Math.round(this.imageplus.sourceImg.width * this.displayRatio);
+        return Math.round(this.image.sourceImg.width * this.displayRatio);
     },
     getDisplayHeight: function () {
-        return Math.round(this.imageplus.sourceImg.height * this.displayRatio);
+        return Math.round(this.image.sourceImg.height * this.displayRatio);
     },
     // Get a url to image resized for window
     getImageUrl: function () {
         return this.inputPanel.generateThumbUrl({
-            src: this.imageplus.sourceImg.src,
+            src: this.image.sourceImg.src,
             w: this.getDisplayWidth(),
             h: this.getDisplayHeight()
         });
     },
     getOuterImageUrl: function () {
         return this.inputPanel.generateThumbUrl({
-            src: this.imageplus.sourceImg.src,
+            src: this.image.sourceImg.src,
             w: this.getDisplayWidth(),
             h: this.getDisplayHeight(),
             'fltr[]': 'blur|25'
@@ -108,42 +110,42 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
     },
     getMinCropSize: function () {
         return [
-            this.imageplus.targetWidth * this.displayRatio,
-            this.imageplus.targetHeight * this.displayRatio
+            this.options.targetWidth * this.displayRatio,
+            this.options.targetHeight * this.displayRatio
         ]
     },
     getMinCropWidth: function () {
-        return this.imageplus.targetWidth * this.displayRatio;
+        return this.options.targetWidth * this.displayRatio;
     },
     getMinCropHeight: function () {
-        return this.imageplus.targetHeight * this.displayRatio;
+        return this.options.targetHeight * this.displayRatio;
     },
     getInitialCropX: function () {
-        return this.imageplus.crop.x * this.displayRatio;
+        return this.image.crop.x * this.displayRatio;
     },
     getInitialCropY: function () {
-        return this.imageplus.crop.y * this.displayRatio;
+        return this.image.crop.y * this.displayRatio;
     },
     getInitialCropWidth: function () {
-        if (this.imageplus.crop.width == 0) {
-            return this.imageplus.targetWidth * this.displayRatio;
+        if (this.image.crop.width == 0) {
+            return this.options.targetWidth * this.displayRatio;
         } else {
-            return this.imageplus.crop.width * this.displayRatio;
+            return this.image.crop.width * this.displayRatio;
         }
     },
     getInitialCropHeight: function () {
-        if (this.imageplus.crop.height == 0) {
-            return this.imageplus.targetHeight * this.displayRatio
+        if (this.image.crop.height == 0) {
+            return this.options.targetHeight * this.displayRatio
         } else {
-            return this.imageplus.crop.height * this.displayRatio;
+            return this.image.crop.height * this.displayRatio;
         }
     },
     getAspectRatio: function () {
-        if (this.imageplus.targetRatio) {
-            return this.imageplus.targetRatio;
+        if (this.options.targetRatio) {
+            return this.options.targetRatio;
         } else {
-            if (this.imageplus.targetWidth > 0 && this.imageplus.targetHeight > 0) {
-                return this.imageplus.targetWidth / this.imageplus.targetHeight;
+            if (this.options.targetWidth > 0 && this.options.targetHeight > 0) {
+                return this.options.targetWidth / this.options.targetHeight;
             } else {
                 return false
             }
@@ -175,10 +177,10 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
         this.close();
     },
     closeFromEditor: function () {
-        this.crop.width = this.imageplus.crop.width;
-        this.crop.height = this.imageplus.crop.height;
-        this.crop.x = this.imageplus.crop.x;
-        this.crop.y = this.imageplus.crop.y;
+        this.crop.width = this.image.crop.width;
+        this.crop.height = this.image.crop.height;
+        this.crop.x = this.image.crop.x;
+        this.crop.y = this.image.crop.y;
         this.close();
     }
 });

@@ -24,25 +24,21 @@
 
 namespace ImagePlus\CropEngines;
 
-
 abstract class AbstractCropEngine
 {
-
     /**
-     * @var \modX
+     * A reference to the modX instance
+     * @var \modX $modx
      */
     protected $modx;
 
-
-    public function __construct(\modX $modx)
+    public function __construct(\modX &$modx)
     {
-        $this->modx = $modx;
+        $this->modx = &$modx;
     }
 
-
     /**
-     * Checks that all requirements are met for using
-     * this engine
+     * Checks that all requirements are met for using this engine
      *
      * @param \modX $modx
      * @return bool True if engine is usable
@@ -51,7 +47,6 @@ abstract class AbstractCropEngine
     {
         return true;
     }
-
 
     /**
      * Parse image+ data and return a url for the cropped
@@ -63,5 +58,4 @@ abstract class AbstractCropEngine
      * @return string
      */
     abstract public function getImageUrl($json, $opts = array(), \modTemplateVar $tv);
-
 }

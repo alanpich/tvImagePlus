@@ -21,28 +21,30 @@ $type = $modx->getOption('type', $scriptProperties, '', true);
 $options = $modx->getOption('options', $scriptProperties, '', true);
 $tpl = $modx->getOption('tpl', $scriptProperties, 'ImagePlus.image', true);
 $value = $modx->getOption('value', $scriptProperties, '', true);
+$debug = $modx->getOption('debug', $scriptProperties, '', false);
 
 if ($value) {
-    // Attempt to decode the value as json
+    // Value is set by snippet property
     $data = json_decode($value);
     if (!$data) {
-        $modx->log(xPDO::LOG_LEVEL_ERROR, "Unable to decode the value", '', 'Image+');
-        $data = json_decode('{"sourceImg":{"src":""}}');
+        $modx->log(xPDO::LOG_LEVEL_ERROR, 'Unable to decode JSON in snippet property', '', 'Image+');
+        if ($debug) {
+            return 'Unable to decode JSON in snippet property';
+        }
     }
+    // No TV is used
+    $tv = null;
 } else {
+    // Value is retreived from template variable
     $tv = $modx->getObject('modTemplateVar', array('name' => $tvname));
     if ($tv) {
         // Get the raw content of the TV
         $value = $tv->getValue($docid);
-
-        // Attempt to decode the input value as json
-        $data = json_decode($value);
-        if (!$data) {
-            $modx->log(xPDO::LOG_LEVEL_ERROR, "Unable to decode json - are you sure this is an Image+ TV?", '', 'Image+');
-            $data = json_decode('{"sourceImg":{"src":""}}');
-        }
     } else {
         $modx->log(xPDO::LOG_LEVEL_ERROR, "Template Variable '{$tvname}' not found.", '', 'Image+');
+        if ($debug) {
+            return "Template Variable '{$tvname}' not found.";
+        }
     }
 }
 
@@ -50,21 +52,22 @@ $output = '';
 // Render output
 switch ($type) {
     case 'check':
-        $output = ($data->sourceImg->src) ? 'image' : 'noimage';
+        $data = json_decode($value);
+        $output = ($data && $data->sourceImg->src) ? 'image' : 'noimage';
         break;
     case 'tpl':
-        $output = ($data->sourceImg->src) ? $imagePlus->getImageURL($value, array(
+        $output = $imagePlus->getImageURL($value, array_merge($scriptProperties, array(
             'docid' => $docid,
             'phpThumbParams' => $options,
             'outputChunk' => $tpl
-        ), $tv) : '';
+        )), $tv);
         break;
     case 'thumb':
     default:
-        $output = ($data->sourceImg->src) ? $imagePlus->getImageURL($value, array(
+        $output = $imagePlus->getImageURL($value, array_merge($scriptProperties, array(
             'docid' => $docid,
             'phpThumbParams' => $options
-        ), $tv) : '';
+        )), $tv);
         break;
 }
 return $output;

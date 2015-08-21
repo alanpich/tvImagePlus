@@ -23,12 +23,12 @@
 
 ImagePlus.jquery.ImageCrop = function (config) {
     config = config || {};
-    this.imageplus = config.imageplus;
+    this.image = config.image;
     this.window = config.window;
     this.imageDOMid = Ext.id();
 
     Ext.apply(config, {
-        cropData: this.imageplus.crop,
+        cropData: this.image.crop,
         collapsable: false,
         items: [{
             border: false,

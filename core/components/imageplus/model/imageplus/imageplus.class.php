@@ -24,6 +24,9 @@
 
 use ImagePlus\CropEngines;
 
+/**
+ * Class ImagePlus
+ */
 class ImagePlus
 {
     /**
@@ -42,7 +45,7 @@ class ImagePlus
      * The version
      * @var string $version
      */
-    public $version = '2.3.0';
+    public $version = '2.4.0';
 
     /**
      * The class options
@@ -88,9 +91,10 @@ class ImagePlus
 
         // set default options
         $this->options = array_merge($this->options, array(
-            'sources' => $this->loadSourceMap(),
-            'has_unmet_dependencies' => $this->checkDependencies()
+            'sources' => $this->loadSourceMap()
         ));
+
+        $this->checkDependencies();
 
         $this->modx->lexicon->load('imageplus:default');
     }
@@ -137,13 +141,19 @@ class ImagePlus
         });
 
         // Do some basic intelligent sniffing
-        if (!CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)
-            && !CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)
-        ) {
-            // Handle unmet dependencies
-            return true;
+        if (!$this->options['cropEngineClass']) {
+            if (CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)) {
+                $this->options['cropEngineClass'] = '\\ImagePlus\\CropEngines\\PhpThumbsUp';
+            } else if (CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
+                $this->options['cropEngineClass'] = '\\ImagePlus\\CropEngines\\PhpThumbOf';
+            }
+            if (!$this->options['cropEngineClass']) {
+                // Handle unmet dependencies
+                $this->options['hasUnmetDependencies'] = true;
+                return true;
+            }
         }
-        return false;
+        $this->options['hasUnmetDependencies'] = false;
     }
 
     /**
@@ -162,79 +172,6 @@ class ImagePlus
             $sourceMap[$source->get('id')]->url = $source->getBaseUrl();
         };
         return $sourceMap;
-    }
-
-    /**
-     * Gather info about the TV
-     *
-     * @param ImagePlusInputRender $render
-     * @param                      $value
-     * @param array $params
-     * @return object
-     */
-    public function loadTvConfig(ImagePlusInputRender $render, $value, array $params)
-    {
-        $data = new stdClass;
-
-        // Grab TV info
-        $data->tv = new stdClass;
-        $data->tv->id = $render->tv->get('id');
-        $data->tv->params = $render->getInputOptions();
-        $data->tv->value = $value;
-
-        // Misc
-        $data->allowBlank = (bool)$params['allowBlank'];
-
-        // Dimension constraints
-        $data->targetWidth = (int)$params['targetWidth'];
-        $data->targetHeight = (int)$params['targetHeight'];
-        $data->targetRatio = $params['targetRatio'];
-
-        // Thumbnail width options
-        $vers = $this->modx->getVersionData();
-        $data->thumbnailWidth = (isset($params['thumbnailWidth']) && intval($params['thumbnailWidth'])) ? intval($params['thumbnailWidth']) : (($vers['major_version'] >= 3) ? 400 : 150);
-
-        // Alt-tag options
-        $data->altTagOn = (isset($params['allowAltTag']) && $params['allowAltTag']);
-
-        $saved = empty($value) ? null : json_decode($value);
-        if (is_null($saved)) {
-            // Crop data
-            $data->crop = new stdClass();
-            $data->crop->width = 0;
-            $data->crop->height = 0;
-            $data->crop->x = 0;
-            $data->crop->y = 0;
-
-            // Source image
-            $data->sourceImg = new stdClass();
-            $data->sourceImg->width = 0;
-            $data->sourceImg->height = 0;
-            $data->sourceImg->src = '';
-            $data->sourceImg->source = 1;
-
-            // Alt-tag
-            $data->altTag = ($data->altTagOn ? '' : false);
-        } else {
-            // Crop data
-            $data->crop = new stdClass();
-            $data->crop->width = $saved->crop->width;
-            $data->crop->height = $saved->crop->height;
-            $data->crop->x = $saved->crop->x;
-            $data->crop->y = $saved->crop->y;
-
-            // Source image
-            $data->sourceImg = new stdClass();
-            $data->sourceImg->width = $saved->sourceImg->width;
-            $data->sourceImg->height = $saved->sourceImg->height;
-            $data->sourceImg->src = $saved->sourceImg->src;
-            $data->sourceImg->source = $saved->sourceImg->source;
-
-            // Alt-tag
-            $data->altTag = ($data->altTagOn ? (isset($saved->altTag) ? $saved->altTag : '') : false);
-        }
-
-        return $data;
     }
 
     /**
@@ -275,29 +212,81 @@ class ImagePlus
     public function getImageURL($json, $opts = array(), modTemplateVar $tv)
     {
         // Check system settings for crop engine override
-        $engineClass = $this->modx->getOption('imageplus.crop_engine_class', null, false);
-
-        // Do some basic intelligent sniffing
-        if (!$engineClass) {
-            if (CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)) {
-                $engineClass = '\\ImagePlus\\CropEngines\\PhpThumbsUp';
-            } else if (CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
-                $engineClass = '\\ImagePlus\\CropEngines\\PhpThumbOf';
-            }
-        }
+        $engineClass = $this->getOption('cropEngineClass');
 
         /**
          * @var ImagePlus\CropEngines\AbstractCropEngine $cropEngine
          */
-        $cropEngine = new $engineClass($this->modx);
+        $cropEngine = new $engineClass($this->modx, array(
+            'core_path' => $this->getOption('corePath')
+        ));
 
         // Check crop engine is usable
-        if (!$cropEngine->engineRequirementsMet($this->modx)) {
-            $this->modx->log(xPDO::LOG_LEVEL_ERROR, "Requirements not met for crop engine [{$engineClass}]", '', 'Image+');
-            return 'Image+ error - requirements not met for crop engine';
+        if ($this->options['hasUnmetDependencies']) {
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Requirements not met for crop engine.', '', 'Image+');
+            return 'Image+ error - requirements not met for crop engine.';
         }
 
+        $json = $this->prepareTvValue($json, $opts, $tv);
         return $cropEngine->getImageUrl($json, $opts, $tv);
+    }
+
+    /**
+     * Prepare a JSON encoded object and return a valid JSON encoded Image+ object
+     *
+     * @param $json JSON value to prepare
+     * @param array $opts
+     * @param modTemplateVar $tv
+     * @return string
+     */
+    public function prepareTvValue($json, $opts = array(), modTemplateVar $tv)
+    {
+        // Prepare value
+        $decoded = json_decode($json);
+        if (!$decoded) {
+            // The variable does not contain an Image+ image object
+            if ($json != '') {
+                // Get Media Source
+                /** @var modMediaSource $source */
+                if ($tv) {
+                    $source = $tv->getSource(($this->modx->resource) ? $this->modx->resource->get('context_key') : 'mgr');
+                } else {
+                    $source = $this->modx->getObject('modMediaSource', $this->modx->getOption('default_media_source'));
+                }
+                if (!($source && $source->getWorkingContext())) {
+                    $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Invalid Media Source', '', 'Image+');
+                    return '';
+                }
+                $source->setRequestProperties($_REQUEST);
+                $source->initialize();
+
+                // The variable contains a value and has to be converted to an Image+ image object
+                $imgPath = $source->getBasePath() . $json;
+                if (file_exists($imgPath)) {
+                    $size = getimagesize($imgPath);
+                } else {
+                    $this->modx->log(xPDO::LOG_LEVEL_INFO, 'The template variabe value does not contain an existing image', '', 'Image+');
+                }
+                $json = json_encode(array(
+                    'altTag' => '',
+                    'crop' => array(
+                        'height' => ($size) ? $size[1] : 0,
+                        'width' => ($size) ? $size[0] : 0,
+                        'x' => 0,
+                        'y' => 0
+                    ),
+                    'sourceImg' => array(
+                        'height' => ($size) ? $size[1] : 0,
+                        'width' => ($size) ? $size[0] : 0,
+                        'source' => $source->get('id'),
+                        'src' => $json
+                    ),
+                    'targetHeight' => (int)$opts['targetHeight'],
+                    'targetWidth' => (int)$opts['targetWidth']
+                ));
+            }
+        }
+        return $json;
     }
 }
 

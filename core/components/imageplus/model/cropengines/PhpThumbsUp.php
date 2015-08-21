@@ -35,8 +35,7 @@ namespace ImagePlus\CropEngines;
 class PhpThumbsUp extends AbstractCropEngine
 {
     /**
-     * Checks that all requirements are met for using
-     * this engine
+     * Checks that all requirements are met for using this engine
      *
      * @param \modX $modx
      * @return bool True if engine is usable
@@ -58,19 +57,25 @@ class PhpThumbsUp extends AbstractCropEngine
      */
     public function getImageUrl($json, $opts = array(), \modTemplateVar $tv)
     {
+        if ($json == '') {
+            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The value is empty. Could not prepare the output.', '', 'Image+');
+            return ($tv) ? $tv->default_text : '';
+        }
+
         // Parse json to object
         $data = json_decode($json);
 
         // If data is null, json was invalid or empty.
         // This is almost certainly because the TV is empty
         if (is_null($data)) {
-            $this->modx->log(\xPDO::LOG_LEVEL_INFO, "TV renderer failed to parse JSON", '', 'Image+');
-            return $tv->default_text;
+            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The JSON value is invalid. Could not prepare the output.', '', 'Image+');
+            return ($tv) ? $tv->default_text : '';
         }
 
         // Load up the mediaSource
         $source = $this->modx->getObject('modMediaSource', $data->sourceImg->source);
         if (!$source instanceof \modMediaSource) {
+            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'Invalid Media Source', '', 'Image+');
             return 'Image+ Error: Invalid Media Source';
         };
         $this->modx->setPlaceholder('docid', $this->modx->getOption('docid', $opts, 0));
@@ -141,7 +146,7 @@ class PhpThumbsUp extends AbstractCropEngine
         // If an output chunk is selected, parse that
         $outputChunk = $this->modx->getOption('outputChunk', $opts, '');
         if ($outputChunk) {
-            $chunkParams = array(
+            $chunkParams = array_merge($opts, array(
                 'url' => $url,
                 'alt' => $data->altTag,
                 'width' => $data->targetWidth,
@@ -155,7 +160,7 @@ class PhpThumbsUp extends AbstractCropEngine
                 'crop.y' => $data->crop->y,
                 'options' => $options,
                 'crop.options' => $cropOptions
-            );
+            ));
             return $this->modx->getChunk($outputChunk, $chunkParams);
         } else {
             // Otherwise return raw url

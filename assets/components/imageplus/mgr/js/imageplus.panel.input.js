@@ -21,22 +21,25 @@
  * @copyright Alan Pich 2013
  */
 
-
 ImagePlus.panel.input = function (config) {
     config = config || {};
-    this.imageplus = config.imageplus;
 
+    this.options = config.options;
+    this.image = {};
+
+    this.getValue(config.hiddenField);
     this.createImageBrowser();
     this.createImagePreview();
     this.createAltTextField();
 
     // Warn if has no dependencies
-    if (ImagePlus.config.has_unmet_dependencies) {
+    if (ImagePlus.config.hasUnmetDependencies) {
         ImagePlus.warnAboutUnmetDependencies()
     }
 
     Ext.apply(config, {
         border: false,
+        config: config,
         baseCls: 'modx-panel',
         hiddenField: config.hiddenField,
         width: '400px',
@@ -74,7 +77,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     listenForResetEvent: function () {
         var resourcePanel = Ext.getCmp('modx-panel-resource');
         resourcePanel.on('tv-reset', function (changed) {
-            if (changed.id = this.imageplus.tv.id) {
+            if (changed.id = this.options.tvId) {
                 this.onReset();
             }
         }, this);
@@ -83,15 +86,15 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     // Create the image browser combo
     createImageBrowser: function () {
         // Generate opento path
-        var openToPath = this.imageplus.sourceImg.src.split('/');
+        var openToPath = this.image.sourceImg.src.split('/');
         openToPath.pop();
         openToPath = openToPath.join('/');
 
         // Create browser component
         var _this = this;
         this.imageBrowser = new ImagePlus.combo.Browser({
-            value: this.imageplus.sourceImg.src,
-            source: this.imageplus.mediaSource,
+            value: this.image.sourceImg.src,
+            source: this.options.mediaSource,
             hideSourceCombo: true,
             openTo: openToPath,
             listeners: {
@@ -122,8 +125,8 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     createAltTextField: function () {
         var _this = this;
         this.altTextField = MODx.load({
-            xtype: this.imageplus.altTagOn ? 'textfield' : 'hidden',
-            value: this.imageplus.altTag || '',
+            xtype: this.options.altTagOn ? 'textfield' : 'hidden',
+            value: this.image.altTag || '',
             listeners: {
                 'change': {
                     fn: this.onAltTagChange,
@@ -132,7 +135,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 'afterrender': function () {
                     var el = this.getEl();
                     if (el) {
-                        el.set({'placeholder': _this.lexicon.alt_text});
+                        el.set({'placeholder': _('imageplus.alt_text')});
                     }
                 }
             }, width: 400, style: {
@@ -147,8 +150,8 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             wctx: 'mgr',
             f: 'png',
             q: 90,
-            w: this.imageplus.thumbnailWidth,
-            source: this.imageplus.sourceImg.source
+            w: this.options.thumbnailWidth,
+            source: this.image.sourceImg.source
         };
         for (var i in params) {
             defaults[i] = params[i]
@@ -161,7 +164,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     // Fires when the TV field is reset
     onReset: function () {
         this.imageBrowser.setValue('');
-        this.imageplus.sourceImg = false;
+        this.image.sourceImg = false;
         this.updatePreviewImage.defer(10, this);
     },
     // Runs after initial render of panel
@@ -170,33 +173,33 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Fired when user has selected an image from the browser
     onImageSelected: function (img) {
-        var diffImg = (!this.imageplus.sourceImg || (this.imageplus.sourceImg && this.imageplus.sourceImg.src != img.relativeUrl));
+        var diffImg = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src != img.relativeUrl));
 
         this.oldSourceImg = {};
-        for (var i in this.imageplus.sourceImg) {
-            this.oldSourceImg[i] = this.imageplus.sourceImg[i];
+        for (var i in this.image.sourceImg) {
+            this.oldSourceImg[i] = this.image.sourceImg[i];
         }
-        this.imageplus.sourceImg = {
+        this.image.sourceImg = {
             src: img.relativeUrl,
             width: img.image_width,
             height: img.image_height,
-            source: this.imageplus.mediaSource
+            source: this.options.mediaSource
         };
         // Reset crop rectangle everytime an image is selected to be different from browser
         if (diffImg) {
-            this.imageplus.crop.x = 0;
-            this.imageplus.crop.y = 0;
-            if (this.imageplus.targetRatio) {
-                if (this.imageplus.sourceImg.width / this.imageplus.sourceImg.height < this.imageplus.targetRatio) {
-                    this.imageplus.crop.width = this.imageplus.sourceImg.width;
-                    this.imageplus.crop.height = this.imageplus.sourceImg.height / this.imageplus.targetRatio;
+            this.image.crop.x = 0;
+            this.image.crop.y = 0;
+            if (this.options.targetRatio) {
+                if (this.image.sourceImg.width / this.image.sourceImg.height < this.options.targetRatio) {
+                    this.image.crop.width = this.image.sourceImg.width;
+                    this.image.crop.height = this.image.sourceImg.height / this.options.targetRatio;
                 } else {
-                    this.imageplus.crop.width = this.imageplus.sourceImg.width / this.imageplus.targetRatio;
-                    this.imageplus.crop.height = this.imageplus.sourceImg.height;
+                    this.image.crop.width = this.image.sourceImg.width / this.options.targetRatio;
+                    this.image.crop.height = this.image.sourceImg.height;
                 }
             } else {
-                this.imageplus.crop.width = this.imageplus.sourceImg.width;
-                this.imageplus.crop.height = this.imageplus.sourceImg.height;
+                this.image.crop.width = this.image.sourceImg.width;
+                this.image.crop.height = this.image.sourceImg.height;
             }
         }
         // If server returns 800x600 or higher, image may be larger so need to get size manually
@@ -213,69 +216,96 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Fired when alt-tag field is changed
     onAltTagChange: function (field, value) {
-        this.imageplus.altTag = value;
-        this.updateHiddenField();
+        this.image.altTag = value;
+        this.updateValue();
     },
     // Manually get image size
     manualGetImageSize: function () {
-        var baseUrl = ImagePlus.config['sources'][this.imageplus.sourceImg.source].url;
+        var baseUrl = ImagePlus.config['sources'][this.image.sourceImg.source].url;
         var img = new Image();
         img.onload = (function (ths) {
             return function () {
-                ths.imageplus.sourceImg.width = this.width;
-                ths.imageplus.sourceImg.height = this.height;
+                ths.image.sourceImg.width = this.width;
+                ths.image.sourceImg.height = this.height;
                 ths.updateDisplay();
-                if (ths.imageplus.crop.width == 0 || ths.imageplus.crop.height == 0) {
+                if (ths.image.crop.width == 0 || ths.image.crop.height == 0) {
                     ths.editImage();
                 }
             }
         })(this);
-        img.src = baseUrl + this.imageplus.sourceImg.src;
+        img.src = baseUrl + this.image.sourceImg.src;
     },
     // Update the component display on state change
     updateDisplay: function () {
 
         // Make sure image is large enough to use
         if (!this.checkImageIsLargeEnough()) {
-            this.imageplus.sourceImg = this.oldSourceImg;
+            this.image.sourceImg = this.oldSourceImg;
             if (!this.oldSourceImg) {
                 this.imageBrowser.reset();
             } else {
                 if (this.oldSourceImg.crop) {
-                    this.imageplus.crop.x = this.oldSourceImg.crop.x;
-                    this.imageplus.crop.y = this.oldSourceImg.crop.y;
-                    this.imageplus.crop.width = this.oldSourceImg.crop.width;
-                    this.imageplus.crop.height = this.oldSourceImg.crop.height;
+                    this.image.crop.x = this.oldSourceImg.crop.x;
+                    this.image.crop.y = this.oldSourceImg.crop.y;
+                    this.image.crop.width = this.oldSourceImg.crop.width;
+                    this.image.crop.height = this.oldSourceImg.crop.height;
                 }
                 this.imageBrowser.setValue(this.lastFileLabel || '');
             }
             MODx.msg.alert("Image too small", "The selected image is too small to be used here. Please select a different image");
             return false;
         }
-        this.lastFileLabel = this.imageplus.sourceImg.src;
+        this.lastFileLabel = this.image.sourceImg.src;
 
         this.updatePreviewImage.defer(10, this);
-        this.updateHiddenField();
+        this.updateValue();
         return true;
     },
+
+    // Get hidden field value
+    getValue: function (field) {
+        this.image = Ext.util.JSON.decode(Ext.get(field).getValue());
+        if (!this.image) {
+            this.image = {
+                'sourceImg': {
+                    'height': 0,
+                    'width': 0,
+                    'source': this.options.mediaSource,
+                    'src': Ext.get(field).getValue()
+                },
+                'crop': {
+                    'x': 0,
+                    'y': 0,
+                    'width': 0,
+                    'height': 0
+                }
+            }
+        }
+        ;
+    },
+
     // Update hidden field value
-    updateHiddenField: function () {
-        //  console.log(this.hiddenField);
+    updateValue: function () {
         var TV = {
-            sourceImg: this.imageplus.sourceImg,
-            crop: this.imageplus.crop,
-            targetWidth: this.imageplus.targetWidth,
-            targetHeight: this.imageplus.targetHeight,
-            altTag: this.imageplus.altTag
+            sourceImg: this.image.sourceImg,
+            crop: this.image.crop,
+            targetWidth: this.options.targetWidth,
+            targetHeight: this.options.targetHeight,
+            altTag: this.image.altTag
         };
         var json = JSON.stringify(TV, null, '  ');
 
         var external = document.getElementById(this.hiddenField);
         var current = external.value || external.innerHTML || '';
-        current = (current != '') ? JSON.stringify(JSON.parse(current), null, '  ') : '';
+
+        if (current != '' && JSON.parse(current)) {
+            current = JSON.stringify(JSON.parse(current), null, '  ');
+        } else {
+            current = '';
+        }
 
         // Has value changed or is source image empty?
-        if (current == json || this.imageplus.sourceImg.src == '') {
+        if (current == json || this.image.sourceImg.src == '') {
             return;
         }
         if (document.getElementById(this.hiddenField)) {
@@ -287,15 +317,15 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Checks whether the image is larger than specified crop dimensions
     checkImageIsLargeEnough: function () {
-        if (!this.imageplus.sourceImg || this.imageplus == undefined) return true;
+        if (!this.image.sourceImg || this.image == undefined) return true;
 
-        if (this.imageplus.targetWidth > 0 && this.imageplus.sourceImg.width > 0) {
-            if (this.imageplus.targetWidth > this.imageplus.sourceImg.width) {
+        if (this.options.targetWidth > 0 && this.image.sourceImg.width > 0) {
+            if (this.options.targetWidth > this.image.sourceImg.width) {
                 return false;
             }
         }
-        if (this.imageplus.targetHeight > 0 && this.imageplus.sourceImg.height > 0) {
-            if (this.imageplus.targetHeight > this.imageplus.sourceImg.height) {
+        if (this.options.targetHeight > 0 && this.image.sourceImg.height > 0) {
+            if (this.options.targetHeight > this.image.sourceImg.height) {
                 return false;
             }
         }
@@ -304,18 +334,18 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     // Launch the editor window
     editImage: function () {
         // Create the editor window (if it doesnt exist)
-        if (!this.editorWindow && this.imageplus.sourceImg && this.imageplus.sourceImg.src) {
+        if (!this.editorWindow && this.image.sourceImg && this.image.sourceImg.src) {
 
             // Calculate safe image ratio
-            var imgW = this.imageplus.sourceImg.width;
-            var imgH = this.imageplus.sourceImg.height;
+            var imgW = this.image.sourceImg.width;
+            var imgH = this.image.sourceImg.height;
             var maxH = window.innerHeight * 0.7;
             var maxW = window.innerWidth * 0.9;
             var ratio;
 
             // Is image taller than screen?
             if (imgH > maxH) {
-                ratio = maxH / imgH
+                ratio = maxH / imgH;
                 if ((imgW * ratio) > maxW) {
                     ratio = maxW / imgW
                 }
@@ -329,13 +359,14 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
 
             this.editorWindow = MODx.load({
                 xtype: 'imageplus-window-editor',
-                title: this.lexicon.editor_title,
-                imageplus: this.imageplus,
+                title: _('imageplus.editor_title'),
+                image: this.image,
+                options: this.options,
                 inputPanel: this,
                 displayRatio: ratio,
                 width: ((imgW * ratio) + 20),
                 height: ((imgH * ratio) + 20 + 84),
-                crop: this.imageplus.crop,
+                crop: this.image.crop,
                 padding: 10
             });
 
@@ -344,7 +375,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         }
     },
     clearImage: function () {
-        this.imageplus.sourceImg = null;
+        this.image.sourceImg = null;
         this.oldSourceImg = null;
         this.lastFileLabel = '';
         if (this.imagePreview.el) {
@@ -357,15 +388,15 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Receive new cropping dimensions from editor
     updateFromEditor: function (crop) {
-        this.imageplus.crop.x = crop.x;
-        this.imageplus.crop.y = crop.y;
-        this.imageplus.crop.width = crop.width;
-        this.imageplus.crop.height = crop.height;
+        this.image.crop.x = crop.x;
+        this.image.crop.y = crop.y;
+        this.image.crop.width = crop.width;
+        this.image.crop.height = crop.height;
 
         if (!this.oldSourceImg) {
             this.oldSourceImg = {};
-            for (var i in this.imageplus.sourceImg) {
-                this.oldSourceImg[i] = this.imageplus.sourceImg[i];
+            for (var i in this.image.sourceImg) {
+                this.oldSourceImg[i] = this.image.sourceImg[i];
             }
         }
         this.oldSourceImg.crop = {};
@@ -378,16 +409,16 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.updateDisplay();
     },
     updatePreviewImage: function () {
-        if (!this.imageplus.sourceImg || this.imageplus.crop.width == 0) {
+        if (!this.image.sourceImg || this.image.crop.width == 0) {
             this.imagePreview.hide();
             return;
         }
         var url = this.generateThumbUrl({
-            src: this.imageplus.sourceImg.src,
-            sw: this.imageplus.crop.width,
-            sh: this.imageplus.crop.height,
-            sx: this.imageplus.crop.x,
-            sy: this.imageplus.crop.y
+            src: this.image.sourceImg.src,
+            sw: this.image.crop.width,
+            sh: this.image.crop.height,
+            sx: this.image.crop.x,
+            sy: this.image.crop.y
         });
         if (this.imagePreview.el) {
             this.imagePreview.el.dom.src = url;

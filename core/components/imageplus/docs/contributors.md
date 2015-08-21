@@ -13,11 +13,20 @@ Many thanks to everyone else who has contributed to this project:
 * [@KristianP](https://github.com/KristianP)
 * [@silentworks](https://github.com/silentworks)
 * Nico Telfer
-* [@bartholomej](https://github.com/bartholomej)
-* [@Mark-H](https://github.com/Mark-H)
-* [@AmaZili](https://github.com/AmaZili)
 * [@inreti](https://github.com/inreti)
+* [@jcdm](https://github.com/jcdm)
 * [@Bruno17](https://github.com/Bruno17)
+
+Translations on Crowdin by:
+* [@alroniks](https://crowdin.com/profile/alroniks)
+* [@AmaZili](https://crowdin.com/profile/AmaZili)
+* [@Bartholomej](https://crowdin.com/profile/Bartholomej)
+* [@dannevang](https://crowdin.com/profile/dannevang)
+* [@gljoslin1014](https://crowdin.com/profile/gljoslin1014)
+* [@mac_aronie](https://crowdin.com/profile/mac_aronie)
+* [@modmore](https://crowdin.com/profile/modmore)
+* [@serimarda](https://crowdin.com/profile/serimarda)
+* [@krismas](https://crowdin.com/profile/krismas)
 
 <!-- Piwik -->
 <script type="text/javascript">
