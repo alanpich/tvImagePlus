@@ -1,6 +1,6 @@
 <?php
 
-$_lang['imageplus'] = "Image+";
+$_lang['imageplus'] = 'Image+';
 
 
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
@@ -8,15 +8,15 @@ $_lang['imageplus.edit_image'] = 'Bewerk Afbeelding';
 $_lang['imageplus.alt_text'] = 'Alternatieve tekst';
 
 /** Input options render **/
-$_lang['imageplus.targetwidth'] = 'Breedte';
+$_lang['imageplus.targetwidth'] = 'Doel (minimale) breedte';
 $_lang['imageplus.targetwidth_desc'] = '(Optioneel, geheel getal) De breedte van de uiteindelijke afbeelding.';
-$_lang['imageplus.targetheight'] = 'Hoogte';
+$_lang['imageplus.targetheight'] = 'Doel (minimale) hoogte';
 $_lang['imageplus.targetheight_desc'] = '(Optioneel, geheel getal) De hoogte van de uiteindelijke afbeelding.';
 $_lang['imageplus.targetRatio'] = 'Hoogte/breedteverhouding voor het doelbestand';
 $_lang['imageplus.targetRatio_desc'] = '(Optioneel, drijvend) De hoogte/breedteverhouding van de afbeelding. Als de hoogte en breedte voor de output zijn ingesteld wordt deze waarde genegeerd.';
 $_lang['imageplus.thumbnailWidth'] = 'Thumbnail breedte';
 $_lang['imageplus.thumbnailWidth_desc'] = '(Optioneel, geheel getal) De breedte van de thumbnail in het Template Variabele paneel.';
-$_lang['imageplus.allowAltTag'] = 'Alt veld';
+$_lang['imageplus.allowAltTag'] = 'Alt-Tag veld weergeven';
 $_lang['imageplus.allowAltTag_desc'] = 'Sta de gebruiker toe om een alt of title tag voor de afbeelding in te voeren';
 
 /** Output options render **/

@@ -1,6 +1,6 @@
 <?php
 
-$_lang['imageplus'] = "Image+";
+$_lang['imageplus'] = 'Image+';
 
 
 $_lang['imageplus.editor_title'] = 'Éditeur Image+';
