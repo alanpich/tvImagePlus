@@ -110,34 +110,34 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
     },
     getMinCropSize: function () {
         return [
-            this.options.targetWidth * this.displayRatio,
-            this.options.targetHeight * this.displayRatio
+            Math.round(this.options.targetWidth * this.displayRatio),
+            Math.round(this.options.targetHeight * this.displayRatio)
         ]
     },
     getMinCropWidth: function () {
-        return this.options.targetWidth * this.displayRatio;
+        return Math.round(this.options.targetWidth * this.displayRatio);
     },
     getMinCropHeight: function () {
-        return this.options.targetHeight * this.displayRatio;
+        return Math.round(this.options.targetHeight * this.displayRatio);
     },
     getInitialCropX: function () {
-        return this.image.crop.x * this.displayRatio;
+        return Math.round(this.image.crop.x * this.displayRatio);
     },
     getInitialCropY: function () {
-        return this.image.crop.y * this.displayRatio;
+        return Math.round(this.image.crop.y * this.displayRatio);
     },
     getInitialCropWidth: function () {
         if (this.image.crop.width == 0) {
-            return this.options.targetWidth * this.displayRatio;
+            return Math.round(this.options.targetWidth * this.displayRatio);
         } else {
-            return this.image.crop.width * this.displayRatio;
+            return Math.round(this.image.crop.width * this.displayRatio);
         }
     },
     getInitialCropHeight: function () {
         if (this.image.crop.height == 0) {
-            return this.options.targetHeight * this.displayRatio
+            return Math.round(this.options.targetHeight * this.displayRatio)
         } else {
-            return this.image.crop.height * this.displayRatio;
+            return Math.round(this.image.crop.height * this.displayRatio);
         }
     },
     getAspectRatio: function () {
