@@ -5,13 +5,13 @@ site_dir: _build/site
 repo_url: https://github.com/Jako/ImagePlus
 
 pages:
-- [index.md, Home]
-- [installation.md, Installation]
-- [getting-started.md, Getting Started]
-- [usage.md, Usage]
-- [examples.md, Examples]
-- [contributors.md, Contributors]
-- [donate.md, Donate]
+- Home: 'index.md'
+- Installation: 'installation.md'
+- Getting Started: 'getting-started.md'
+- Usage: 'usage.md'
+- Examples: 'examples.md'
+- Contributors: 'contributors.md'
+- Donate: 'donate.md'
 
 theme: readthedocs
 
