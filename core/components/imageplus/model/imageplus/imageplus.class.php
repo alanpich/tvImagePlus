@@ -141,7 +141,7 @@ class ImagePlus
         });
 
         // Do some basic intelligent sniffing
-        if (!$this->options['cropEngineClass']) {
+        if (!isset($this->options['cropEngineClass'])) {
             if (CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)) {
                 $this->options['cropEngineClass'] = '\\ImagePlus\\CropEngines\\PhpThumbsUp';
             } else if (CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
