@@ -77,7 +77,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     listenForResetEvent: function () {
         var resourcePanel = Ext.getCmp('modx-panel-resource');
         resourcePanel.on('tv-reset', function (changed) {
-            if (changed.id = this.options.tvId) {
+            if (changed.id == this.options.tvId) {
                 this.onReset();
             }
         }, this);
