@@ -31,14 +31,9 @@ Ext.extend(imagePlus, Ext.Component, {
     page: {}, window: {}, grid: {}, tree: {}, panel: {}, combo: {}, config: {}, jquery: {}, form: {},
 
     generateThumbUrl: function (params) {
-        return this.generatePhpThumbOfUrl(params);
-    },
-
-    generatePhpThumbOfUrl: function (params) {
         var url = MODx.config.connectors_url + 'system/phpthumb.php?imageplus=1';
         var defaults = {
             wctx: 'mgr',
-            w: 150,
             source: 1
         };
         for (var i in params) {
@@ -47,8 +42,7 @@ Ext.extend(imagePlus, Ext.Component, {
         for (i in defaults) {
             url += '&' + i + '=' + defaults[i];
         }
-        return url;
-
+        return url + '&w=150';
     },
 
     warnAboutUnmetDependencies: function () {
