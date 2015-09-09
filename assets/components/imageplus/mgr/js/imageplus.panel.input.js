@@ -148,8 +148,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         var url = MODx.config.connectors_url + 'system/phpthumb.php?imageplus=1';
         var defaults = {
             wctx: 'mgr',
-            f: 'png',
-            q: 90,
             w: this.options.thumbnailWidth,
             source: this.image.sourceImg.source
         };
