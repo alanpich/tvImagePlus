@@ -18,6 +18,10 @@ The field has to be filled with a float value.
 If you set only one value of **Target Height** or **Target Width** and leave empty **Target Aspect Ratio**, the size of 
 the crop is not restricted to any aspect ratio.
 
+> **How to calculate float value**
+>
+> For setting an aspect ratio using a float value: this value is easily acquired by dividing any width of a desired aspect ratio by its corresponding height. So say you want to all your crops to have the same aspect ratio as a 1600x1000 image, simply divide 1600 by 1000, resulting in 1.6. This is your float value.
+
 **Show Alt Tag Field**
 
 *Image+* TVs can also contain an **Alt Tag Field**, which is an additional text input, that is stored with each image. 
