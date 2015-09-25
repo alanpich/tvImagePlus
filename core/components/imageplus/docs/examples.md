@@ -33,3 +33,11 @@ You could show the thumbnail in the grid column by setting the renderer to 'Imag
 </script>
 <noscript><p><img src="//piwik.partout.info/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
+
+### getResources
+
+In order for the TV to be parsed with getResources, make sure you add the following line to your getResources call:
+
+```
+&processTVs=`name_of_your_tv`
+```
