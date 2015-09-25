@@ -1,13 +1,17 @@
 <?php
 /**
- * Snippet as alternative to Image+ TV Output Type
+ * ImagePlus Snippet as alternative to Image+ TV Output Type
+ *
+ * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
+ * Copyright 2015 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
- * @author  Alan Pich <alan.pich@gmail.com>
+ * @subpackage snippet
  *
- * @snippet ImagePlus
- * @var string $options The type of render to perform
- *
+ * @author Alan Pich <alan.pich@gmail.com>
+ * @author Thomas Jakobi <thomas.jakobi@partout.info>
+ * @copyright Alan Pich 2013-2015
+ * @copyright Thomas Jakobi 2015
  */
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
