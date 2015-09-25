@@ -15,7 +15,7 @@
  */
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
-$imagePlus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+$imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
     'core_path' => $corePath
 ));
 
@@ -60,7 +60,7 @@ switch ($type) {
         $output = ($data && $data->sourceImg->src) ? 'image' : 'noimage';
         break;
     case 'tpl':
-        $output = $imagePlus->getImageURL($value, array_merge($scriptProperties, array(
+        $output = $imageplus->getImageURL($value, array_merge($scriptProperties, array(
             'docid' => $docid,
             'phpThumbParams' => $options,
             'outputChunk' => $tpl
@@ -68,7 +68,7 @@ switch ($type) {
         break;
     case 'thumb':
     default:
-        $output = $imagePlus->getImageURL($value, array_merge($scriptProperties, array(
+        $output = $imageplus->getImageURL($value, array_merge($scriptProperties, array(
             'docid' => $docid,
             'phpThumbParams' => $options
         )), $tv);
