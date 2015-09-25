@@ -1,4 +1,4 @@
-# Intro
+# Image+
 
 Image+ is an advanced image custom template variable type for MODx Revolution. The dimensions for the uploaded image can 
 (optionally) be configured to constrain a minimal width and/or height. The image crop could be forced to remain at a 

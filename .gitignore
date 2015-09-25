@@ -6,3 +6,7 @@ _build/site
 _packages/*.*
 !_packages/.gitignore
 !_packages/*.zip
+
+node_modules/
+package.json
+Gruntfile.js

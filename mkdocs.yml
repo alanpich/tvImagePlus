@@ -15,4 +15,6 @@ pages:
 
 theme: readthedocs
 
-markdown_extensions: [footnotes,tables]
+markdown_extensions:
+    - footnotes
+    - tables
