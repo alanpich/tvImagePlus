@@ -14,7 +14,7 @@
  */
 
 ImagePlus.MIGX_Renderer = function (json) {
-    if (json == null || json == undefined ) return '';
+    if (typeof(json) == "undefined" || json == null) return '';
     if (!json.length) return '';
     var data = JSON.parse(json);
     var url = ImagePlus.generateThumbUrl({
@@ -24,6 +24,6 @@ ImagePlus.MIGX_Renderer = function (json) {
         sh: data.crop.height,
         sx: data.crop.x,
         sy: data.crop.y
-    })
+    });
     return '<img src="' + url + '" style="max-width:100%; height:auto;" />';
-}
+};
