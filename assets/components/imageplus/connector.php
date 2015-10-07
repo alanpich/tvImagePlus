@@ -28,10 +28,12 @@ $imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imag
     'core_path' => $corePath
 ));
 
-// Load up some lexiconzzzz
-$modx->lexicon->load('imageplus:default');
+// Set HTTP_MODAUTH for web processors
+if (defined('MODX_REQP') && MODX_REQP === false) {
+    $_SERVER['HTTP_MODAUTH'] = $modx->user->getUserToken($modx->context->get('key'));
+}
 
-// Handle request 
+// Handle request
 $modx->request->handleRequest(array(
     'processors_path' => $imageplus->getOption('processorsPath'),
     'location' => ''
