@@ -83,7 +83,8 @@ class ImagePlus
 
         // set default options
         $this->options = array_merge($this->options, array(
-            'sources' => $this->loadSourceMap()
+            'sources' => $this->loadSourceMap(),
+            'debug' => true
         ));
 
         $this->checkDependencies();
@@ -172,20 +173,29 @@ class ImagePlus
     public function includeScriptAssets()
     {
         $vers = $this->modx->getVersionData();
-        if ($vers['major_version'] >= 3) {
-            $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus.css');
+        if ($this->options['debug'] && strpos($this->options['assetsUrl'], 'develop/imageplus/') !== false) {
+            if ($vers['major_version'] >= 3) {
+                $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus.css');
+            } else {
+                $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus-22.css');
+            }
+            $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/jquery/jquery.jcrop.min.css');
+            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.panel.input.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.window.editor.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.migx_renderer.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/tools/JSON2.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.min.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.jcrop.min.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.jquery.imagecrop.js?v=v' . $this->version);
         } else {
-            $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus-22.css');
+            if ($vers['major_version'] >= 3) {
+                $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus.min.css');
+            } else {
+                $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus-22.min.css');
+            }
+            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.min.js?v=v' . $this->version);
         }
-        $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/jquery/jquery.jcrop.min.css');
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.js?v=v' . $this->version);
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.panel.input.js?v=v' . $this->version);
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.window.editor.js?v=v' . $this->version);
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.migx_renderer.js?v=v' . $this->version);
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/tools/JSON2.js?v=v' . $this->version);
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.min.js?v=v' . $this->version);
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.jcrop.min.js?v=v' . $this->version);
-        $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.jquery.imagecrop.js?v=v' . $this->version);
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
             . ' ImagePlus.config = ' . json_encode($this->options) . ';'
             . ' var $jIP = jQuery.noConflict();'
