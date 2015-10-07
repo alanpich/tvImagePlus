@@ -17,8 +17,6 @@ class ImagePlusOutputRender extends modTemplateVarOutputRender
 {
     public function process($value, array $params = array())
     {
-        $this->modx->lexicon->load('imageplus:default');
-
         // Load imageplus class
         $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
         $imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
