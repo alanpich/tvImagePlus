@@ -68,6 +68,7 @@ class ImagePlus
             'cssUrl' => $assetsUrl . 'css/',
             'jsUrl' => $assetsUrl . 'js/',
             'imagesUrl' => $assetsUrl . 'images/',
+            'connectorUrl' => $assetsUrl . 'connector.php',
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
             'vendorPath' => $corePath . 'vendor/',
@@ -78,7 +79,6 @@ class ImagePlus
             'controllersPath' => $corePath . 'controllers/',
             'processorsPath' => $corePath . 'processors/',
             'templatesPath' => $corePath . 'templates/',
-            'connectorUrl' => $assetsUrl . 'connector.php',
         ), $options);
 
         // set default options
