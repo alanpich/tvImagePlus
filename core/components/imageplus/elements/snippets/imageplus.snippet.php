@@ -31,7 +31,7 @@ if ($value) {
     // Value is set by snippet property
     $data = json_decode($value);
     if (!$data) {
-        $modx->log(xPDO::LOG_LEVEL_ERROR, 'Unable to decode JSON in snippet property', '', 'Image+');
+        $modx->log(xPDO::LOG_LEVEL_DEBUG, 'Unable to decode JSON in snippet property', '', 'Image+');
         if ($debug) {
             return 'Unable to decode JSON in snippet property';
         }
@@ -45,7 +45,7 @@ if ($value) {
         // Get the raw content of the TV
         $value = $tv->getValue($docid);
     } else {
-        $modx->log(xPDO::LOG_LEVEL_ERROR, "Template Variable '{$tvname}' not found.", '', 'Image+');
+        $modx->log(xPDO::LOG_LEVEL_DEBUG, "Template Variable '{$tvname}' not found.", '', 'Image+');
         if ($debug) {
             return "Template Variable '{$tvname}' not found.";
         }
