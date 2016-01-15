@@ -5,6 +5,7 @@ Changelog
     - Retain the value of a MODX TV as image source of the Image+ TV
     - Fill output chunk placeholders with script properties
     - Improved error logging
+    - Resolved issues with apostrophes in language strings
 
 - 2.3.4
     - Open crop window automatic after selecting a new image

@@ -23,7 +23,7 @@
         labelAlign: 'top',
         items: [{
             xtype: 'textfield',
-            fieldLabel: '{/literal}{$imageplus.targetwidth}{literal}',
+            fieldLabel: _('imageplus.targetwidth'),
             name: 'inopt_targetWidth',
             id: 'inopt_targetWidth{/literal}{$tv}{literal}',
             value: params['targetWidth'] || '',
@@ -33,11 +33,11 @@
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'inopt_targetWidth{/literal}{$tv}{literal}',
-            html: '{/literal}{$imageplus.targetwidth_desc}{literal}',
+            html: _('imageplus.targetwidth_desc'),
             cls: 'desc-under'
         }, {
             xtype: 'textfield',
-            fieldLabel: '{/literal}{$imageplus.targetheight}{literal}',
+            fieldLabel: _('imageplus.targetheight'),
             name: 'inopt_targetHeight',
             id: 'inopt_targetHeight{/literal}{$tv}{literal}',
             value: params['targetHeight'] || '',
@@ -47,11 +47,11 @@
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'inopt_targetHeight{/literal}{$tv}{literal}',
-            html: '{/literal}{$imageplus.targetheight_desc}{literal}',
+            html: _('imageplus.targetheight_desc'),
             cls: 'desc-under'
         }, {
             xtype: 'textfield',
-            fieldLabel: '{/literal}{$imageplus.targetRatio}{literal}',
+            fieldLabel: _('imageplus.targetRatio'),
             name: 'inopt_targetRatio',
             id: 'inopt_targetRatio{/literal}{$tv}{literal}',
             value: params['targetRatio'] || '',
@@ -61,11 +61,11 @@
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'inopt_targetRatio{/literal}{$tv}{literal}',
-            html: '{/literal}{$imageplus.targetRatio_desc}{literal}',
+            html: _('imageplus.targetRatio_desc'),
             cls: 'desc-under'
         }, {
             xtype: 'textfield',
-            fieldLabel: '{/literal}{$imageplus.thumbnailWidth}{literal}',
+            fieldLabel: _('imageplus.thumbnailWidth'),
             name: 'inopt_thumbnailWidth',
             id: 'inopt_thumbnailWidth{/literal}{$tv}{literal}',
             value: params['thumbnailWidth'] || '',
@@ -75,22 +75,22 @@
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'inopt_thumbnailWidth{/literal}{$tv}{literal}',
-            html: '{/literal}{$imageplus.thumbnailWidth_desc}{literal}',
+            html: _('imageplus.thumbnailWidth_desc'),
             cls: 'desc-under'
         }, {
             xtype: 'combo-boolean',
-            fieldLabel: '{/literal}{$imageplus.allowAltTag}{literal}',
+            fieldLabel: _('imageplus.allowAltTag'),
             name: 'inopt_allowAltTag',
             hiddenName: 'inopt_allowAltTag',
             id: 'inopt_allowAltTag{/literal}{$tv}{literal}',
-            value: (params['allowAltTag'] || false),
+            value: params['allowAltTag'] == 0 || params['allowAltTag'] == 'false' ? false : true,
             labelAlign: 'left',
             anchors: '98%',
             listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'inopt_allowAltTag{/literal}{$tv}{literal}',
-            html: '{/literal}{$imageplus.allowAltTag_desc}{literal}',
+            html: _('imageplus.allowAltTag_desc'),
             cls: 'desc-under'
         }],
         renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'

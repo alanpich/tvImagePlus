@@ -3,7 +3,7 @@
   "lowCaseName": "imageplus",
   "description": "Advanced Image template variable input type",
   "author": "Thomas Jakobi",
-  "version": "2.4.0-b4",
+  "version": "2.4.0",
   "package": {
     "elements": {
       "chunks": [
@@ -24,6 +24,7 @@
           "file": "imageplus.plugin.php",
           "description": "Image+ runtime hooks - registers custom TV input & output types and includes javascripts on document edit pages.",
           "events": [
+            "OnManagerPageBeforeRender",
             "OnTVInputPropertiesList",
             "OnTVInputRenderList",
             "OnTVOutputRenderList",

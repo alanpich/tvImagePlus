@@ -23,8 +23,8 @@
         labelAlign: 'top',
         items: [{
             xtype: 'textfield',
-            fieldLabel: '{/literal}{$imageplus.phpThumbParams}{literal}',
-            description: MODx.expandHelp ? '' : '{/literal}{$imageplus.phpThumbParams_desc}{literal}',
+            fieldLabel: _('imageplus.phpThumbParams'),
+            description: MODx.expandHelp ? '' : _('imageplus.phpThumbParams_desc'),
             name: 'prop_phpThumbParams',
             id: 'prop_phpThumbParams{/literal}{$tv}{literal}',
             value: params['phpThumbParams'] || '',
@@ -34,7 +34,7 @@
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'prop_phpThumbParams{/literal}{$tv}{literal}',
-            html: '{/literal}{$imageplus.phpThumbParams_desc}{literal}',
+            html: _('imageplus.phpThumbParams_desc'),
             cls: 'desc-under'
         }, {
             xtype: 'modx-combo',
@@ -48,8 +48,8 @@
             valueField: 'name',
             typeAhead: true,
             editable: true,
-            fieldLabel: '{/literal}{$imageplus.outputChunk}{literal}',
-            description: MODx.expandHelp ? '' : '{/literal}{$imageplus.outputChunk_desc}{literal}',
+            fieldLabel: _('imageplus.outputChunk'),
+            description: MODx.expandHelp ? '' : _('imageplus.outputChunk_desc'),
             name: 'prop_outputChunk',
             id: 'prop_outputChunk{/literal}{$tv}{literal}',
             value: params['outputChunk'] || '',
@@ -59,22 +59,22 @@
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'prop_outputChunk{/literal}{$tv}{literal}',
-            html: '{/literal}{$imageplus.outputChunk_desc}{literal}',
+            html: _('imageplus.outputChunk_desc'),
             cls: 'desc-under'
         }, {
             xtype: 'combo-boolean',
-            fieldLabel: '{/literal}{$imageplus.generateUrl}{literal}',
-            description: MODx.expandHelp ? '' : '{/literal}{$imageplus.generateUrl_desc}{literal}',
+            fieldLabel: _('imageplus.generateUrl'),
+            description: MODx.expandHelp ? '' : _('imageplus.generateUrl_desc'),
             name: 'prop_generateUrl',
             id: 'prop_generateUrl{/literal}{$tv}{literal}',
-            value: params['generateUrl'] || 1,
+            value: params['allowAltTag'] == 1 || params['allowAltTag'] == 'true' ? true : false,
             anchors: '98%',
             width: '99%',
             listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'prop_generateUrl{/literal}{$tv}{literal}',
-            html: '{/literal}{$imageplus.generateUrl_desc}{literal}',
+            html: _('imageplus.generateUrl_desc'),
             cls: 'desc-under'
         }],
         renderTo: 'tv-output-properties-form{/literal}{$tv}{literal}'

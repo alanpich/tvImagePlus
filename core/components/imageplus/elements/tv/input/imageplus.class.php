@@ -27,7 +27,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
     }
 
     // Override the default TV render because of a isnumeric/intval bug,
-    // that does not allow a floatval in the input options
+    // that does not allow a floatval in the input options - fixed in MODX Revolution 2.3.4 (https://github.com/modxcms/revolution/pull/12452)
     public function render($value, array $params = array())
     {
         $this->setPlaceholder('tv', $this->tv);
@@ -63,9 +63,6 @@ class ImagePlusInputRender extends modTemplateVarInputRender
             'core_path' => $corePath
         ));
         $version = $this->modx->getVersionData();
-
-        // add lexicon topic
-        $this->modx->controller->addLexiconTopic('imageplus:default');
 
         // Load required javascripts & register global config
         $imageplus->includeScriptAssets();
