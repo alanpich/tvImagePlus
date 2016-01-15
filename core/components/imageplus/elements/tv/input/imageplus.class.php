@@ -95,7 +95,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         $this->setPlaceholder('tvConfig', json_encode($tvConfig));
 
         // Prepare value
-        $this->tv->value = $imageplus->prepareTvValue($this->tv->value, $params, $source);
+        $this->tv->value = $imageplus->prepareTvValue($this->tv->value, $params, $this->tv);
     }
 }
 
