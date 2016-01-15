@@ -211,7 +211,7 @@ class ImagePlus
      * @internal param array $params
      * @return string
      */
-    public function getImageURL($json, $opts = array(), modTemplateVar $tv)
+    public function getImageURL($json, $opts = array(), modTemplateVar $tv = null)
     {
         // Check system settings for crop engine override
         $engineClass = $this->getOption('cropEngineClass');
@@ -241,7 +241,7 @@ class ImagePlus
      * @param modTemplateVar $tv
      * @return string
      */
-    public function prepareTvValue($json, $opts = array(), modTemplateVar $tv)
+    public function prepareTvValue($json, $opts = array(), modTemplateVar $tv = null)
     {
         // Prepare value
         $decoded = json_decode($json);

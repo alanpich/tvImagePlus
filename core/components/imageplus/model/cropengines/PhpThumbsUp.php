@@ -47,7 +47,7 @@ class PhpThumbsUp extends AbstractCropEngine
      * @param \modTemplateVar $tv
      * @return string
      */
-    public function getImageUrl($json, $opts = array(), \modTemplateVar $tv)
+    public function getImageUrl($json, $opts = array(), \modTemplateVar $tv = null)
     {
         if ($json == '') {
             $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The value is empty. Could not prepare the output.', '', 'Image+');
