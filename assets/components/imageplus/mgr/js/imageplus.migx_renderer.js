@@ -14,7 +14,7 @@
  */
 
 ImagePlus.MIGX_Renderer = function (json) {
-    if (typeof(json) == "undefined" || json == null) return '';
+    if (typeof(json) == 'undefined' || json == null) return '';
     if (!json.length) return '';
     var data = JSON.parse(json);
     var url = ImagePlus.generateThumbUrl({

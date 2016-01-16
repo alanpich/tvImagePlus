@@ -3,6 +3,8 @@ Changelog
 
 - 2.4.1
     - Fixing recoverable errors
+    - Change the image by typing the filename
+    - Translated error messages
 
 - 2.4.0
     - Retain the value of a MODX TV as source image for the Image+ TV

@@ -101,6 +101,12 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 select: {
                     fn: this.onImageSelected,
                     scope: this
+                },
+                change: {
+                    fn: function (cb, nv) {
+                        this.onImageChange(nv);
+                    },
+                    scope: this
                 }
             },
             onTrigger1Click: function () {
@@ -212,6 +218,82 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             this.editImage();
         }
     },
+    // Fired when user has changed the image input
+    onImageChange: function (src) {
+        if (src != '') {
+            var diffImg = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src != src));
+
+            this.oldSourceImg = {};
+            for (var i in this.image.sourceImg) {
+                this.oldSourceImg[i] = this.image.sourceImg[i];
+            }
+
+            this.image.sourceImg = {
+                src: src,
+                source: this.options.mediaSource
+            };
+
+            var baseUrl = ImagePlus.config['sources'][this.image.sourceImg.source].url;
+            var img = new Image();
+            img.onload = (function (ths) {
+                return function () {
+                    ths.image.sourceImg.width = this.width;
+                    ths.image.sourceImg.height = this.height;
+
+                    // Reset crop rectangle everytime an image is selected to be different from browser
+                    if (diffImg) {
+                        ths.image.crop.x = 0;
+                        ths.image.crop.y = 0;
+                        if (ths.options.targetRatio) {
+                            if (ths.image.sourceImg.width / ths.image.sourceImg.height < ths.options.targetRatio) {
+                                ths.image.crop.width = ths.image.sourceImg.width;
+                                ths.image.crop.height = ths.image.sourceImg.height / ths.options.targetRatio;
+                            } else {
+                                ths.image.crop.width = ths.image.sourceImg.width / ths.options.targetRatio;
+                                ths.image.crop.height = ths.image.sourceImg.height;
+                            }
+                        } else {
+                            ths.image.crop.width = ths.image.sourceImg.width;
+                            ths.image.crop.height = ths.image.sourceImg.height;
+                        }
+                    }
+
+                    // Update display
+                    if (!ths.updateDisplay()) {
+                        return;
+                    }
+                    if (diffImg) {
+                        ths.editImage();
+                    }
+
+                    ths.updateDisplay();
+                    if (ths.image.crop.width == 0 || ths.image.crop.height == 0) {
+                        ths.editImage();
+                    }
+                }
+            })(this);
+            img.onerror = (function (ths) {
+                return function () {
+                    if (!ths.oldSourceImg) {
+                        ths.imageBrowser.reset();
+                    } else {
+                        if (ths.oldSourceImg.crop) {
+                            ths.image.crop.x = ths.oldSourceImg.crop.x;
+                            ths.image.crop.y = ths.oldSourceImg.crop.y;
+                            ths.image.crop.width = ths.oldSourceImg.crop.width;
+                            ths.image.crop.height = ths.oldSourceImg.crop.height;
+                        }
+                        ths.imageBrowser.setValue(ths.lastFileLabel || '');
+                    }
+                    MODx.msg.alert(_('imageplus.error.image_not_found.title'), _('imageplus.error.image_not_found.msg'));
+                    return false;
+                }
+            })(this);
+            img.src = baseUrl + this.image.sourceImg.src;
+        } else {
+            this.clearImage();
+        }
+    },
     // Fired when alt-tag field is changed
     onAltTagChange: function (field, value) {
         this.image.altTag = value;
@@ -250,7 +332,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 }
                 this.imageBrowser.setValue(this.lastFileLabel || '');
             }
-            MODx.msg.alert("Image too small", "The selected image is too small to be used here. Please select a different image");
+            MODx.msg.alert(_('imageplus.error.image_too_small.title'), _('imageplus.error.image_too_small.msg'));
             return false;
         }
         this.lastFileLabel = this.image.sourceImg.src;
@@ -279,7 +361,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 }
             }
         }
-        ;
     },
 
     // Update hidden field value
@@ -450,9 +531,9 @@ ImagePlus.form.TripleTriggerField = Ext.extend(Ext.form.TriggerField, {
 
         this.triggerConfig = {
             tag: 'span', cls: 'x-form-triple-triggers', cn: [
-                {tag: "div", cls: "x-form-trigger " + this.trigger1Class},
-                {tag: "div", cls: "x-form-trigger " + this.trigger2Class},
-                {tag: "div", cls: "x-form-trigger " + this.trigger3Class}
+                {tag: 'div', cls: 'x-form-trigger ' + this.trigger1Class},
+                {tag: 'div', cls: 'x-form-trigger ' + this.trigger2Class},
+                {tag: 'div', cls: 'x-form-trigger ' + this.trigger3Class}
             ]
         };
     },
@@ -565,7 +646,7 @@ Ext.extend(ImagePlus.combo.Browser, ImagePlus.form.TripleTriggerField, {
             rootId: this.config.rootId || '/',
             hideSourceCombo: this.config.hideSourceCombo || false,
             listeners: {
-                'select': {
+                select: {
                     fn: function (data) {
                         this.setValue(data.relativeUrl);
                         this.fireEvent('select', data);

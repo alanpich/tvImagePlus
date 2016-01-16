@@ -45,7 +45,7 @@ Ext.extend(imagePlus, Ext.Component, {
     warnAboutUnmetDependencies: function () {
         var warningWindow = MODx.load({
             xtype: 'modx-window',
-            title: "Image+ Warning – Unmet Dependencies",
+            title: 'Image+ Warning – Unmet Dependencies',
             modal: true,
             padding: 25,
             allowDrop: false,
@@ -58,9 +58,9 @@ Ext.extend(imagePlus, Ext.Component, {
                     L.ownerCt.ownerCt.close();
                 }
             }],
-            html: "<h3>You don't have any crop engines!</h3>" +
-            "<p>Before you can use Image+, you need at least one Crop Engine installed to handle image manipulation.</p>" +
-            "<p>A quick fix is to install either pThumb, phpThumbOf or phpThumbsUp from the MODX Package Repository</p>"
+            html: '<h3>You don\'t have any crop engines!</h3>' +
+            '<p>Before you can use Image+, you need at least one Crop Engine installed to handle image manipulation.</p>' +
+            '<p>A quick fix is to install either pThumb, phpThumbOf or phpThumbsUp from the MODX Package Repository</p>'
         });
         warningWindow.show();
     }

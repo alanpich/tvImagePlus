@@ -1,7 +1,5 @@
 <?php
-
 $_lang['imageplus'] = 'Image+';
-
 
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Edit Image';
@@ -41,3 +39,8 @@ $_lang['imageplus.placeholder.crop.x'] = 'Crop x position of the source image';
 $_lang['imageplus.placeholder.crop.y'] = 'Crop y position of the source image';
 $_lang['imageplus.placeholder.options'] = 'phpThumb option string to generate the thumbnail image';
 $_lang['imageplus.placeholder.crop.options'] = 'phpThumb crop option string to generate the thumbnail image';
+
+$_lang['imageplus.error.image_too_small.title'] = 'Image too small';
+$_lang['imageplus.error.image_too_small.msg'] = 'The selected image is too small to be used here. Please select a different image.';
+$_lang['imageplus.error.image_not_found.title'] = 'Image not found';
+$_lang['imageplus.error.image_not_found.msg'] = 'The image was not found and can\'t be cropped. Please select a different image.';
