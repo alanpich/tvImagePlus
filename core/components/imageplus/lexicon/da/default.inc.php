@@ -1,7 +1,5 @@
 <?php
-
 $_lang['imageplus'] = 'Image+';
-
 
 $_lang['imageplus.editor_title'] = 'Image+ editor';
 $_lang['imageplus.edit_image'] = 'Rediger billede';
@@ -41,3 +39,8 @@ $_lang['imageplus.placeholder.crop.x'] = 'Beskær x placering af kildebilledet';
 $_lang['imageplus.placeholder.crop.y'] = 'Beskær y placering af kildebilledet';
 $_lang['imageplus.placeholder.options'] = 'phpThumb indstillingsstreng til at generere miniaturebilledet';
 $_lang['imageplus.placeholder.crop.options'] = 'phpThumb beskæringsindstillingsstreng til at generere miniaturebilledet';
+
+$_lang['imageplus.error.image_too_small.title'] = 'Billedet er for lille';
+$_lang['imageplus.error.image_too_small.msg'] = 'Det valgte billede er for småt til at blive brugt her. Vælg venligst et andet billede.';
+$_lang['imageplus.error.image_not_found.title'] = 'Billedet blev ikke fundet';
+$_lang['imageplus.error.image_not_found.msg'] = 'Billedet blev ikke fundet og kan dermed ikke blive beskåret. Vælg venligst et andet billede.';
