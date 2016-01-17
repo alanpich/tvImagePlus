@@ -1,7 +1,5 @@
 <?php
-
 $_lang['imageplus'] = 'Image+';
-
 
 $_lang['imageplus.editor_title'] = 'Éditeur Image+';
 $_lang['imageplus.edit_image'] = 'Éditer l\'image';
@@ -41,3 +39,8 @@ $_lang['imageplus.placeholder.crop.x'] = 'Position recadrage en x de l\'image so
 $_lang['imageplus.placeholder.crop.y'] = 'Position recadrage en y de l\'image source';
 $_lang['imageplus.placeholder.options'] = 'chaîne d\'option phpThumb pour générer l\'image miniature';
 $_lang['imageplus.placeholder.crop.options'] = 'chaîne d\'option de recadrage phpThumb pour générer l\'image miniature';
+
+$_lang['imageplus.error.image_too_small.title'] = 'Image trop petite';
+$_lang['imageplus.error.image_too_small.msg'] = 'L\'image sélectionnée est trop petite pour être utilisé ici. Veuillez sélectionner une image différente.';
+$_lang['imageplus.error.image_not_found.title'] = 'Image non trouvée';
+$_lang['imageplus.error.image_not_found.msg'] = 'L\'image est introuvable et ne peut être recadrée. Veuillez sélectionner une image différente.';
