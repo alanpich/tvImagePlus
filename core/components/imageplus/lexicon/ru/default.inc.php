@@ -39,3 +39,8 @@ $_lang['imageplus.placeholder.crop.x'] = 'Позиция обрезки исхо
 $_lang['imageplus.placeholder.crop.y'] = 'Позиция обрезки исходного изображения по оси Y (вертикаль)';
 $_lang['imageplus.placeholder.options'] = 'Строка параметров phpThumb для генерации иконки изображения';
 $_lang['imageplus.placeholder.crop.options'] = 'Строка опций обрезки phpThumb для генерации иконки изображения';
+
+$_lang['imageplus.error.image_too_small.title'] = 'Изображение слишком маленькое';
+$_lang['imageplus.error.image_too_small.msg'] = 'Выбранное изображение слишком маленькое для использования здесь. Выберите другое изображение, пожалуйста.';
+$_lang['imageplus.error.image_not_found.title'] = 'Изображение не найдено';
+$_lang['imageplus.error.image_not_found.msg'] = 'Изображение не найдено и не может быть обрезано. Выберите другое изображение, пожалуйста.';
