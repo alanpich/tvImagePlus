@@ -1,7 +1,5 @@
 <?php
-
 $_lang['imageplus'] = 'Image+';
-
 
 $_lang['imageplus.editor_title'] = 'Редактор Image+';
 $_lang['imageplus.edit_image'] = 'Редактировать изображение';
