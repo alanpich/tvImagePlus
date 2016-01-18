@@ -1,7 +1,5 @@
 <?php
-
 $_lang['imageplus'] = 'Image+';
-
 
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Upravit obrázek';
@@ -41,3 +39,8 @@ $_lang['imageplus.placeholder.crop.x'] = 'Oříznout podle X osy zdrojového obr
 $_lang['imageplus.placeholder.crop.y'] = 'Oříznout podle Y osy zdrojového obrázku';
 $_lang['imageplus.placeholder.options'] = 'phpThumb řetězec pro generování miniatur';
 $_lang['imageplus.placeholder.crop.options'] = 'phpThumb řetězec ořezu pro generování miniatur';
+
+$_lang['imageplus.error.image_too_small.title'] = 'Obrázek je příliš malý';
+$_lang['imageplus.error.image_too_small.msg'] = 'Vybraný obrázek je moc malý pro použití. Prosím vyberte jiný obrázek.';
+$_lang['imageplus.error.image_not_found.title'] = 'Obrázek nebyl nalezen';
+$_lang['imageplus.error.image_not_found.msg'] = 'Obrázek nebyl nalezen a nelze ho oříznout. Prosím vyberte jiný obrázek.';
