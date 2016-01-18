@@ -1,9 +1,9 @@
 <?php
 
 /** Snippet properties */
-$_lang['imageplus.imageplus.tvname'] = 'Name of the Image+ TV.';
-$_lang['imageplus.imageplus.docid'] = 'Resource where the Image+ TV value is received from.';
-$_lang['imageplus.imageplus.type'] = 'Type of the snippet output. Could be set to <i>check</i> <i>tpl</i> and <i>thumb</i>.';
-$_lang['imageplus.imageplus.options'] = 'Extended phpThumb options for the image.';
-$_lang['imageplus.imageplus.tpl'] = 'Template chunk for the snippet output.';
-$_lang['imageplus.imageplus.value'] = 'Use your own JSON encoded value for the snippet output. The properties <i>tvname</i> and <i>docid</i> are ignored.';
+$_lang['imageplus.imageplus.tvname'] = 'Nome della TV dell\'Image+.';
+$_lang['imageplus.imageplus.docid'] = 'La Resource da dove il valore della Image+ TV viene richiamato.';
+$_lang['imageplus.imageplus.type'] = 'Tipo della snippet output. Può essere fissato come <i>check</i> <i>tpl</i> ed <i>thumb</i>.';
+$_lang['imageplus.imageplus.options'] = 'Opzioni estesi del phpThumb per l\'immagine.';
+$_lang['imageplus.imageplus.tpl'] = 'Template chunk per la snippet output.';
+$_lang['imageplus.imageplus.value'] = 'Utilizza il suo contenuto codificato in JSON per la snippet output. Le proprietà <i>tvname</i> ed <i>docid</i> vengono ignorati.';
