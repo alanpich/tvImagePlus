@@ -1,7 +1,5 @@
 <?php
-
 $_lang['imageplus'] = 'Image+';
-
 
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Bewerk Afbeelding';
@@ -41,3 +39,8 @@ $_lang['imageplus.placeholder.crop.x'] = 'Crop X positie van de bronafbeelding';
 $_lang['imageplus.placeholder.crop.y'] = 'Crop Y positie van de bronafbeelding';
 $_lang['imageplus.placeholder.options'] = 'phpThumb waarde om de thumbnail te genereren';
 $_lang['imageplus.placeholder.crop.options'] = 'phpThumb crop waarde om de thumbnail te genereren';
+
+$_lang['imageplus.error.image_too_small.title'] = 'Afbeelding is te klein';
+$_lang['imageplus.error.image_too_small.msg'] = 'De geselecteerde afbeelding is te klein om hier gebruikt te worden. Selecteer een andere afbeelding.';
+$_lang['imageplus.error.image_not_found.title'] = 'Afbeelding niet gevonden';
+$_lang['imageplus.error.image_not_found.msg'] = 'De afbeelding kan niet worden bijgesneden omdat hij niet gevonden kon worden. Selecteer een andere afbeelding.';
