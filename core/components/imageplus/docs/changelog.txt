@@ -1,11 +1,10 @@
-Changelog
-=========
+Changelog for Image+
+====================
 
 - 2.4.1
     - Fixing recoverable errors
     - Change the image by typing the filename
     - Translated error messages
-
 - 2.4.0
     - Retain the value of a MODX TV as source image for the Image+ TV
     - Fill output chunk placeholders with script properties
@@ -15,18 +14,14 @@ Changelog
 - 2.3.4
     - Open crop window automatic after selecting a new image
     - Bugfix for media source issue in MIGX
-
 - 2.3.3
     - Run jQuery in noConflict mode
-
 - 2.3.2
     - Added 'value' parameter in the ImagePlus Snippet
-
 - 2.3.1
     - Use default_media_source if the media source of the TV is not set (i.e. if it used in a MIGX configuration)
     - Enable property sets for the ImagePlus Snippet
     - Don't show the crop window if the image size is invalid
-
 - 2.3.0
     - MODX 2.3 compatibility
     - Inline Trigger fields
