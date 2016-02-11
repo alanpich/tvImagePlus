@@ -21,7 +21,7 @@ $_lang['imageplus.allowAltTag_desc'] = 'Povolit uživatelům zadat title/alt.';
 $_lang['imageplus.phpThumbParams'] = 'Další phpThumb parametry';
 $_lang['imageplus.phpThumbParams_desc'] = 'Přidejte další filtry, např. pro phpThumb. Dokumentaci naleznete <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">zde</a>.';
 $_lang['imageplus.outputChunk'] = 'Výstupní chunk';
-$_lang['imageplus.outputChunk_desc'] = 'Vyberte chunk pro výstup TV. Pokud necháte prázdné, výstupem bude čisté url.';
+$_lang['imageplus.outputChunk_desc'] = 'Vyberte chunk pro výstup TV. Nechte prázdé pro výstup čisté URL.';
 $_lang['imageplus.generateUrl'] = 'Generovat URL miniatury';
 $_lang['imageplus.generateUrl_desc'] = '(Volitelné) URL miniatury možná není třeba, pokud miniaturu generujete v chunku (například pomocí pthumb).';
 
