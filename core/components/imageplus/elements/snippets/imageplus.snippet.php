@@ -44,6 +44,7 @@ if ($value) {
     if ($tv) {
         // Get the raw content of the TV
         $value = $tv->getValue($docid);
+        $value = $tv->processBindings($value, $docid);
     } else {
         $modx->log(xPDO::LOG_LEVEL_DEBUG, "Template Variable '{$tvname}' not found.", '', 'Image+');
         if ($debug) {

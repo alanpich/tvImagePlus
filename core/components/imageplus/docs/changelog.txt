@@ -1,6 +1,8 @@
 Changelog for Image+
 ====================
 
+- 2.4.2
+    - The snippet could use inherited values
 - 2.4.1
     - Fixing recoverable errors
     - Change the image by typing the filename
