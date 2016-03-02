@@ -339,7 +339,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.updateValue();
         return true;
     },
-
     // Get hidden field value
     getValue: function (field) {
         this.image = Ext.util.JSON.decode(Ext.get(field).getValue());
@@ -360,7 +359,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             }
         }
     },
-
     // Update hidden field value
     updateValue: function () {
         var TV = {
