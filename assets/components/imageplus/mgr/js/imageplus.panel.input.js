@@ -379,16 +379,13 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             current = '';
         }
 
-        // Has value changed or is source image empty?
-        if (current == json || this.image.sourceImg.src == '') {
-            return;
-        }
-        if (document.getElementById(this.hiddenField)) {
-            document.getElementById(this.hiddenField).value = json;
-        }
+        // Has value changed and is source image not empty?
+        if (external && current != json && this.image.sourceImg.src != '') {
+            external.value = json;
 
-        // Mark resource as dirty
-        MODx.fireResourceFormChange()
+            // Mark resource as dirty
+            MODx.fireResourceFormChange()
+        }
     },
     // Checks whether the image is larger than specified crop dimensions
     checkImageIsLargeEnough: function () {
