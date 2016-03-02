@@ -48,12 +48,14 @@ ImagePlus.panel.input = function (config) {
             anchor: '98%',
             hideLabel: true,
             listeners: {
-                'afterRender': {
+                afterrender: {
                     fn: this.onAfterRender,
                     scope: this
                 }
             },
-            items: [this.imageBrowser]
+            items: [
+                this.imageBrowser
+            ]
         }, {
             cls: 'modx-tv-image-preview imageplus-image-preview',
             border: false,
@@ -69,11 +71,7 @@ ImagePlus.panel.input = function (config) {
     this.listenForResetEvent();
 };
 Ext.extend(ImagePlus.panel.input, MODx.Panel, {
-    /**
-     * Bind change event on tv input DOM element so
-     * that we can be notified when the user hits the
-     * native 'Reset' button
-     */
+    // Listen for TV 'Reset' button
     listenForResetEvent: function () {
         var resourcePanel = Ext.getCmp('modx-panel-resource');
         resourcePanel.on('tv-reset', function (changed) {
@@ -82,7 +80,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             }
         }, this);
     },
-
     // Create the image browser combo
     createImageBrowser: function () {
         // Generate opento path
@@ -135,11 +132,11 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             submitValue: false,
             value: this.image.altTag || '',
             listeners: {
-                'change': {
+                change: {
                     fn: this.onAltTagChange,
                     scope: this
                 },
-                'afterrender': function () {
+                afterrender: function () {
                     var el = this.getEl();
                     if (el) {
                         el.set({'placeholder': _('imageplus.alt_text')});
