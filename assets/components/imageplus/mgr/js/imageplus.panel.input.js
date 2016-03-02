@@ -132,6 +132,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         var _this = this;
         this.altTextField = MODx.load({
             xtype: this.options.altTagOn ? 'textfield' : 'hidden',
+            submitValue: false,
             value: this.image.altTag || '',
             listeners: {
                 'change': {
@@ -615,6 +616,7 @@ ImagePlus.form.TripleTriggerField = Ext.extend(Ext.form.TriggerField, {
 ImagePlus.combo.Browser = function (config) {
     config = config || {};
     Ext.applyIf(config, {
+        submitValue: false,
         width: 400,
         triggerAction: 'all',
         trigger1Class: 'x-form-clear-trigger',
