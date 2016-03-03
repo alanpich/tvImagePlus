@@ -83,8 +83,7 @@ class ImagePlus
 
         // set default options
         $this->options = array_merge($this->options, array(
-            'sources' => $this->loadSourceMap(),
-            'debug' => true
+            'sources' => $this->loadSourceMap()
         ));
 
         $this->checkDependencies();
@@ -173,7 +172,7 @@ class ImagePlus
     public function includeScriptAssets()
     {
         $vers = $this->modx->getVersionData();
-        if ($this->options['debug'] && strpos($this->options['assetsUrl'], 'develop/imageplus/') !== false) {
+        if ($this->getOption('debug')) {
             if ($vers['major_version'] >= 3) {
                 $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus.css');
             } else {

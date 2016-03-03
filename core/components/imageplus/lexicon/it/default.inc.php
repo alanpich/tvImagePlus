@@ -44,3 +44,6 @@ $_lang['imageplus.error.image_too_small.title'] = 'L\'immagine è troppo piccola
 $_lang['imageplus.error.image_too_small.msg'] = 'L\'immagine selezionata è troppo piccola per essere usata qui. Si prega di selezionare un\'altra immagine.';
 $_lang['imageplus.error.image_not_found.title'] = 'L\'immagine non è stata trovata';
 $_lang['imageplus.error.image_not_found.msg'] = 'L\'immagine non è stata trovata e percio non può essere tagliata. Si prega di selezionare un\'altra immagine.';
+
+$_lang['setting_imageplus.debug'] = 'Enable Debug';
+$_lang['setting_imageplus.debug_desc'] = 'Load not combined/uglified javascript and not combined/minified css files.';

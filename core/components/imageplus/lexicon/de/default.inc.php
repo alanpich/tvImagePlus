@@ -44,3 +44,6 @@ $_lang['imageplus.error.image_too_small.title'] = 'Bild ist zu klein';
 $_lang['imageplus.error.image_too_small.msg'] = 'Das gewählte Bild ist zu klein um benutzt zu werden. Bitte wählen Sie ein anderes Bild.';
 $_lang['imageplus.error.image_not_found.title'] = 'Bild nicht gefunden';
 $_lang['imageplus.error.image_not_found.msg'] = 'Das Bild wurde nicht gefunden und kann nicht zugeschnitten werden. Bitte wählen Sie ein anderes Bild.';
+
+$_lang['setting_imageplus.debug'] = 'Debug Modus aktivieren';
+$_lang['setting_imageplus.debug_desc'] = 'Lade nicht kombinierte und nicht komprimierte Javascript und CSS Dateien.';

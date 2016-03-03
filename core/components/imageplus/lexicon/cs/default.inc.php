@@ -44,3 +44,6 @@ $_lang['imageplus.error.image_too_small.title'] = 'Obrázek je příliš malý';
 $_lang['imageplus.error.image_too_small.msg'] = 'Vybraný obrázek je moc malý pro použití. Prosím vyberte jiný obrázek.';
 $_lang['imageplus.error.image_not_found.title'] = 'Obrázek nebyl nalezen';
 $_lang['imageplus.error.image_not_found.msg'] = 'Obrázek nebyl nalezen a nelze ho oříznout. Prosím vyberte jiný obrázek.';
+
+$_lang['setting_imageplus.debug'] = 'Enable Debug';
+$_lang['setting_imageplus.debug_desc'] = 'Load not combined/uglified javascript and not combined/minified css files.';

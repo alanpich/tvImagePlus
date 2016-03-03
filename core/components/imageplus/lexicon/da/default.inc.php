@@ -44,3 +44,6 @@ $_lang['imageplus.error.image_too_small.title'] = 'Billedet er for lille';
 $_lang['imageplus.error.image_too_small.msg'] = 'Det valgte billede er for småt til at blive brugt her. Vælg venligst et andet billede.';
 $_lang['imageplus.error.image_not_found.title'] = 'Billedet blev ikke fundet';
 $_lang['imageplus.error.image_not_found.msg'] = 'Billedet blev ikke fundet og kan dermed ikke blive beskåret. Vælg venligst et andet billede.';
+
+$_lang['setting_imageplus.debug'] = 'Enable Debug';
+$_lang['setting_imageplus.debug_desc'] = 'Load not combined/uglified javascript and not combined/minified css files.';

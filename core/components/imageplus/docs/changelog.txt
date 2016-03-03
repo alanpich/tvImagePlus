@@ -1,6 +1,10 @@
 Changelog for Image+
 ====================
 
+- 2.4.3
+    - The alt text field could contain special chars
+    - Debug system setting for enabling not combined and minified/uglified css/js files
+    - Fixed not found image in combined/minified css file
 - 2.4.2
     - The snippet could use inherited values
 - 2.4.1
