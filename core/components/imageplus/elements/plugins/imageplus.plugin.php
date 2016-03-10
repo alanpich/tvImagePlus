@@ -16,11 +16,13 @@
  * @copyright Alan Pich 2013-2015
  * @copyright Thomas Jakobi 2015
  *
- * @event   OnTVInputRenderList
- * @event   OnTVOutputRenderList
- * @event   OnTVInputPropertiesList
- * @event   OnTVOutputRenderPropertiesList
- * @event   OnDocFormRender
+ * @event OnTVInputRenderList
+ * @event OnTVOutputRenderList
+ * @event OnTVInputPropertiesList
+ * @event OnTVOutputRenderPropertiesList
+ * @event OnDocFormRender
+ *
+ * @var modx $modx
  */
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
