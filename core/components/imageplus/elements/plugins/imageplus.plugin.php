@@ -33,6 +33,7 @@ $imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imag
 switch ($modx->event->name) {
     case 'OnManagerPageBeforeRender':
         $modx->controller->addLexiconTopic('imageplus:default');
+        $imageplus->includeScriptAssets();
         break;
     case 'OnTVInputRenderList':
         $modx->event->output($corePath . 'elements/tv/input/');
