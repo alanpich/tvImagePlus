@@ -18,10 +18,15 @@ The field has to be filled with a float value.
 If you set only one value of **Target Height** or **Target Width** and leave empty **Target Aspect Ratio**, the size of 
 the crop is not restricted to any aspect ratio.
 
-> **How to calculate float value**
->
-> For setting an aspect ratio using a float value: this value is easily acquired by dividing any width of a desired aspect ratio by its corresponding height. So say you want to all your crops to have the same aspect ratio as a 1600x1000 image, simply divide 1600 by 1000, resulting in 1.6. This is your float value.
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        How to calculate float value
+    </div>
+    <div class="panel-body">
+        For setting an aspect ratio using a float value: this value is easily acquired by dividing any width of a desired aspect ratio by its corresponding height. So say you want to all your crops to have the same aspect ratio as a 1600x1000 image, simply divide 1600 by 1000, resulting in 1.6. This is your float value.
+    </div>
+</div>
+              
 **Show Alt Tag Field**
 
 *Image+* TVs can also contain an **Alt Tag Field**, which is an additional text input, that is stored with each image. 
@@ -66,7 +71,7 @@ crop.y | Crop y position of the thumbnail image
 options | Crop engine full option string to generate the thumbnail image
 crop.options | Crop engine crop option string to generate the thumbnail image
 
-All options could be displayed with the 
+All these placeholders could be used in the Snippet too.
 
 **Generate Thumb URL**
 
@@ -74,8 +79,8 @@ If you create the thumbnail in output chunk i.e. by a pthumb output filter, you 
 internal thumb URL. 
 
 ## Snippet
-The Snippet gives you a second option to render the TV value. With the template variable output options you are 
-restricted to one output size per template variable, with the snippet you could generate several sizes. The following 
+The Snippet gives you a second option to render the TV value. With the template variable output, you are 
+restricted to one output chunk per template variable, with the snippet you could be more flexiple use different output chunks. The following 
 properties could be set in the snippet call:
 
 Property | Description | Default

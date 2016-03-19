@@ -1,4 +1,4 @@
-site_name: Image+ Custom Template Variable
+site_name: Image+
 docs_dir: core/components/imageplus/docs
 site_dir: _build/site
 
@@ -13,7 +13,7 @@ pages:
 - Contributors: 'contributors.md'
 - Donate: 'donate.md'
 
-theme: readthedocs
+theme: flatly
 
 markdown_extensions:
     - footnotes

@@ -41,3 +41,33 @@ In order for the TV to be parsed with getResources, make sure you add the follow
 ```
 &processTVs=`name_of_your_tv`
 ```
+
+### Responsive images
+
+If you want to display responsive images with and without the crop, you could use the ImagePlus snippet.
+
+**Snippet Call**
+```
+[[ImagePlus? 
+&tvname=`yourtvname` 
+&type=`tpl` 
+&options=`&w=320`
+&tpl=`tplResponsiveImage`
+&pagetitle=`[[*pagetitle]]`
+]]
+```
+  
+  
+**Chunk tplResponsiveImage**
+```
+<picture>
+    <source media="(min-width: 36em)"
+            srcset="[[+source.src:pthumb=`w=1024`]] 1024w,
+                [[+source.src:pthumb=`w=640`]] 640w,
+                [[+source.src:pthumb=`w=320`]] 320w"
+            sizes="33.3vw"/>
+    <source srcset="[[+source.src:pthumb=`[[+crop.options]]&w=640`]] 2x,
+                [[+source.src:pthumb=`[[+crop.options]]&w=320`]] 1x"/>
+    <img src="[[+url]]" alt="[[+alt:default=`[[+pagetitle]]`]]"/>
+</picture>
+```
