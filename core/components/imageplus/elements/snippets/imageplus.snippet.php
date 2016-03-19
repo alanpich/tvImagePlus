@@ -61,18 +61,18 @@ switch ($type) {
         $output = ($data && $data->sourceImg->src) ? 'image' : 'noimage';
         break;
     case 'tpl':
-        $output = $imageplus->getImageURL($value, array_merge($scriptProperties, array(
+        $output = ($value) ? $imageplus->getImageURL($value, array_merge($scriptProperties, array(
             'docid' => $docid,
             'phpThumbParams' => $options,
             'outputChunk' => $tpl
-        )), $tv);
+        )), $tv) : '';
         break;
     case 'thumb':
     default:
-        $output = $imageplus->getImageURL($value, array_merge($scriptProperties, array(
+        $output = ($value) ? $imageplus->getImageURL($value, array_merge($scriptProperties, array(
             'docid' => $docid,
             'phpThumbParams' => $options
-        )), $tv);
+        )), $tv) : '';
         break;
 }
 return $output;
