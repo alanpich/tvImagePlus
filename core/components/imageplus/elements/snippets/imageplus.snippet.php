@@ -25,7 +25,7 @@ $type = $modx->getOption('type', $scriptProperties, '', true);
 $options = $modx->getOption('options', $scriptProperties, '', true);
 $tpl = $modx->getOption('tpl', $scriptProperties, 'ImagePlus.image', true);
 $value = $modx->getOption('value', $scriptProperties, '', true);
-$debug = $modx->getOption('debug', $scriptProperties, '', false);
+$debug = $modx->getOption('debug', $scriptProperties, $imageplus->getOption('debug'), false);
 
 if ($value) {
     // Value is set by snippet property

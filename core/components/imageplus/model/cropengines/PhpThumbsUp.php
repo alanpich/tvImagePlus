@@ -50,7 +50,7 @@ class PhpThumbsUp extends AbstractCropEngine
     public function getImageUrl($json, $opts = array(), \modTemplateVar $tv = null)
     {
         if ($json == '') {
-            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The value is empty. Could not prepare the output.', '', 'Image+');
+            $this->modx->log(\xPDO::LOG_LEVEL_DEBUG, 'The value is empty. Could not prepare the output.', '', 'Image+');
             return ($tv) ? $tv->default_text : '';
         }
 
@@ -60,7 +60,7 @@ class PhpThumbsUp extends AbstractCropEngine
         // If data is null, json was invalid or empty.
         // This is almost certainly because the TV is empty
         if (is_null($data)) {
-            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The JSON value is invalid. Could not prepare the output.', '', 'Image+');
+            $this->modx->log(\xPDO::LOG_LEVEL_DEBUG, 'The JSON value is invalid. Could not prepare the output.', '', 'Image+');
             return ($tv) ? $tv->default_text : '';
         }
 
