@@ -22,7 +22,7 @@
  * @event OnTVOutputRenderPropertiesList
  * @event OnDocFormRender
  *
- * @var modx $modx
+ * @var modX $modx
  */
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');

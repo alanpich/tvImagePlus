@@ -17,7 +17,7 @@
 use ImagePlus\CropEngines;
 
 /**
- * Class ImagePlus
+ * class ImagePlus
  */
 class ImagePlus
 {
