@@ -4,7 +4,7 @@
 
 ### MIGX
 
-If you want to use *Image+* in MIGX you could define all *Image+* TV properties with a JSON string in the 'Configs' textarea in the MIGX formtabs field configuration. The following properties are possible.
+If you want to use *Image+* in MIGX you could define all *Image+* TV properties with a JSON string in the 'Configs' textarea in the MIGX formtabs field configuration. The following properties are possible:
 
 ```
 {
@@ -16,7 +16,19 @@ If you want to use *Image+* in MIGX you could define all *Image+* TV properties 
 }
 ```
 
-You could show the thumbnail in the grid column by setting the renderer to 'ImagePlus.MIGX_Renderer'. At the moment you have to raw edit a MIGX configuration for that.
+And you also have to change the *Input TV Type* to `imageplus`.
+
+You could show the thumbnail in the grid column by setting the renderer to 'ImagePlus.MIGX_Renderer'. In prior MIGX versions you have to raw edit a MIGX configuration for that. 
+
+To use that *Image+*-MIGX-Field in the Frontend, call the `ImagePlus`-Snippet with just the value-parameter being the name of this MIGX-Field: 
+
+```
+[[ImagePlus? 
+  &value=`[[+migxImagePlusField]]`
+]]
+```
+
+This will get you the prepared URL for the cropped image, instead of the raw JSON-Object.
 
 <!-- Piwik -->
 <script type="text/javascript">
