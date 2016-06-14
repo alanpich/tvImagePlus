@@ -1,0 +1,33 @@
+.x-form-field-wrap {
+  .x-form-triple-triggers {
+    border: 0;
+    border-radius: 0 3px 3px 0;
+    box-shadow: none;
+    padding: 0;
+    width: 90px;
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    .x-form-trigger {
+      position: relative;
+      top: auto;
+      vertical-align: top;
+      display: inline-block;
+      &.x-form-clear-trigger {
+        &:before {
+          content: "\f00d";
+        }
+      }
+      &.x-form-crop-trigger {
+        &:before {
+          content: "\f125";
+        }
+      }
+    }
+  }
+}
+
+.imageplus-hidden-textarea {
+  display: none;
+}

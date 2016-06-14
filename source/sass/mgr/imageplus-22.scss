@@ -1,0 +1,37 @@
+.x-form-field-wrap {
+  .x-form-triple-triggers {
+    border: 0;
+    border-radius: 0 3px 3px 0;
+    box-shadow: none;
+    padding: 0;
+    width: 30px;
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    .x-form-trigger {
+      position: relative;
+      top: auto;
+      vertical-align: top;
+      display: inline-block;
+    }
+    .x-form-clear-trigger {
+      background-image: url(../images/clear-trigger.png);
+    }
+    .x-form-crop-trigger {
+      background-image: url(../images/crop-trigger.png);
+    }
+    .x-form-image-trigger {
+      background-image: url(../images/image-trigger.png);
+    }
+
+  }
+}
+
+.imageplus-image-preview {
+  margin-top: 4px;
+  padding-top: 4px;
+}
+
+.imageplus-hidden-textarea {
+  display: none;
+}
