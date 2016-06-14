@@ -1,5 +1,5 @@
 site_name: Image+
-docs_dir: core/components/imageplus/docs
+docs_dir: core/components/imageplus/docs/mkdocs
 site_dir: _build/site
 
 repo_url: https://github.com/Jako/ImagePlus
