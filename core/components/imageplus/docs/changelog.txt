@@ -1,6 +1,12 @@
 Changelog for Image+
 ====================
 
+- 2.4.4
+    - Add assets files on manager pages (i.e. for MIGX).
+    - Don't try get an Image+ url with an empty template variable value
+    - Log invalid JSON only if imageplus.debug system setting is active
+    - Correcting typos, refactored code
+    - Use only uglified/minified scripts in package code
 - 2.4.3
     - The alt text field could contain special chars
     - Debug system setting for enabling not combined and minified/uglified css/js files

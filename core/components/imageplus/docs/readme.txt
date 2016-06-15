@@ -1,7 +1,7 @@
 Image+ TV type
 ==============
 
-Author: Alan Pich <alan.pich@gmailg.com>
+Author: Alan Pich <alan.pich@gmail.com>
 Maintainer and further development: Thomas Jakobi <thomas.jakobi@partout.info>
 License: GNU GPLv2
 
