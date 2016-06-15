@@ -50,7 +50,9 @@ class PhpThumbsUp extends AbstractCropEngine
     public function getImageUrl($json, $opts = array(), \modTemplateVar $tv = null)
     {
         if ($json == '') {
-            $this->modx->log(\xPDO::LOG_LEVEL_DEBUG, 'The value is empty. Could not prepare the output.', '', 'Image+');
+            if ($this->imageplus->getOption('debug')) {
+                $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The value is empty. Could not prepare the output.', '', 'Image+');
+            }
             return ($tv) ? $tv->default_text : '';
         }
 
@@ -60,14 +62,18 @@ class PhpThumbsUp extends AbstractCropEngine
         // If data is null, json was invalid or empty.
         // This is almost certainly because the TV is empty
         if (is_null($data)) {
-            $this->modx->log(\xPDO::LOG_LEVEL_DEBUG, 'The JSON value is invalid. Could not prepare the output.', '', 'Image+');
+            if ($this->imageplus->getOption('debug')) {
+                $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The JSON value is invalid. Could not prepare the output.', '', 'Image+');
+            }
             return ($tv) ? $tv->default_text : '';
         }
 
         // Load up the mediaSource
         $source = $this->modx->getObject('modMediaSource', $data->sourceImg->source);
         if (!$source instanceof \modMediaSource) {
-            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'Invalid Media Source', '', 'Image+');
+            if ($this->imageplus->getOption('debug')) {
+                $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'Invalid Media Source', '', 'Image+');
+            }
             return 'Image+ Error: Invalid Media Source';
         };
         $this->modx->setPlaceholder('docid', $this->modx->getOption('docid', $opts, 0));
