@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Image+ Input Render
  *
@@ -70,9 +71,8 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         // Get Media Source
         /** @var modMediaSource $source */
         $source = $this->tv->getSource(($this->modx->resource) ? $this->modx->resource->get('context_key') : 'mgr');
-        if (!$source) return '';
-        if (!$source->getWorkingContext()) {
-            return '';
+        if (!$source || !$source->getWorkingContext()) {
+            return;
         }
         $source->setRequestProperties($_REQUEST);
         $source->initialize();

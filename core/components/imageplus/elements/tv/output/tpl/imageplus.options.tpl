@@ -67,7 +67,7 @@
             description: MODx.expandHelp ? '' : _('imageplus.generateUrl_desc'),
             name: 'prop_generateUrl',
             id: 'prop_generateUrl{/literal}{$tv}{literal}',
-            value: params['allowAltTag'] == 1 || params['allowAltTag'] == 'true' ? true : false,
+            value: !!(params['generateUrl'] == 1 || params['generateUrl'] == 'true'),
             anchors: '98%',
             width: '99%',
             listeners: oc

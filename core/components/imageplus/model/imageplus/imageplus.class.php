@@ -63,12 +63,6 @@ class ImagePlus
         $this->options = array_merge(array(
             'namespace' => $this->namespace,
             'version' => $this->version,
-            'assetsPath' => $assetsPath,
-            'assetsUrl' => $assetsUrl,
-            'cssUrl' => $assetsUrl . 'css/',
-            'jsUrl' => $assetsUrl . 'js/',
-            'imagesUrl' => $assetsUrl . 'images/',
-            'connectorUrl' => $assetsUrl . 'connector.php',
             'corePath' => $corePath,
             'modelPath' => $corePath . 'model/',
             'vendorPath' => $corePath . 'vendor/',
@@ -79,16 +73,22 @@ class ImagePlus
             'controllersPath' => $corePath . 'controllers/',
             'processorsPath' => $corePath . 'processors/',
             'templatesPath' => $corePath . 'templates/',
+            'assetsPath' => $assetsPath,
+            'assetsUrl' => $assetsUrl,
+            'jsUrl' => $assetsUrl . 'js/',
+            'cssUrl' => $assetsUrl . 'css/',
+            'imagesUrl' => $assetsUrl . 'images/',
+            'connectorUrl' => $assetsUrl . 'connector.php'
         ), $options);
 
-        // set default options
+        // Add default options
         $this->options = array_merge($this->options, array(
             'sources' => $this->loadSourceMap()
         ));
 
         $this->checkDependencies();
 
-        $this->modx->lexicon->load('imageplus:default');
+        $this->modx->lexicon->load($this->namespace . ':default');
     }
 
     /**
@@ -142,7 +142,7 @@ class ImagePlus
             if (!$this->options['cropEngineClass']) {
                 // Handle unmet dependencies
                 $this->options['hasUnmetDependencies'] = true;
-                return true;
+                return;
             }
         }
         $this->options['hasUnmetDependencies'] = false;
@@ -171,29 +171,35 @@ class ImagePlus
      */
     public function includeScriptAssets()
     {
+        $assetsUrl = $this->getOption('assetsUrl');
+        $jsUrl = $this->getOption('jsUrl') . 'mgr/';
+        $jsSourceUrl = $assetsUrl . '../../../source/js/mgr/';
+        $cssUrl = $this->getOption('cssUrl') . 'mgr/';
+        $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
         $vers = $this->modx->getVersionData();
-        if ($this->getOption('debug')) {
+
+        if ($this->getOption('debug') && ($this->getOption('assetsUrl') != MODX_ASSETS_URL . 'components/imageplus/')) {
             if ($vers['major_version'] >= 3) {
-                $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus.css');
+                $this->modx->regClientCSS($cssSourceUrl . 'imageplus.css');
             } else {
-                $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus-22.css');
+                $this->modx->regClientCSS($cssSourceUrl . 'imageplus-22.css');
             }
-            $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/jquery/jquery.jcrop.min.css');
-            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.panel.input.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.window.editor.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.migx_renderer.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/tools/JSON2.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.min.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/jquery/jquery.jcrop.min.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.jquery.imagecrop.js?v=v' . $this->version);
+            $this->modx->regClientCSS($cssSourceUrl . 'jquery.jcrop.min.css');
+            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.panel.input.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.window.editor.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.migx_renderer.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'tools/JSON2.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'jquery/jquery.min.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'jquery/jquery.jcrop.min.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.jquery.imagecrop.js?v=v' . $this->version);
         } else {
             if ($vers['major_version'] >= 3) {
-                $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus.min.css');
+                $this->modx->regClientCSS($cssUrl . 'imageplus.min.css');
             } else {
-                $this->modx->regClientCSS($this->options['assetsUrl'] . 'mgr/css/imageplus-22.min.css');
+                $this->modx->regClientCSS($cssUrl . 'imageplus-22.min.css');
             }
-            $this->modx->regClientStartupScript($this->options['assetsUrl'] . 'mgr/js/imageplus.min.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsUrl . 'imageplus.min.js?v=v' . $this->version);
         }
         $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
             . ' ImagePlus.config = ' . json_encode($this->options) . ';'
@@ -235,7 +241,7 @@ class ImagePlus
     /**
      * Prepare a JSON encoded object and return a valid JSON encoded Image+ object
      *
-     * @param $json JSON value to prepare
+     * @param string $json JSON value to prepare
      * @param array $opts
      * @param modTemplateVar $tv
      * @return string
@@ -267,6 +273,7 @@ class ImagePlus
                     $size = getimagesize($imgPath);
                 } else {
                     $this->modx->log(xPDO::LOG_LEVEL_INFO, 'The template variabe value does not contain an existing image', '', 'Image+');
+                    $size = false;
                 }
                 $json = json_encode(array(
                     'altTag' => '',

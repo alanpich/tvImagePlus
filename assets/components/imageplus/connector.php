@@ -12,6 +12,8 @@
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
  * @copyright Thomas Jakobi 2015
+ *
+ * @var modX $modx
  */
 // Allow anonymous users for web processors and restrict actions to that folder including subfolders with restricted chars
 if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'web/') === 0) {

@@ -83,7 +83,7 @@
             name: 'inopt_allowAltTag',
             hiddenName: 'inopt_allowAltTag',
             id: 'inopt_allowAltTag{/literal}{$tv}{literal}',
-            value: params['allowAltTag'] == 0 || params['allowAltTag'] == 'false' ? false : true,
+            value: !(params['allowAltTag'] == 0 || params['allowAltTag'] == 'false'),
             labelAlign: 'left',
             anchors: '98%',
             listeners: oc

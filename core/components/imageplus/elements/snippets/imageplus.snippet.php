@@ -12,6 +12,9 @@
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
  * @copyright Thomas Jakobi 2015
+ *
+ * @var modX $modx
+ * @var array $scriptProperties
  */
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');

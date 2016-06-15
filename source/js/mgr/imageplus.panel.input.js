@@ -126,7 +126,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Create field for alt-text input
     createAltTextField: function () {
-        var _this = this;
         this.altTextField = MODx.load({
             xtype: this.options.altTagOn ? 'textfield' : 'hidden',
             submitValue: false,
