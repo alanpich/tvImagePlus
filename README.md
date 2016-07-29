@@ -1,4 +1,4 @@
-# Image+#
+# Image+
 ## Advanced Image Custom Template Variable
 
 Advanced image custom template variable type for MODx Revolution. The dimensions for the uploaded image can (optionally) 

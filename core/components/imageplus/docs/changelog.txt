@@ -1,6 +1,8 @@
 Changelog for Image+
 ====================
 
+- 2.4.5
+    - Solved an installation issue on Windows machines
 - 2.4.4
     - Add assets files on manager pages (i.e. for MIGX).
     - Don't try get an Image+ url with an empty template variable value
