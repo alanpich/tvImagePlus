@@ -45,5 +45,5 @@ $_lang['imageplus.error.image_too_small.msg'] = 'De geselecteerde afbeelding is 
 $_lang['imageplus.error.image_not_found.title'] = 'Afbeelding niet gevonden';
 $_lang['imageplus.error.image_not_found.msg'] = 'De afbeelding kan niet worden bijgesneden omdat hij niet gevonden kon worden. Selecteer een andere afbeelding.';
 
-$_lang['setting_imageplus.debug'] = 'Enable Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Load not combined/uglified javascript and not combined/minified css files.';
+$_lang['setting_imageplus.debug'] = 'Debug';
+$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';

@@ -45,5 +45,5 @@ $_lang['imageplus.error.image_too_small.msg'] = 'L\'image sélectionnée est tro
 $_lang['imageplus.error.image_not_found.title'] = 'Image non trouvée';
 $_lang['imageplus.error.image_not_found.msg'] = 'L\'image est introuvable et ne peut être recadrée. Veuillez sélectionner une image différente.';
 
-$_lang['setting_imageplus.debug'] = 'Enable Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Load not combined/uglified javascript and not combined/minified css files.';
+$_lang['setting_imageplus.debug'] = 'Debug';
+$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';

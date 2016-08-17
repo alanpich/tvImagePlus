@@ -45,5 +45,5 @@ $_lang['imageplus.error.image_too_small.msg'] = 'The selected image is too small
 $_lang['imageplus.error.image_not_found.title'] = 'Image not found';
 $_lang['imageplus.error.image_not_found.msg'] = 'The image was not found and can\'t be cropped. Please select a different image.';
 
-$_lang['setting_imageplus.debug'] = 'Enable Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Load not combined/uglified javascript and not combined/minified css files.';
+$_lang['setting_imageplus.debug'] = 'Debug';
+$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
