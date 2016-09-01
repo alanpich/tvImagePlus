@@ -8,5 +8,3 @@ _packages/*.*
 !_packages/*.zip
 
 node_modules/
-package.json
-Gruntfile.js
