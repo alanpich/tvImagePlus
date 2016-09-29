@@ -1,10 +1,12 @@
 Changelog for Image+
 ====================
 
+- 2.4.6
+    - Fix showing a full server path, when the image is not found [#41]
 - 2.4.5
     - Solved an installation issue on Windows machines
 - 2.4.4
-    - Add assets files on manager pages (i.e. for MIGX).
+    - Add assets files on manager pages (i.e. for MIGX)
     - Don't try get an Image+ url with an empty template variable value
     - Log invalid JSON only if imageplus.debug system setting is active
     - Correcting typos, refactored code
@@ -61,10 +63,10 @@ Changelog for Image+
     - Now works with MIGX [#15]
     - TV Default Value is now output if TV is empty
     - TV Reset button now works [#22]
-    - Added image preloader to accurately get image size on upload.
+    - Added image preloader to accurately get image size on upload
     - This is because MODX File Manager will not report accurate
       image size for images above 800x600 [#8]
-    - Added option to put an icon on TV input 'crop' button. [#16]
+    - Added option to put an icon on TV input 'crop' button [#16]
     - Create a system setting called imageplus.crop_icon and
       populate it with the url to the desired icon png
     - Added system setting override for core_path and assets_url [#25]

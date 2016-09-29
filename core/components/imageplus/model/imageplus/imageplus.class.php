@@ -271,27 +271,31 @@ class ImagePlus
                 $imgPath = $source->getBasePath() . $json;
                 if (file_exists($imgPath)) {
                     $size = getimagesize($imgPath);
+                    $json = json_encode(array(
+                        'altTag' => '',
+                        'crop' => array(
+                            'height' => ($size) ? $size[1] : 0,
+                            'width' => ($size) ? $size[0] : 0,
+                            'x' => 0,
+                            'y' => 0
+                        ),
+                        'sourceImg' => array(
+                            'height' => ($size) ? $size[1] : 0,
+                            'width' => ($size) ? $size[0] : 0,
+                            'source' => $source->get('id'),
+                            'src' => $json
+                        ),
+                        'targetHeight' => (int)$opts['targetHeight'],
+                        'targetWidth' => (int)$opts['targetWidth']
+                    ));
                 } else {
-                    $this->modx->log(xPDO::LOG_LEVEL_INFO, 'The template variabe value does not contain an existing image', '', 'Image+');
-                    $size = false;
+                    if ($this->getOption('debug')) {
+                        $this->modx->log(xPDO::LOG_LEVEL_ERROR,
+                            'The template variabe and the assigned media source don\'t point to an existing image. ' .
+                            'The following server path is calculated: "' . $imgPath . '"', '', 'Image+');
+                    }
+                    $json = '';
                 }
-                $json = json_encode(array(
-                    'altTag' => '',
-                    'crop' => array(
-                        'height' => ($size) ? $size[1] : 0,
-                        'width' => ($size) ? $size[0] : 0,
-                        'x' => 0,
-                        'y' => 0
-                    ),
-                    'sourceImg' => array(
-                        'height' => ($size) ? $size[1] : 0,
-                        'width' => ($size) ? $size[0] : 0,
-                        'source' => $source->get('id'),
-                        'src' => $json
-                    ),
-                    'targetHeight' => (int)$opts['targetHeight'],
-                    'targetWidth' => (int)$opts['targetWidth']
-                ));
             }
         }
         return $json;
