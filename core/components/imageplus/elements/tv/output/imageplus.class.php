@@ -13,6 +13,7 @@
  * @copyright Alan Pich 2013-2015
  * @copyright Thomas Jakobi 2015-2016
  */
+
 class ImagePlusOutputRender extends modTemplateVarOutputRender
 {
     public function process($value, array $params = array())

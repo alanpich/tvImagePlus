@@ -1,9 +1,9 @@
 <?php
 /**
  * Image+ runtime hooks
- * Registers custom TV input & output types and includes javascripts on
- * document edit pages so that the TV can be used from within other extras
- * (i.e. MIGX, Collections)
+ * Registers custom TV input & output types and includes javascripts on document
+ * edit pages so that the TV can be used from within other extras (i.e. MIGX,
+ * Collections)
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
  * Copyright 2015-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
@@ -16,6 +16,7 @@
  * @copyright Alan Pich 2013-2015
  * @copyright Thomas Jakobi 2015-2016
  *
+ * @event OnManagerPageBeforeRender
  * @event OnTVInputRenderList
  * @event OnTVOutputRenderList
  * @event OnTVInputPropertiesList

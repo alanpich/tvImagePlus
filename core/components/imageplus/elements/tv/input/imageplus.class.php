@@ -16,19 +16,31 @@
  */
 class ImagePlusInputRender extends modTemplateVarInputRender
 {
+    /**
+     * Return the template path to load
+     * @return string
+     */
     public function getTemplate()
     {
         $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
         return $corePath . 'elements/tv/input/tpl/imageplus.render.tpl';
     }
 
+    /**
+     * @return array
+     */
     public function getLexiconTopics()
     {
         return array('imageplus:default');
     }
 
-    // Override the default TV render because of a isnumeric/intval bug,
-    // that does not allow a floatval in the input options - fixed in MODX Revolution 2.3.4 (https://github.com/modxcms/revolution/pull/12452)
+    /**
+     * Override the default TV render because of a isnumeric/intval bug, that does not allow a floatval in the input
+     * options - fixed in MODX Revolution 2.3.4 (https://github.com/modxcms/revolution/pull/12452)
+     * @param string $value
+     * @param array $params
+     * @return mixed|string|void
+     */
     public function render($value, array $params = array())
     {
         $this->setPlaceholder('tv', $this->tv);
@@ -39,9 +51,9 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         if (!empty($params)) {
             foreach ($params as $k => $v) {
                 if ($v === 'true') {
-                    $params[$k] = TRUE;
+                    $params[$k] = true;
                 } elseif ($v === 'false') {
-                    $params[$k] = FALSE;
+                    $params[$k] = false;
                 } elseif (is_numeric($v) && ((int)$v == $v)) {
                     $params[$k] = intval($v);
                 } elseif (is_numeric($v)) {
@@ -56,6 +68,11 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         return !empty($tpl) ? $this->modx->controller->fetchTemplate($tpl) : $output;
     }
 
+    /**
+     * @param string $value
+     * @param array $params
+     * @return void|mixed
+     */
     public function process($value, array $params = array())
     {
         // Load imageplus class
