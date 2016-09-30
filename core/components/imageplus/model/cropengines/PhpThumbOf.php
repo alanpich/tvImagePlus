@@ -127,16 +127,20 @@ class PhpThumbOf extends AbstractCropEngine
 
         // Call phpthumbof for url
         $generateUrl = $this->modx->getOption('generateUrl', $opts, 1);
-        if ($generateUrl) {
-            $url = $this->modx->runSnippet(
-                'phpthumbof',
-                array(
-                    'options' => $options,
-                    'input' => $imgPath
-                )
-            );
+        if (file_exists($imgPath)) {
+            if ($generateUrl) {
+                $url = $this->modx->runSnippet(
+                    'phpthumbof',
+                    array(
+                        'options' => $options,
+                        'input' => $imgPath
+                    )
+                );
+            } else {
+                $url = '';
+            }
         } else {
-            $url = '';
+            $url = $data->sourceImg->src;
         }
 
         // If an output chunk is selected, parse that

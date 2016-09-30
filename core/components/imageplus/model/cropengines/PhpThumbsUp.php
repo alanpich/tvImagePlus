@@ -127,19 +127,21 @@ class PhpThumbsUp extends AbstractCropEngine
 
         // Call phpthumbsup for url
         $generateUrl = $this->modx->getOption('generateUrl', $opts, 1);
-        if ($generateUrl) {
-            $url = $this->modx->runSnippet(
-                'phpthumbsup',
-                array(
-                    'options' => $options,
-                    'input' => $imgPath
-                )
-            );
+        if (file_exists($imgPath)) {
+            if ($generateUrl) {
+                $url = $this->modx->runSnippet(
+                    'phpthumbsup',
+                    array(
+                        'options' => $options,
+                        'input' => $imgPath
+                    )
+                );
+            } else {
+                $url = '';
+            }
         } else {
-            $url = '';
+            $url = $data->sourceImg->src;
         }
-
-        $url = str_replace('%2F', '/', $url);
 
         // If an output chunk is selected, parse that
         $outputChunk = $this->modx->getOption('outputChunk', $opts, '');

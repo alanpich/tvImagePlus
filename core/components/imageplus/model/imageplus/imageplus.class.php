@@ -136,7 +136,7 @@ class ImagePlus
         if (!isset($this->options['cropEngineClass'])) {
             if (CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)) {
                 $this->options['cropEngineClass'] = '\\ImagePlus\\CropEngines\\PhpThumbsUp';
-            } else if (CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
+            } elseif (CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
                 $this->options['cropEngineClass'] = '\\ImagePlus\\CropEngines\\PhpThumbOf';
             }
             if (!$this->options['cropEngineClass']) {
@@ -271,31 +271,29 @@ class ImagePlus
                 $imgPath = $source->getBasePath() . $json;
                 if (file_exists($imgPath)) {
                     $size = getimagesize($imgPath);
-                    $json = json_encode(array(
-                        'altTag' => '',
-                        'crop' => array(
-                            'height' => ($size) ? $size[1] : 0,
-                            'width' => ($size) ? $size[0] : 0,
-                            'x' => 0,
-                            'y' => 0
-                        ),
-                        'sourceImg' => array(
-                            'height' => ($size) ? $size[1] : 0,
-                            'width' => ($size) ? $size[0] : 0,
-                            'source' => $source->get('id'),
-                            'src' => $json
-                        ),
-                        'targetHeight' => (int)$opts['targetHeight'],
-                        'targetWidth' => (int)$opts['targetWidth']
-                    ));
                 } else {
                     if ($this->getOption('debug')) {
-                        $this->modx->log(xPDO::LOG_LEVEL_ERROR,
-                            'The template variabe and the assigned media source don\'t point to an existing image. ' .
-                            'The following server path is calculated: "' . $imgPath . '"', '', 'Image+');
+                        $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'The template variabe value does not contain an existing image', '', 'Image+');
                     }
-                    $json = '';
+                    $size = false;
                 }
+                $json = json_encode(array(
+                    'altTag' => '',
+                    'crop' => array(
+                        'height' => ($size) ? $size[1] : 0,
+                        'width' => ($size) ? $size[0] : 0,
+                        'x' => 0,
+                        'y' => 0
+                    ),
+                    'sourceImg' => array(
+                        'height' => ($size) ? $size[1] : 0,
+                        'width' => ($size) ? $size[0] : 0,
+                        'source' => $source->get('id'),
+                        'src' => $json
+                    ),
+                    'targetHeight' => (int)$opts['targetHeight'],
+                    'targetWidth' => (int)$opts['targetWidth']
+                ));
             }
         }
         return $json;
