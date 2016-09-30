@@ -120,6 +120,7 @@ class PhpThumbsUp extends AbstractCropEngine
         };
         $optParams = ($optParams) ? array_merge($cropParams, $optParams) : array_merge($params, $optParams);
         $options = http_build_query($optParams);
+        $options = rawurldecode(preg_replace('/%5B[0-9]+%5D/simU', '%5B%5D', $options));
         $cropOptions = http_build_query($cropParams);
 
         $data->targetWidth = isset($optParams['w']) ? $optParams['w'] : 0;
