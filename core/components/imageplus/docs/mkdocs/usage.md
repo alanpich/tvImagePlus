@@ -91,6 +91,7 @@ type | Type of the snippet output. Could be set to `check` [^1], `tpl` [^2] and 
 options | Extended phpThumb options for the image [^4]. | -
 tpl | Template chunk for the snippet output [^5]. | ImagePlus.image
 value | Use your own JSON encoded value for the snippet output. The properties `tvname` and `docid` are ignored. | -
+debug | Log debug informations in MODX error log. | No
 
 **Example**
 
@@ -105,6 +106,14 @@ value | Use your own JSON encoded value for the snippet output. The properties `
 ```
 
 Will output the content of the template variable with the name *imageplus* of resource *1* and the extended phpThumb option *&w=100* (width: 100px) in the parsed *ImagePlus.demo* chunk.
+
+## System Settings
+
+ImagePlus uses the following system settings in the namespace `imageplus`:
+
+Key | Description | Default
+----|-------------|--------
+imageplus.debug | Log debug informations in MODX error log. | No
 
 [^1]: Outputs *image* if the Image+ TV contains an image, otherwise *noimage*.
 [^2]: Outputs the parsed template set by **tpl** property for retreived Image+ TV value (with additional options set by the **options** property) 
