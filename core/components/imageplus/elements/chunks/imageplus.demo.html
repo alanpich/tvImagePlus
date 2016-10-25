@@ -67,6 +67,8 @@
 
     <p>
         <img src="[[+url]]" alt="[[+alt]]"/>
+        [[+caption:notempty=`<p class="caption">[[+caption]]</p>`]]
+        [[+credits:notempty=`<p class="credits">[[+credits]]</p>`]]
     </p>
 
     <h4>Responsive image output (different crops for different viewports)</h4>
@@ -80,7 +82,9 @@
                     sizes="33.3vw"/>
             <source srcset="[[+source.src:pthumb=`[[+crop.options]]&w=640`]] 2x,
                         [[+source.src:pthumb=`[[+crop.options]]&w=320`]] 1x"/>
-            <img src="[[+url]]"/>
+            <img src="[[+url]]" alt="[[+alt]]"/>
         </picture>
     </p>
+    [[+caption:notempty=`<p class="caption">[[+caption]]</p>`]]
+    [[+credits:notempty=`<p class="credits">[[+credits]]</p>`]]
 </div>

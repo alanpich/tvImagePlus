@@ -4,6 +4,8 @@ $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Edit Image';
 $_lang['imageplus.alt_text'] = 'Alt text';
+$_lang['imageplus.caption'] = 'Caption';
+$_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
 $_lang['imageplus.targetwidth'] = 'Target (Minimal) Width';

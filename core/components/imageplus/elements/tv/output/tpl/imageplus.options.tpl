@@ -64,8 +64,9 @@
             fieldLabel: _('imageplus.generateUrl'),
             description: MODx.expandHelp ? '' : _('imageplus.generateUrl_desc'),
             name: 'prop_generateUrl',
+            hiddenName: 'prop_generateUrl',
             id: 'prop_generateUrl{/literal}{$tv}{literal}',
-            value: !!(params['generateUrl'] == 1 || params['generateUrl'] == 'true'),
+            value: (params['generateUrl'] == 1 || params['generateUrl'] == 'true'),
             anchor: '100%',
             listeners: oc
         }, {
