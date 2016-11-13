@@ -2,8 +2,8 @@
   "name": "ImagePlus",
   "lowCaseName": "imageplus",
   "description": "Advanced Image template variable input type",
-  "author": "Thomas Jakobi",
-  "version": "2.4.5",
+  "author": "Alan Pich, Thomas Jakobi",
+  "version": "2.6.0-rc1",
   "package": {
     "elements": {
       "chunks": [
@@ -72,6 +72,44 @@
         "key": "debug",
         "type": "combo-boolean",
         "area": "system",
+        "value": "0"
+      },
+      {
+        "key": "target_width",
+        "area": "imageplus",
+        "value": ""
+      },
+      {
+        "key": "target_height",
+        "area": "imageplus",
+        "value": ""
+      },
+      {
+        "key": "target_ratio",
+        "area": "imageplus",
+        "value": ""
+      },
+      {
+        "key": "thumbnail_width",
+        "area": "imageplus",
+        "value": ""
+      },
+      {
+        "key": "allow_alt_tag",
+        "type": "combo-boolean",
+        "area": "imageplus",
+        "value": "0"
+      },
+      {
+        "key": "allow_caption",
+        "type": "combo-boolean",
+        "area": "imageplus",
+        "value": "0"
+      },
+      {
+        "key": "allow_credits",
+        "type": "combo-boolean",
+        "area": "imageplus",
         "value": "0"
       }
     ]

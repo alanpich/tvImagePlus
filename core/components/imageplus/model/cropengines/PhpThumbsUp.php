@@ -160,7 +160,9 @@ class PhpThumbsUp extends AbstractCropEngine
                 'crop.x' => $data->crop->x,
                 'crop.y' => $data->crop->y,
                 'options' => $options,
-                'crop.options' => $cropOptions
+                'crop.options' => $cropOptions,
+                'caption' => $data->caption,
+                'credits' => $data->credits
             ));
             return $this->modx->getChunk($outputChunk, $chunkParams);
         } else {
