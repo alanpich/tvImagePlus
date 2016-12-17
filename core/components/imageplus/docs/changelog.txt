@@ -2,6 +2,7 @@ Changelog for Image+
 ====================
 
 - 2.6.0
+    - System wide predefined crop sizes/aspect ratios, selectable in the TV options.
     - Context/system settings that supercede the TV options
 - 2.5.0
     - Added optional caption and credits fields below of the image
