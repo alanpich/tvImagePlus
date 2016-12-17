@@ -43,7 +43,8 @@ module.exports = function (grunt) {
                     'source/js/mgr/tools/JSON2.js',
                     'source/js/mgr/jquery/jquery.min.js',
                     'source/js/mgr/jquery/jquery.jcrop.min.js',
-                    'source/js/mgr/imageplus.jquery.imagecrop.js'
+                    'source/js/mgr/imageplus.jquery.imagecrop.js',
+                    'source/js/mgr/imageplus.grid.js'
                 ],
                 dest: 'assets/components/imageplus/js/mgr/imageplus.min.js'
             }
