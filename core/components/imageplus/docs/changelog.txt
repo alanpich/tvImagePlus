@@ -1,6 +1,8 @@
 Changelog for Image+
 ====================
 
+- 2.6.0
+    - Context/system settings that supercede the TV options
 - 2.5.0
     - Added optional caption and credits fields below of the image
 - 2.4.6

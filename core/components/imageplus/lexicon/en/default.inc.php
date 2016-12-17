@@ -8,6 +8,8 @@ $_lang['imageplus.caption'] = 'Caption';
 $_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
+$_lang['imageplus.section'] = 'Image+ Options';
+$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="http://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
 $_lang['imageplus.targetwidth'] = 'Target (Minimal) Width';
 $_lang['imageplus.targetwidth_desc'] = '(Optional, Integer) The target width for the output image. The uploaded image should have this minimal width.';
 $_lang['imageplus.targetheight'] = 'Target (Minimal) Height';
@@ -51,5 +53,21 @@ $_lang['imageplus.error.image_too_small.msg'] = 'The selected image is too small
 $_lang['imageplus.error.image_not_found.title'] = 'Image not found';
 $_lang['imageplus.error.image_not_found.msg'] = 'The image was not found and can\'t be cropped. Please select a different image.';
 
+/** System settings **/
+$_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
 $_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
+$_lang['setting_imageplus.target_width'] = $_lang['imageplus.targetwidth'];
+$_lang['setting_imageplus.target_width_desc'] = $_lang['imageplus.targetwidth_desc'];
+$_lang['setting_imageplus.target_height'] = $_lang['imageplus.targetheight'];
+$_lang['setting_imageplus.target_height_desc'] = $_lang['imageplus.targetheight_desc'];
+$_lang['setting_imageplus.target_ratio'] = $_lang['imageplus.targetRatio'];
+$_lang['setting_imageplus.target_ratio_desc'] = $_lang['imageplus.targetRatio_desc'];
+$_lang['setting_imageplus.thumbnail_width'] = $_lang['imageplus.thumbnailWidth'];
+$_lang['setting_imageplus.thumbnail_width_desc'] = $_lang['imageplus.thumbnailWidth_desc'];
+$_lang['setting_imageplus.allow_alt_tag'] = $_lang['imageplus.allowAltTag'];
+$_lang['setting_imageplus.allow_alt_tag_desc'] = $_lang['imageplus.allowAltTag_desc'];
+$_lang['setting_imageplus.allow_caption'] = $_lang['imageplus.allowCaption'];
+$_lang['setting_imageplus.allow_caption_desc'] = $_lang['imageplus.allowCaption_desc'];
+$_lang['setting_imageplus.allow_credits'] = $_lang['imageplus.allowCredits'];
+$_lang['setting_imageplus.allow_credits_desc'] = $_lang['imageplus.allowCredits_desc'];

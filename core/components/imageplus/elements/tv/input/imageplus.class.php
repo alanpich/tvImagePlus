@@ -97,16 +97,21 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         // For migxResourceMediaPath snippet
         $this->setPlaceholder('mediasource', $source->get('id'));
 
+        $context = (isset ($_GET['wctx']) && $_GET['wctx']) ? $_GET['wctx'] : '';
+        $obj = $this->modx->getContext($context);
+        $contextSettings = ($obj) ? $obj->config : null;
+        $tvName = $this->tv->get('name');
+
         // Prepare tv config for jsonification
         $tvConfig = new stdClass();
         $tvConfig->allowBlank = (bool)$params['allowBlank'];
-        $tvConfig->targetWidth = (int)$params['targetWidth'];
-        $tvConfig->targetHeight = (int)$params['targetHeight'];
-        $tvConfig->targetRatio = $params['targetRatio'];
-        $tvConfig->thumbnailWidth = (isset($params['thumbnailWidth']) && intval($params['thumbnailWidth'])) ? intval($params['thumbnailWidth']) : (($version['major_version'] >= 3) ? 400 : 150);
-        $tvConfig->altTagOn = (bool)$params['allowAltTag'];
-        $tvConfig->captionOn = (bool)$params['allowCaption'];
-        $tvConfig->creditsOn = (bool)$params['allowCredits'];
+        $tvConfig->targetWidth = (int)$this->getTVConfig('target_width', $tvName, $contextSettings, $params['targetWidth']);
+        $tvConfig->targetHeight = (int)$this->getTVConfig('target_height', $tvName, $contextSettings, $params['targetHeight']);
+        $tvConfig->targetRatio = $this->getTVConfig('target_ratio', $tvName, $contextSettings, $params['targetRatio']);
+        $tvConfig->thumbnailWidth = (int)$this->getTVConfig('thumbnail_width', $tvName, $contextSettings, (isset($params['thumbnailWidth']) && $params['thumbnailWidth']) ? $params['thumbnailWidth'] : (($version['major_version'] >= 3) ? 400 : 150));
+        $tvConfig->altTagOn = (bool)$this->getTVConfig('allow_alt_tag', $tvName, $contextSettings, $params['allowAltTag']);
+        $tvConfig->captionOn = (bool)$this->getTVConfig('allow_caption', $tvName, $contextSettings, $params['allowCaption']);
+        $tvConfig->creditsOn = (bool)$this->getTVConfig('allow_credits', $tvName, $contextSettings, $params['allowCredits']);
         $tvConfig->mediaSource = $source->get('id');
         $tvConfig->tvId = $this->tv->get('id');
         $tvConfig->tvParams = $this->getInputOptions();
@@ -115,6 +120,36 @@ class ImagePlusInputRender extends modTemplateVarInputRender
 
         // Prepare value
         $this->tv->value = $imageplus->prepareTvValue($this->tv->value, $params, $this->tv);
+    }
+
+    /**
+     * @param string $key
+     * @param string $name
+     * @param array $config
+     * @param string $default
+     * @return string
+     */
+    private function getTVConfig($key, $name, $config, $default)
+    {
+        $value = $default;
+
+        // Global System/$config setting
+        $settingKey = 'imageplus.' . $key;
+        // Use MODX System setting if defined and not empty
+        $value = (isset($this->modx->config[$settingKey]) && !empty($this->modx->config[$settingKey])) ? $this->modx->config[$settingKey] : $default;
+        // Use $config setting if defined and not empty
+        $value = (isset($config[$settingKey]) && !empty($config[$settingKey])) ? $config[$settingKey] : $value;
+
+        // TV name based System/$config setting
+        if ($name) {
+            $settingKey = 'imageplus.' . $name . '.' . $key;
+            // Use MODX System setting if defined and not empty
+            $value = (isset($this->modx->config[$settingKey]) && !empty($this->modx->config[$settingKey])) ? $this->modx->config[$settingKey] : $value;
+            // Use $config setting if defined and not empty
+            $value = (isset($config[$settingKey]) && !empty($config[$settingKey])) ? $config[$settingKey] : $value;
+        }
+
+        return $value;
     }
 }
 

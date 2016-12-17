@@ -22,6 +22,11 @@
         border: false,
         labelAlign: 'top',
         items: [{
+            cls: 'x-form-item imageplus-section',
+            html: '<label class="x-form-item-label" style="padding-bottom: 0">' +
+            _('imageplus.section') + '</label><label class="desc-under" style="">' +
+            _('imageplus.section_desc') + '</label>'
+        }, {
             layout: 'column',
             items: [{
                 columnWidth: .5,

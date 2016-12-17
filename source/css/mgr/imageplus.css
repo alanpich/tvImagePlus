@@ -28,3 +28,11 @@
 .imageplus-hidden-textarea {
   display: none;
 }
+
+.imageplus-sectiontitle .x-form-item-label {
+  padding-top: 0;
+}
+
+.imageplus-sectiontitle .desc-under {
+  padding-top: 0;
+}
