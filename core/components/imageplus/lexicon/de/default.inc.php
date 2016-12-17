@@ -4,8 +4,16 @@ $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Bild bearbeiten';
 $_lang['imageplus.alt_text'] = 'Alt-Text';
+$_lang['imageplus.caption'] = 'Titel';
+$_lang['imageplus.credits'] = 'Bildnachweis';
 
 /** Input options render **/
+$_lang['imageplus.section'] = 'Image+ Optionen';
+$_lang['imageplus.section_desc'] = 'Die folgenden Optionen können per System-/Kontexteinstellungen überschrieben werden. Bitte lesen Sie die <a href="http://jako.github.io/ImagePlus/usage/">Dokumentation</a> für die entsprechenden Einträge in den System-/Kontexteinstellungen.';
+$_lang['imageplus.selectConfig'] = 'Vordefinierte Ausgabegrößen/Ausgabe-Seitenverältnisse';
+$_lang['imageplus.selectConfig_desc'] = 'Wählen Sie eine vordefinierte Ausgabegröße/ein Seitenverhältnis. Die Vorgaben können in den Systemeinstellungen eingestellt werden.';
+$_lang['imageplus.selectConfigForce'] = 'Erzwungene vordefinierte Ausgabegrößen/Ausgabe-Seitenverältnisse';
+$_lang['imageplus.selectConfigForce_desc'] = 'Wählen Sie eine erzwungene vordefinierte Ausgabegröße/ein Seitenverhältnis. Die Vorgaben können in den Systemeinstellungen eingestellt werden.';
 $_lang['imageplus.targetwidth'] = 'Ausgabebreite';
 $_lang['imageplus.targetwidth_desc'] = '(Optional, Integer) Gibt die Ausgabebreite des Bildes an. Das hochgeladene Bild muss mindestens diese Breite haben.';
 $_lang['imageplus.targetheight'] = 'Ausgabehöhe';
@@ -16,6 +24,10 @@ $_lang['imageplus.thumbnailWidth'] = 'Breite des Thumbnails';
 $_lang['imageplus.thumbnailWidth_desc'] = '(Optional, Integer) Breite des Thumbnails im Template Variablen Bereich.';
 $_lang['imageplus.allowAltTag'] = 'Alternatives Textfeld anzeigen';
 $_lang['imageplus.allowAltTag_desc'] = 'Ermöglicht die Eingabe eines Alt oder Title-Attributes für das Bild.';
+$_lang['imageplus.allowCaption'] = 'Titel Feld anzeigen';
+$_lang['imageplus.allowCaption_desc'] = 'Ermöglicht die Eingabe eines Titels für das Bild.';
+$_lang['imageplus.allowCredits'] = 'Bildnachweis Feld anzeigen';
+$_lang['imageplus.allowCredits_desc'] = 'Ermöglicht die Eingabe eines Bildnachweises für das Bild.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Zursätzliche phpThumb Parameter';
@@ -45,5 +57,28 @@ $_lang['imageplus.error.image_too_small.msg'] = 'Das gewählte Bild ist zu klein
 $_lang['imageplus.error.image_not_found.title'] = 'Bild nicht gefunden';
 $_lang['imageplus.error.image_not_found.msg'] = 'Das Bild wurde nicht gefunden und kann nicht zugeschnitten werden. Bitte wählen Sie ein anderes Bild.';
 
+/** System settings **/
+$_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
 $_lang['setting_imageplus.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';
+$_lang['setting_imageplus.target_width'] = $_lang['imageplus.targetwidth'];
+$_lang['setting_imageplus.target_width_desc'] = $_lang['imageplus.targetwidth_desc'];
+$_lang['setting_imageplus.target_height'] = $_lang['imageplus.targetheight'];
+$_lang['setting_imageplus.target_height_desc'] = $_lang['imageplus.targetheight_desc'];
+$_lang['setting_imageplus.target_ratio'] = $_lang['imageplus.targetRatio'];
+$_lang['setting_imageplus.target_ratio_desc'] = $_lang['imageplus.targetRatio_desc'];
+$_lang['setting_imageplus.thumbnail_width'] = $_lang['imageplus.thumbnailWidth'];
+$_lang['setting_imageplus.thumbnail_width_desc'] = $_lang['imageplus.thumbnailWidth_desc'];
+$_lang['setting_imageplus.allow_alt_tag'] = $_lang['imageplus.allowAltTag'];
+$_lang['setting_imageplus.allow_alt_tag_desc'] = $_lang['imageplus.allowAltTag_desc'];
+$_lang['setting_imageplus.allow_caption'] = $_lang['imageplus.allowCaption'];
+$_lang['setting_imageplus.allow_caption_desc'] = $_lang['imageplus.allowCaption_desc'];
+$_lang['setting_imageplus.allow_credits'] = $_lang['imageplus.allowCredits'];
+$_lang['setting_imageplus.allow_credits_desc'] = $_lang['imageplus.allowCredits_desc'];
+$_lang['setting_imageplus.select_config'] = 'Vordefinierte Ausgabegrößen/Ausgabe-Seitenverältnisse';
+$_lang['setting_imageplus.select_config_desc'] = 'Wählen Sie eine vordefinierte Ausgabegröße/ein Seitenverhältnis.';
+$_lang['setting_imageplus.force_config'] = 'Erzwungene vordefinierte Ausgabegrößen/Ausgabe-Seitenverältnisse';
+$_lang['setting_imageplus.force_config_desc'] = 'Wählen Sie eine erzwungene vordefinierte Ausgabegröße/ein Seitenverhältnis.';
+
+/** System settings grid */
+$_lang['setting_imageplus.configname'] = 'Name';

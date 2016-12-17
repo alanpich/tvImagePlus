@@ -37,7 +37,7 @@ class ImagePlus
      * The version
      * @var string $version
      */
-    public $version = '2.4.5';
+    public $version = '2.6.0-rc3';
 
     /**
      * The class options
@@ -193,6 +193,7 @@ class ImagePlus
             $this->modx->regClientStartupScript($jsSourceUrl . 'jquery/jquery.min.js?v=v' . $this->version);
             $this->modx->regClientStartupScript($jsSourceUrl . 'jquery/jquery.jcrop.min.js?v=v' . $this->version);
             $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.jquery.imagecrop.js?v=v' . $this->version);
+            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.grid.js?v=v' . $this->version);
         } else {
             if ($vers['major_version'] >= 3) {
                 $this->modx->regClientCSS($cssUrl . 'imageplus.min.css');
