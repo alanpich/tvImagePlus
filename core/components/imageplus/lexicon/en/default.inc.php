@@ -4,6 +4,8 @@ $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Edit Image';
 $_lang['imageplus.alt_text'] = 'Alt text';
+$_lang['imageplus.caption'] = 'Caption';
+$_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
 $_lang['imageplus.targetwidth'] = 'Target (Minimal) Width';
@@ -16,6 +18,10 @@ $_lang['imageplus.thumbnailWidth'] = 'Thumbnail Width';
 $_lang['imageplus.thumbnailWidth_desc'] = '(Optional, Integer) The thumbnail width of the image in the template variable panel.';
 $_lang['imageplus.allowAltTag'] = 'Show Alt Tag Field';
 $_lang['imageplus.allowAltTag_desc'] = 'Allow user to enter a title/alt-tag for the image.';
+$_lang['imageplus.allowCaption'] = 'Show Caption Field';
+$_lang['imageplus.allowCaption_desc'] = 'Allow user to enter a caption for the image.';
+$_lang['imageplus.allowCredits'] = 'Show Credits Field';
+$_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Additional phpThumb Parameters';

@@ -64,10 +64,13 @@ switch ($type) {
         $output = ($data && $data->sourceImg->src) ? 'image' : 'noimage';
         break;
     case 'tpl':
+        $data = json_decode($value);
         $output = ($value) ? $imageplus->getImageURL($value, array_merge($scriptProperties, array(
             'docid' => $docid,
             'phpThumbParams' => $options,
-            'outputChunk' => $tpl
+            'outputChunk' => $tpl,
+            'caption' => ($data && $data->caption) ? $data->caption : '',
+            'credits' => ($data && $data->credits) ? $data->credits : ''
         )), $tv) : '';
         break;
     case 'thumb':

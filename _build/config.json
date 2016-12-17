@@ -2,8 +2,8 @@
   "name": "ImagePlus",
   "lowCaseName": "imageplus",
   "description": "Advanced Image template variable input type",
-  "author": "Thomas Jakobi",
-  "version": "2.4.5",
+  "author": "Alan Pich, Thomas Jakobi",
+  "version": "2.5.0",
   "package": {
     "elements": {
       "chunks": [

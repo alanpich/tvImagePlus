@@ -20,7 +20,4 @@ $imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imag
     'core_path' => $corePath
 ));
 
-$lang = $modx->lexicon->fetch('imageplus.', true);
-$modx->controller->setPlaceholder('imageplus', $lang);
-
 return $modx->smarty->fetch($corePath . 'elements/tv/input/tpl/imageplus.options.tpl');

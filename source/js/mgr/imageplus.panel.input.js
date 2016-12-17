@@ -30,7 +30,7 @@ ImagePlus.panel.input = function (config) {
     this.getValue(config.hiddenField);
     this.createImageBrowser();
     this.createImagePreview();
-    this.createAltTextField();
+    this.createTextFields();
 
     // Warn if has no dependencies
     if (ImagePlus.config.hasUnmetDependencies) {
@@ -45,7 +45,7 @@ ImagePlus.panel.input = function (config) {
         width: '400px',
         items: [{
             xtype: 'compositefield',
-            anchor: '98%',
+            anchor: '100%',
             hideLabel: true,
             listeners: {
                 afterrender: {
@@ -61,7 +61,9 @@ ImagePlus.panel.input = function (config) {
             border: false,
             items: [
                 this.imagePreview,
-                this.altTextField
+                this.altTextField,
+                this.captionField,
+                this.creditsField
             ]
         }]
     });
@@ -124,25 +126,100 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             }
         });
     },
-    // Create field for alt-text input
-    createAltTextField: function () {
+    // Create fields for alt-text, caption and credits input
+    createTextFields: function () {
+        var _this = this;
         this.altTextField = MODx.load({
-            xtype: this.options.altTagOn ? 'textfield' : 'hidden',
-            submitValue: false,
-            value: this.image.altTag || '',
-            listeners: {
-                change: {
-                    fn: this.onAltTagChange,
-                    scope: this
-                },
-                afterrender: function () {
-                    var el = this.getEl();
-                    if (el) {
-                        el.set({'placeholder': _('imageplus.alt_text')});
+            xtype: 'panel',
+            items: {
+                xtype: this.options.altTagOn ? 'textfield' : 'hidden',
+                submitValue: false,
+                value: this.image.altTag || '',
+                listeners: {
+                    change: {
+                        fn: this.onAltTagChange,
+                        scope: this
+                    },
+                    afterrender: function () {
+                        var el = this.getEl();
+                        if (el && _this.options.altTagOn) {
+                            el.set({'placeholder': _('imageplus.alt_text')});
+                            el.insertSibling({
+                                tag: 'span',
+                                cls: 'icon icon-code',
+                                style: 'position: absolute; left: 8px; top: 10px; opacity: 0.6',
+                                title: _('imageplus.alt_text')
+                            }, 'after', true);
+                        }
                     }
+                },
+                width: 400,
+                style: {
+                    marginBottom: '5px',
+                    paddingLeft: '25px'
                 }
-            }, width: 400, style: {
-                marginBottom: '5px'
+            }
+        });
+        this.captionField = MODx.load({
+            xtype: 'panel',
+            items: {
+                xtype: this.options.captionOn ? 'textfield' : 'hidden',
+                submitValue: false,
+                value: this.image.caption || '',
+                listeners: {
+                    change: {
+                        fn: this.onCaptionChange,
+                        scope: this
+                    },
+                    afterrender: function () {
+                        var el = this.getEl();
+                        if (el && _this.options.captionOn) {
+                            el.set({'placeholder': _('imageplus.caption')});
+                            el.insertSibling({
+                                tag: 'span',
+                                cls: 'icon icon-header',
+                                style: 'position: absolute; left: 8px; top: 10px; opacity: 0.6',
+                                title: _('imageplus.caption')
+                            }, 'after', true);
+                        }
+                    }
+                },
+                width: 400,
+                style: {
+                    marginBottom: '5px',
+                    paddingLeft: '25px'
+                }
+            }
+        });
+        this.creditsField = MODx.load({
+            xtype: 'panel',
+            items: {
+                xtype: this.options.creditsOn ? 'textfield' : 'hidden',
+                submitValue: false,
+                value: this.image.credits || '',
+                listeners: {
+                    change: {
+                        fn: this.onCreditsChange,
+                        scope: this
+                    },
+                    afterrender: function () {
+                        var el = this.getEl();
+                        if (el && _this.options.creditsOn) {
+                            el.set({'placeholder': _('imageplus.credits')});
+                            el.insertSibling({
+                                tag: 'span',
+                                cls: 'icon icon-copyright',
+                                style: 'position: absolute; left: 8px; top: 9px; opacity: 0.6',
+                                title: _('imageplus.credits')
+                            }, 'after', true);
+                        }
+                    }
+                },
+                width: 400,
+                style: {
+                    marginBottom: '5px',
+                    paddingLeft: '25px'
+                }
             }
         })
     },
@@ -296,6 +373,16 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.image.altTag = value;
         this.updateValue();
     },
+    // Fired when alt-tag field is changed
+    onCaptionChange: function (field, value) {
+        this.image.caption = value;
+        this.updateValue();
+    },
+    // Fired when alt-tag field is changed
+    onCreditsChange: function (field, value) {
+        this.image.credits = value;
+        this.updateValue();
+    },
     // Manually get image size
     manualGetImageSize: function () {
         var baseUrl = ImagePlus.config['sources'][this.image.sourceImg.source].url;
@@ -365,7 +452,9 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             crop: this.image.crop,
             targetWidth: this.options.targetWidth,
             targetHeight: this.options.targetHeight,
-            altTag: this.image.altTag
+            altTag: this.image.altTag,
+            caption: this.image.caption,
+            credits: this.image.credits
         };
         var json = JSON.stringify(TV, null, '  ');
 

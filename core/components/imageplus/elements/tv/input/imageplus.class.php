@@ -105,6 +105,8 @@ class ImagePlusInputRender extends modTemplateVarInputRender
         $tvConfig->targetRatio = $params['targetRatio'];
         $tvConfig->thumbnailWidth = (isset($params['thumbnailWidth']) && intval($params['thumbnailWidth'])) ? intval($params['thumbnailWidth']) : (($version['major_version'] >= 3) ? 400 : 150);
         $tvConfig->altTagOn = (bool)$params['allowAltTag'];
+        $tvConfig->captionOn = (bool)$params['allowCaption'];
+        $tvConfig->creditsOn = (bool)$params['allowCredits'];
         $tvConfig->mediaSource = $source->get('id');
         $tvConfig->tvId = $this->tv->get('id');
         $tvConfig->tvParams = $this->getInputOptions();

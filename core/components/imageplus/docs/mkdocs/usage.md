@@ -32,8 +32,27 @@ the crop is not restricted to any aspect ratio.
 *Image+* TVs can also contain an **Alt Tag Field**, which is an additional text input, that is stored with each image. 
 It could be output alongside the image i.e. as an alt-tag or title-tag.
 
-In order to outpt the alt text in a *Image+* TV placeholder, you will need to select an chunk in the **Output 
+In order to output the alt text in a *Image+* TV placeholder, you will need to select an chunk in the **Output 
 Options**. You could also use the ImagePlus snippet and specify a template chunk in the snippet call options.
+The alt text is filled in the placeholder `[[+alt]]` in that chunk.
+
+**Show Caption Field**
+
+*Image+* TVs can also contain an **Caption Field**, which is an additional text input, that is stored with each image. 
+It could be output beneath the image i.e. in an additional caption div.
+
+In order to output the caption in a *Image+* TV placeholder, you will need to select an chunk in the **Output 
+Options**. You could also use the ImagePlus snippet and specify a template chunk in the snippet call options. 
+The caption is filled in the placeholder `[[+caption]]` in that chunk.
+
+**Show Credits Field**
+
+*Image+* TVs can also contain an **Credits Field**, which is an additional text input, that is stored with each image. 
+It could be output beneath the image i.e. in an additional credits div.
+
+In order to output the credits in a *Image+* TV placeholder, you will need to select an chunk in the **Output 
+Options**. You could also use the ImagePlus snippet and specify a template chunk in the snippet call options.
+The credits are filled in the placeholder `[[+credits]]` in that chunk.
 
 **Allow Empty**
 

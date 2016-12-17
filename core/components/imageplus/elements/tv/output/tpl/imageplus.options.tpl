@@ -28,8 +28,7 @@
             name: 'prop_phpThumbParams',
             id: 'prop_phpThumbParams{/literal}{$tv}{literal}',
             value: params['phpThumbParams'] || '',
-            anchors: '98%',
-            width: '99%',
+            anchor: '100%',
             listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
@@ -53,8 +52,7 @@
             name: 'prop_outputChunk',
             id: 'prop_outputChunk{/literal}{$tv}{literal}',
             value: params['outputChunk'] || '',
-            anchors: '98%',
-            width: '99%',
+            anchor: '100%',
             listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
@@ -66,10 +64,10 @@
             fieldLabel: _('imageplus.generateUrl'),
             description: MODx.expandHelp ? '' : _('imageplus.generateUrl_desc'),
             name: 'prop_generateUrl',
+            hiddenName: 'prop_generateUrl',
             id: 'prop_generateUrl{/literal}{$tv}{literal}',
-            value: !!(params['generateUrl'] == 1 || params['generateUrl'] == 'true'),
-            anchors: '98%',
-            width: '99%',
+            value: (params['generateUrl'] == 1 || params['generateUrl'] == 'true'),
+            anchor: '100%',
             listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
