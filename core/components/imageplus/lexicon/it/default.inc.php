@@ -4,7 +4,7 @@ $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Redattore Image+';
 $_lang['imageplus.edit_image'] = 'Modifca Immagine';
 $_lang['imageplus.alt_text'] = 'Testo per l\'attributo Alt';
-$_lang['imageplus.caption'] = 'Caption';
+$_lang['imageplus.caption'] = 'Didascalia';
 $_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
@@ -25,7 +25,7 @@ $_lang['imageplus.thumbnailWidth_desc'] = '(Opzionale, Numero Intero) La lunghez
 $_lang['imageplus.allowAltTag'] = 'Tag alt';
 $_lang['imageplus.allowAltTag_desc'] = 'Consente all\'utente di inserire un titolo/tag-alt per l\'immagine';
 $_lang['imageplus.allowCaption'] = 'Show Caption Field';
-$_lang['imageplus.allowCaption_desc'] = 'Allow user to enter a caption for the image.';
+$_lang['imageplus.allowCaption_desc'] = 'Consente all\'utente di inserire una didascalia per l\'immagine.';
 $_lang['imageplus.allowCredits'] = 'Show Credits Field';
 $_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
 
@@ -81,4 +81,4 @@ $_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect r
 $_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
 
 /** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';
+$_lang['setting_imageplus.configname'] = 'Nome';
