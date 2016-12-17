@@ -27,6 +27,16 @@
             _('imageplus.section') + '</label><label class="desc-under" style="">' +
             _('imageplus.section_desc') + '</label>'
         }, {
+            xtype: 'sizes-ratio-combo',
+            fieldLabel: _('imageplus.selectConfig{/literal}{if $forceconfig}Force{/if}{literal}'),
+            name: 'inopt_selectConfig',
+            id: 'inopt_selectConfig{/literal}{$tv}{literal}',
+            tvId: '{/literal}{$tv}{literal}',
+            labelAlign: 'left',
+            data: {/literal}{$selectconfig}{literal},
+            hidden: {/literal}{$hide}{literal},
+            anchor: '100%'
+        }, {
             layout: 'column',
             items: [{
                 columnWidth: .5,
@@ -38,6 +48,7 @@
                     name: 'inopt_targetWidth',
                     id: 'inopt_targetWidth{/literal}{$tv}{literal}',
                     value: params['targetWidth'] || '',
+                    readOnly: {/literal}{if $forceconfig}true{else}false{/if}{literal},
                     anchor: '100%',
                     listeners: oc
                 }, {
@@ -51,6 +62,7 @@
                     name: 'inopt_targetHeight',
                     id: 'inopt_targetHeight{/literal}{$tv}{literal}',
                     value: params['targetHeight'] || '',
+                    readOnly: {/literal}{if $forceconfig}true{else}false{/if}{literal},
                     anchor: '100%',
                     listeners: oc
                 }, {
@@ -69,6 +81,7 @@
                     name: 'inopt_targetRatio',
                     id: 'inopt_targetRatio{/literal}{$tv}{literal}',
                     value: params['targetRatio'] || '',
+                    readOnly: {/literal}{if $forceconfig}true{else}false{/if}{literal},
                     anchor: '100%',
                     listeners: oc
                 }, {
