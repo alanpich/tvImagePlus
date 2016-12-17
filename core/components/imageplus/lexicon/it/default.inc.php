@@ -8,10 +8,10 @@ $_lang['imageplus.caption'] = 'Didascalia';
 $_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Options';
+$_lang['imageplus.section'] = 'Opzioni Image+';
 $_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="http://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
 $_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
-$_lang['imageplus.selectConfig_desc'] = 'Select a predefined target size/aspect ratio. The definitions could be created in the system settings.';
+$_lang['imageplus.selectConfig_desc'] = 'Seleziona un\'impostazione di dimensioni/proporzioni predefinita. Le definizioni possono essere create nelle impostazioni del sistema.';
 $_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';
 $_lang['imageplus.selectConfigForce_desc'] = 'Forced select a predefined crop size/aspect ratio. The definitions could be created in the system settings.';
 $_lang['imageplus.targetwidth'] = 'Larghezza';
@@ -24,10 +24,10 @@ $_lang['imageplus.thumbnailWidth'] = 'La larghezza della miniatura dell\'immagin
 $_lang['imageplus.thumbnailWidth_desc'] = '(Opzionale, Numero Intero) La lunghezza della miniatura dell\'immagine nella pannello della Template Variable.';
 $_lang['imageplus.allowAltTag'] = 'Tag alt';
 $_lang['imageplus.allowAltTag_desc'] = 'Consente all\'utente di inserire un titolo/tag-alt per l\'immagine';
-$_lang['imageplus.allowCaption'] = 'Show Caption Field';
+$_lang['imageplus.allowCaption'] = 'Visualizza campo didascalia';
 $_lang['imageplus.allowCaption_desc'] = 'Consente all\'utente di inserire una didascalia per l\'immagine.';
 $_lang['imageplus.allowCredits'] = 'Show Credits Field';
-$_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
+$_lang['imageplus.allowCredits_desc'] = 'Consente all\'utente di inserire un credito per l\'immagine.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Parametri aggiuntivi di phpThumb';
