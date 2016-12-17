@@ -1,0 +1,3 @@
+files:
+  - source: /core/components/imageplus/lexicon/en/*.php
+    translation: /core/components/imageplus/lexicon/%two_letters_code%/%original_file_name%
