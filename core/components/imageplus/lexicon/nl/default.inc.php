@@ -1,16 +1,16 @@
 <?php
 $_lang['imageplus'] = 'Image+';
 
-$_lang['imageplus.editor_title'] = 'Image+ Editor';
+$_lang['imageplus.editor_title'] = 'Afbeelding Editor';
 $_lang['imageplus.edit_image'] = 'Bewerk Afbeelding';
 $_lang['imageplus.alt_text'] = 'Alternatieve tekst';
-$_lang['imageplus.caption'] = 'Caption';
+$_lang['imageplus.caption'] = 'Titel';
 $_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="http://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
-$_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
+$_lang['imageplus.section'] = 'Afbeelding Options';
+$_lang['imageplus.section_desc'] = 'De volgende opties kunnen met een context of system setting worden overschreven. Bekijk de <a href="http://jako.github.io/ImagePlus/usage/">documentatie</a> voor de juiste keys.';
+$_lang['imageplus.selectConfig'] = 'Voorgedefinieerde doel maten/aspect ratios';
 $_lang['imageplus.selectConfig_desc'] = 'Select a predefined target size/aspect ratio. The definitions could be created in the system settings.';
 $_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';
 $_lang['imageplus.selectConfigForce_desc'] = 'Forced select a predefined crop size/aspect ratio. The definitions could be created in the system settings.';
