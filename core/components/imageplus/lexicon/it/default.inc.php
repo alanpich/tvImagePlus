@@ -9,7 +9,7 @@ $_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
 $_lang['imageplus.section'] = 'Opzioni Image+';
-$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="http://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
+$_lang['imageplus.section_desc'] = 'Le seguenti opzioni possono essere sovrascritte dalle impostazioni di sistema/contesto. Si prega di leggere la <a href="http://jako.github.io/ImagePlus/usage/">documentazione</a> per conoscere le chiavi da utilizzare nelle impostazioni di sistema/contesto.';
 $_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
 $_lang['imageplus.selectConfig_desc'] = 'Seleziona un\'impostazione di dimensioni/proporzioni predefinita. Le definizioni possono essere create nelle impostazioni del sistema.';
 $_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';
@@ -60,7 +60,7 @@ $_lang['imageplus.error.image_not_found.msg'] = 'L\'immagine non è stata trovat
 /** System settings **/
 $_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
+$_lang['setting_imageplus.debug_desc'] = 'Scrivi le informazioni di debug nell\'error log di MODX.';
 $_lang['setting_imageplus.target_width'] = $_lang['imageplus.targetwidth'];
 $_lang['setting_imageplus.target_width_desc'] = $_lang['imageplus.targetwidth_desc'];
 $_lang['setting_imageplus.target_height'] = $_lang['imageplus.targetheight'];
