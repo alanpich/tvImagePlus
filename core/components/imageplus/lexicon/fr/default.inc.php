@@ -4,11 +4,11 @@ $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Éditeur Image+';
 $_lang['imageplus.edit_image'] = 'Éditer l\'image';
 $_lang['imageplus.alt_text'] = 'Texte de l\'attribut Alt';
-$_lang['imageplus.caption'] = 'Caption';
-$_lang['imageplus.credits'] = 'Credits';
+$_lang['imageplus.caption'] = 'Légende';
+$_lang['imageplus.credits'] = 'Crédits';
 
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Options';
+$_lang['imageplus.section'] = 'Options d\'Image+';
 $_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="http://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
 $_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
 $_lang['imageplus.selectConfig_desc'] = 'Select a predefined target size/aspect ratio. The definitions could be created in the system settings.';
@@ -24,10 +24,10 @@ $_lang['imageplus.thumbnailWidth'] = 'Largeur miniature';
 $_lang['imageplus.thumbnailWidth_desc'] = '(Optionnel, entier) Largeur de la miniature dans le panneau de variable de modèle (TV).';
 $_lang['imageplus.allowAltTag'] = 'Tag Alt';
 $_lang['imageplus.allowAltTag_desc'] = 'Autorise l\'utilisateur à entrer un titre/tag alt pour l\'image';
-$_lang['imageplus.allowCaption'] = 'Show Caption Field';
-$_lang['imageplus.allowCaption_desc'] = 'Allow user to enter a caption for the image.';
-$_lang['imageplus.allowCredits'] = 'Show Credits Field';
-$_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
+$_lang['imageplus.allowCaption'] = 'Afficher le champ de légende';
+$_lang['imageplus.allowCaption_desc'] = 'Permettre à l’utilisateur d’entrer une légende pour l’image.';
+$_lang['imageplus.allowCredits'] = 'Afficher le champ de crédits';
+$_lang['imageplus.allowCredits_desc'] = 'Permettre à l’utilisateur d’entrer un crédit pour l’image.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Paramètres phpThumb additionnels';
@@ -78,7 +78,7 @@ $_lang['setting_imageplus.allow_credits_desc'] = $_lang['imageplus.allowCredits_
 $_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
 $_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
 $_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+$_lang['setting_imageplus.force_config_desc'] = 'Forcer l’utilisation des ratios de taille/aspect prédéfinis.';
 
 /** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';
+$_lang['setting_imageplus.configname'] = 'Nom';
