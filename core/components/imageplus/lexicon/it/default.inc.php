@@ -26,7 +26,7 @@ $_lang['imageplus.allowAltTag'] = 'Tag alt';
 $_lang['imageplus.allowAltTag_desc'] = 'Consente all\'utente di inserire un titolo/tag-alt per l\'immagine';
 $_lang['imageplus.allowCaption'] = 'Visualizza campo didascalia';
 $_lang['imageplus.allowCaption_desc'] = 'Consente all\'utente di inserire una didascalia per l\'immagine.';
-$_lang['imageplus.allowCredits'] = 'Show Credits Field';
+$_lang['imageplus.allowCredits'] = 'Mostra il campo Credits';
 $_lang['imageplus.allowCredits_desc'] = 'Consente all\'utente di inserire un credito per l\'immagine.';
 
 /** Output options render **/
