@@ -1,7 +1,7 @@
 <?php
 $_lang['imageplus'] = 'Image+';
 
-$_lang['imageplus.editor_title'] = 'Afbeelding Editor';
+$_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.edit_image'] = 'Bewerk Afbeelding';
 $_lang['imageplus.alt_text'] = 'Alternatieve tekst';
 $_lang['imageplus.caption'] = 'Titel';
