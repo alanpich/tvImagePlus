@@ -55,7 +55,7 @@ $_lang['imageplus.placeholder.crop.options'] = 'L\'opzione di ritaglio su phpthu
 $_lang['imageplus.error.image_too_small.title'] = 'L\'immagine è troppo piccola';
 $_lang['imageplus.error.image_too_small.msg'] = 'L\'immagine selezionata è troppo piccola per essere usata qui. Si prega di selezionare un\'altra immagine.';
 $_lang['imageplus.error.image_not_found.title'] = 'L\'immagine non è stata trovata';
-$_lang['imageplus.error.image_not_found.msg'] = 'L\'immagine non è stata trovata e percio non può essere tagliata. Si prega di selezionare un\'altra immagine.';
+$_lang['imageplus.error.image_not_found.msg'] = 'L\'immagine non è stata trovata e perciò non può essere tagliata. Si prega di selezionare un\'altra immagine.';
 
 /** System settings **/
 $_lang['area_imageplus'] = 'Image+';
