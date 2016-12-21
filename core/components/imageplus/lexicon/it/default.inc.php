@@ -2,10 +2,18 @@
 $_lang['imageplus'] = 'Image+';
 
 $_lang['imageplus.editor_title'] = 'Redattore Image+';
-$_lang['imageplus.edit_image'] = 'Modifca Immagine';
+$_lang['imageplus.edit_image'] = 'Modifica Immagine';
 $_lang['imageplus.alt_text'] = 'Testo per l\'attributo Alt';
+$_lang['imageplus.caption'] = 'Didascalia';
+$_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
+$_lang['imageplus.section'] = 'Opzioni Image+';
+$_lang['imageplus.section_desc'] = 'Le seguenti opzioni possono essere sovrascritte dalle impostazioni di sistema/contesto. Si prega di leggere la <a href="http://jako.github.io/ImagePlus/usage/">documentazione</a> per conoscere le chiavi da utilizzare nelle impostazioni di sistema/contesto.';
+$_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
+$_lang['imageplus.selectConfig_desc'] = 'Seleziona un\'impostazione di dimensioni/proporzioni predefinita. Le definizioni possono essere create nelle impostazioni del sistema.';
+$_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';
+$_lang['imageplus.selectConfigForce_desc'] = 'Forced select a predefined crop size/aspect ratio. The definitions could be created in the system settings.';
 $_lang['imageplus.targetwidth'] = 'Larghezza';
 $_lang['imageplus.targetwidth_desc'] = 'La larghezza desiderata per l\'immagine finale';
 $_lang['imageplus.targetheight'] = 'Altezza';
@@ -16,6 +24,10 @@ $_lang['imageplus.thumbnailWidth'] = 'La larghezza della miniatura dell\'immagin
 $_lang['imageplus.thumbnailWidth_desc'] = '(Opzionale, Numero Intero) La lunghezza della miniatura dell\'immagine nella pannello della Template Variable.';
 $_lang['imageplus.allowAltTag'] = 'Tag alt';
 $_lang['imageplus.allowAltTag_desc'] = 'Consente all\'utente di inserire un titolo/tag-alt per l\'immagine';
+$_lang['imageplus.allowCaption'] = 'Visualizza campo didascalia';
+$_lang['imageplus.allowCaption_desc'] = 'Consente all\'utente di inserire una didascalia per l\'immagine.';
+$_lang['imageplus.allowCredits'] = 'Mostra il campo Credits';
+$_lang['imageplus.allowCredits_desc'] = 'Consente all\'utente di inserire un credito per l\'immagine.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Parametri aggiuntivi di phpThumb';
@@ -43,7 +55,30 @@ $_lang['imageplus.placeholder.crop.options'] = 'L\'opzione di ritaglio su phpthu
 $_lang['imageplus.error.image_too_small.title'] = 'L\'immagine è troppo piccola';
 $_lang['imageplus.error.image_too_small.msg'] = 'L\'immagine selezionata è troppo piccola per essere usata qui. Si prega di selezionare un\'altra immagine.';
 $_lang['imageplus.error.image_not_found.title'] = 'L\'immagine non è stata trovata';
-$_lang['imageplus.error.image_not_found.msg'] = 'L\'immagine non è stata trovata e percio non può essere tagliata. Si prega di selezionare un\'altra immagine.';
+$_lang['imageplus.error.image_not_found.msg'] = 'L\'immagine non è stata trovata e perciò non può essere tagliata. Si prega di selezionare un\'altra immagine.';
 
+/** System settings **/
+$_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
+$_lang['setting_imageplus.debug_desc'] = 'Scrivi le informazioni di debug nell\'error log di MODX.';
+$_lang['setting_imageplus.target_width'] = $_lang['imageplus.targetwidth'];
+$_lang['setting_imageplus.target_width_desc'] = $_lang['imageplus.targetwidth_desc'];
+$_lang['setting_imageplus.target_height'] = $_lang['imageplus.targetheight'];
+$_lang['setting_imageplus.target_height_desc'] = $_lang['imageplus.targetheight_desc'];
+$_lang['setting_imageplus.target_ratio'] = $_lang['imageplus.targetRatio'];
+$_lang['setting_imageplus.target_ratio_desc'] = $_lang['imageplus.targetRatio_desc'];
+$_lang['setting_imageplus.thumbnail_width'] = $_lang['imageplus.thumbnailWidth'];
+$_lang['setting_imageplus.thumbnail_width_desc'] = $_lang['imageplus.thumbnailWidth_desc'];
+$_lang['setting_imageplus.allow_alt_tag'] = $_lang['imageplus.allowAltTag'];
+$_lang['setting_imageplus.allow_alt_tag_desc'] = $_lang['imageplus.allowAltTag_desc'];
+$_lang['setting_imageplus.allow_caption'] = $_lang['imageplus.allowCaption'];
+$_lang['setting_imageplus.allow_caption_desc'] = $_lang['imageplus.allowCaption_desc'];
+$_lang['setting_imageplus.allow_credits'] = $_lang['imageplus.allowCredits'];
+$_lang['setting_imageplus.allow_credits_desc'] = $_lang['imageplus.allowCredits_desc'];
+$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
+$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
+$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
+$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+
+/** System settings grid */
+$_lang['setting_imageplus.configname'] = 'Nome';
