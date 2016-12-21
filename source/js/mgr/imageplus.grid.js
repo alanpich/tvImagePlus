@@ -227,8 +227,6 @@ Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
     },
     saveValue: function () {
         var value = [];
-        var store = this.getStore();
-        var range = store.getRange();
         Ext.each(this.getStore().getRange(), function (record) {
             value.push({
                 name: record.data.name,
