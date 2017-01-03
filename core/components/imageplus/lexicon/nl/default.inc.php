@@ -27,7 +27,7 @@ $_lang['imageplus.allowAltTag_desc'] = 'Sta de gebruiker toe om een alt of title
 $_lang['imageplus.allowCaption'] = 'Toon bijschriftveld';
 $_lang['imageplus.allowCaption_desc'] = 'Gebruiker toestaan aan een bijschrift voor de afbeelding in te voeren.';
 $_lang['imageplus.allowCredits'] = 'Credits-veld weergeven';
-$_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
+$_lang['imageplus.allowCredits_desc'] = 'Mogelijk maken dat de gebruiker een naamsvermelding (credits) voor de afbeelding kan invoeren.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Extra phpThumb opties';
@@ -59,8 +59,8 @@ $_lang['imageplus.error.image_not_found.msg'] = 'De afbeelding kan niet worden b
 
 /** System settings **/
 $_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
+$_lang['setting_imageplus.debug'] = 'Foutoplossing';
+$_lang['setting_imageplus.debug_desc'] = 'Log debug/foutopsporings informatie in het foutenlogboek van MODX.';
 $_lang['setting_imageplus.target_width'] = $_lang['imageplus.targetwidth'];
 $_lang['setting_imageplus.target_width_desc'] = $_lang['imageplus.targetwidth_desc'];
 $_lang['setting_imageplus.target_height'] = $_lang['imageplus.targetheight'];
@@ -75,10 +75,10 @@ $_lang['setting_imageplus.allow_caption'] = $_lang['imageplus.allowCaption'];
 $_lang['setting_imageplus.allow_caption_desc'] = $_lang['imageplus.allowCaption_desc'];
 $_lang['setting_imageplus.allow_credits'] = $_lang['imageplus.allowCredits'];
 $_lang['setting_imageplus.allow_credits_desc'] = $_lang['imageplus.allowCredits_desc'];
-$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
-$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+$_lang['setting_imageplus.select_config'] = 'Vooraf gedefinieerde uitknip maten/hoogte-breedteverhoudingen';
+$_lang['setting_imageplus.select_config_desc'] = 'Maak vooraf gedefinieerde uitknip grootte/hoogte-breedteverhoudingen die selecteerbaar zijn in de template variabele opties.';
+$_lang['setting_imageplus.force_config'] = 'Forceer vooraf gedefinieerde uitknip maten/hoogte-breedteverhoudingen';
+$_lang['setting_imageplus.force_config_desc'] = 'Forceer het gebruik van vooraf gedefinieerde uitknip grootte/hoogte-breedteverhoudingen.';
 
 /** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';
+$_lang['setting_imageplus.configname'] = 'Naam';
