@@ -10,10 +10,10 @@ $_lang['imageplus.credits'] = 'Credits';
 /** Input options render **/
 $_lang['imageplus.section'] = 'Opzioni Image+';
 $_lang['imageplus.section_desc'] = 'Le seguenti opzioni possono essere sovrascritte dalle impostazioni di sistema/contesto. Si prega di leggere la <a href="http://jako.github.io/ImagePlus/usage/">documentazione</a> per conoscere le chiavi da utilizzare nelle impostazioni di sistema/contesto.';
-$_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
+$_lang['imageplus.selectConfig'] = 'Destinazione con dimensioni/proporzioni predefinite';
 $_lang['imageplus.selectConfig_desc'] = 'Seleziona un\'impostazione di dimensioni/proporzioni predefinita. Le definizioni possono essere create nelle impostazioni del sistema.';
-$_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';
-$_lang['imageplus.selectConfigForce_desc'] = 'Forced select a predefined crop size/aspect ratio. The definitions could be created in the system settings.';
+$_lang['imageplus.selectConfigForce'] = 'Forza destinazione predefinita dimensioni/proporzioni';
+$_lang['imageplus.selectConfigForce_desc'] = 'Selezione forzata di un ritaglio con dimensioni/proporzioni predefinite. Le definizioni possono essere create nelle impostazioni di sistema.';
 $_lang['imageplus.targetwidth'] = 'Larghezza';
 $_lang['imageplus.targetwidth_desc'] = 'La larghezza desiderata per l\'immagine finale';
 $_lang['imageplus.targetheight'] = 'Altezza';
@@ -22,7 +22,7 @@ $_lang['imageplus.targetRatio'] = 'Le proporzioni del bersaglio';
 $_lang['imageplus.targetRatio_desc'] = '(Opzionale, Float [numero intero/frazionale]) Le proporzioni con valore di tipo Float per rendere l\'immagine. Se l\'altezza e la larghezza hanno il valore impostato, il valore delle proporzioni viene ignorato.';
 $_lang['imageplus.thumbnailWidth'] = 'La larghezza della miniatura dell\'immagine';
 $_lang['imageplus.thumbnailWidth_desc'] = '(Opzionale, Numero Intero) La lunghezza della miniatura dell\'immagine nella pannello della Template Variable.';
-$_lang['imageplus.allowAltTag'] = 'Tag alt';
+$_lang['imageplus.allowAltTag'] = 'Visualizza campo tag Alt';
 $_lang['imageplus.allowAltTag_desc'] = 'Consente all\'utente di inserire un titolo/tag-alt per l\'immagine';
 $_lang['imageplus.allowCaption'] = 'Visualizza campo didascalia';
 $_lang['imageplus.allowCaption_desc'] = 'Consente all\'utente di inserire una didascalia per l\'immagine.';
@@ -75,10 +75,10 @@ $_lang['setting_imageplus.allow_caption'] = $_lang['imageplus.allowCaption'];
 $_lang['setting_imageplus.allow_caption_desc'] = $_lang['imageplus.allowCaption_desc'];
 $_lang['setting_imageplus.allow_credits'] = $_lang['imageplus.allowCredits'];
 $_lang['setting_imageplus.allow_credits_desc'] = $_lang['imageplus.allowCredits_desc'];
-$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
-$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+$_lang['setting_imageplus.select_config'] = 'Ritaglio con dimensioni/proporzioni predefinite';
+$_lang['setting_imageplus.select_config_desc'] = 'Crea ritaglio con dimensioni/proporzioni predefinite che sono selezionabili nelle opzioni delle variabili di template.';
+$_lang['setting_imageplus.force_config'] = 'Forza ritaglio con dimensioni/proporzioni predefinite';
+$_lang['setting_imageplus.force_config_desc'] = 'Forza l\'uso di ritagli con dimensioni/proporzioni predefinite.';
 
 /** System settings grid */
 $_lang['setting_imageplus.configname'] = 'Nome';
