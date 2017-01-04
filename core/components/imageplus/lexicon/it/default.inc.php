@@ -12,7 +12,7 @@ $_lang['imageplus.section'] = 'Opzioni Image+';
 $_lang['imageplus.section_desc'] = 'Le seguenti opzioni possono essere sovrascritte dalle impostazioni di sistema/contesto. Si prega di leggere la <a href="http://jako.github.io/ImagePlus/usage/">documentazione</a> per conoscere le chiavi da utilizzare nelle impostazioni di sistema/contesto.';
 $_lang['imageplus.selectConfig'] = 'Destinazione con dimensioni/proporzioni predefinite';
 $_lang['imageplus.selectConfig_desc'] = 'Seleziona un\'impostazione di dimensioni/proporzioni predefinita. Le definizioni possono essere create nelle impostazioni del sistema.';
-$_lang['imageplus.selectConfigForce'] = 'Forza destinazione predefinita dimensioni/proporzioni';
+$_lang['imageplus.selectConfigForce'] = 'Forza destinazione con dimensioni/proporzioni predefinite';
 $_lang['imageplus.selectConfigForce_desc'] = 'Selezione forzata di un ritaglio con dimensioni/proporzioni predefinite. Le definizioni possono essere create nelle impostazioni di sistema.';
 $_lang['imageplus.targetwidth'] = 'Larghezza';
 $_lang['imageplus.targetwidth_desc'] = 'La larghezza desiderata per l\'immagine finale';
