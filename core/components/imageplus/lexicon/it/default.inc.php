@@ -49,8 +49,8 @@ $_lang['imageplus.placeholder.crop.width'] = 'Ritaglio della larghezza dell\'imm
 $_lang['imageplus.placeholder.crop.height'] = 'Ritaglio dell\'altezza dell\'immagine di origine';
 $_lang['imageplus.placeholder.crop.x'] = 'Ritaglio della posizione orizzontale (asse x) dell\'immagine di origine';
 $_lang['imageplus.placeholder.crop.y'] = 'Ritaglio della posizione verticale (asse y) dell\'immagine di origine';
-$_lang['imageplus.placeholder.options'] = 'L\'opzione su phpThumb per generare la miniatura dell\'immagine';
-$_lang['imageplus.placeholder.crop.options'] = 'L\'opzione di ritaglio su phpthumb per generare la miniatura dell\'immagine';
+$_lang['imageplus.placeholder.options'] = 'L\'opzione su phpThumb per generare l\'anteprima dell\'immagine';
+$_lang['imageplus.placeholder.crop.options'] = 'L\'opzione di ritaglio su phpthumb per generare l\'anteprima dell\'immagine';
 
 $_lang['imageplus.error.image_too_small.title'] = 'L\'immagine è troppo piccola';
 $_lang['imageplus.error.image_too_small.msg'] = 'L\'immagine selezionata è troppo piccola per essere usata qui. Si prega di selezionare un\'altra immagine.';
