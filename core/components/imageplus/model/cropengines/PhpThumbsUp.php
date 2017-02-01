@@ -80,7 +80,7 @@ class PhpThumbsUp extends AbstractCropEngine
         $source->initialize();
 
         // Grab absolute system path to image
-        $imgPath = $source->getBasePath() . $data->sourceImg->src;
+        $imgPath = realpath($source->getBasePath() . $data->sourceImg->src);
 
         // Prepare arguments for phpthumbof snippet call
         $cropParams = array(

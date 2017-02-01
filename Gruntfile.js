@@ -16,8 +16,7 @@ module.exports = function (grunt) {
                 },
                 files: {
                     src: [
-                        'assets/components/imageplus/css/mgr/imageplus.min.css',
-                        'assets/components/imageplus/css/mgr/imageplus-22.min.css'
+                        'assets/components/imageplus/css/mgr/imageplus.min.css'
                     ]
                 }
             },
@@ -67,13 +66,6 @@ module.exports = function (grunt) {
                     'source/css/mgr/jquery.jcrop.min.css'
                 ],
                 dest: 'assets/components/imageplus/css/mgr/imageplus.min.css'
-            },
-            imageplus22: {
-                src: [
-                    'source/css/mgr/imageplus-22.css',
-                    'source/css/mgr/jquery.jcrop.min.css'
-                ],
-                dest: 'assets/components/imageplus/css/mgr/imageplus-22.min.css'
             }
         },
         sftp: {
@@ -81,7 +73,7 @@ module.exports = function (grunt) {
                 files: {
                     "./": [
                         'assets/components/imageplus/css/mgr/imageplus.min.css',
-                        'assets/components/imageplus/css/mgr/imageplus-22.min.css'
+                        'source/css/mgr/imageplus.css'
                     ]
                 },
                 options: {

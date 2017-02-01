@@ -37,7 +37,7 @@ class ImagePlus
      * The version
      * @var string $version
      */
-    public $version = '2.6.0-rc3';
+    public $version = '2.6.0';
 
     /**
      * The class options
@@ -176,33 +176,24 @@ class ImagePlus
         $jsSourceUrl = $assetsUrl . '../../../source/js/mgr/';
         $cssUrl = $this->getOption('cssUrl') . 'mgr/';
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
-        $vers = $this->modx->getVersionData();
 
         if ($this->getOption('debug') && ($this->getOption('assetsUrl') != MODX_ASSETS_URL . 'components/imageplus/')) {
-            if ($vers['major_version'] >= 3) {
-                $this->modx->regClientCSS($cssSourceUrl . 'imageplus.css');
-            } else {
-                $this->modx->regClientCSS($cssSourceUrl . 'imageplus-22.css');
-            }
-            $this->modx->regClientCSS($cssSourceUrl . 'jquery.jcrop.min.css');
-            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.panel.input.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.window.editor.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.migx_renderer.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'tools/JSON2.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'jquery/jquery.min.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'jquery/jquery.jcrop.min.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.jquery.imagecrop.js?v=v' . $this->version);
-            $this->modx->regClientStartupScript($jsSourceUrl . 'imageplus.grid.js?v=v' . $this->version);
+            $this->modx->controller->addCss($cssSourceUrl . 'imageplus.css?v=v' . $this->version);
+            $this->modx->controller->addCss($cssSourceUrl . 'jquery.jcrop.min.css?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.panel.input.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.window.editor.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.migx_renderer.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'tools/JSON2.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'jquery/jquery.min.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'jquery/jquery.jcrop.min.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.jquery.imagecrop.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.grid.js?v=v' . $this->version);
         } else {
-            if ($vers['major_version'] >= 3) {
-                $this->modx->regClientCSS($cssUrl . 'imageplus.min.css');
-            } else {
-                $this->modx->regClientCSS($cssUrl . 'imageplus-22.min.css');
-            }
-            $this->modx->regClientStartupScript($jsUrl . 'imageplus.min.js?v=v' . $this->version);
+            $this->modx->controller->addCss($cssUrl . 'imageplus.min.css?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsUrl . 'imageplus.min.js?v=v' . $this->version);
         }
-        $this->modx->regClientStartupHTMLBlock('<script type="text/javascript">'
+        $this->modx->controller->addHtml('<script type="text/javascript">'
             . ' ImagePlus.config = ' . json_encode($this->options) . ';'
             . ' var $jIP = jQuery.noConflict();'
             . '</script>');

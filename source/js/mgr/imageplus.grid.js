@@ -2,7 +2,7 @@
  * Image+ Sizes Ratio Helper
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage script
@@ -10,7 +10,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2016
+ * @copyright Thomas Jakobi 2015-2017
  */
 
 ImagePlus.grid.SizesRatio = function (config) {
@@ -33,7 +33,7 @@ ImagePlus.grid.SizesRatio = function (config) {
     });
     Ext.applyIf(config, {
         id: this.ident + '-sizes-ratio-grid',
-        fields: ['id', 'targetwidth', 'targetheight', 'targetRatio', 'rank'],
+        fields: ['id', 'name', 'targetwidth', 'targetheight', 'targetRatio', 'rank'],
         autoHeight: true,
         store: new Ext.data.JsonStore({
             fields: ['id', 'name', 'targetwidth', 'targetheight', 'targetRatio', 'rank'],

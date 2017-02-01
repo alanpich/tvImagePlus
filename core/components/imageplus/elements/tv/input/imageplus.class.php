@@ -4,7 +4,7 @@
  * Image+ Input Render
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage input_render
@@ -12,7 +12,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2016
+ * @copyright Thomas Jakobi 2015-2017
  */
 class ImagePlusInputRender extends modTemplateVarInputRender
 {
@@ -32,40 +32,6 @@ class ImagePlusInputRender extends modTemplateVarInputRender
     public function getLexiconTopics()
     {
         return array('imageplus:default');
-    }
-
-    /**
-     * Override the default TV render because of a isnumeric/intval bug, that does not allow a floatval in the input
-     * options - fixed in MODX Revolution 2.3.4 (https://github.com/modxcms/revolution/pull/12452)
-     * @param string $value
-     * @param array $params
-     * @return mixed|string|void
-     */
-    public function render($value, array $params = array())
-    {
-        $this->setPlaceholder('tv', $this->tv);
-        $this->setPlaceholder('id', $this->tv->get('id'));
-        $this->setPlaceholder('ctx', isset($_REQUEST['ctx']) ? $_REQUEST['ctx'] : 'web');
-        $this->setPlaceholder('params', $params);
-
-        if (!empty($params)) {
-            foreach ($params as $k => $v) {
-                if ($v === 'true') {
-                    $params[$k] = true;
-                } elseif ($v === 'false') {
-                    $params[$k] = false;
-                } elseif (is_numeric($v) && ((int)$v == $v)) {
-                    $params[$k] = intval($v);
-                } elseif (is_numeric($v)) {
-                    $params[$k] = (float)($v);
-                }
-            }
-        }
-        $this->_loadLexiconTopics();
-        $output = $this->process($value, $params);
-
-        $tpl = $this->getTemplate();
-        return !empty($tpl) ? $this->modx->controller->fetchTemplate($tpl) : $output;
     }
 
     /**
@@ -104,7 +70,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
 
         // Prepare tv config for jsonification
         $tvConfig = new stdClass();
-        $tvConfig->allowBlank = (bool)$params['allowBlank'];
+        $tvConfig->allowBlank = $params['allowBlank'] == 'false' || $params['allowBlank'] == 0;
         $tvConfig->targetWidth = (int)$this->getTVConfig('target_width', $tvName, $contextSettings, $params['targetWidth']);
         $tvConfig->targetHeight = (int)$this->getTVConfig('target_height', $tvName, $contextSettings, $params['targetHeight']);
         $tvConfig->targetRatio = $this->getTVConfig('target_ratio', $tvName, $contextSettings, $params['targetRatio']);
@@ -131,8 +97,6 @@ class ImagePlusInputRender extends modTemplateVarInputRender
      */
     private function getTVConfig($key, $name, $config, $default)
     {
-        $value = $default;
-
         // Global System/$config setting
         $settingKey = 'imageplus.' . $key;
         // Use MODX System setting if defined and not empty
