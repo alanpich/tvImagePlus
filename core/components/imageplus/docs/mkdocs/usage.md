@@ -23,10 +23,14 @@ aspect ratio.
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        How to calculate float value
+        How to calculate the aspect ratio
     </div>
     <div class="panel-body">
-        For setting an aspect ratio using a float value: this value is easily acquired by dividing any width of a desired aspect ratio by its corresponding height. So say you want to all your crops to have the same aspect ratio as a 1600x1000 image, simply divide 1600 by 1000, resulting in 1.6. This is your float value.
+        The aspect ratio contains a float value: this value is easily acquired
+        by dividing any width of a desired aspect ratio by its corresponding
+        height. So say you want to all your crops to have the same aspect ratio
+        as a 1600x1000 image, simply divide 1600 by 1000, resulting in 1.6. This
+        is your aspect ratio value.
     </div>
 </div>
 
