@@ -138,7 +138,8 @@ class PhpThumbOf extends AbstractCropEngine
                     )
                 );
             } else {
-                $url = '';
+                $sourceBases = $source->getBases();
+                $url = $sourceBases[url] . $data->sourceImg->src;
             }
         } else {
             $url = $data->sourceImg->src;
