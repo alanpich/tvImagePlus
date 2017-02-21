@@ -1,6 +1,8 @@
 Changelog for Image+
 ====================
 
+- 2.6.2
+    - Bugfix for disabled option 'Generate Thumbnail URL' and an empty url placeholder
 - 2.6.1
     - Bugfix for an empty select_config system setting
 - 2.6.0
@@ -46,7 +48,8 @@ Changelog for Image+
 - 2.3.2
     - Added 'value' parameter in the ImagePlus Snippet
 - 2.3.1
-    - Use default_media_source if the media source of the TV is not set (i.e. if it used in a MIGX configuration)
+    - Use default_media_source if the media source of the TV is not set
+      (i.e. if it used in a MIGX configuration)
     - Enable property sets for the ImagePlus Snippet
     - Don't show the crop window if the image size is invalid
 - 2.3.0
@@ -95,7 +98,8 @@ Changelog for Image+
 - 2.1.x
     - Fixed bug with non-default media sources
     - Added field for additional phpThumb parameters to output renderer
-    - Added option to specify a chunk for output formatting (fields: url,alt,width,height)
+    - Added option to specify a chunk for output formatting
+      (fields: url,alt,width,height)
 
 - 2.0.x
     - Complete rewrite

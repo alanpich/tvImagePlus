@@ -37,7 +37,7 @@ class ImagePlus
      * The version
      * @var string $version
      */
-    public $version = '2.6.1';
+    public $version = '2.6.2';
 
     /**
      * The class options
@@ -193,10 +193,10 @@ class ImagePlus
             $this->modx->controller->addCss($cssUrl . 'imageplus.min.css?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsUrl . 'imageplus.min.js?v=v' . $this->version);
         }
-        $this->modx->controller->addHtml('<script type="text/javascript">'
-            . ' ImagePlus.config = ' . json_encode($this->options) . ';'
-            . ' var $jIP = jQuery.noConflict();'
-            . '</script>');
+        $this->modx->controller->addHtml('<script type="text/javascript">' .
+            ' ImagePlus.config = ' . json_encode($this->options) . ';' .
+            ' var $jIP = jQuery.noConflict();' .
+            '</script>');
     }
 
     /**

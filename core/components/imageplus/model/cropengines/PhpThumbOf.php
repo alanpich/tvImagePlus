@@ -69,6 +69,7 @@ class PhpThumbOf extends AbstractCropEngine
         }
 
         // Load up the mediaSource
+        /** @var \modMediaSource $source */
         $source = $this->modx->getObject('modMediaSource', $data->sourceImg->source);
         if (!$source instanceof \modMediaSource) {
             if ($this->imageplus->getOption('debug')) {
@@ -138,8 +139,7 @@ class PhpThumbOf extends AbstractCropEngine
                     )
                 );
             } else {
-                $sourceBases = $source->getBases();
-                $url = $sourceBases[url] . $data->sourceImg->src;
+                $url = $source->getBaseUrl() . $data->sourceImg->src;
             }
         } else {
             $url = $data->sourceImg->src;
