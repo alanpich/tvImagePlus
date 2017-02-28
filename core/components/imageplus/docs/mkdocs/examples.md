@@ -54,6 +54,69 @@ In order for the TV to be parsed with getResources, make sure you add the follow
 &processTVs=`name_of_your_tv`
 ```
 
+### Using with getPage or pdoPage
+
+To correctly parse ImagePlus inside a getPage/pdoPage call, make sure you add the following lines to your calls getPage or getPage calls:
+
+```
+&includeTVs=`name_of_your_tv`
+&processTVs=`name_of_your_tv`
+```
+
+In your template chunks for getResources or pdoResources calls wrapped by getPage/pdoPage, you need to add one parameter so that the Snippet knows the origin ID to pull data from:
+
+```
+ &docid=`[[+id]]`
+```
+
+Here is an example call and configuration, where *image* is your Image+ TV:
+
+```
+<div class="blog-articles">
+[[!pdoPage?
+    &element=`pdoResources`
+    &tpl=`blog_post`
+    &limit=`11`
+    &includeContent=`1`
+    &includeTVs=`image`
+    &processTVs=`1`
+    &showHidden=`0`
+    &hideContainers=`1`
+]]
+</div>
+<div class="blog-paging">
+  [[!+page.nav]]
+</div>
+```
+
+`blog_post` tpl:
+
+```
+<article class="post">
+    <header class="post-header">
+        <h3 class="post-title mt0 mb1"><a href="[[~[[+id]]]]">[[+longtitle:default=`[[+pagetitle]]`]]</a></h3>
+
+[[+tv.image:ne:then=`
+   [[ImagePlus? 
+      &tvname=`image` 
+      &type=`tpl` 
+      &docid=`[[+id]]`
+      &tpl=`blog_intro_img`
+    ]] 
+`]]
+
+    </header>
+    <section class="post-excerpt">
+         <p>[[+content:striptags:ellipsis=`255`:typography]]
+         <a class="read-more" href="[[~[[+id]]]]">read more »</a></p>
+    </section>
+    <footer class="post-meta">
+        <span class="post-author">[[+createdby:userinfo=`fullname`]]</span>
+        <time class="post-date" datetime="[[+publishedon:date=`%B %e, %Y`]]">[[+publishedon:date=`%B %e, %Y`]]</time>
+    </footer>
+</article>
+```
+
 ### Responsive images
 
 If you want to display responsive images with and without the crop, you could use the ImagePlus snippet.
