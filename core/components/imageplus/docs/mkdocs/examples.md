@@ -46,24 +46,20 @@ This will get you the prepared URL for the cropped image, instead of the raw JSO
 <noscript><p><img src="//piwik.partout.info/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 
-### getResources
+### getResources/pdoResources
 
-In order for the TV to be parsed with getResources, make sure you add the following line to your getResources call:
-
-```
-&processTVs=`name_of_your_tv`
-```
-
-### Using with getPage or pdoPage
-
-To correctly parse ImagePlus inside a getPage/pdoPage call, make sure you add the following lines to your calls getPage or getPage calls:
+In order for the TV to be parsed with getResources/pdoResources, make sure you add the following lines to your getResources/pdoResources call:
 
 ```
 &includeTVs=`name_of_your_tv`
 &processTVs=`name_of_your_tv`
 ```
 
-In your template chunks for getResources or pdoResources calls wrapped by getPage/pdoPage, you need to add one parameter so that the Snippet knows the origin ID to pull data from:
+In the chunk you could use the placeholder `[[+tv.name_of_your_tv]]` if the Output Type of the TV is set to ImagePlus. Without additional changes, the placeholder contains the raw url to the cropped image.
+
+### Using the ImagePlus Snippet inside getResources/pdoResources template chunk
+
+In your template chunks for getResources/pdoResources calls, you need to add one parameter so that the ImagePlus snippet knows the origin ID to pull data from:
 
 ```
  &docid=`[[+id]]`
@@ -71,6 +67,7 @@ In your template chunks for getResources or pdoResources calls wrapped by getPag
 
 Here is an example call and configuration, where *image* is your Image+ TV:
 
+**Snippet Call**
 ```
 <div class="blog-articles">
 [[!pdoPage?
@@ -78,8 +75,6 @@ Here is an example call and configuration, where *image* is your Image+ TV:
     &tpl=`blog_post`
     &limit=`11`
     &includeContent=`1`
-    &includeTVs=`image`
-    &processTVs=`1`
     &showHidden=`0`
     &hideContainers=`1`
 ]]
@@ -89,21 +84,19 @@ Here is an example call and configuration, where *image* is your Image+ TV:
 </div>
 ```
 
-`blog_post` tpl:
+**Chunk blog_post**
 
 ```
 <article class="post">
     <header class="post-header">
         <h3 class="post-title mt0 mb1"><a href="[[~[[+id]]]]">[[+longtitle:default=`[[+pagetitle]]`]]</a></h3>
 
-[[+tv.image:ne:then=`
-   [[ImagePlus? 
-      &tvname=`image` 
-      &type=`tpl` 
-      &docid=`[[+id]]`
-      &tpl=`blog_intro_img`
+    [[ImagePlus? 
+        &tvname=`image` 
+        &type=`tpl` 
+        &docid=`[[+id]]`
+        &tpl=`blog_intro_img`
     ]] 
-`]]
 
     </header>
     <section class="post-excerpt">
@@ -115,6 +108,14 @@ Here is an example call and configuration, where *image* is your Image+ TV:
         <time class="post-date" datetime="[[+publishedon:date=`%B %e, %Y`]]">[[+publishedon:date=`%B %e, %Y`]]</time>
     </footer>
 </article>
+```
+
+**Chunk blog_intro_img**
+
+```
+<div class="feature" style="margin-bottom:1rem">
+    <a href="[[+caption]]"><img src="[[+source.src:pthumb=`w=320`]]" alt="[[+alt]]" /></a>
+</div>
 ```
 
 ### Responsive images
@@ -131,8 +132,7 @@ If you want to display responsive images with and without the crop, you could us
 &pagetitle=`[[*pagetitle]]`
 ]]
 ```
-  
-  
+    
 **Chunk tplResponsiveImage**
 ```
 <picture>
