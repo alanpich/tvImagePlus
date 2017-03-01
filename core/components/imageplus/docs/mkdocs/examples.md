@@ -55,11 +55,11 @@ In order for the TV to be parsed with getResources/pdoResources, make sure you a
 &processTVs=`name_of_your_tv`
 ```
 
-In the chunk you could use the placeholder `[[+tv.name_of_your_tv]]` if the Output Type of the TV is set to ImagePlus. Without additional changes, the placeholder contains the raw url to the cropped image.
+In the template chunk of getResources/pdoResources you could use the placeholder `[[+tv.name_of_your_tv]]` if the Output Type of the TV is set to ImagePlus. Without additional changes, the placeholder contains the url to the cropped image.
 
 ### Using the ImagePlus Snippet inside getResources/pdoResources template chunk
 
-In your template chunks for getResources/pdoResources calls, you need to add one parameter so that the ImagePlus snippet knows the origin ID to pull data from:
+In your template chunk for getResources/pdoResources, you need to add one parameter so that the ImagePlus snippet knows the origin ID to pull data from:
 
 ```
  &docid=`[[+id]]`
@@ -72,7 +72,7 @@ Here is an example call and configuration, where *image* is your Image+ TV:
 <div class="blog-articles">
 [[!pdoPage?
     &element=`pdoResources`
-    &tpl=`blog_post`
+    &tpl=`tplBlogPost`
     &limit=`11`
     &includeContent=`1`
     &showHidden=`0`
@@ -84,7 +84,7 @@ Here is an example call and configuration, where *image* is your Image+ TV:
 </div>
 ```
 
-**Chunk blog_post**
+**Chunk tplBlogPost**
 
 ```
 <article class="post">
@@ -95,7 +95,7 @@ Here is an example call and configuration, where *image* is your Image+ TV:
         &tvname=`image` 
         &type=`tpl` 
         &docid=`[[+id]]`
-        &tpl=`blog_intro_img`
+        &tpl=`tplBlogIntroImg`
     ]] 
 
     </header>
@@ -110,7 +110,7 @@ Here is an example call and configuration, where *image* is your Image+ TV:
 </article>
 ```
 
-**Chunk blog_intro_img**
+**Chunk tplBlogIntroImg**
 
 ```
 <div class="feature" style="margin-bottom:1rem">
