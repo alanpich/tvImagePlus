@@ -1,21 +1,31 @@
-Image+ TV type
-==============
+Image+
+======
+
+Advanced image custom template variable in MODX Revolution.
 
 Author: Alan Pich <alan.pich@gmail.com>
 Maintainer and further development: Thomas Jakobi <thomas.jakobi@partout.info>
 License: GNU GPLv2
 
-Advanced image custom template variable type for MODx Revolution. The dimensions for the uploaded image can (optionally)
-be configured to constrain a minimal width and/or height. The image crop could be forced to remain at a pre-set ratio.
-A graphical tool could be used to crop the image to the required dimensions/proportions.
+Features
+--------
+With this MODX Revolution custom template variable an image could be cropped
+while maintaining the original image. The dimensions for the image can
+(optionally) be configured to constrain a minimal width and/or height. The image
+crop could be forced to remain at a pre-set ratio. A graphical tool could be
+used to crop the image to the required dimensions/proportions.
+
+Installation
+------------
+MODX Package Management
 
 Usage
 -----
-Install via package manager and create a TV with input & output types of Image+
+Install via package manager, create a TV and change the input & output type to 'Image+'
 
 Documentation
 -------------
-http://jako.github.io/ImagePlus/
+For more information please read the documentation on http://jako.github.io/ImagePlus/
 
 GitHub Repository
 -----------------
