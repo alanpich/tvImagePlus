@@ -26,6 +26,7 @@ require_once MODX_CORE_PATH . 'config/' . MODX_CONFIG_KEY . '.inc.php';
 require_once MODX_CONNECTORS_PATH . 'index.php';
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
+/** @var ImagePlus $imageplus */
 $imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
     'core_path' => $corePath
 ));

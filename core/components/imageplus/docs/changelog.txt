@@ -1,6 +1,8 @@
 Changelog for Image+
 ====================
 
+- 2.6.3
+    - Bugfix a full server path in the url placeholder
 - 2.6.2
     - Bugfix for disabled option 'Generate Thumbnail URL' and an empty url placeholder
 - 2.6.1

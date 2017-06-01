@@ -41,18 +41,32 @@ if ($value) {
     }
     // No TV is used
     $tv = null;
+    $tvOutputProperties = array();
 } else {
     // Value is retreived from template variable
+    /** @var modTemplateVar $tv */
     $tv = $modx->getObject('modTemplateVar', array('name' => $tvname));
     if ($tv) {
         // Get the raw content of the TV
         $value = $tv->getValue($docid);
         $value = $tv->processBindings($value, $docid);
+        $tvOutputProperties = $tv->get('output_properties');
+        foreach ($tvOutputProperties as &$tvOutputProperty) {
+            switch ($tvOutputProperty) {
+                case 'true' :
+                    $tvOutputProperty = true;
+                    break;
+                case 'false' :
+                    $tvOutputProperty = false;
+                    break;
+            }
+        }
     } else {
         if ($debug) {
             $modx->log(xPDO::LOG_LEVEL_ERROR, "Template Variable '{$tvname}' not found.", '', 'Image+');
             return "Template Variable '{$tvname}' not found.";
         }
+        $tvOutputProperties = array();
     }
 }
 
@@ -65,7 +79,7 @@ switch ($type) {
         break;
     case 'tpl':
         $data = json_decode($value);
-        $output = ($value) ? $imageplus->getImageURL($value, array_merge($scriptProperties, array(
+        $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, array(
             'docid' => $docid,
             'phpThumbParams' => $options,
             'outputChunk' => $tpl,
@@ -75,7 +89,7 @@ switch ($type) {
         break;
     case 'thumb':
     default:
-        $output = ($value) ? $imageplus->getImageURL($value, array_merge($scriptProperties, array(
+        $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, array(
             'docid' => $docid,
             'phpThumbParams' => $options
         )), $tv) : '';
