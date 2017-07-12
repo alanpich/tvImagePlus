@@ -70,7 +70,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
 
         // Prepare tv config for jsonification
         $tvConfig = new stdClass();
-        $tvConfig->allowBlank = $params['allowBlank'] == 'false' || $params['allowBlank'] == 0;
+        $tvConfig->allowBlank = ($params['allowBlank'] === 'false' || $params['allowBlank'] === 0 || $params['allowBlank'] === false) ? false : true;;
         $tvConfig->targetWidth = (int)$this->getTVConfig('target_width', $tvName, $contextSettings, $params['targetWidth']);
         $tvConfig->targetHeight = (int)$this->getTVConfig('target_height', $tvName, $contextSettings, $params['targetHeight']);
         $tvConfig->targetRatio = $this->getTVConfig('target_ratio', $tvName, $contextSettings, $params['targetRatio']);
