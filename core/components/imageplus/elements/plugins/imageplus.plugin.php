@@ -26,12 +26,14 @@
  * @var modX $modx
  */
 
+$eventName = $modx->event->name;
+
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
 $imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
     'core_path' => $corePath
 ));
 
-switch ($modx->event->name) {
+switch ($eventName) {
     case 'OnManagerPageBeforeRender':
         $modx->controller->addLexiconTopic('imageplus:default');
         $imageplus->includeScriptAssets();

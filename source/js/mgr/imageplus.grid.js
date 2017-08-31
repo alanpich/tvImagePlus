@@ -1,4 +1,5 @@
 /**
+/**
  * Image+ Sizes Ratio Helper
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
@@ -152,7 +153,7 @@ Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
     },
     removeEntry: function () {
         Ext.Msg.confirm(_('remove') || '', _('confirm_remove') || '', function (e) {
-            if (e == 'yes') {
+            if (e === 'yes') {
                 var ds = this.getStore();
                 var rows = this.getSelectionModel().getSelections();
                 if (!rows.length) {
@@ -161,7 +162,7 @@ Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
                 for (var i = 0; i < rows.length; i++) {
                     var id = rows[i].id;
                     var index = ds.findBy(function (record, id) {
-                        if (record.id == id) {
+                        if (record.id === id) {
                             return true;
                         }
                     });
@@ -212,7 +213,7 @@ Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
     onClick: function (e) {
         var t = e.getTarget();
         var elm = t.className.split(' ')[0];
-        if (elm == 'icon') {
+        if (elm === 'icon') {
             var act = t.className.split(' ')[1];
             var record = this.getSelectionModel().getSelected();
             this.menu.record = record.data;
