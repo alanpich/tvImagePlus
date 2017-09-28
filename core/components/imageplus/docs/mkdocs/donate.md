@@ -6,7 +6,7 @@ between the releases.
 Please support the ongoing and past development of *Image+* by making a donation below.
 
 <div style="margin-bottom: 2em">
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display: inline-block; vertical-align: middle;">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="Q5486WTXP8FCL">
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
@@ -15,18 +15,6 @@ Please support the ongoing and past development of *Image+* by making a donation
 <br/>
 </div>
 
-<!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//piwik.partout.info/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 13]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
+*Image+* development is sponsored by Treehillstudio – MODX Development in Münsterland.
+
+<a href="https://treehillstudio.com"><img alt="Treehillstudio – MODX Development in Münsterland" border="0" src="../assets/img/treehillstudio_logo_color.svg" width="188" height="56"></a>

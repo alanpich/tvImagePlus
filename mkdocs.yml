@@ -1,11 +1,13 @@
 site_name: Image+
 docs_dir: core/components/imageplus/docs/mkdocs
 site_dir: _build/site
+edit_uri: tree/master/core/components/imageplus/docs/mkdocs
 
+repo_name: 'Jako/ImagePlus'
 repo_url: https://github.com/Jako/ImagePlus
 
 pages:
-- Home: 'index.md'
+- Description: 'index.md'
 - Installation: 'installation.md'
 - Getting Started: 'getting-started.md'
 - Usage: 'usage.md'
@@ -13,8 +15,21 @@ pages:
 - Contributors: 'contributors.md'
 - Donate: 'donate.md'
 
-theme: flatly
+extra:
+  font:
+    text: 'Dosis'
+    heading: 'Ubuntu'
+
+piwik_analytics:
+  site_id: 13
+  piwik_url: '//piwik.partout.info/'
+
+theme: 'material'
+theme_dir: '/Users/jako/Documents/MODx/MkDocs Material/material'
 
 markdown_extensions:
-    - footnotes
-    - tables
+  - footnotes
+  - tables
+  - admonition
+  - meta
+  - toc(permalink=true)

@@ -21,24 +21,14 @@ If you set only one value of **Target Height** or **Target Width** and leave
 empty **Target Aspect Ratio**, the size of the crop is not restricted to any
 aspect ratio.
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        How to calculate the aspect ratio
-    </div>
-    <div class="panel-body">
-        The aspect ratio contains a float value: this value is easily acquired
-        by dividing any width of a desired aspect ratio by its corresponding
-        height. So say you want to all your crops to have the same aspect ratio
-        as a 1600x1000 image, simply divide 1600 by 1000, resulting in 1.6. This
-        is your aspect ratio value.
-    </div>
-</div>
+!!! note "How to calculate the aspect ratio"
+    The aspect ratio contains a float value: this value is easily acquired by dividing any width of a desired aspect ratio by its corresponding height. So say you want to all your crops to have the same aspect ratio as a 1600x1000 image, simply divide 1600 by 1000, resulting in 1.6. This is your aspect ratio value.
 
 #### Show Alt Tag Field
 
 *Image+* TVs can also contain an **Alt Tag Field**, which is an additional text
-*input, that is stored with each image. It could be output alongside the image
-*i.e. as an alt-tag or title-tag.
+input, that is stored with each image. It could be output alongside the image
+i.e. as an alt-tag or title-tag.
 
 In order to output the alt text in a *Image+* TV placeholder, you will need to
 select an chunk in the **Output Options**. You could also use the ImagePlus
@@ -48,8 +38,8 @@ is filled in the placeholder `[[+alt]]` in that chunk.
 #### Show Caption Field
 
 *Image+* TVs can also contain an **Caption Field**, which is an additional text
-*input, that is stored with each image. It could be output beneath the image
-*i.e. in an additional caption div.
+input, that is stored with each image. It could be output beneath the image
+i.e. in an additional caption div.
 
 In order to output the caption in a *Image+* TV placeholder, you will need to
 select an chunk in the **Output Options**. You could also use the ImagePlus
@@ -59,8 +49,8 @@ filled in the placeholder `[[+caption]]` in that chunk.
 #### Show Credits Field
 
 *Image+* TVs can also contain an **Credits Field**, which is an additional text
-*input, that is stored with each image. It could be output beneath the image
-*i.e. in an additional credits div.
+input, that is stored with each image. It could be output beneath the image
+i.e. in an additional credits div.
 
 In order to output the credits in a *Image+* TV placeholder, you will need to
 select an chunk in the **Output Options**. You could also use the ImagePlus
@@ -172,19 +162,3 @@ Will output the content of the template variable with the name *imageplus* of re
 [^4]: Outputs the thumbnail URL for retreived Image+ TV value (with additional options set by the **options** property)
 [^5]: See [phpThumb readme](http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt) for possible options. Maybe not all options are valid in your installation (because of crop engine limitations or server restricions).
 [^6]: The template chunk placeholder are the same as in the output chunk of the template variable.
-
-<!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//piwik.partout.info/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 13]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->

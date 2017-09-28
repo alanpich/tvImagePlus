@@ -1,10 +1,11 @@
-## Examples
-
-**Image+* could be used for several purposes. On this page you find some examples how to use it:
+**Image+* could be used for several purposes. On this page you find some
+*examples how to use it:
 
 ### MIGX
 
-If you want to use *Image+* in MIGX you could define all *Image+* TV properties with a JSON string in the 'Configs' textarea in the MIGX formtabs field configuration. The following properties are possible:
+If you want to use *Image+* in MIGX you could define all *Image+* TV properties
+with a JSON string in the *Configs* textarea in the MIGX formtabs field
+configuration. The following properties are possible:
 
 ```
 {
@@ -18,9 +19,12 @@ If you want to use *Image+* in MIGX you could define all *Image+* TV properties 
 
 And you also have to change the *Input TV Type* to `imageplus`.
 
-You could show the thumbnail in the grid column by setting the renderer to 'ImagePlus.MIGX_Renderer'. In prior MIGX versions you have to raw edit a MIGX configuration for that. 
+You could show the thumbnail in the grid column by setting the renderer to
+*ImagePlus.MIGX_Renderer*. In prior MIGX versions you have to raw edit a MIGX
+configuration for that.
 
-To use that *Image+*-MIGX-Field in the Frontend, call the `ImagePlus` Snippet with just the value-parameter being the name of this MIGX-Field: 
+To use that *Image+*-MIGX-Field in the Frontend, call the *ImagePlus Snippet*
+with just the value-parameter being the name of this MIGX-Field:
 
 ```
 [[ImagePlus? 
@@ -28,38 +32,30 @@ To use that *Image+*-MIGX-Field in the Frontend, call the `ImagePlus` Snippet wi
 ]]
 ```
 
-This will get you the prepared URL for the cropped image, instead of the raw JSON-Object.
-
-<!-- Piwik -->
-<script type="text/javascript">
-  var _paq = _paq || [];
-  _paq.push(['trackPageView']);
-  _paq.push(['enableLinkTracking']);
-  (function() {
-    var u="//piwik.partout.info/";
-    _paq.push(['setTrackerUrl', u+'piwik.php']);
-    _paq.push(['setSiteId', 13]);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-  })();
-</script>
-<noscript><p><img src="//piwik.partout.info/piwik.php?idsite=13" style="border:0;" alt="" /></p></noscript>
-<!-- End Piwik Code -->
+This will get you the prepared URL for the cropped image, instead of the raw
+JSON-Object.
 
 ### getResources/pdoResources
 
-In order for the TV to be parsed with `getResources`/`pdoResources`, make sure you add the following lines to your `getResources`/`pdoResources` Snippet call:
+In order for the TV to be parsed with the *getResources/pdoResources Snippet*,
+make sure you add the following lines to your *getResources/pdoResources
+Snippet* call:
 
 ```
 &includeTVs=`name_of_your_tv`
 &processTVs=`name_of_your_tv`
 ```
 
-In the template Chunk of the `getResources`/`pdoResources` Snippet call you could use the placeholder `[[+tv.name_of_your_tv]]` if the Output Type of the TV is set to `Image+`. Without additional changes, the placeholder contains the url to the cropped image.
+In the template Chunk of the *getResources/pdoResources Snippet* call you
+could use the placeholder `[[+tv.name_of_your_tv]]` if the Output Type of the TV
+is set to `Image+`. Without additional changes, the placeholder contains the url
+to the cropped image.
 
 ### Using the ImagePlus Snippet inside getResources/pdoResources Template Chunk
 
-In your template Chunk for `getResources`/`pdoResources` Snippet call, you need to add one parameter so that the `ImagePlus` Snippet call knows the origin ID to pull data from:
+In your template Chunk for *getResources/pdoResources Snippet* call, you need
+to add one parameter so that the *ImagePlus Snippet* call knows the origin ID to
+pull data from:
 
 ```
  &docid=`[[+id]]`
@@ -120,7 +116,8 @@ Here is an example call and configuration, where *image* is your Image+ TV:
 
 ### Responsive images
 
-If you want to display responsive images with and without the crop, you could use the `ImagePlus` Snippet.
+If you want to display responsive images with and without the crop, you could
+use the *ImagePlus Snippet*.
 
 **Snippet Call**
 ```
