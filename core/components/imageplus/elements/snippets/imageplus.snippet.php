@@ -18,6 +18,7 @@
  */
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
+/** @var ImagePlus $imageplus */
 $imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
     'core_path' => $corePath
 ));
