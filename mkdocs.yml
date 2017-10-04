@@ -22,7 +22,7 @@ extra:
 
 piwik_analytics:
   site_id: 13
-  piwik_url: '//piwik.partout.info/'
+  piwik_url: 'https://piwik.partout.info/'
 
 theme: 'material'
 theme_dir: '/Users/jako/Documents/MODx/MkDocs Material/material'
