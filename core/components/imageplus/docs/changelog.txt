@@ -1,6 +1,8 @@
 Changelog for Image+
 ====================
 
+- 2.6.4
+    - Added phpThumbOn crop engine
 - 2.6.3
     - Bugfix a full server path in the url placeholder
 - 2.6.2
@@ -72,7 +74,7 @@ Changelog for Image+
 
 - 2.2.x
     - Added GUI warning of missing dependencies
-    - Added PhpThumbsUp crop engine
+    - Added phpThumbsUp crop engine
     - Refactored to allow changing of crop engines
     - Added grid renderer for MIGX backend
     - Confirmed to work with Articles [#21]
