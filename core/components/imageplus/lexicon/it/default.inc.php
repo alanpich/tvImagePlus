@@ -36,6 +36,7 @@ $_lang['imageplus.outputChunk'] = 'Chunk Output';
 $_lang['imageplus.outputChunk_desc'] = 'Seleziona un chunk per l\'output della variabile tv. Lascia vuoto per avere un semplice url come output.';
 $_lang['imageplus.generateUrl'] = 'Generare l\'URL dell\'anteprima';
 $_lang['imageplus.generateUrl_desc'] = '(Facoltativo) L\'URL della miniatura dell\'immagine potrebbe non essere necessario se questa viene generata nella \'output chunk\' es. dalla \'output filter\' del pthumb.';
+$_lang['imageplus.generateUrl_desc_warning'] = 'You have to activate this option, when you don\'t specify an output chunk in the output options or when you use the [[+url]] placeholder in the specified output chunk. Otherwise the image is not cropped/resized and the original image path is returned.';
 
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'URL dell\'immagine di anteprima';
