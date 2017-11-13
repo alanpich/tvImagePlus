@@ -119,14 +119,14 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
         return Math.round(this.image.crop.y * this.displayRatio);
     },
     getInitialCropWidth: function () {
-        if (this.image.crop.width == 0) {
+        if (this.image.crop.width === 0) {
             return Math.round(this.options.targetWidth * this.displayRatio);
         } else {
             return Math.round(this.image.crop.width * this.displayRatio);
         }
     },
     getInitialCropHeight: function () {
-        if (this.image.crop.height == 0) {
+        if (this.image.crop.height === 0) {
             return Math.round(this.options.targetHeight * this.displayRatio)
         } else {
             return Math.round(this.image.crop.height * this.displayRatio);
@@ -146,7 +146,7 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
     getCropCoords: function () {
         var W = this.getInitialCropWidth();
         var H = this.getInitialCropHeight();
-        if (W == 0 || H == 0) {
+        if (W === 0 || H === 0) {
             return false;
         }
         var X = this.getInitialCropX();

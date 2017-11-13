@@ -22,7 +22,11 @@ empty **Target Aspect Ratio**, the size of the crop is not restricted to any
 aspect ratio.
 
 !!! note "How to calculate the aspect ratio"
-    The aspect ratio contains a float value: this value is easily acquired by dividing any width of a desired aspect ratio by its corresponding height. So say you want to all your crops to have the same aspect ratio as a 1600x1000 image, simply divide 1600 by 1000, resulting in 1.6. This is your aspect ratio value.
+    The aspect ratio contains a float value: this value is easily acquired by
+    dividing any width of a desired aspect ratio by its corresponding height. So
+    say you want to all your crops to have the same aspect ratio as a `1600x1000`
+    image, simply divide `1600` by `1000`, resulting in `1.6`. This is your aspect
+    ratio value.
 
 #### Show Alt Tag Field
 
@@ -123,6 +127,12 @@ All these placeholders could be used in the Snippet too.
 If you create the thumbnail in output chunk i.e. by a pthumb output filter, you
 could disable the generation of the internal thumb URL.
 
+!!! caution "Caution"
+    You have to activate this option, when you don't specify an output chunk in
+    the output options or when you use the `[[+url]]` placeholder in the specified
+    output chunk. Otherwise the image is not cropped/resized and the original
+    image path is returned.
+
 ## Snippet
 
 The Snippet gives you a second option to render the TV value. With the template
@@ -152,9 +162,9 @@ debug | Log debug informations in MODX error log. | No
 ]]
 ```
 
-Will output the content of the template variable with the name *imageplus* of resource
-*1* and the extended phpThumb option *&w=100* (width: 100px) in the parsed
-*ImagePlus.demo* chunk.
+This snippet call outputs the content of the template variable with the name
+`imageplus` of resource `1` and the extended phpThumb option `&w=100` (width:
+100px) in the parsed `ImagePlus.demo` chunk.
 
 [^1]: The first entry supercedes the second entry in the list etc.
 [^2]: Outputs *image* if the Image+ TV contains an image, otherwise *noimage*.

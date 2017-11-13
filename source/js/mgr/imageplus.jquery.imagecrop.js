@@ -68,7 +68,7 @@ Ext.extend(ImagePlus.jquery.ImageCrop, Ext.Panel, {
         };
         this.$image.Jcrop(conf, function (ths) {
             return function () {
-                ths.cropper = this;
+                this.cropper = ths;
                 this.setOptions({
                     outerImage: ths.window.getOuterImageUrl(),
                     bgOpacity: 0.5

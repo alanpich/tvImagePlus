@@ -116,7 +116,7 @@
                     name: 'inopt_allowAltTag',
                     hiddenName: 'inopt_allowAltTag',
                     id: 'inopt_allowAltTag{/literal}{$tv}{literal}',
-                    value: !(params['allowAltTag'] == 0 || params['allowAltTag'] == 'false'),
+                    value: !(params['allowAltTag'] === 0 || params['allowAltTag'] === 'false'),
                     labelAlign: 'left',
                     anchor: '100%',
                     listeners: oc
@@ -136,7 +136,7 @@
                     name: 'inopt_allowCaption',
                     hiddenName: 'inopt_allowCaption',
                     id: 'inopt_allowCaption{/literal}{$tv}{literal}',
-                    value: (params['allowCaption'] == 1 || params['allowCaption'] == 'true'),
+                    value: (params['allowCaption'] === 1 || params['allowCaption'] === 'true'),
                     labelAlign: 'left',
                     anchor: '100%',
                     listeners: oc
@@ -156,7 +156,7 @@
                     name: 'inopt_allowCredits',
                     hiddenName: 'inopt_allowCredits',
                     id: 'inopt_allowCredits{/literal}{$tv}{literal}',
-                    value: (params['allowCredits'] == 1 || params['allowCredits'] == 'true'),
+                    value: (params['allowCredits'] === 1 || params['allowCredits'] === 'true'),
                     labelAlign: 'left',
                     anchor: '100%',
                     listeners: oc

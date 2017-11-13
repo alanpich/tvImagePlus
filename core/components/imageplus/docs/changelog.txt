@@ -1,8 +1,11 @@
 Changelog for Image+
 ====================
 
-- 2.6.4
+- 2.7.0
     - Added phpThumbOn crop engine
+    - Warning in the TV output options for the right usage of the Generate Thumb URL property
+    - Bugfix for using a wrong plugin event name in special circumstances
+    - Improved check for the allowBlank TV option
 - 2.6.3
     - Bugfix a full server path in the url placeholder
 - 2.6.2

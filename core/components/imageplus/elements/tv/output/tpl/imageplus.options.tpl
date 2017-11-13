@@ -62,17 +62,17 @@
         }, {
             xtype: 'combo-boolean',
             fieldLabel: _('imageplus.generateUrl'),
-            description: MODx.expandHelp ? '' : _('imageplus.generateUrl_desc'),
+            description: MODx.expandHelp ? '' : _('imageplus.generateUrl_desc') + '<br><span class="red">' + _('imageplus.generateUrl_desc_warning') + '</span>',
             name: 'prop_generateUrl',
             hiddenName: 'prop_generateUrl',
             id: 'prop_generateUrl{/literal}{$tv}{literal}',
-            value: (params['generateUrl'] == 1 || params['generateUrl'] == 'true'),
+            value: (params['generateUrl'] === 1 || params['generateUrl'] === 'true'),
             anchor: '100%',
             listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'prop_generateUrl{/literal}{$tv}{literal}',
-            html: _('imageplus.generateUrl_desc'),
+            html: _('imageplus.generateUrl_desc') + '<br><span class="red">' + _('imageplus.generateUrl_desc_warning') + '</span>',
             cls: 'desc-under'
         }],
         renderTo: 'tv-output-properties-form{/literal}{$tv}{literal}'

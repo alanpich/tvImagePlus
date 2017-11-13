@@ -11,10 +11,11 @@
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
  * @copyright Thomas Jakobi 2015-2017
+ * @return {string}
  */
 
 ImagePlus.MIGX_Renderer = function (json) {
-    if (typeof(json) == 'undefined' || json == null || !json.length) {
+    if (typeof(json) === 'undefined' || json === null || !json.length) {
         return '';
     }
     var data = JSON.parse(json);

@@ -36,6 +36,7 @@ $_lang['imageplus.outputChunk'] = 'Ausgabe Chunk';
 $_lang['imageplus.outputChunk_desc'] = '(Optional) Wählen Sie einen Ausgabe Chunk aus. Wenn kein Wert angebeben ist wird der Bildpfad ausgegeben.';
 $_lang['imageplus.generateUrl'] = 'Thumbnail URL generieren';
 $_lang['imageplus.generateUrl_desc'] = '(Optional) Die Thumbnail URL eventuell wird nicht benötigt, wenn das Thumbnail im Ausgabe Chunk z.B. mit einem pThumb Output Filter generiert wird.';
+$_lang['imageplus.generateUrl_desc_warning'] = 'Sie müssen diese Option aktivieren, wenn Sie keinen Ausgabe Chunk benutzen oder wenn Sie den [[+url]] Platzhalter im angegebenen Ausgabe Chunk einsetzen. Andernfalls wird das Bild nicht beschnitten/skaliert und der original Bildpfad ausgegeben.';
 
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'Thumbnail URL';
