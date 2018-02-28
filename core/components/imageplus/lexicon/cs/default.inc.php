@@ -36,6 +36,7 @@ $_lang['imageplus.outputChunk'] = 'Výstupní chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Vyberte chunk pro výstup TV. Nechte prázdé pro výstup čisté URL.';
 $_lang['imageplus.generateUrl'] = 'Generovat URL miniatury';
 $_lang['imageplus.generateUrl_desc'] = '(Volitelné) URL miniatury možná není třeba, pokud miniaturu generujete v chunku (například pomocí pthumb).';
+$_lang['imageplus.generateUrl_desc_warning'] = 'You have to activate this option, when you don\'t specify an output chunk in the output options or when you use the [[+url]] placeholder in the specified output chunk. Otherwise the image is not cropped/resized and the original image path is returned.';
 
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'URL miniatury';
