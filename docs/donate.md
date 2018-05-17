@@ -17,4 +17,4 @@ Please support the ongoing and past development of *Image+* by making a donation
 
 *Image+* development is sponsored by Treehillstudio – MODX Development in Münsterland.
 
-<a href="https://treehillstudio.com"><img alt="Treehillstudio – MODX Development in Münsterland" border="0" src="../assets/img/treehillstudio_logo_color.svg" width="188" height="56"></a>
+<a href="https://treehillstudio.com"><img alt="Treehillstudio – MODX Development in Münsterland" border="0" src="../assets/images/treehillstudio_logo_color.svg" width="188" height="56"></a>

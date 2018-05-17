@@ -21,11 +21,13 @@ MODX Package Management
 
 Usage
 -----
-Install via package manager, create a TV and change the input & output type to 'Image+'
+Install via package manager, create a TV and change the input & output type to
+'Image+'
 
 Documentation
 -------------
-For more information please read the documentation on http://jako.github.io/ImagePlus/
+For more information please read the documentation on
+http://jako.github.io/ImagePlus/
 
 GitHub Repository
 -----------------

@@ -11,7 +11,7 @@ module.exports = function (grunt) {
         usebanner: {
             css: {
                 options: {
-                    position: 'top',
+                    position: 'bottom',
                     banner: '<%= banner %>'
                 },
                 files: {
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
             }
         },
         cssmin: {
-            imageplus: {
+            css: {
                 src: [
                     'source/css/mgr/imageplus.css',
                     'source/css/mgr/jquery.jcrop.min.css'
