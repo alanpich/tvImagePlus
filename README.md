@@ -1,3 +1,5 @@
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/imageplus/localized.svg)](https://crowdin.com/project/imageplus)
+
 # Image+
 
 Advanced image custom template variable in MODX Revolution.
@@ -22,6 +24,10 @@ Install via package manager, create a TV and change the input & output type to '
 
 For more information please read the [documentation](http://jako.github.io/ImagePlus/).
 
-### Dependencies
+## Dependencies
 
 MODX Cropping Engine i.e. [pthumb](http://modx.com/extras/package/pthumb)
+
+## Translations
+
+Translations of the package could be done on [Crowdin](https://crowdin.com/project/imageplus)
