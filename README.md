@@ -18,7 +18,7 @@ MODX Package Management
 
 ## Usage
 
-Install via package manager, create a TV and change the input & output type to 'Image+'
+Install via package manager, create a TV and change the input & output type to 'Image+'.
 
 ## Documentation
 
