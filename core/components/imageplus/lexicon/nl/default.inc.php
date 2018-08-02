@@ -36,7 +36,7 @@ $_lang['imageplus.outputChunk'] = 'Output Chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Selecteer een chunk voor de TV output. Laat leeg om alleen een link naar de afbeelding terug te krijgen.';
 $_lang['imageplus.generateUrl'] = 'Genereer Thumbnail URL';
 $_lang['imageplus.generateUrl_desc'] = '(Optioneel) De thumbnail URL is mogelijk niet nodig, als de thumbnail gegenereerd wordt in de output chunk met bijvoorbeeld een pthumb output filter.';
-$_lang['imageplus.generateUrl_desc_warning'] = 'You have to activate this option, when you don\'t specify an output chunk in the output options or when you use the [[+url]] placeholder in the specified output chunk. Otherwise the image is not cropped/resized and the original image path is returned.';
+$_lang['imageplus.generateUrl_desc_warning'] = 'Deze optie moet ingeschakeld zijn wanneer je geen "output chunk" hebt gedefineerd; of wanneer je de "output chunk" wel hebt gedefineerd en de [[+url]] placeholder hierin gebruikt. Als deze optie in voorgaande situaties niet is ingeschakeld dan worden afbeeldingen niet bijgesneden en/of vergroot en verkleind en wordt het pad naar de originele afbeelding weergegeven.';
 
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'URL van de thumbnail';
