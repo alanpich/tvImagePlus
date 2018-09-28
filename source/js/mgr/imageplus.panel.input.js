@@ -217,7 +217,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Fires when the TV field is reset
     generateThumbUrl: function (params) {
-        var url = MODx.config.connectors_url + 'system/phpthumb.php?imageplus=1';
+        var url = MODx.config.connectors_url + 'system/phpthumb.php';
         var defaults = {
             wctx: 'mgr',
             w: this.options.thumbnailWidth,
