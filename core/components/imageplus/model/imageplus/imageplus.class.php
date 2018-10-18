@@ -3,7 +3,7 @@
  * Image+ classfile
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2018 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage classfile
@@ -11,7 +11,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2017
+ * @copyright Thomas Jakobi 2015-2018
  */
 
 use ImagePlus\CropEngines;
@@ -37,7 +37,7 @@ class ImagePlus
      * The version
      * @var string $version
      */
-    public $version = '2.7.0';
+    public $version = '2.8.0-rc1';
 
     /**
      * The class options
@@ -178,17 +178,17 @@ class ImagePlus
         $jsSourceUrl = $assetsUrl . '../../../source/js/mgr/';
         $cssUrl = $this->getOption('cssUrl') . 'mgr/';
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
+        $nodeUrl = $assetsUrl . '../../../node_modules/';
 
         if ($this->getOption('debug') && ($this->getOption('assetsUrl') != MODX_ASSETS_URL . 'components/imageplus/')) {
             $this->modx->controller->addCss($cssSourceUrl . 'imageplus.css?v=v' . $this->version);
-            $this->modx->controller->addCss($cssSourceUrl . 'jquery.jcrop.min.css?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.panel.input.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.window.editor.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.migx_renderer.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'tools/JSON2.js?v=v' . $this->version);
-            $this->modx->controller->addJavascript($jsSourceUrl . 'jquery/jquery.min.js?v=v' . $this->version);
-            $this->modx->controller->addJavascript($jsSourceUrl . 'jquery/jquery.jcrop.min.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($nodeUrl . 'jquery/dist/jquery.slim.min.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsSourceUrl . 'jcrop/jquery.jcrop.min.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.jquery.imagecrop.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.grid.js?v=v' . $this->version);
         } else {
@@ -197,7 +197,6 @@ class ImagePlus
         }
         $this->modx->controller->addHtml('<script type="text/javascript">' .
             ' ImagePlus.config = ' . json_encode($this->options) . ';' .
-            ' var $jIP = jQuery.noConflict();' .
             '</script>');
     }
 

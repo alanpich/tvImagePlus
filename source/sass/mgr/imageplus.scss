@@ -3,17 +3,17 @@
     border: 0;
     border-radius: 0 3px 3px 0;
     box-shadow: none;
-    padding: 0;
-    width: 90px;
     height: 100% !important;
+    padding: 0;
     position: absolute;
-    top: 0;
     right: 0;
+    top: 0;
+    width: 90px;
     .x-form-trigger {
+      display: inline-block;
       position: relative;
       top: auto;
       vertical-align: top;
-      display: inline-block;
       &.x-form-clear-trigger {
         &:before {
           content: "\f00d";
@@ -31,6 +31,7 @@
 .imageplus-hidden-textarea {
   display: none;
 }
+
 .imageplus-sectiontitle {
   .x-form-item-label {
     padding-top: 0;
@@ -39,3 +40,5 @@
     padding-top: 0;
   }
 }
+
+@import "jquery.jcrop";

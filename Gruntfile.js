@@ -3,10 +3,10 @@ module.exports = function (grunt) {
     grunt.initConfig({
         modx: grunt.file.readJSON('_build/config.json'),
         banner: '/*!\n' +
-        ' * <%= modx.name %> - <%= modx.description %>\n' +
-        ' * Version: <%= modx.version %>\n' +
-        ' * Build date: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        ' */\n',
+            ' * <%= modx.name %> - <%= modx.description %>\n' +
+            ' * Version: <%= modx.version %>\n' +
+            ' * Build date: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            ' */\n',
         usebanner: {
             css: {
                 options: {
@@ -39,8 +39,8 @@ module.exports = function (grunt) {
                     'source/js/mgr/imageplus.window.editor.js',
                     'source/js/mgr/imageplus.migx_renderer.js',
                     'source/js/mgr/tools/JSON2.js',
-                    'source/js/mgr/jquery/jquery.min.js',
-                    'source/js/mgr/jquery/jquery.jcrop.min.js',
+                    'node_modules/jquery/dist/jquery.slim.min.js',
+                    'source/js/mgr/jcrop/jquery.jcrop.min.js',
                     'source/js/mgr/imageplus.jquery.imagecrop.js',
                     'source/js/mgr/imageplus.grid.js'
                 ],
@@ -59,13 +59,44 @@ module.exports = function (grunt) {
                 }
             }
         },
+        postcss: {
+            options: {
+                processors: [
+                    require('pixrem')(),
+                    require('autoprefixer')({
+                        browsers: 'last 2 versions, ie >= 8'
+                    })
+                ]
+            },
+            mgr: {
+                src: [
+                    'source/css/mgr/imageplus.css'
+                ]
+            }
+        },
         cssmin: {
-            css: {
+            mgr: {
                 src: [
                     'source/css/mgr/imageplus.css',
                     'source/css/mgr/jquery.jcrop.min.css'
                 ],
                 dest: 'assets/components/imageplus/css/mgr/imageplus.min.css'
+            }
+        },
+        imagemin: {
+            gif: {
+                options: {
+                    optimizationLevel: 7
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'source/img/',
+                        src: ['**/*.gif'],
+                        dest: 'assets/components/imageplus/img/',
+                        ext: '.gif'
+                    }
+                ]
             }
         },
         watch: {
@@ -79,7 +110,7 @@ module.exports = function (grunt) {
                 files: [
                     'source/**/*.scss'
                 ],
-                tasks: ['sass', 'cssmin', 'usebanner:css']
+                tasks: ['sass', 'postcss', 'cssmin', 'usebanner:css']
             },
             config: {
                 files: [
@@ -137,6 +168,7 @@ module.exports = function (grunt) {
     //load the packages
     grunt.loadNpmTasks('grunt-banner');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-postcss');
@@ -145,5 +177,5 @@ module.exports = function (grunt) {
     grunt.renameTask('string-replace', 'bump');
 
     //register the task
-    grunt.registerTask('default', ['bump', 'uglify', 'sass', 'cssmin', 'usebanner']);
+    grunt.registerTask('default', ['bump', 'uglify', 'sass', 'postcss', 'cssmin', 'usebanner']);
 };

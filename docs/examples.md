@@ -13,7 +13,9 @@ configuration. The following properties are possible:
 "targetHeight":"",
 "targetRatio":"",
 "thumbnailWidth":"",
-"allowAltTag":""
+"allowAltTag":"",
+"allowCaption":"",
+"allowCredits":""
 }
 ```
 

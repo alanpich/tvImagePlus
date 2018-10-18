@@ -2,7 +2,7 @@
  * Image+ Input Panel
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2018 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage script
@@ -10,7 +10,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2017
+ * @copyright Thomas Jakobi 2015-2018
  */
 
 ImagePlus.panel.input = function (config) {
@@ -224,10 +224,15 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             source: this.image.sourceImg.source
         };
         for (var i in params) {
-            defaults[i] = params[i]
+            defaults[i] = params[i];
         }
+        var qs = '';
         for (i in defaults) {
-            url += '&' + i + '=' + defaults[i];
+            qs += encodeURIComponent(i) + '=' + encodeURIComponent(defaults[i]) + '&';
+        }
+        if (qs.length > 0) {
+            qs = qs.substring(0, qs.length - 1);
+            url = url + "?" + qs;
         }
         return url;
     },
@@ -516,7 +521,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 options: this.options,
                 inputPanel: this,
                 displayRatio: ratio,
-                width: ((imgW * ratio) + 20),
+                width: (((imgW * ratio) + 20) <= 200) ? 200 : ((imgW * ratio) + 20),
                 height: ((imgH * ratio) + 20 + 84),
                 crop: this.image.crop,
                 padding: 10

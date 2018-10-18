@@ -4,7 +4,7 @@
  * Image+ Input Render
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2018 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage input_render
@@ -12,7 +12,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2017
+ * @copyright Thomas Jakobi 2015-2018
  */
 class ImagePlusInputRender extends modTemplateVarInputRender
 {
@@ -43,6 +43,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
     {
         // Load imageplus class
         $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
+        /** @var ImagePlus $imageplus */
         $imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
             'core_path' => $corePath
         ));

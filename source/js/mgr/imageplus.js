@@ -2,7 +2,7 @@
  * Image+ Custom Manager Page Script
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2017 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2018 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage script
@@ -10,7 +10,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2017
+ * @copyright Thomas Jakobi 2015-2018
  */
 
 var imagePlus = function (config) {
@@ -26,7 +26,7 @@ Ext.extend(imagePlus, Ext.Component, {
     },
 
     generatePhpThumbOfUrl: function (params) {
-        var url = MODx.config.connectors_url + 'system/phpthumb.php?imageplus=1';
+        var url = MODx.config.connectors_url + 'system/phpthumb.php?';
         var defaults = {
             wctx: 'mgr',
             w: 150,
@@ -35,8 +35,13 @@ Ext.extend(imagePlus, Ext.Component, {
         for (var i in params) {
             defaults[i] = params[i]
         }
+        var qs = '';
         for (i in defaults) {
-            url += '&' + i + '=' + defaults[i];
+            qs += encodeURIComponent(i) + '=' + encodeURIComponent(defaults[i]) + '&';
+        }
+        if (qs.length > 0) {
+            qs = qs.substring(0, qs.length - 1);
+            url = url + "?" + qs;
         }
         return url;
 
