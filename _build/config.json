@@ -127,8 +127,16 @@
     ]
   },
   "build": {
-    "readme": "docs/readme.txt",
-    "license": "docs/license.txt",
-    "changelog": "docs/changelog.txt"
+    "readme": "docs/readme.md",
+    "license": "docs/license.md",
+    "changelog": "docs/changelog.md",
+    "options": {
+      "modx_version": "2.6"
+    },
+    "resolver": {
+      "after": [
+        "resolve.treehillstudio.php"
+      ]
+    }
   }
 }
