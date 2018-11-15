@@ -7,7 +7,11 @@
  *
  * @var mixed $object
  * @var array $options
+ * @var xPDOTransport $transport
  */
+
+$packageName = 'Image+';
+$lowercaseName = 'imageplus';
 $url = 'https://treehillstudio.com/extras/package/statistics';
 $params = array();
 
@@ -33,8 +37,8 @@ $c->where(
 $c->where(
     array(
         array(
-            'modTransportPackage.package_name:=' => 'imageplus',
-            'OR:modTransportPackage.package_name:=' => 'Image+'
+            'modTransportPackage.package_name:=' => $lowercaseName,
+            'OR:modTransportPackage.package_name:=' => $packageName
         ),
         'installed:IS NOT' => null
     )
@@ -46,17 +50,15 @@ $oldPackage = $modx->getObject('transport.modTransportPackage', $c);
 
 $oldVersion = '';
 if ($oldPackage) {
-    $oldVersion = $oldPackage->get('version_major') . '.' . $oldPackage->get('version_minor');
-    $oldVersion .= '.' . $oldPackage->get('version_patch');
-    $oldVersion .= '-' . $oldPackage->get('release');
+    $oldVersion = $oldPackage->get('version_major') .
+        '.' . $oldPackage->get('version_minor') .
+        '.' . $oldPackage->get('version_patch') .
+        '-' . $oldPackage->get('release');
 }
 
 $version = '';
-if ($options['topic']) {
-    $topic = trim($options['topic'], '/');
-    $topic = explode('/', $topic);
-    $signature = end($topic);
-    $version = str_replace(strtolower($package) . '-', '', $signature);
+if ($transport->version) {
+    $version = $transport->version;
 }
 
 $modxVersionObj = $modx->getObject('modSystemSetting', array('key' => 'settings_version'));
@@ -73,12 +75,6 @@ switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         break;
     case xPDOTransport::ACTION_UNINSTALL:
         $action = 'uninstall';
-
-        $version = $oldVersion;
-        $setupOptionsPath = explode('/', $options['setup-options']);
-        $signature = $setupOptionsPath[0];
-        $oldVersion = str_replace(strtolower($package) . '-', '', $signature);
-
         break;
 }
 
