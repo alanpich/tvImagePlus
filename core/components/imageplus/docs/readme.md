@@ -26,7 +26,7 @@ Install via package manager, create a TV and change the input & output type to
 ## Documentation
 
 For more information please read the documentation on
-http://jako.github.io/ImagePlus/
+https://jako.github.io/ImagePlus/
 
 ## GitHub Repository
 
