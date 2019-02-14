@@ -10,8 +10,6 @@
  * @var xPDOTransport $transport
  */
 
-$packageName = 'Image+';
-$lowercaseName = 'imageplus';
 $url = 'https://treehillstudio.com/extras/package/statistics';
 $params = array();
 
@@ -37,8 +35,7 @@ $c->where(
 $c->where(
     array(
         array(
-            'modTransportPackage.package_name:=' => $lowercaseName,
-            'OR:modTransportPackage.package_name:=' => $packageName
+            'modTransportPackage.signature:LIKE' => $options['namespace'] . '-%',
         ),
         'installed:IS NOT' => null
     )
