@@ -1,6 +1,6 @@
 # Image+
 
-Advanced image custom template variable in MODX Revolution.
+Advanced image custom template variable for MODX Revolution.
 
 - Author: Alan Pich <alan.pich@gmail.com>
 - Maintainer and further development: Thomas Jakobi <thomas.jakobi@partout.info>
