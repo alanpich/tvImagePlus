@@ -148,7 +148,7 @@ type | Type of the snippet output. Could be set to `check` [^2], `tpl` [^3] and 
 options | Extended phpThumb options for the image [^5]. | -
 tpl | Template chunk for the snippet output [^6]. | ImagePlus.image
 value | Use your own JSON encoded value for the snippet output. The properties `tvname` and `docid` are ignored. | -
-debug | Log debug informations in MODX error log. | No
+debug | Log debug informations in MODX error log. | 0 (No)
 
 #### Example
 
