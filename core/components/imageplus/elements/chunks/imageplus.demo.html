@@ -1,0 +1,90 @@
+<div>
+    <h3>Image+ Demo Chunk</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Description</th>
+            <th>Current Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>[[%imageplus.placeholder.url? &namespace=`imageplus`]]</td>
+            <td>[[+url]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.alt? &namespace=`imageplus`]]</td>
+            <td>[[+alt]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.width? &namespace=`imageplus`]]</td>
+            <td>[[+width]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.height? &namespace=`imageplus`]]</td>
+            <td>[[+height]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.source.src? &namespace=`imageplus`]]</td>
+            <td>[[+source.src]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.source.width? &namespace=`imageplus`]]</td>
+            <td>[[+source.width]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.source.height? &namespace=`imageplus`]]</td>
+            <td>[[+source.height]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.crop.width? &namespace=`imageplus`]]</td>
+            <td>[[+crop.width]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.crop.height? &namespace=`imageplus`]]</td>
+            <td>[[+crop.height]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.crop.x? &namespace=`imageplus`]]</td>
+            <td>[[+crop.x]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.crop.y? &namespace=`imageplus`]]</td>
+            <td>[[+crop.y]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.options? &namespace=`imageplus`]]</td>
+            <td>[[+options]]</td>
+        </tr>
+        <tr>
+            <td>[[%imageplus.placeholder.crop.options? &namespace=`imageplus`]]</td>
+            <td>[[+crop.options]]</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h4>Default image output</h4>
+
+    <div>
+        <img src="[[+url]]" alt="[[+alt]]"/>
+        [[+caption:notempty=`<p class="caption">[[+caption]]</p>`]]
+        [[+credits:notempty=`<p class="credits">[[+credits]]</p>`]]
+    </div>
+
+    <h4>Responsive image output (different crops for different viewports)</h4>
+
+    <p>
+        <picture>
+            <source media="(min-width: 36em)"
+                    srcset="[[+source.src:pthumb=`w=1024`]] 1024w,
+                        [[+source.src:pthumb=`w=640`]] 640w,
+                        [[+source.src:pthumb=`w=320`]] 320w"
+                    sizes="33.3vw"/>
+            <source srcset="[[+source.src:pthumb=`[[+crop.options]]&w=640`]] 2x,
+                        [[+source.src:pthumb=`[[+crop.options]]&w=320`]] 1x"/>
+            <img src="[[+url]]" alt="[[+alt]]"/>
+        </picture>
+    </p>
+    [[+caption:notempty=`<p class="caption">[[+caption]]</p>`]]
+    [[+credits:notempty=`<p class="credits">[[+credits]]</p>`]]
+</div>

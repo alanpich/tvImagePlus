@@ -1,17 +1,33 @@
-# Image+ v2.0 #
-## Advanced Image Template Variable
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/imageplus/localized.svg)](https://crowdin.com/project/imageplus)
 
-**v2.1 now available for [download](https://github.com/downloads/alanpich/tvImagePlus/tvimageplus-2.1-pl.transport.zip) `v2.1-pl`**
+# Image+
 
-**Dependant on PhpThumbOf component**
+Advanced image custom template variable in MODX Revolution.
 
-Advanced image TV input type for MODx Revolution.
-The required dimensions for the image can (optionally) 
-be configured on the TV, restricting one or both 
-dimensions. When the editor uploads an image to the TV,
-they can then use a graphical tool to crop the image
-to the required dimensions/proportions.
+## Features
 
-This extra is a complete replacement for previous versions. 
-All previous versions (1.x) should be removed before attempting
-to install v2.x
+With this MODX custom template variable an image could be cropped while
+maintaining the original image. The dimensions for the image can (optionally) be
+configured to constrain a minimal width and/or height. The image crop could be
+forced to remain at a pre-set ratio. A graphical tool could be used to crop the
+image to the required dimensions/proportions.
+
+## Installation
+
+MODX Package Management
+
+## Usage
+
+Install via package manager, create a TV and change the input & output type to 'Image+'.
+
+## Documentation
+
+For more information please read the [documentation](http://jako.github.io/ImagePlus/).
+
+## Dependencies
+
+MODX Cropping Engine i.e. [pthumb](http://modx.com/extras/package/pthumb)
+
+## Translations
+
+Translations of the package could be done on [Crowdin](https://crowdin.com/project/imageplus)
