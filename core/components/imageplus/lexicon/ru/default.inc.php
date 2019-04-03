@@ -9,11 +9,11 @@ $_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ параметры';
-$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="http://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
-$_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
+$_lang['imageplus.section_desc'] = 'Следующие параметры могут быть переопределены контекстом/системными настройками. Пожалуйста, прочитайте документацию <a href="http://jako.github.io/ImagePlus/usage/"></a> для соответствующих ключей в контексте/системных настройках.';
+$_lang['imageplus.selectConfig'] = 'Предопределенные размеры/соотношения сторон';
 $_lang['imageplus.selectConfig_desc'] = 'Выберите заранее заданное соотношение размера/аспекта. Определения могут быть созданы в настройках системы.';
 $_lang['imageplus.selectConfigForce'] = 'Принудительные предопределенные размеры/пропорции';
-$_lang['imageplus.selectConfigForce_desc'] = 'Forced select a predefined crop size/aspect ratio. The definitions could be created in the system settings.';
+$_lang['imageplus.selectConfigForce_desc'] = 'Выберите заранее заданное соотношение размера/аспекта. Определения могут быть созданы в настройках системы.';
 $_lang['imageplus.targetwidth'] = 'Необходимая (минимальная) ширина';
 $_lang['imageplus.targetwidth_desc'] = '(Необязательно, Integer) Необходимая ширина для отображаемого изображения. Загружаемое изображение должно иметь эту минимальную ширину.';
 $_lang['imageplus.targetheight'] = 'Необходимая (минимальная) высота';
@@ -26,8 +26,8 @@ $_lang['imageplus.allowAltTag'] = 'Показывать поле для атри
 $_lang['imageplus.allowAltTag_desc'] = 'Позволяет пользователю ввести заголовок/альтернативный текст для изображения';
 $_lang['imageplus.allowCaption'] = 'Показать поле заголовка';
 $_lang['imageplus.allowCaption_desc'] = 'Разрешить пользователю ввести подпись для изображения.';
-$_lang['imageplus.allowCredits'] = 'Show Credits Field';
-$_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
+$_lang['imageplus.allowCredits'] = 'Показать поле «Кредиты»';
+$_lang['imageplus.allowCredits_desc'] = 'Разрешить пользователю ввести кредит для изображения.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Дополнительные параметры phpThumb';
