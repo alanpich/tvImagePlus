@@ -5,7 +5,7 @@ $_lang['imageplus.editor_title'] = 'Редактор Image+';
 $_lang['imageplus.edit_image'] = 'Редактировать изображение';
 $_lang['imageplus.alt_text'] = 'Альтернатиный текст (alt)';
 $_lang['imageplus.caption'] = 'Заголовок';
-$_lang['imageplus.credits'] = 'Credits';
+$_lang['imageplus.credits'] = 'Авторы';
 
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ параметры';
@@ -26,8 +26,8 @@ $_lang['imageplus.allowAltTag'] = 'Показывать поле для атри
 $_lang['imageplus.allowAltTag_desc'] = 'Позволяет пользователю ввести заголовок/альтернативный текст для изображения';
 $_lang['imageplus.allowCaption'] = 'Показать поле заголовка';
 $_lang['imageplus.allowCaption_desc'] = 'Разрешить пользователю ввести подпись для изображения.';
-$_lang['imageplus.allowCredits'] = 'Показать поле «Кредиты»';
-$_lang['imageplus.allowCredits_desc'] = 'Разрешить пользователю ввести кредит для изображения.';
+$_lang['imageplus.allowCredits'] = 'Показать поле «Авторы»';
+$_lang['imageplus.allowCredits_desc'] = 'Разрешить пользователю ввести Автора для изображения.';
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Дополнительные параметры phpThumb';
@@ -36,7 +36,7 @@ $_lang['imageplus.outputChunk'] = 'Чанк для вывода';
 $_lang['imageplus.outputChunk_desc'] = 'Выберите чанк для вывода TV. Оставьте пустым для обычного вывода текстом.';
 $_lang['imageplus.generateUrl'] = 'Генерировать Thumb URL';
 $_lang['imageplus.generateUrl_desc'] = '(Необязательно) URL иконки может быть необязательным, если вы генерируете иконку в чанке, т.е. когда phpThumb используется как output filter.';
-$_lang['imageplus.generateUrl_desc_warning'] = 'You have to activate this option, when you don\'t specify an output chunk in the output options or when you use the [[+url]] placeholder in the specified output chunk. Otherwise the image is not cropped/resized and the original image path is returned.';
+$_lang['imageplus.generateUrl_desc_warning'] = 'Вы должны активировать эту опцию, когда вы не указываете выходной блок в опциях вывода или когда вы используете заполнитель [[+url]] в указанном выходном блоке. В противном случае изображение не обрезается/не изменяется, и возвращается исходный путь к изображению.';
 
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'URL иконки изображения';
@@ -76,10 +76,10 @@ $_lang['setting_imageplus.allow_caption'] = $_lang['imageplus.allowCaption'];
 $_lang['setting_imageplus.allow_caption_desc'] = $_lang['imageplus.allowCaption_desc'];
 $_lang['setting_imageplus.allow_credits'] = $_lang['imageplus.allowCredits'];
 $_lang['setting_imageplus.allow_credits_desc'] = $_lang['imageplus.allowCredits_desc'];
-$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
-$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+$_lang['setting_imageplus.select_config'] = 'Предопределенные размеры/соотношения сторон';
+$_lang['setting_imageplus.select_config_desc'] = 'Создайте предопределенные соотношения размера/пропорций, которые выбираются в настройках переменной шаблона.';
+$_lang['setting_imageplus.force_config'] = 'Предопределенные размеры/соотношения сторон';
+$_lang['setting_imageplus.force_config_desc'] = 'Предопределенные размеры/соотношения сторон.';
 
 /** System settings grid */
 $_lang['setting_imageplus.configname'] = 'Имя';
