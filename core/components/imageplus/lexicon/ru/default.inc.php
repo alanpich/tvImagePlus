@@ -11,8 +11,8 @@ $_lang['imageplus.credits'] = 'Credits';
 $_lang['imageplus.section'] = 'Image+ параметры';
 $_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="http://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
 $_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
-$_lang['imageplus.selectConfig_desc'] = 'Select a predefined target size/aspect ratio. The definitions could be created in the system settings.';
-$_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';
+$_lang['imageplus.selectConfig_desc'] = 'Выберите заранее заданное соотношение размера/аспекта. Определения могут быть созданы в настройках системы.';
+$_lang['imageplus.selectConfigForce'] = 'Принудительные предопределенные размеры/пропорции';
 $_lang['imageplus.selectConfigForce_desc'] = 'Forced select a predefined crop size/aspect ratio. The definitions could be created in the system settings.';
 $_lang['imageplus.targetwidth'] = 'Необходимая (минимальная) ширина';
 $_lang['imageplus.targetwidth_desc'] = '(Необязательно, Integer) Необходимая ширина для отображаемого изображения. Загружаемое изображение должно иметь эту минимальную ширину.';
@@ -24,8 +24,8 @@ $_lang['imageplus.thumbnailWidth'] = 'Ширина иконки';
 $_lang['imageplus.thumbnailWidth_desc'] = '(Необязательно) Ширина изображения в панели управления TV.';
 $_lang['imageplus.allowAltTag'] = 'Показывать поле для атрибута Аlt';
 $_lang['imageplus.allowAltTag_desc'] = 'Позволяет пользователю ввести заголовок/альтернативный текст для изображения';
-$_lang['imageplus.allowCaption'] = 'Show Caption Field';
-$_lang['imageplus.allowCaption_desc'] = 'Allow user to enter a caption for the image.';
+$_lang['imageplus.allowCaption'] = 'Показать поле заголовка';
+$_lang['imageplus.allowCaption_desc'] = 'Разрешить пользователю ввести подпись для изображения.';
 $_lang['imageplus.allowCredits'] = 'Show Credits Field';
 $_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
 
@@ -82,4 +82,4 @@ $_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect r
 $_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
 
 /** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';
+$_lang['setting_imageplus.configname'] = 'Имя';
