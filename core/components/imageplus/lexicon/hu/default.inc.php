@@ -2,7 +2,6 @@
 $_lang['imageplus'] = 'Image+';
 
 $_lang['imageplus.editor_title'] = 'Image+ Szerkesztő';
-$_lang['imageplus.edit_image'] = 'Kép szerkesztése';
 $_lang['imageplus.alt_text'] = 'Alt text';
 $_lang['imageplus.caption'] = 'Caption';
 $_lang['imageplus.credits'] = 'Credits';
