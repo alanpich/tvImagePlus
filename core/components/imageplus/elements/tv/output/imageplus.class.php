@@ -16,6 +16,13 @@
 
 class ImagePlusOutputRender extends modTemplateVarOutputRender
 {
+    /**
+     * Process Output Render
+     *
+     * @param string $value
+     * @param array $params
+     * @return string
+     */
     public function process($value, array $params = array())
     {
         // Load imageplus class

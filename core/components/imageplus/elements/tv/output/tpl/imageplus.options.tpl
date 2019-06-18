@@ -74,6 +74,25 @@
             forId: 'prop_generateUrl{/literal}{$tv}{literal}',
             html: _('imageplus.generateUrl_desc') + '<br><span class="red">' + _('imageplus.generateUrl_desc_warning') + '</span>',
             cls: 'desc-under'
+        }, {
+            cls: "treehillstudio_about",
+            html: '<img width="133" height="40" src="' + ImagePlus.config.assetsUrl + 'img/mgr/treehill-studio-small.png"' + ' srcset="' + ImagePlus.config.assetsUrl + 'img/mgr/treehill-studio-small@2x.png 2x" alt="Treehill Studio">',
+            listeners: {
+                afterrender: function (component) {
+                    component.getEl().select('img').on('click', function () {
+                        var msg = '<span style="display: inline-block; text-align: center;">&copy; 2013-2015 by Alan Pich <a href="https://github.com/alanpich" target="_blank">github.com/alanpich</a><br>' +
+                                '<img src="' + ImagePlus.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + ImagePlus.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt"Treehill Studio" style="margin-top: 10px"><br>' +
+                                '&copy; 2015-2019 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                        Ext.Msg.show({
+                            title: _('imageplus') + ' ' + ImagePlus.config.version,
+                            msg: msg,
+                            buttons: Ext.Msg.OK,
+                            cls: 'treehillstudio_window',
+                            width: 330
+                        });
+                    });
+                }
+            }
         }],
         renderTo: 'tv-output-properties-form{/literal}{$tv}{literal}'
     });

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Image+ Input Render
  *
@@ -14,6 +13,7 @@
  * @copyright Alan Pich 2013-2015
  * @copyright Thomas Jakobi 2015-2019
  */
+
 class ImagePlusInputRender extends modTemplateVarInputRender
 {
     /**

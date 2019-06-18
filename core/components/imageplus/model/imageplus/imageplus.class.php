@@ -196,7 +196,7 @@ class ImagePlus
             $this->modx->controller->addJavascript($jsUrl . 'imageplus.min.js?v=v' . $this->version);
         }
         $this->modx->controller->addHtml('<script type="text/javascript">' .
-            ' ImagePlus.config = ' . json_encode($this->options) . ';' .
+            ' ImagePlus.config = ' . json_encode($this->options, JSON_PRETTY_PRINT) . ';' .
             '</script>');
     }
 
@@ -206,8 +206,8 @@ class ImagePlus
      * @param string $json
      * @param array $opts
      * @param modTemplateVar $tv
-     * @internal param array $params
      * @return string
+     * @internal param array $params
      */
     public function getImageURL($json, $opts = array(), modTemplateVar $tv = null)
     {

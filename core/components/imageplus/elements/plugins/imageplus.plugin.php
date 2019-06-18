@@ -1,6 +1,7 @@
 <?php
 /**
- * Image+ runtime hooks
+ * Image+ Runtime Hooks
+ *
  * Registers custom TV input & output types and includes javascripts on document
  * edit pages so that the TV can be used from within other extras (i.e. MIGX,
  * Collections)

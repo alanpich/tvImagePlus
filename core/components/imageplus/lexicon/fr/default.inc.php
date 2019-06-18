@@ -2,7 +2,6 @@
 $_lang['imageplus'] = 'Image+';
 
 $_lang['imageplus.editor_title'] = 'Éditeur Image+';
-$_lang['imageplus.edit_image'] = 'Éditer l\'image';
 $_lang['imageplus.alt_text'] = 'Texte de l\'attribut Alt';
 $_lang['imageplus.caption'] = 'Légende';
 $_lang['imageplus.credits'] = 'Crédits';

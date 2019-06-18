@@ -2,7 +2,6 @@
 $_lang['imageplus'] = 'Image+';
 
 $_lang['imageplus.editor_title'] = 'Редактор Image+';
-$_lang['imageplus.edit_image'] = 'Редактировать изображение';
 $_lang['imageplus.alt_text'] = 'Альтернатиный текст (alt)';
 $_lang['imageplus.caption'] = 'Заголовок';
 $_lang['imageplus.credits'] = 'Авторы';

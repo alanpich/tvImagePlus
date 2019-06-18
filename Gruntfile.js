@@ -32,7 +32,7 @@ module.exports = function (grunt) {
             }
         },
         uglify: {
-            js: {
+            mgr: {
                 src: [
                     'source/js/mgr/imageplus.js',
                     'source/js/mgr/imageplus.panel.input.js',
@@ -53,7 +53,7 @@ module.exports = function (grunt) {
                 outputStyle: 'expanded',
                 sourcemap: false
             },
-            dist: {
+            mgr: {
                 files: {
                     'source/css/mgr/imageplus.css': 'source/sass/mgr/imageplus.scss'
                 }
@@ -63,9 +63,7 @@ module.exports = function (grunt) {
             options: {
                 processors: [
                     require('pixrem')(),
-                    require('autoprefixer')({
-                        browsers: 'last 2 versions, ie >= 8'
-                    })
+                    require('autoprefixer')()
                 ]
             },
             mgr: {
@@ -84,16 +82,27 @@ module.exports = function (grunt) {
             }
         },
         imagemin: {
-            gif: {
+            png: {
                 options: {
                     optimizationLevel: 7
                 },
                 files: [
                     {
                         expand: true,
-                        cwd: 'source/img/',
+                        cwd: 'source/img/mgr/',
+                        src: ['**/*.png'],
+                        dest: 'assets/components/imageplus/img/mgr/',
+                        ext: '.png'
+                    }
+                ]
+            },
+            gif: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'source/img/mgr/',
                         src: ['**/*.gif'],
-                        dest: 'assets/components/imageplus/img/',
+                        dest: 'assets/components/imageplus/img/mgr/',
                         ext: '.gif'
                     }
                 ]
@@ -150,6 +159,30 @@ module.exports = function (grunt) {
                     }]
                 }
             },
+            inputoptions: {
+                files: [{
+                    src: 'core/components/imageplus/elements/tv/input/tpl/imageplus.options.tpl',
+                    dest: 'core/components/imageplus/elements/tv/input/tpl/imageplus.options.tpl'
+                }],
+                options: {
+                    replacements: [{
+                        pattern: /&copy; 2015(-\d{4})?/g,
+                        replacement: '&copy; ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear()
+                    }]
+                }
+            },
+            outputoptions: {
+                files: [{
+                    src: 'core/components/imageplus/elements/tv/output/tpl/imageplus.options.tpl',
+                    dest: 'core/components/imageplus/elements/tv/output/tpl/imageplus.options.tpl'
+                }],
+                options: {
+                    replacements: [{
+                        pattern: /&copy; 2015(-\d{4})?/g,
+                        replacement: '&copy; ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear()
+                    }]
+                }
+            },
             docs: {
                 files: [{
                     src: 'mkdocs.yml',
@@ -157,7 +190,7 @@ module.exports = function (grunt) {
                 }],
                 options: {
                     replacements: [{
-                        pattern: /&copy; \d{4}(-\d{4})?/g,
+                        pattern: /&copy; 2015(-\d{4})?/g,
                         replacement: '&copy; ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear()
                     }]
                 }
