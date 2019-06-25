@@ -2,7 +2,6 @@
 
 /** Snippet properties */
 $_lang['imageplus.imageplus.docid'] = 'Resource where the Image+ TV value is received from.';
-$_lang['imageplus.imageplus.fromJson'] = '';
 $_lang['imageplus.imageplus.options'] = 'Extended phpThumb options for the image.';
 $_lang['imageplus.imageplus.tpl'] = 'Template chunk for the snippet output.';
 $_lang['imageplus.imageplus.tvname'] = 'Name of the Image+ TV.';
