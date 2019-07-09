@@ -2,14 +2,13 @@
 $_lang['imageplus'] = 'Image+';
 
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
-$_lang['imageplus.edit_image'] = 'Edit Image';
 $_lang['imageplus.alt_text'] = 'Alt text';
 $_lang['imageplus.caption'] = 'Caption';
 $_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="http://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
+$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a target="_blank" href="http://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
 $_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
 $_lang['imageplus.selectConfig_desc'] = 'Select a predefined target size/aspect ratio. The definitions could be created in the system settings.';
 $_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';
@@ -36,6 +35,7 @@ $_lang['imageplus.outputChunk'] = 'Output Chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Select a chunk for tv output. Leave blank for raw url output.';
 $_lang['imageplus.generateUrl'] = 'Generate Thumb URL';
 $_lang['imageplus.generateUrl_desc'] = '(Optional) The thumb url is maybe not necessary, if you generate the thumbnail in output chunk i.e. by a pthumb output filter.';
+$_lang['imageplus.generateUrl_desc_warning'] = 'You have to activate this option, when you don\'t specify an output chunk in the output options or when you use the [[+url]] placeholder in the specified output chunk. Otherwise the image is not cropped/resized and the original image path is returned.';
 
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'URL of the thumbnail image';

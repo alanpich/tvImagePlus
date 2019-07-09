@@ -2,7 +2,7 @@
  * Image+ Image Editor
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage script
@@ -10,7 +10,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2016
+ * @copyright Thomas Jakobi 2015-2019
  */
 
 
@@ -76,7 +76,6 @@ ImagePlus.window.Editor = function (config) {
     ImagePlus.window.Editor.superclass.constructor.call(this, config);
 };
 Ext.extend(ImagePlus.window.Editor, Ext.Window, {
-
     // Get the required width of the cropper
     getDisplayWidth: function () {
         return Math.round(this.image.sourceImg.width * this.displayRatio);
@@ -119,14 +118,14 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
         return Math.round(this.image.crop.y * this.displayRatio);
     },
     getInitialCropWidth: function () {
-        if (this.image.crop.width == 0) {
+        if (this.image.crop.width === 0) {
             return Math.round(this.options.targetWidth * this.displayRatio);
         } else {
             return Math.round(this.image.crop.width * this.displayRatio);
         }
     },
     getInitialCropHeight: function () {
-        if (this.image.crop.height == 0) {
+        if (this.image.crop.height === 0) {
             return Math.round(this.options.targetHeight * this.displayRatio)
         } else {
             return Math.round(this.image.crop.height * this.displayRatio);
@@ -146,7 +145,7 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
     getCropCoords: function () {
         var W = this.getInitialCropWidth();
         var H = this.getInitialCropHeight();
-        if (W == 0 || H == 0) {
+        if (W === 0 || H === 0) {
             return false;
         }
         var X = this.getInitialCropX();

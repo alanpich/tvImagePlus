@@ -2,7 +2,7 @@
  * Image+ Input Panel
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage script
@@ -10,7 +10,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2016
+ * @copyright Thomas Jakobi 2015-2019
  */
 
 ImagePlus.panel.input = function (config) {
@@ -69,7 +69,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     listenForResetEvent: function () {
         var resourcePanel = Ext.getCmp('modx-panel-resource');
         resourcePanel.on('tv-reset', function (changed) {
-            if (changed.id == this.options.tvId) {
+            if (changed.id === this.options.tvId) {
                 this.onReset();
             }
         }, this);
@@ -139,7 +139,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                             el.insertSibling({
                                 tag: 'span',
                                 cls: 'icon icon-code',
-                                style: 'position: absolute; left: 8px; top: 10px; opacity: 0.6',
+                                style: 'position: absolute; left: 8px; top: 14px; opacity: 0.6',
                                 title: _('imageplus.alt_text')
                             }, 'after', true);
                         }
@@ -147,7 +147,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 },
                 width: 400,
                 style: {
-                    marginBottom: '5px',
+                    marginTop: '5px',
                     paddingLeft: '25px'
                 }
             }
@@ -170,7 +170,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                             el.insertSibling({
                                 tag: 'span',
                                 cls: 'icon icon-header',
-                                style: 'position: absolute; left: 8px; top: 10px; opacity: 0.6',
+                                style: 'position: absolute; left: 8px; top: 14px; opacity: 0.6',
                                 title: _('imageplus.caption')
                             }, 'after', true);
                         }
@@ -178,7 +178,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 },
                 width: 400,
                 style: {
-                    marginBottom: '5px',
+                    marginTop: '5px',
                     paddingLeft: '25px'
                 }
             }
@@ -201,7 +201,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                             el.insertSibling({
                                 tag: 'span',
                                 cls: 'icon icon-copyright',
-                                style: 'position: absolute; left: 8px; top: 9px; opacity: 0.6',
+                                style: 'position: absolute; left: 8px; top: 14px; opacity: 0.6',
                                 title: _('imageplus.credits')
                             }, 'after', true);
                         }
@@ -209,7 +209,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 },
                 width: 400,
                 style: {
-                    marginBottom: '5px',
+                    marginTop: '5px',
                     paddingLeft: '25px'
                 }
             }
@@ -217,17 +217,22 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Fires when the TV field is reset
     generateThumbUrl: function (params) {
-        var url = MODx.config.connectors_url + 'system/phpthumb.php?imageplus=1';
+        var url = MODx.config.connectors_url + 'system/phpthumb.php';
         var defaults = {
             wctx: 'mgr',
             w: this.options.thumbnailWidth,
             source: this.image.sourceImg.source
         };
         for (var i in params) {
-            defaults[i] = params[i]
+            defaults[i] = params[i];
         }
+        var qs = '';
         for (i in defaults) {
-            url += '&' + i + '=' + defaults[i];
+            qs += encodeURIComponent(i) + '=' + encodeURIComponent(defaults[i]) + '&';
+        }
+        if (qs.length > 0) {
+            qs = qs.substring(0, qs.length - 1);
+            url = url + "?" + qs;
         }
         return url;
     },
@@ -243,7 +248,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Fired when user has selected an image from the browser
     onImageSelected: function (img) {
-        var diffImg = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src != img.relativeUrl));
+        var diffImg = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src !== img.relativeUrl));
 
         this.oldSourceImg = {};
         for (var i in this.image.sourceImg) {
@@ -286,8 +291,8 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Fired when user has changed the image input
     onImageChange: function (src) {
-        if (src != '') {
-            var diffImg = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src != src));
+        if (src !== '') {
+            var diffImg = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src !== src));
 
             this.oldSourceImg = {};
             for (var i in this.image.sourceImg) {
@@ -333,7 +338,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                     }
 
                     ths.updateDisplay();
-                    if (ths.image.crop.width == 0 || ths.image.crop.height == 0) {
+                    if (ths.image.crop.width === 0 || ths.image.crop.height === 0) {
                         ths.editImage();
                     }
                 }
@@ -365,12 +370,12 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.image.altTag = value;
         this.updateValue();
     },
-    // Fired when alt-tag field is changed
+    // Fired when caption-tag field is changed
     onCaptionChange: function (field, value) {
         this.image.caption = value;
         this.updateValue();
     },
-    // Fired when alt-tag field is changed
+    // Fired when credits-tag field is changed
     onCreditsChange: function (field, value) {
         this.image.credits = value;
         this.updateValue();
@@ -384,7 +389,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 ths.image.sourceImg.width = this.width;
                 ths.image.sourceImg.height = this.height;
                 ths.updateDisplay();
-                if (ths.image.crop.width == 0 || ths.image.crop.height == 0) {
+                if (ths.image.crop.width === 0 || ths.image.crop.height === 0) {
                     ths.editImage();
                 }
             }
@@ -453,14 +458,14 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         var external = document.getElementById(this.hiddenField);
         var current = external.value || external.innerHTML || '';
 
-        if (current != '' && JSON.parse(current)) {
+        if (current !== '' && JSON.parse(current)) {
             current = JSON.stringify(JSON.parse(current), null, '  ');
         } else {
             current = '';
         }
 
         // Has value changed and is source image not empty?
-        if (external && current != json && this.image.sourceImg.src != '') {
+        if (external && current !== json && this.image.sourceImg.src !== '') {
             external.value = json;
 
             // Mark resource as dirty
@@ -469,7 +474,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Checks whether the image is larger than specified crop dimensions
     checkImageIsLargeEnough: function () {
-        if (!this.image.sourceImg || this.image == undefined) return true;
+        if (!this.image.sourceImg || this.image === undefined) return true;
 
         if (this.options.targetWidth > 0 && this.image.sourceImg.width > 0) {
             if (this.options.targetWidth > this.image.sourceImg.width) {
@@ -516,7 +521,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 options: this.options,
                 inputPanel: this,
                 displayRatio: ratio,
-                width: ((imgW * ratio) + 20),
+                width: (((imgW * ratio) + 20) <= 200) ? 200 : ((imgW * ratio) + 20),
                 height: ((imgH * ratio) + 20 + 84),
                 crop: this.image.crop,
                 padding: 10
@@ -561,7 +566,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.updateDisplay();
     },
     updatePreviewImage: function () {
-        if (!this.image.sourceImg || this.image.crop.width == 0) {
+        if (!this.image.sourceImg || this.image.crop.width === 0) {
             this.imagePreview.hide();
             return;
         }

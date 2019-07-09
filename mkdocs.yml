@@ -1,11 +1,15 @@
 site_name: Image+
-docs_dir: core/components/imageplus/docs/mkdocs
+docs_dir: docs
 site_dir: _build/site
+edit_uri: tree/master/docs
 
+repo_name: 'Jako/ImagePlus'
 repo_url: https://github.com/Jako/ImagePlus
 
+copyright: '&copy; 2015-2019 <a href="https://treehillstudio.com">Treehill Studio</a>'
+
 pages:
-- Home: 'index.md'
+- Description: 'index.md'
 - Installation: 'installation.md'
 - Getting Started: 'getting-started.md'
 - Usage: 'usage.md'
@@ -13,8 +17,45 @@ pages:
 - Contributors: 'contributors.md'
 - Donate: 'donate.md'
 
-theme: flatly
+extra:
+  matomo:
+    - //matomo.partout.info/
+    - 13
+
+theme:
+  name: null
+  custom_dir: ../../../mkdocs-material/material
+
+  # 404 page
+  static_templates:
+    - 404.html
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  feature:
+    tabs: false
+  palette:
+    primary: #40A0DF
+    accent: #0080D4
+  font:
+    text: Dosis
+    text_weights: 300,400,700
+    code: Ubuntu Mono
+    code_weights: 400,700
+    head: Ubuntu
+    head_weights: 400,400i,700,700i
+  favicon: assets/images/favicon.png
+  logo:
+    icon: "\uE80C"
 
 markdown_extensions:
-    - footnotes
-    - tables
+  - footnotes
+  - tables
+  - admonition
+  - meta
+  - toc(permalink=true)
+  - pymdownx.superfences

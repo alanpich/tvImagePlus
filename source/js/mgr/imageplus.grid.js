@@ -1,8 +1,9 @@
 /**
+/**
  * Image+ Sizes Ratio Helper
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage script
@@ -10,7 +11,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2016
+ * @copyright Thomas Jakobi 2015-2019
  */
 
 ImagePlus.grid.SizesRatio = function (config) {
@@ -33,7 +34,7 @@ ImagePlus.grid.SizesRatio = function (config) {
     });
     Ext.applyIf(config, {
         id: this.ident + '-sizes-ratio-grid',
-        fields: ['id', 'targetwidth', 'targetheight', 'targetRatio', 'rank'],
+        fields: ['id', 'name', 'targetwidth', 'targetheight', 'targetRatio', 'rank'],
         autoHeight: true,
         store: new Ext.data.JsonStore({
             fields: ['id', 'name', 'targetwidth', 'targetheight', 'targetRatio', 'rank'],
@@ -152,7 +153,7 @@ Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
     },
     removeEntry: function () {
         Ext.Msg.confirm(_('remove') || '', _('confirm_remove') || '', function (e) {
-            if (e == 'yes') {
+            if (e === 'yes') {
                 var ds = this.getStore();
                 var rows = this.getSelectionModel().getSelections();
                 if (!rows.length) {
@@ -161,7 +162,7 @@ Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
                 for (var i = 0; i < rows.length; i++) {
                     var id = rows[i].id;
                     var index = ds.findBy(function (record, id) {
-                        if (record.id == id) {
+                        if (record.id === id) {
                             return true;
                         }
                     });
@@ -212,7 +213,7 @@ Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
     onClick: function (e) {
         var t = e.getTarget();
         var elm = t.className.split(' ')[0];
-        if (elm == 'icon') {
+        if (elm === 'icon') {
             var act = t.className.split(' ')[1];
             var record = this.getSelectionModel().getSelected();
             this.menu.record = record.data;
@@ -227,8 +228,6 @@ Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
     },
     saveValue: function () {
         var value = [];
-        var store = this.getStore();
-        var range = store.getRange();
         Ext.each(this.getStore().getRange(), function (record) {
             value.push({
                 name: record.data.name,

@@ -3,7 +3,7 @@
  * Image+ cropengine
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2016 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2019 by Thomas Jakobi <thomas.jakobi@partout.info>
  *
  * @package imageplus
  * @subpackage cropengine
@@ -11,7 +11,7 @@
  * @author Alan Pich <alan.pich@gmail.com>
  * @author Thomas Jakobi <thomas.jakobi@partout.info>
  * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2016
+ * @copyright Thomas Jakobi 2015-2019
  */
 
 namespace ImagePlus\CropEngines;
@@ -69,6 +69,7 @@ class PhpThumbsUp extends AbstractCropEngine
         }
 
         // Load up the mediaSource
+        /** @var \modMediaSource $source */
         $source = $this->modx->getObject('modMediaSource', $data->sourceImg->source);
         if (!$source instanceof \modMediaSource) {
             if ($this->imageplus->getOption('debug')) {
@@ -80,7 +81,11 @@ class PhpThumbsUp extends AbstractCropEngine
         $source->initialize();
 
         // Grab absolute system path to image
-        $imgPath = $source->getBasePath() . $data->sourceImg->src;
+        $imgPath = realpath($source->getBasePath() . $data->sourceImg->src);
+
+        if ($this->imageplus->getOption('debug') && !$imgPath) {
+            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The realpath of the image ' . $source->getBasePath() . $data->sourceImg->src . 'is not valid. Please check the media source path setting of the Image+ image.', '', 'Image+');
+        }
 
         // Prepare arguments for phpthumbof snippet call
         $cropParams = array(
@@ -138,7 +143,7 @@ class PhpThumbsUp extends AbstractCropEngine
                     )
                 );
             } else {
-                $url = '';
+                $url = $source->getBaseUrl() . $data->sourceImg->src;
             }
         } else {
             $url = $data->sourceImg->src;
@@ -161,8 +166,8 @@ class PhpThumbsUp extends AbstractCropEngine
                 'crop.y' => $data->crop->y,
                 'options' => $options,
                 'crop.options' => $cropOptions,
-                'caption' => $data->caption,
-                'credits' => $data->credits
+                'caption' => isset($data->caption) ? $data->caption : '',
+                'credits' => isset($data->credits) ? $data->credits : ''
             ));
             return $this->modx->getChunk($outputChunk, $chunkParams);
         } else {
