@@ -89,10 +89,16 @@ switch ($type) {
         )), $tv) : '';
         break;
     case 'thumb':
+        $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, array(
+            'docid' => $docid,
+            'phpThumbParams' => $options,
+            'outputChunk' => '',
+        )), $tv) : '';
+        break;
     default:
         $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, array(
             'docid' => $docid,
-            'phpThumbParams' => $options
+            'phpThumbParams' => $options,
         )), $tv) : '';
         break;
 }
