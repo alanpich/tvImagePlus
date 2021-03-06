@@ -47,7 +47,7 @@ class PhpThumbOf extends AbstractCropEngine
      * @param \modTemplateVar $tv
      * @return string
      */
-    public function getImageUrl($json, $opts = array(), \modTemplateVar $tv = null)
+    public function getImageUrl($json, $opts = array(), $tv = null)
     {
         if ($json == '') {
             if ($this->imageplus->getOption('debug')) {
@@ -70,13 +70,13 @@ class PhpThumbOf extends AbstractCropEngine
 
         // Load up the mediaSource
         /** @var \modMediaSource $source */
-        $source = $this->modx->getObject('modMediaSource', $data->sourceImg->source);
+        $source = $this->modx->getObject('sources.modMediaSource', $data->sourceImg->source);
         if (!$source instanceof \modMediaSource) {
             if ($this->imageplus->getOption('debug')) {
                 $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'Invalid Media Source', '', 'Image+');
             }
             return 'Image+ Error: Invalid Media Source';
-        };
+        }
         $this->modx->setPlaceholder('docid', $this->modx->getOption('docid', $opts, 0));
         $source->initialize();
 

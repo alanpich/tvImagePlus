@@ -37,7 +37,7 @@ class ImagePlus
      * The version
      * @var string $version
      */
-    public $version = '2.8.2';
+    public $version = '2.8.3';
 
     /**
      * The class options
@@ -164,7 +164,7 @@ class ImagePlus
             $source->initialize();
             $sourceMap[$source->get('id')] = new stdClass();
             $sourceMap[$source->get('id')]->url = $source->getBaseUrl();
-        };
+        }
         return $sourceMap;
     }
 
@@ -209,7 +209,7 @@ class ImagePlus
      * @return string
      * @internal param array $params
      */
-    public function getImageURL($json, $opts = array(), modTemplateVar $tv = null)
+    public function getImageURL($json, $opts = array(), $tv = null)
     {
         // Check system settings for crop engine override
         $engineClass = $this->getOption('cropEngineClass');
@@ -239,7 +239,7 @@ class ImagePlus
      * @param modTemplateVar $tv
      * @return string
      */
-    public function prepareTvValue($json, $opts = array(), modTemplateVar $tv = null)
+    public function prepareTvValue($json, $opts = array(), $tv = null)
     {
         // Prepare value
         $decoded = json_decode($json);

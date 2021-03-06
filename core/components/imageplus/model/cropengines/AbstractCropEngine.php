@@ -60,5 +60,5 @@ abstract class AbstractCropEngine
      * @param \modTemplateVar $tv
      * @return string
      */
-    abstract public function getImageUrl($json, $opts = array(), \modTemplateVar $tv);
+    abstract public function getImageUrl($json, $opts = array(), $tv = null);
 }

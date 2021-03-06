@@ -1,3 +1,7 @@
+modx-input-props {
+  padding: 0;
+}
+
 .x-form-field-wrap .x-form-triple-triggers {
   border: 0;
   border-radius: 0 3px 3px 0;
@@ -35,6 +39,31 @@
 
 .imageplus-sectiontitle .desc-under {
   padding-top: 0;
+}
+
+.treehillstudio_about {
+  cursor: pointer;
+  height: 40px;
+  opacity: .25;
+  transition: opacity 0.5s;
+  margin-top: 20px;
+}
+
+.treehillstudio_about:hover {
+  opacity: 1;
+}
+
+.treehillstudio_about .x-panel-body {
+  text-align: right;
+}
+
+.treehillstudio_window a {
+  color: #849125;
+  text-decoration: none;
+}
+
+.treehillstudio_window a:hover {
+  color: #4d5415;
 }
 
 /* jquery.Jcrop.scss v0.9.12 */

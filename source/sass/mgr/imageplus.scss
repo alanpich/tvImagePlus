@@ -1,3 +1,9 @@
+$treehillstudio-color: #a9ba2f;
+
+modx-input-props {
+  padding: 0;
+}
+
 .x-form-field-wrap {
   .x-form-triple-triggers {
     border: 0;
@@ -38,6 +44,30 @@
   }
   .desc-under {
     padding-top: 0;
+  }
+}
+
+.treehillstudio_about {
+  cursor: pointer;
+  height: 40px;
+  opacity: .25;
+  transition: opacity 0.5s;
+  margin-top: 20px;
+  &:hover {
+    opacity: 1;
+  }
+  .x-panel-body {
+    text-align: right;
+  }
+}
+
+.treehillstudio_window {
+  a {
+    color: darken($treehillstudio-color, 10);
+    text-decoration: none;
+    &:hover {
+      color: darken($treehillstudio-color, 25);
+    }
   }
 }
 
