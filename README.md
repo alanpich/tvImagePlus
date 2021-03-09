@@ -30,4 +30,4 @@ MODX Cropping Engine i.e. [pthumb](https://modx.com/extras/package/pthumb)
 
 ## Translations
 
-Translations of the package could be done on [Crowdin](https://crowdin.com/project/imageplus)
+Translations of the package can be made on [Crowdin](https://crowdin.com/project/imageplus)
