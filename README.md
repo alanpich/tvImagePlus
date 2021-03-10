@@ -1,4 +1,4 @@
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/imageplus/localized.svg)](https://crowdin.com/project/imageplus)
+[![Weblate](https://hosted.weblate.org/widgets/modx-imageplus/-/svg-badge.svg)](https://hosted.weblate.org/engage/modx-imageplus/)
 
 # Image+
 
@@ -30,4 +30,4 @@ MODX Cropping Engine i.e. [pthumb](https://modx.com/extras/package/pthumb)
 
 ## Translations
 
-Translations of the package can be made on [Crowdin](https://crowdin.com/project/imageplus)
+Translations of the package can be made on [Weblate](https://hosted.weblate.org/engage/modx-imageplus/)
