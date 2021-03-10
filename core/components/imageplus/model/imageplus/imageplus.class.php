@@ -140,6 +140,8 @@ class ImagePlus
                 $this->options['cropEngineClass'] = '\\ImagePlus\\CropEngines\\PhpThumbOf';
             } elseif (CropEngines\PhpThumbOn::engineRequirementsMet($this->modx)) {
                 $this->options['cropEngineClass'] = '\\ImagePlus\\CropEngines\\PhpThumbOn';
+            } else {
+                $this->options['cropEngineClass'] = '';
             }
             if (!$this->options['cropEngineClass']) {
                 // Handle unmet dependencies
