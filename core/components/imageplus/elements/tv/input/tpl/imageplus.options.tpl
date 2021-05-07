@@ -1,4 +1,3 @@
-<div id="tv-input-properties-form{$tv}"></div>
 <script type="text/javascript">
     // <![CDATA[
     {literal}
@@ -17,15 +16,21 @@
     MODx.load({
         xtype: 'panel',
         layout: 'form',
-        autoHeight: true,
-        cls: 'form-with-labels',
+        applyTo: 'modx-input-props',
         border: false,
         labelAlign: 'top',
+        listeners: {
+            afterrender: function (component) {
+                Ext.getCmp('modx-panel-tv-input-properties').addListener('resize', function () {
+                    component.setWidth(Ext.getCmp('modx-input-props').getWidth()).doLayout();
+                });
+            }
+        },
         items: [{
             cls: 'x-form-item imageplus-section',
             html: '<label class="x-form-item-label" style="padding-bottom: 0">' +
-            _('imageplus.section') + '</label><label class="desc-under" style="">' +
-            _('imageplus.section_desc') + '</label>'
+                _('imageplus.section') + '</label><label class="desc-under" style="">' +
+                _('imageplus.section_desc') + '</label>'
         }, {
             xtype: 'sizes-ratio-combo',
             fieldLabel: _('imageplus.selectConfig{/literal}{if $forceconfig}Force{/if}{literal}'),
@@ -179,8 +184,8 @@
                 afterrender: function (component) {
                     component.getEl().select('img').on('click', function () {
                         var msg = '<span style="display: inline-block; text-align: center;">&copy; 2013-2015 by Alan Pich <a href="https://github.com/alanpich" target="_blank">github.com/alanpich</a><br>' +
-                                '<img src="' + ImagePlus.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + ImagePlus.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt="Treehill Studio" style="margin-top: 10px"><br>' +
-                                '&copy; 2015-2021 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '<img src="' + ImagePlus.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + ImagePlus.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt="Treehill Studio" style="margin-top: 10px"><br>' +
+                            '&copy; 2015-2021 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('imageplus') + ' ' + ImagePlus.config.version,
                             msg: msg,
@@ -192,7 +197,6 @@
                 }
             }
         }],
-        renderTo: 'tv-input-properties-form{/literal}{$tv}{literal}'
     });
     // ]]>
 </script>
