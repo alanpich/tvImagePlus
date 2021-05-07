@@ -1,4 +1,4 @@
-[![Weblate](https://hosted.weblate.org/widgets/modx-imageplus/-/svg-badge.svg)](https://hosted.weblate.org/engage/modx-imageplus/)
+[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/-/modx-imageplus-standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/modx-imageplus-standard/)
 
 # Image+
 
@@ -30,4 +30,4 @@ MODX Cropping Engine i.e. [pthumb](https://modx.com/extras/package/pthumb)
 
 ## Translations
 
-Translations of the package can be made on [Weblate](https://hosted.weblate.org/engage/modx-imageplus/)
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-imageplus-standard/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-imageplus-system-settings/)
