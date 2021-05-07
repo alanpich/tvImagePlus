@@ -6,7 +6,7 @@ $_lang['imageplus.caption'] = 'Título';
 $_lang['imageplus.credits'] = 'Créditos';
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'Las siguientes opciones pueden ser anuladas por la configuración del contexto/sistema. Lea la <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentación</a> para conocer las claves apropiadas en la configuración del contexto/sistema.';
+$_lang['imageplus.section_desc'] = 'Las siguientes opciones pueden ser anuladas por la configuración del contexto/sistema. Por favor, lea la <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentación</a> para conocer las claves apropiadas en la configuración del contexto/sistema.';
 $_lang['imageplus.selectConfig'] = 'Tamaños predefinidos de objetivos/relación de aspectos';
 $_lang['imageplus.selectConfig_desc'] = 'Seleccione una proporción predefinida de tamaño y aspecto del objetivo. Las definiciones podrían crearse en los ajustes del sistema.';
 $_lang['imageplus.selectConfigForce'] = 'Tamaños de objetivos predefinidos y relaciones de aspecto forzadas';
