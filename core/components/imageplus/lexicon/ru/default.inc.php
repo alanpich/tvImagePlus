@@ -6,7 +6,7 @@ $_lang['imageplus.caption'] = 'Заголовок';
 $_lang['imageplus.credits'] = 'Авторы';
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ параметры';
-$_lang['imageplus.section_desc'] = 'Следующие параметры могут быть переопределены контекстом/системными настройками. Пожалуйста, прочитайте <a target="_blank" href="https://jako.github.io/ImagePlus/usage/">документацию</a> для соответствующих ключей в контексте/системных настройках.';
+$_lang['imageplus.section_desc'] = 'Следующие параметры могут быть переопределены контекстом/системными настройками. Пожалуйста, прочитайте <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">документацию</a> для соответствующих ключей в контексте/системных настройках.';
 $_lang['imageplus.selectConfig'] = 'Предопределенные размеры/соотношения сторон';
 $_lang['imageplus.selectConfig_desc'] = 'Выберите заранее заданное соотношение размера/аспекта. Определения могут быть созданы в настройках системы.';
 $_lang['imageplus.selectConfigForce'] = 'Принудительные предопределенные размеры/пропорции';
@@ -27,7 +27,7 @@ $_lang['imageplus.allowCredits'] = 'Показать поле «Авторы»';
 $_lang['imageplus.allowCredits_desc'] = 'Разрешить пользователю ввести Автора для изображения.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Дополнительные параметры phpThumb';
-$_lang['imageplus.phpThumbParams_desc'] = 'Добавляет дополнительные фильтры и другие параметры для phpThumb. Документацию можно найти <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">здесь</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Добавляет дополнительные фильтры и другие параметры для phpThumb. Документацию можно найти <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">здесь</a>.';
 $_lang['imageplus.outputChunk'] = 'Чанк для вывода';
 $_lang['imageplus.outputChunk_desc'] = 'Выберите чанк для вывода TV. Оставьте пустым для обычного вывода текстом.';
 $_lang['imageplus.generateUrl'] = 'Генерировать Thumb URL';

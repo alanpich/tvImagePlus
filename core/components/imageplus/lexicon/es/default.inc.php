@@ -6,7 +6,7 @@ $_lang['imageplus.caption'] = 'Título';
 $_lang['imageplus.credits'] = 'Créditos';
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'Las siguientes opciones pueden ser anuladas por la configuración del contexto/sistema. Lea la <a target="_blank" href="https://jako.github.io/ImagePlus/usage/">documentación</a> para conocer las claves apropiadas en la configuración del contexto/sistema.';
+$_lang['imageplus.section_desc'] = 'Las siguientes opciones pueden ser anuladas por la configuración del contexto/sistema. Lea la <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentación</a> para conocer las claves apropiadas en la configuración del contexto/sistema.';
 $_lang['imageplus.selectConfig'] = 'Tamaños predefinidos de objetivos/relación de aspectos';
 $_lang['imageplus.selectConfig_desc'] = 'Seleccione una proporción predefinida de tamaño y aspecto del objetivo. Las definiciones podrían crearse en los ajustes del sistema.';
 $_lang['imageplus.selectConfigForce'] = 'Tamaños de objetivos predefinidos y relaciones de aspecto forzadas';
@@ -27,7 +27,7 @@ $_lang['imageplus.allowCredits'] = 'Mostrar campo de créditos';
 $_lang['imageplus.allowCredits_desc'] = 'Permitir al usuario introducir un crédito para la imagen.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Parámetros phpThumb adicionales';
-$_lang['imageplus.phpThumbParams_desc'] = 'Añade filtros adicionales etc a phpThumb. La documentación se puede encontrar <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">aquí</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Añade filtros adicionales etc a phpThumb. La documentación se puede encontrar <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">aquí</a>.';
 $_lang['imageplus.outputChunk'] = 'Resultado chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Selecciona un chunk para obtener un resultado del tv. Dejar en vacío para obtener un resultado de la url cruda.';
 $_lang['imageplus.generateUrl'] = 'Generar la URL del pulgar';

@@ -8,7 +8,7 @@ $_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a target="_blank" href="https://jako.github.io/ImagePlus/usage/">documentation</a> for the appropriate keys in the context/system settings.';
+$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentation</a> for the appropriate keys in the context/system settings.';
 $_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
 $_lang['imageplus.selectConfig_desc'] = 'Select a predefined target size/aspect ratio. The definitions could be created in the system settings.';
 $_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';
@@ -30,7 +30,7 @@ $_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the im
 
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Additional phpThumb Parameters';
-$_lang['imageplus.phpThumbParams_desc'] = 'Add additional filters etc for phpThumb. Documentation can be found <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">here</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Add additional filters etc for phpThumb. Documentation can be found <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">here</a>.';
 $_lang['imageplus.outputChunk'] = 'Output Chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Select a chunk for tv output. Leave blank for raw url output.';
 $_lang['imageplus.generateUrl'] = 'Generate Thumb URL';

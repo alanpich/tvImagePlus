@@ -6,7 +6,7 @@ $_lang['imageplus.caption'] = 'Titel';
 $_lang['imageplus.credits'] = 'Credits';
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ Opties';
-$_lang['imageplus.section_desc'] = 'De volgende opties kunnen met een context of system setting worden overschreven. Bekijk de <a target="_blank" href="https://jako.github.io/ImagePlus/usage/">documentatie</a> voor de juiste keys.';
+$_lang['imageplus.section_desc'] = 'De volgende opties kunnen met een context of system setting worden overschreven. Bekijk de <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentatie</a> voor de juiste keys.';
 $_lang['imageplus.selectConfig'] = 'Voorgedefinieerde doel maten/aspect ratios';
 $_lang['imageplus.selectConfig_desc'] = 'Selecteer een vooraf gedefinieerde doel grootte/hoogte-breedteverhouding. Deze kunnen aangemaakt worden in de systeeminstellingen.';
 $_lang['imageplus.selectConfigForce'] = 'Forceer vooraf gedefinieerde doel maten/hoogte-breedteverhoudingen';
@@ -27,7 +27,7 @@ $_lang['imageplus.allowCredits'] = 'Credits-veld weergeven';
 $_lang['imageplus.allowCredits_desc'] = 'Mogelijk maken dat de gebruiker een naamsvermelding (credits) voor de afbeelding kan invoeren.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Extra phpThumb opties';
-$_lang['imageplus.phpThumbParams_desc'] = 'Voeg extra phpThumb opties zoals filters toe. Documentatie is <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">hier</a> te vinden.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Voeg extra phpThumb opties zoals filters toe. Documentatie is <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">hier</a> te vinden.';
 $_lang['imageplus.outputChunk'] = 'Output Chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Selecteer een chunk voor de TV output. Laat leeg om alleen een link naar de afbeelding terug te krijgen.';
 $_lang['imageplus.generateUrl'] = 'Genereer Thumbnail URL';

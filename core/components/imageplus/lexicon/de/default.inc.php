@@ -1,9 +1,11 @@
 <?php
 $_lang['imageplus'] = 'Image+';
+
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.alt_text'] = 'Alt-Text';
 $_lang['imageplus.caption'] = 'Titel';
 $_lang['imageplus.credits'] = 'Bildnachweis';
+
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ Optionen';
 $_lang['imageplus.section_desc'] = 'Die folgenden Optionen können per System-/Kontexteinstellungen überschrieben werden. Bitte lesen Sie die <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">Dokumentation</a> für die entsprechenden Einträge in den System-/Kontexteinstellungen.';
@@ -25,6 +27,7 @@ $_lang['imageplus.allowCaption'] = 'Titel Feld anzeigen';
 $_lang['imageplus.allowCaption_desc'] = 'Ermöglicht die Eingabe eines Titels für das Bild.';
 $_lang['imageplus.allowCredits'] = 'Bildnachweis Feld anzeigen';
 $_lang['imageplus.allowCredits_desc'] = 'Ermöglicht die Eingabe eines Bildnachweises für das Bild.';
+
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Zursätzliche phpThumb Parameter';
 $_lang['imageplus.phpThumbParams_desc'] = '(Optional) Geben Sie zusätzliche phpThumb Parameter an. Mehr Informationen zu phpThumb Parametern erhalten Sie <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">hier</a>.';
@@ -33,6 +36,7 @@ $_lang['imageplus.outputChunk_desc'] = '(Optional) Wählen Sie einen Ausgabe Chu
 $_lang['imageplus.generateUrl'] = 'Thumbnail URL generieren';
 $_lang['imageplus.generateUrl_desc'] = '(Optional) Die Thumbnail URL eventuell wird nicht benötigt, wenn das Thumbnail im Ausgabe Chunk z.B. mit einem pThumb Output Filter generiert wird.';
 $_lang['imageplus.generateUrl_desc_warning'] = 'Sie müssen diese Option aktivieren, wenn Sie keinen Ausgabe Chunk benutzen oder wenn Sie den [[+url]] Platzhalter im angegebenen Ausgabe Chunk einsetzen. Andernfalls wird das Bild nicht beschnitten/skaliert und der original Bildpfad ausgegeben.';
+
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'Thumbnail URL';
 $_lang['imageplus.placeholder.alt'] = 'Alt-Text';
@@ -47,17 +51,34 @@ $_lang['imageplus.placeholder.crop.x'] = 'Crop-X-Startposition des Originalbilds
 $_lang['imageplus.placeholder.crop.y'] = 'Crop-Y-Startposition des Originalbilds';
 $_lang['imageplus.placeholder.options'] = 'phpThumb Optionen für das Thumbnail';
 $_lang['imageplus.placeholder.crop.options'] = 'phpThumb Crop Optionen für das Thumbnail';
+
 $_lang['imageplus.error.image_too_small.title'] = 'Bild ist zu klein';
 $_lang['imageplus.error.image_too_small.msg'] = 'Das gewählte Bild ist zu klein um benutzt zu werden. Bitte wählen Sie ein anderes Bild.';
 $_lang['imageplus.error.image_not_found.title'] = 'Bild nicht gefunden';
 $_lang['imageplus.error.image_not_found.msg'] = 'Das Bild wurde nicht gefunden und kann nicht zugeschnitten werden. Bitte wählen Sie ein anderes Bild.';
+
 /** System settings **/
 $_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
 $_lang['setting_imageplus.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';
+$_lang['setting_imageplus.target_width'] = $_lang['imageplus.targetwidth'];
+$_lang['setting_imageplus.target_width_desc'] = $_lang['imageplus.targetwidth_desc'];
+$_lang['setting_imageplus.target_height'] = $_lang['imageplus.targetheight'];
+$_lang['setting_imageplus.target_height_desc'] = $_lang['imageplus.targetheight_desc'];
+$_lang['setting_imageplus.target_ratio'] = $_lang['imageplus.targetRatio'];
+$_lang['setting_imageplus.target_ratio_desc'] = $_lang['imageplus.targetRatio_desc'];
+$_lang['setting_imageplus.thumbnail_width'] = $_lang['imageplus.thumbnailWidth'];
+$_lang['setting_imageplus.thumbnail_width_desc'] = $_lang['imageplus.thumbnailWidth_desc'];
+$_lang['setting_imageplus.allow_alt_tag'] = $_lang['imageplus.allowAltTag'];
+$_lang['setting_imageplus.allow_alt_tag_desc'] = $_lang['imageplus.allowAltTag_desc'];
+$_lang['setting_imageplus.allow_caption'] = $_lang['imageplus.allowCaption'];
+$_lang['setting_imageplus.allow_caption_desc'] = $_lang['imageplus.allowCaption_desc'];
+$_lang['setting_imageplus.allow_credits'] = $_lang['imageplus.allowCredits'];
+$_lang['setting_imageplus.allow_credits_desc'] = $_lang['imageplus.allowCredits_desc'];
 $_lang['setting_imageplus.select_config'] = 'Vordefinierte Ausgabegrößen/Ausgabe-Seitenverhältnisse';
 $_lang['setting_imageplus.select_config_desc'] = 'Erstellen Sie vordefinierte Ausgabegrößen/Ausgabe-Seitenverhältnisse, welche in den Template Variable Optionen wählbar sind.';
 $_lang['setting_imageplus.force_config'] = 'Erzwungene vordefinierte Ausgabegrößen/Ausgabe-Seitenverältnisse';
 $_lang['setting_imageplus.force_config_desc'] = 'Erzwingen Sie die Verwendung von vordefinierten Ausgabegrößen/Ausgabe-Seitenverhältnissen.';
+
 /** System settings grid */
 $_lang['setting_imageplus.configname'] = 'Name';

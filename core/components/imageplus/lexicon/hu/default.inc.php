@@ -1,63 +1,84 @@
 <?php
 $_lang['imageplus'] = 'Image+';
+
 $_lang['imageplus.editor_title'] = 'Image+ Szerkesztő';
 $_lang['imageplus.alt_text'] = 'Alt text';
-$_lang['imageplus.caption'] = 'Felirat';
-$_lang['imageplus.credits'] = 'Hitelek';
+$_lang['imageplus.caption'] = 'Caption';
+$_lang['imageplus.credits'] = 'Credits';
+
 /** Input options render **/
 $_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'A következő beállítások felülírhatók a kontextus/rendszer beállításaival. Kérjük, olvassa el a <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">dokumentációt</a> a megfelelő kulcsokért a kontextus/rendszerbeállításokban.';
-$_lang['imageplus.selectConfig'] = 'Előre meghatározott célméretek/aspektusarányok';
-$_lang['imageplus.selectConfig_desc'] = 'Válasszon ki egy előre meghatározott célméret/szögarányt. A definíciókat a rendszerbeállításokban lehet létrehozni.';
-$_lang['imageplus.selectConfigForce'] = 'Kényszerített előre meghatározott célméretek/aspektusarányok';
-$_lang['imageplus.selectConfigForce_desc'] = 'Kényszerített választás egy előre meghatározott termésméret/szögarány. A definíciókat a rendszerbeállításokban lehet létrehozni.';
+$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentation</a> for the appropriate keys in the context/system settings.';
+$_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
+$_lang['imageplus.selectConfig_desc'] = 'Select a predefined target size/aspect ratio. The definitions could be created in the system settings.';
+$_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';
+$_lang['imageplus.selectConfigForce_desc'] = 'Forced select a predefined crop size/aspect ratio. The definitions could be created in the system settings.';
 $_lang['imageplus.targetwidth'] = 'Új szélesség';
-$_lang['imageplus.targetwidth_desc'] = '(Választható, egész szám) A kimeneti kép célszélessége. A feltöltött képnek ezzel a minimális szélességgel kell rendelkeznie.';
+$_lang['imageplus.targetwidth_desc'] = 'A készített kép szélessége';
 $_lang['imageplus.targetheight'] = 'Új magasság';
-$_lang['imageplus.targetheight_desc'] = '(Választható, egész szám) A kimeneti kép célmagassága. A feltöltött képnek ezzel a minimális magassággal kell rendelkeznie.';
-$_lang['imageplus.targetRatio'] = 'A cél képarány';
-$_lang['imageplus.targetRatio_desc'] = '(Választható, Float) A kimeneti kép céloldali képaránya float értékként. Ha a célmagasság és a célszélesség be van állítva, ez az érték figyelmen kívül marad.';
-$_lang['imageplus.thumbnailWidth'] = 'Miniatűr szélesség';
-$_lang['imageplus.thumbnailWidth_desc'] = '(Választható, egész szám) A kép miniatűr szélessége a sablon változó panelen.';
+$_lang['imageplus.targetheight_desc'] = 'A készített kép magassága';
+$_lang['imageplus.targetRatio'] = 'Target Aspect Ratio';
+$_lang['imageplus.targetRatio_desc'] = '(Optional, Float) The target aspect ratio for the output image as float value. If the target height and the targed width are set, this value is ignored.';
+$_lang['imageplus.thumbnailWidth'] = 'Thumbnail Width';
+$_lang['imageplus.thumbnailWidth_desc'] = '(Optional, Integer) The thumbnail width of the image in the template variable panel.';
 $_lang['imageplus.allowAltTag'] = 'Alt tag megengedése';
-$_lang['imageplus.allowAltTag_desc'] = 'Lehetővé teszi a felhasználó számára a kép címének/alt-tagjének megadását.';
-$_lang['imageplus.allowCaption'] = 'Felirat mező megjelenítése';
-$_lang['imageplus.allowCaption_desc'] = 'Lehetővé teszi a felhasználó számára a kép feliratának megadását.';
-$_lang['imageplus.allowCredits'] = 'Mutasd a kreditek mezőt';
-$_lang['imageplus.allowCredits_desc'] = 'Lehetővé teszi a felhasználó számára, hogy megadja a kép kreditpontját.';
+$_lang['imageplus.allowAltTag_desc'] = 'Megengedni a felhasználónak, hogy beállíthassa a title/alt-tag tulajdonságait a képnek';
+$_lang['imageplus.allowCaption'] = 'Show Caption Field';
+$_lang['imageplus.allowCaption_desc'] = 'Allow user to enter a caption for the image.';
+$_lang['imageplus.allowCredits'] = 'Show Credits Field';
+$_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
+
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'További phpThumb paraméterek';
-$_lang['imageplus.phpThumbParams_desc'] = 'További szűrők stb. hozzáadása a phpThumbhoz. A dokumentáció megtalálható <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">itt</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'További filterek stb hozzáadása a phpThumb-hoz. A dokumentáció megtalálható <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">itt</a>.';
 $_lang['imageplus.outputChunk'] = 'Kimeneti chunk';
-$_lang['imageplus.outputChunk_desc'] = 'Válasszon ki egy darabot a tv-kimenethez. Hagyja üresen a nyers url kimenethez.';
-$_lang['imageplus.generateUrl'] = 'Hüvelykujj URL generálása';
-$_lang['imageplus.generateUrl_desc'] = '(Választható) A thumb url-re talán nincs szükség, ha a kimeneti csomagban, azaz egy pthumb kimeneti szűrővel generálod a miniatűr képet.';
-$_lang['imageplus.generateUrl_desc_warning'] = 'Ezt az opciót akkor kell aktiválnod, ha nem adsz meg kimeneti egységet a kimeneti beállítások között, vagy ha a [[+url]] helyőrzőt használod a megadott kimeneti egységben. Ellenkező esetben a képet nem vágja le/méretezi, és az eredeti kép elérési útvonalát adja vissza.';
+$_lang['imageplus.outputChunk_desc'] = 'Válassz ki egy chunk-ot amibe a kimeneteli TV-ket használhatod majd. Hagyd üresen a nyers output-ért';
+$_lang['imageplus.generateUrl'] = 'Generate Thumb URL';
+$_lang['imageplus.generateUrl_desc'] = '(Optional) The thumb url is maybe not necessary, if you generate the thumbnail in output chunk i.e. by a pthumb output filter.';
+$_lang['imageplus.generateUrl_desc_warning'] = 'You have to activate this option, when you don\'t specify an output chunk in the output options or when you use the [[+url]] placeholder in the specified output chunk. Otherwise the image is not cropped/resized and the original image path is returned.';
+
 /** Placeholder descriptions */
-$_lang['imageplus.placeholder.url'] = 'A miniatűr kép URL címe';
+$_lang['imageplus.placeholder.url'] = 'URL of the thumbnail image';
 $_lang['imageplus.placeholder.alt'] = 'Alt text';
-$_lang['imageplus.placeholder.width'] = 'A miniatűr kép szélessége (0 esetén figyelmen kívül hagyva)';
-$_lang['imageplus.placeholder.height'] = 'A miniatűr kép magassága (0 esetén figyelmen kívül hagyva)';
-$_lang['imageplus.placeholder.source.src'] = 'A forráskép elérési útvonala';
-$_lang['imageplus.placeholder.source.width'] = 'A forráskép szélessége';
-$_lang['imageplus.placeholder.source.height'] = 'A forráskép magassága';
-$_lang['imageplus.placeholder.crop.width'] = 'A forráskép vágási szélessége';
-$_lang['imageplus.placeholder.crop.height'] = 'A forráskép vágási magassága';
-$_lang['imageplus.placeholder.crop.x'] = 'A forráskép x pozíciójának kivágása';
-$_lang['imageplus.placeholder.crop.y'] = 'A forráskép y pozíciójának vágása';
-$_lang['imageplus.placeholder.options'] = 'phpThumb opció string a miniatűr kép létrehozásához';
-$_lang['imageplus.placeholder.crop.options'] = 'phpThumb crop opció string a miniatűr kép létrehozásához';
-$_lang['imageplus.error.image_too_small.title'] = 'Túl kicsi kép';
-$_lang['imageplus.error.image_too_small.msg'] = 'A kiválasztott kép túl kicsi ahhoz, hogy itt felhasználható legyen. Kérjük, válasszon másik képet.';
-$_lang['imageplus.error.image_not_found.title'] = 'Kép nem található';
-$_lang['imageplus.error.image_not_found.msg'] = 'A képet nem találtuk, és nem lehet levágni. Kérjük, válasszon másik képet.';
+$_lang['imageplus.placeholder.width'] = 'Width of the thumbnail image (ignored when 0)';
+$_lang['imageplus.placeholder.height'] = 'Height of the thumbnail image (ignored when 0)';
+$_lang['imageplus.placeholder.source.src'] = 'Path to the source image';
+$_lang['imageplus.placeholder.source.width'] = 'Width of the source image';
+$_lang['imageplus.placeholder.source.height'] = 'Height of the source image';
+$_lang['imageplus.placeholder.crop.width'] = 'Crop width of the source image';
+$_lang['imageplus.placeholder.crop.height'] = 'Crop height of the source image';
+$_lang['imageplus.placeholder.crop.x'] = 'Crop x position of the source image';
+$_lang['imageplus.placeholder.crop.y'] = 'Crop y position of the source image';
+$_lang['imageplus.placeholder.options'] = 'phpThumb option string to generate the thumbnail image';
+$_lang['imageplus.placeholder.crop.options'] = 'phpThumb crop option string to generate the thumbnail image';
+
+$_lang['imageplus.error.image_too_small.title'] = 'Image too small';
+$_lang['imageplus.error.image_too_small.msg'] = 'The selected image is too small to be used here. Please select a different image.';
+$_lang['imageplus.error.image_not_found.title'] = 'Image not found';
+$_lang['imageplus.error.image_not_found.msg'] = 'The image was not found and can\'t be cropped. Please select a different image.';
+
 /** System settings **/
 $_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Naplózza a hibakeresési információkat a MODX hibanaplójában.';
-$_lang['setting_imageplus.select_config'] = 'Előre meghatározott termésméretek/szögarányok';
-$_lang['setting_imageplus.select_config_desc'] = 'Létrehozhat előre definiált vágási méret/szögarányokat, amelyek a sablonváltozó beállításaiban választhatók.';
-$_lang['setting_imageplus.force_config'] = 'Előre meghatározott méret/arányok kikényszerítése';
-$_lang['setting_imageplus.force_config_desc'] = 'Előre meghatározott méret/szögarányok használatának kikényszerítése.';
+$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
+$_lang['setting_imageplus.target_width'] = $_lang['imageplus.targetwidth'];
+$_lang['setting_imageplus.target_width_desc'] = $_lang['imageplus.targetwidth_desc'];
+$_lang['setting_imageplus.target_height'] = $_lang['imageplus.targetheight'];
+$_lang['setting_imageplus.target_height_desc'] = $_lang['imageplus.targetheight_desc'];
+$_lang['setting_imageplus.target_ratio'] = $_lang['imageplus.targetRatio'];
+$_lang['setting_imageplus.target_ratio_desc'] = $_lang['imageplus.targetRatio_desc'];
+$_lang['setting_imageplus.thumbnail_width'] = $_lang['imageplus.thumbnailWidth'];
+$_lang['setting_imageplus.thumbnail_width_desc'] = $_lang['imageplus.thumbnailWidth_desc'];
+$_lang['setting_imageplus.allow_alt_tag'] = $_lang['imageplus.allowAltTag'];
+$_lang['setting_imageplus.allow_alt_tag_desc'] = $_lang['imageplus.allowAltTag_desc'];
+$_lang['setting_imageplus.allow_caption'] = $_lang['imageplus.allowCaption'];
+$_lang['setting_imageplus.allow_caption_desc'] = $_lang['imageplus.allowCaption_desc'];
+$_lang['setting_imageplus.allow_credits'] = $_lang['imageplus.allowCredits'];
+$_lang['setting_imageplus.allow_credits_desc'] = $_lang['imageplus.allowCredits_desc'];
+$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
+$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
+$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
+$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+
 /** System settings grid */
 $_lang['setting_imageplus.configname'] = 'Name';

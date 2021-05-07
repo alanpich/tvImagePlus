@@ -6,7 +6,7 @@ $_lang['imageplus.caption'] = 'Didascalia';
 $_lang['imageplus.credits'] = 'Crediti';
 /** Input options render **/
 $_lang['imageplus.section'] = 'Opzioni Image+';
-$_lang['imageplus.section_desc'] = 'Le seguenti opzioni possono essere sovrascritte dalle impostazioni di sistema/contesto. Si prega di leggere la <a target="_blank" href="https://jako.github.io/ImagePlus/usage/">documentazione</a> per conoscere le chiavi da utilizzare nelle impostazioni di sistema/contesto.';
+$_lang['imageplus.section_desc'] = 'Le seguenti opzioni possono essere sovrascritte dalle impostazioni di sistema/contesto. Si prega di leggere la <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentazione</a> per conoscere le chiavi da utilizzare nelle impostazioni di sistema/contesto.';
 $_lang['imageplus.selectConfig'] = 'Destinazione con dimensioni/proporzioni predefinite';
 $_lang['imageplus.selectConfig_desc'] = 'Seleziona un\'impostazione di dimensioni/proporzioni predefinita. Le definizioni possono essere create nelle impostazioni del sistema.';
 $_lang['imageplus.selectConfigForce'] = 'Forza destinazione con dimensioni/proporzioni predefinite';
@@ -27,7 +27,7 @@ $_lang['imageplus.allowCredits'] = 'Mostra il campo Credits';
 $_lang['imageplus.allowCredits_desc'] = 'Consente all\'utente di inserire un credito per l\'immagine.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Parametri aggiuntivi di phpThumb';
-$_lang['imageplus.phpThumbParams_desc'] = 'Aggiungi filtri aggiuntivi ecc. per phpThumb. La documentazione può essere trovata <a target="_blank" href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt">qui</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Aggiungi filtri aggiuntivi ecc. per phpThumb. La documentazione può essere trovata <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">qui</a>.';
 $_lang['imageplus.outputChunk'] = 'Chunk Output';
 $_lang['imageplus.outputChunk_desc'] = 'Seleziona un chunk per l\'output della variabile tv. Lascia vuoto per avere un semplice url come output.';
 $_lang['imageplus.generateUrl'] = 'Generare l\'URL dell\'anteprima';
