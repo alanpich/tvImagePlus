@@ -7,13 +7,13 @@
  */
 $_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
-$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
-$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+$_lang['setting_imageplus.debug_desc'] = 'Registrar información de depuración en el registro de errores de MODX.';
+$_lang['setting_imageplus.select_config'] = 'Tamaños de cultivo/relación de aspecto predefinidos';
+$_lang['setting_imageplus.select_config_desc'] = 'Cree relaciones predefinidas de tamaño y aspecto de los cultivos que se pueden seleccionar en las opciones variables de la plantilla.';
+$_lang['setting_imageplus.force_config'] = 'Forzar tamaños de cultivo/relaciones de aspecto predefinidas';
+$_lang['setting_imageplus.force_config_desc'] = 'Forzar el uso de proporciones predefinidas de tamaño y aspecto de los cultivos.';
 /** System settings grid */
 $_lang['setting_imageplus.configname'] = 'Name';
-$_lang['setting_imageplus.target_width'] = 'Target Width';
-$_lang['setting_imageplus.target_height'] = 'Target Height';
-$_lang['setting_imageplus.target_ratio'] = 'Target Aspect Ratio';
+$_lang['setting_imageplus.target_width'] = 'Ancho de la salida';
+$_lang['setting_imageplus.target_height'] = 'Altura de salida';
+$_lang['setting_imageplus.target_ratio'] = 'Relación de aspecto de la salida';
