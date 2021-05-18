@@ -7,13 +7,13 @@
  */
 $_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
-$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
-$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+$_lang['setting_imageplus.debug_desc'] = 'Naplózza a hibakeresési információkat a MODX hibanaplójában.';
+$_lang['setting_imageplus.select_config'] = 'Előre meghatározott termésméretek/szögarányok';
+$_lang['setting_imageplus.select_config_desc'] = 'Létrehozhat előre definiált vágási méret/szögarányokat, amelyek a sablonváltozó beállításaiban választhatók.';
+$_lang['setting_imageplus.force_config'] = 'Előre meghatározott méret/arányok kikényszerítése';
+$_lang['setting_imageplus.force_config_desc'] = 'Előre meghatározott méret/szögarányok használatának kikényszerítése.';
 /** System settings grid */
 $_lang['setting_imageplus.configname'] = 'Name';
-$_lang['setting_imageplus.target_width'] = 'Target Width';
-$_lang['setting_imageplus.target_height'] = 'Target Height';
-$_lang['setting_imageplus.target_ratio'] = 'Target Aspect Ratio';
+$_lang['setting_imageplus.target_width'] = 'Kimeneti szélesség';
+$_lang['setting_imageplus.target_height'] = 'Kimeneti magasság';
+$_lang['setting_imageplus.target_ratio'] = 'Kimeneti képarány';
