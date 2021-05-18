@@ -198,7 +198,7 @@ class ImagePlus
             $this->modx->controller->addJavascript($jsUrl . 'imageplus.min.js?v=v' . $this->version);
         }
         $this->modx->controller->addHtml('<script type="text/javascript">' .
-            'ImagePlus.config = ' . json_encode($this->options, JSON_PRETTY_PRINT) . ';' .
+            'ImagePlus.config = ' . json_encode($this->options, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';' .
             '</script>');
     }
 

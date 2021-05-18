@@ -42,7 +42,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
      *
      * @param string $value
      * @param array $params
-     * @return void|mixed
+     * @return void
      */
     public function process($value, array $params = array())
     {

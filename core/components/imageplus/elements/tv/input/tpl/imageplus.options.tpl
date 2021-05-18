@@ -1,6 +1,5 @@
 <script type="text/javascript">
-    // <![CDATA[
-    {literal}
+    // <![CDATA[{literal}
     var params = {
         {/literal}{foreach from=$params key=k item=v name='p'}
         '{$k}': '{$v|escape:"javascript"}'{if NOT $smarty.foreach.p.last}, {/if}
@@ -34,13 +33,15 @@
         }, {
             xtype: 'sizes-ratio-combo',
             fieldLabel: _('imageplus.selectConfig{/literal}{if $forceconfig}Force{/if}{literal}'),
+            description: MODx.expandHelp ? '' : _('imageplus.selectConfig{/literal}{if $forceconfig}Force{/if}{literal}_desc'),
             name: 'inopt_selectConfig',
             id: 'inopt_selectConfig{/literal}{$tv}{literal}',
             tvId: '{/literal}{$tv}{literal}',
             labelAlign: 'left',
             data: {/literal}{$selectconfig}{literal},
             hidden: {/literal}{$hide}{literal},
-            anchor: '100%'
+            anchor: '100%',
+            listeners: oc
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'inopt_selectConfig{/literal}{$tv}{literal}',
@@ -55,6 +56,7 @@
                 items: [{
                     xtype: 'textfield',
                     fieldLabel: _('imageplus.targetwidth'),
+                    description: MODx.expandHelp ? '' : _('imageplus.targetwidth_desc'),
                     name: 'inopt_targetWidth',
                     id: 'inopt_targetWidth{/literal}{$tv}{literal}',
                     value: params['targetWidth'] || '',
@@ -69,6 +71,7 @@
                 }, {
                     xtype: 'textfield',
                     fieldLabel: _('imageplus.targetheight'),
+                    description: MODx.expandHelp ? '' : _('imageplus.targetheight_desc'),
                     name: 'inopt_targetHeight',
                     id: 'inopt_targetHeight{/literal}{$tv}{literal}',
                     value: params['targetHeight'] || '',
@@ -88,6 +91,7 @@
                 items: [{
                     xtype: 'textfield',
                     fieldLabel: _('imageplus.targetRatio'),
+                    description: MODx.expandHelp ? '' : _('imageplus.targetRatio_desc'),
                     name: 'inopt_targetRatio',
                     id: 'inopt_targetRatio{/literal}{$tv}{literal}',
                     value: params['targetRatio'] || '',
@@ -102,6 +106,7 @@
                 }, {
                     xtype: 'textfield',
                     fieldLabel: _('imageplus.thumbnailWidth'),
+                    description: MODx.expandHelp ? '' : _('imageplus.thumbnailWidth_desc'),
                     name: 'inopt_thumbnailWidth',
                     id: 'inopt_thumbnailWidth{/literal}{$tv}{literal}',
                     value: params['thumbnailWidth'] || '',
@@ -123,6 +128,7 @@
                 items: [{
                     xtype: 'combo-boolean',
                     fieldLabel: _('imageplus.allowAltTag'),
+                    description: MODx.expandHelp ? '' : _('imageplus.allowAltTag_desc'),
                     name: 'inopt_allowAltTag',
                     hiddenName: 'inopt_allowAltTag',
                     id: 'inopt_allowAltTag{/literal}{$tv}{literal}',
@@ -143,6 +149,7 @@
                 items: [{
                     xtype: 'combo-boolean',
                     fieldLabel: _('imageplus.allowCaption'),
+                    description: MODx.expandHelp ? '' : _('imageplus.allowCaption_desc'),
                     name: 'inopt_allowCaption',
                     hiddenName: 'inopt_allowCaption',
                     id: 'inopt_allowCaption{/literal}{$tv}{literal}',
@@ -163,6 +170,7 @@
                 items: [{
                     xtype: 'combo-boolean',
                     fieldLabel: _('imageplus.allowCredits'),
+                    description: MODx.expandHelp ? '' : _('imageplus.allowCredits_desc'),
                     name: 'inopt_allowCredits',
                     hiddenName: 'inopt_allowCredits',
                     id: 'inopt_allowCredits{/literal}{$tv}{literal}',
