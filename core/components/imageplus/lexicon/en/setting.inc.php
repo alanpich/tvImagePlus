@@ -2,7 +2,7 @@
 /**
  * Default Lexicon Entries for Image+
  *
- * @package timerangetv
+ * @package imageplus
  * @subpackage lexicon
  */
 
