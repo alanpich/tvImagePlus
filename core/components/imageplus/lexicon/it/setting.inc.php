@@ -7,13 +7,13 @@
  */
 $_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
-$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
-$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+$_lang['setting_imageplus.debug_desc'] = 'Scrivi le informazioni di debug nell\'error log di MODX.';
+$_lang['setting_imageplus.select_config'] = 'Ritaglio con dimensioni/proporzioni predefinite';
+$_lang['setting_imageplus.select_config_desc'] = 'Crea ritaglio con dimensioni/proporzioni predefinite che sono selezionabili nelle opzioni delle variabili di template.';
+$_lang['setting_imageplus.force_config'] = 'Forza ritaglio con dimensioni/proporzioni predefinite';
+$_lang['setting_imageplus.force_config_desc'] = 'Forza l\'uso di ritagli con dimensioni/proporzioni predefinite.';
 /** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';
-$_lang['setting_imageplus.target_width'] = 'Target Width';
-$_lang['setting_imageplus.target_height'] = 'Target Height';
-$_lang['setting_imageplus.target_ratio'] = 'Target Aspect Ratio';
+$_lang['setting_imageplus.configname'] = 'Nome';
+$_lang['setting_imageplus.target_width'] = 'Larghezza di uscita';
+$_lang['setting_imageplus.target_height'] = 'Altezza di uscita';
+$_lang['setting_imageplus.target_ratio'] = 'Rapporto d\'aspetto in uscita';
