@@ -6,14 +6,14 @@
  * @subpackage lexicon
  */
 $_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
-$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
-$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+$_lang['setting_imageplus.debug'] = 'Foutoplossing';
+$_lang['setting_imageplus.debug_desc'] = 'Log debug/foutopsporings informatie in het foutenlogboek van MODX.';
+$_lang['setting_imageplus.select_config'] = 'Vooraf gedefinieerde uitknip maten/hoogte-breedteverhoudingen';
+$_lang['setting_imageplus.select_config_desc'] = 'Maak vooraf gedefinieerde uitknip grootte/hoogte-breedteverhoudingen die selecteerbaar zijn in de template variabele opties.';
+$_lang['setting_imageplus.force_config'] = 'Forceer vooraf gedefinieerde uitknip maten/hoogte-breedteverhoudingen';
+$_lang['setting_imageplus.force_config_desc'] = 'Forceer het gebruik van vooraf gedefinieerde uitknip grootte/hoogte-breedteverhoudingen.';
 /** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';
-$_lang['setting_imageplus.target_width'] = 'Target Width';
-$_lang['setting_imageplus.target_height'] = 'Target Height';
-$_lang['setting_imageplus.target_ratio'] = 'Target Aspect Ratio';
+$_lang['setting_imageplus.configname'] = 'Naam';
+$_lang['setting_imageplus.target_width'] = 'Uitgangsbreedte';
+$_lang['setting_imageplus.target_height'] = 'Uitgangshoogte';
+$_lang['setting_imageplus.target_ratio'] = 'Beeldverhouding uitgang';
