@@ -1,6 +1,11 @@
 <?php
+/**
+ * Properties Lexicon Entries for Image+
+ *
+ * @package timerangetv
+ * @subpackage lexicon
+ */
 
-/** Snippet properties */
 $_lang['imageplus.imageplus.docid'] = 'Resource where the Image+ TV value is received from.';
 $_lang['imageplus.imageplus.options'] = 'Extended phpThumb options for the image.';
 $_lang['imageplus.imageplus.tpl'] = 'Template chunk for the snippet output.';
