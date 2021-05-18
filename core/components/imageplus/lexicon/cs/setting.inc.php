@@ -7,13 +7,13 @@
  */
 $_lang['area_imageplus'] = 'Image+';
 $_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Log debug informations in MODX error log.';
-$_lang['setting_imageplus.select_config'] = 'Predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.select_config_desc'] = 'Create predefined crop size/aspect ratios that are selectable in the template variable options.';
-$_lang['setting_imageplus.force_config'] = 'Force predefined crop sizes/aspect ratios';
-$_lang['setting_imageplus.force_config_desc'] = 'Force the usage of predefined crop size/aspect ratios.';
+$_lang['setting_imageplus.debug_desc'] = 'Zaznamenávání ladicích informací do protokolu chyb MODX.';
+$_lang['setting_imageplus.select_config'] = 'Předdefinované velikosti plodin/poměry stran';
+$_lang['setting_imageplus.select_config_desc'] = 'Vytvořit předdefinované poměry velikosti ořezu/plochy, které lze vybrat v proměnných možnostech šablony.';
+$_lang['setting_imageplus.force_config'] = 'Vynucení předdefinovaných velikostí ořezů/poměrů stran';
+$_lang['setting_imageplus.force_config_desc'] = 'Vynucení použití předdefinovaných poměrů velikosti a perspektivy ořezu.';
 /** System settings grid */
 $_lang['setting_imageplus.configname'] = 'Name';
-$_lang['setting_imageplus.target_width'] = 'Target Width';
-$_lang['setting_imageplus.target_height'] = 'Target Height';
-$_lang['setting_imageplus.target_ratio'] = 'Target Aspect Ratio';
+$_lang['setting_imageplus.target_width'] = 'Šířka výstupu';
+$_lang['setting_imageplus.target_height'] = 'Úroveň výdajů';
+$_lang['setting_imageplus.target_ratio'] = 'Výstupní poměr stran';
