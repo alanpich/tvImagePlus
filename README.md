@@ -28,6 +28,10 @@ For more information please read the [documentation](https://jako.github.io/Imag
 
 MODX Cropping Engine i.e. [pthumb](https://modx.com/extras/package/pthumb)
 
+## License
+
+The project is licensed under the [GPLv2 license](https://github.com/Jako/ImagePlus/blob/master/core/components/imageplus/docs/license.md).
+
 ## Translations
 
 Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-imageplus-standard/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-imageplus-system-settings/)
