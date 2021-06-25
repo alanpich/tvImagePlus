@@ -109,6 +109,7 @@ ImagePlus.grid.SizesRatio = function (config) {
                 fn: this.buttonColumnRenderer,
                 scope: this
             },
+            menuDisabled: true,
             width: 30,
             align: 'right'
         }, {
