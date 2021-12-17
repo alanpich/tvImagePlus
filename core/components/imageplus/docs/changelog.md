@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.4] - 2021-03-06
+
+### Fixed
+
+- Fix for PHP 8 warnings
+
 ## [2.8.3] - 2021-03-06
 
 ### Changed
@@ -13,13 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.8.2] - 2021-01-19
 
-### Changed
+### Fixed
 
 - Fix the ImagePlus.MIGX_Renderer to show normal images too
 
 ## [2.8.1] - 2020-01-04
 
-### Changed
+### Fixed
 
 - Prevent an error, when $modx->resource is not set
 
@@ -28,6 +34,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Updated jQuery
+
+### Fixed
+
 - Fixing a jQuery issue with ContentBlocks and other extras that use jQuery inside [#60]
 - Fixing cannot read property 'destroy' of undefined issue
 - Fixing Undefined property issue [#71]
@@ -41,8 +50,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bugfix for using a wrong plugin event name in special circumstances
 - Improved check for the allowBlank TV option
+
+### Fixed
+
+- Bugfix for using a wrong plugin event name in special circumstances
 
 ### Added
 
@@ -51,25 +63,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.6.3] - 2017-06-01
 
-### Changed
+### Fixed
 
 - Bugfix a full server path in the url placeholder
 
 ## [2.6.2] - 2017-02-21
 
-### Changed
+### Fixed
 
 - Bugfix for disabled option 'Generate Thumbnail URL' and an empty url placeholder
 
 ## [2.6.1] - 2017-02-03
 
-### Changed
+### Fixed
 
 - Bugfix for an empty select_config system setting
 
 ## [2.6.0] - 2017-02-01
 
-### Changed
+### Fixed
 
 - Fixed a missing realpath issue
 
@@ -84,7 +96,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.5.0] - 2016-12-17
 
-### Changed
+### Fixed
 
 - Fix showing a full server path, when the image is not found [#41]
 
@@ -94,7 +106,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.4.5] - 2016-07-29
 
-### Changed
+### Fixed
 
 - Solved an installation issue on Windows machines
 
@@ -114,7 +126,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.4.3] - 2016-03-03
 
-### Changed
+### Fixed
 
 - Fixed not found image in combined/minified css file
 
@@ -135,10 +147,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Change the image by typing the filename
 
-### Added
+### Fixed
 
 - Fixing recoverable errors
-- Translated error messages
+
+### Added
+
+Translated error messages
 
 ## [2.4.0] - 2016-01-15
 
@@ -186,13 +201,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Bugfix for fireResourceFormChange issue
 - Updated Jcrop plugin and jQuery
-- Bugfix for a Firefox display issue
 - Updated Czech translation (@bartholomej)
 - Updated Dutch translation (@Mark-H)
 - Updated French translation (@AmaZili)
 - Updated Russian translation (@Alroniks, serimarda)
+
+### Fixed
+
+- Bugfix for fireResourceFormChange issue
+- Bugfix for a Firefox display issue
 
 ### Added
 
