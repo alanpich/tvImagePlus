@@ -135,7 +135,7 @@ could disable the generation of the internal thumb URL.
 
 ## Snippet
 
-The Snippet gives you a second option to render the TV value. With the template
+The snippet gives you a second option to render the TV value. With the template
 variable output, you are restricted to one output chunk per template variable,
 with the snippet you could be more flexiple use different output chunks. The
 following properties could be set in the snippet call:
