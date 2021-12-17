@@ -154,7 +154,7 @@ class PhpThumbsUp extends AbstractCropEngine
         if ($outputChunk) {
             $chunkParams = array_merge($opts, array(
                 'url' => $url,
-                'alt' => $data->altTag,
+                'alt' => isset($data->altTag) ? $data->altTag : '',
                 'width' => $data->targetWidth,
                 'height' => $data->targetHeight,
                 'source.src' => $imgPath,

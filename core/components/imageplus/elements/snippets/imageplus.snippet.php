@@ -84,8 +84,8 @@ switch ($type) {
             'docid' => $docid,
             'phpThumbParams' => $options,
             'outputChunk' => $tpl,
-            'caption' => ($data && $data->caption) ? $data->caption : '',
-            'credits' => ($data && $data->credits) ? $data->credits : ''
+            'caption' => ($data && isset($data->caption)) ? $data->caption : '',
+            'credits' => ($data && isset($data->credits)) ? $data->credits : ''
         )), $tv) : '';
         break;
     case 'thumb':
