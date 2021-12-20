@@ -1,4 +1,4 @@
-modx-input-props {
+.modx-input-props {
   padding: 0;
 }
 
@@ -13,18 +13,15 @@ modx-input-props {
   top: 0;
   width: 90px;
 }
-
 .x-form-field-wrap .x-form-triple-triggers .x-form-trigger {
   display: inline-block;
   position: relative;
   top: auto;
   vertical-align: top;
 }
-
 .x-form-field-wrap .x-form-triple-triggers .x-form-trigger.x-form-clear-trigger:before {
   content: "\f00d";
 }
-
 .x-form-field-wrap .x-form-triple-triggers .x-form-trigger.x-form-crop-trigger:before {
   content: "\f125";
 }
@@ -36,7 +33,6 @@ modx-input-props {
 .imageplus-sectiontitle .x-form-item-label {
   padding-top: 0;
 }
-
 .imageplus-sectiontitle .desc-under {
   padding-top: 0;
 }
@@ -44,26 +40,23 @@ modx-input-props {
 .treehillstudio_about {
   cursor: pointer;
   height: 40px;
-  opacity: .25;
+  opacity: 0.25;
   transition: opacity 0.5s;
   margin-top: 20px;
 }
-
 .treehillstudio_about:hover {
   opacity: 1;
 }
-
 .treehillstudio_about .x-panel-body {
   text-align: right;
 }
 
 .treehillstudio_window a {
-  color: #849125;
+  color: #b2bf28;
   text-decoration: none;
 }
-
 .treehillstudio_window a:hover {
-  color: #4d5415;
+  color: #77801a;
 }
 
 /* jquery.Jcrop.scss v0.9.12 */
@@ -112,56 +105,48 @@ modx-input-props {
   height: 7px;
   width: 7px;
 }
-
 .jcrop-handle.ord-n {
   left: 50%;
   margin-left: -4px;
   margin-top: -4px;
   top: 0;
 }
-
 .jcrop-handle.ord-s {
   bottom: 0;
   left: 50%;
   margin-bottom: -4px;
   margin-left: -4px;
 }
-
 .jcrop-handle.ord-e {
   margin-right: -4px;
   margin-top: -4px;
   right: 0;
   top: 50%;
 }
-
 .jcrop-handle.ord-w {
   left: 0;
   margin-left: -4px;
   margin-top: -4px;
   top: 50%;
 }
-
 .jcrop-handle.ord-nw {
   left: 0;
   margin-left: -4px;
   margin-top: -4px;
   top: 0;
 }
-
 .jcrop-handle.ord-ne {
   margin-right: -4px;
   margin-top: -4px;
   right: 0;
   top: 0;
 }
-
 .jcrop-handle.ord-se {
   bottom: 0;
   margin-bottom: -4px;
   margin-right: -4px;
   right: 0;
 }
-
 .jcrop-handle.ord-sw {
   bottom: 0;
   left: 0;
@@ -173,35 +158,29 @@ modx-input-props {
   height: 7px;
   width: 100%;
 }
-
 .jcrop-dragbar.ord-e, .jcrop-dragbar.ord-w {
   height: 100%;
   width: 7px;
 }
-
 .jcrop-dragbar.ord-n {
   margin-top: -4px;
 }
-
 .jcrop-dragbar.ord-s {
   bottom: 0;
   margin-bottom: -4px;
 }
-
 .jcrop-dragbar.ord-e {
   margin-right: -4px;
   right: 0;
 }
-
 .jcrop-dragbar.ord-w {
   margin-left: -4px;
 }
 
 .jcrop-light .jcrop-hline, .jcrop-light .jcrop-vline {
   background: #ffffff;
-  opacity: .7 !important;
+  opacity: 0.7 !important;
 }
-
 .jcrop-light .jcrop-handle {
   background-color: #000000;
   border-color: #ffffff;
@@ -210,9 +189,8 @@ modx-input-props {
 
 .jcrop-dark .jcrop-hline, .jcrop-dark .jcrop-dark .jcrop-vline {
   background: #000000;
-  opacity: .7 !important;
+  opacity: 0.7 !important;
 }
-
 .jcrop-dark .jcrop-handle {
   background-color: #ffffff;
   border-color: #000000;
