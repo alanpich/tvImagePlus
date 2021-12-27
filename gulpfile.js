@@ -23,10 +23,6 @@ const banner = '/*!\n' +
     ' * Build date: ' + format("yyyy-MM-dd", new Date()) + '\n' +
     ' */';
 
-const DEST_MGR = './assets/',
-    CORE = './core/components/armbruster/elements/templates/',
-    FAVICON_DATA_FILE = 'faviconData.json';
-
 gulp.task('scripts-mgr', function () {
     return gulp.src([
         'source/js/mgr/imageplus.js',
@@ -131,4 +127,4 @@ gulp.task('watch', function () {
 });
 
 // Default Task
-gulp.task('default', gulp.series('scripts-mgr', 'sass-mgr', 'images-mgr', 'bump'));
+gulp.task('default', gulp.series('bump', 'scripts-mgr', 'sass-mgr', 'images-mgr'));
