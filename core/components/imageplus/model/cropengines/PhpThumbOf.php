@@ -120,9 +120,9 @@ class PhpThumbOf extends AbstractCropEngine
             foreach ($optParams as $key => $val) {
                 if (empty($val)) {
                     unset($optParams[$key]);
-                };
+                }
             }
-        };
+        }
         $optParams = ($optParams) ? array_merge($cropParams, $optParams) : array_merge($params, $optParams);
         $options = http_build_query($optParams);
         $options = rawurldecode(preg_replace('/%5B[0-9]+%5D/simU', '%5B%5D', $options));

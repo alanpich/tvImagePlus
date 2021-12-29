@@ -55,4 +55,4 @@ switch ($eventName) {
     case 'OnDocFormRender':
         $imageplus->includeScriptAssets();
         break;
-};
+}
