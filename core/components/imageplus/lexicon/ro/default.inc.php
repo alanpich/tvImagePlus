@@ -5,8 +5,8 @@ $_lang['imageplus.alt_text'] = 'Alt text';
 $_lang['imageplus.caption'] = 'Legenda';
 $_lang['imageplus.credits'] = 'Credite';
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'Următoarele opțiuni pot fi înlocuite de setările de context/sistem. Vă rugăm să citiți documentația <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentația</a> pentru tastele corespunzătoare din setările de context/sistem.';
+$_lang['imageplus.input_section'] = 'Image+ Options';
+$_lang['imageplus.input_section_desc'] = 'Următoarele opțiuni pot fi înlocuite de setările de context/sistem. Vă rugăm să citiți documentația <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank">documentația</a> pentru tastele corespunzătoare din setările de context/sistem.';
 $_lang['imageplus.selectConfig'] = 'Dimensiuni țintă predefinite/raporturi de aspect';
 $_lang['imageplus.selectConfig_desc'] = 'Selectați un raport predefinit de dimensiune/aspect țintă. Definițiile ar putea fi create în setările sistemului.';
 $_lang['imageplus.selectConfigForce'] = 'Dimensiuni țintă predefinite forțate/raporturi de aspect';

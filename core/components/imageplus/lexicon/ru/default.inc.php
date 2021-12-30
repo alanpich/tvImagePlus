@@ -5,8 +5,8 @@ $_lang['imageplus.alt_text'] = 'Альтернатиный текст (alt)';
 $_lang['imageplus.caption'] = 'Заголовок';
 $_lang['imageplus.credits'] = 'Авторы';
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ параметры';
-$_lang['imageplus.section_desc'] = 'Следующие параметры могут быть переопределены контекстом/системными настройками. Пожалуйста, прочитайте <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">документацию</a> для соответствующих ключей в контексте/системных настройках.';
+$_lang['imageplus.input_section'] = 'Image+ параметры';
+$_lang['imageplus.input_section_desc'] = 'Следующие параметры могут быть переопределены контекстом/системными настройками. Пожалуйста, прочитайте <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank">документацию</a> для соответствующих ключей в контексте/системных настройках.';
 $_lang['imageplus.selectConfig'] = 'Предопределенные размеры/соотношения сторон';
 $_lang['imageplus.selectConfig_desc'] = 'Выберите заранее заданное соотношение размера/аспекта. Определения могут быть созданы в настройках системы.';
 $_lang['imageplus.selectConfigForce'] = 'Принудительные предопределенные размеры/пропорции';

@@ -5,8 +5,8 @@ $_lang['imageplus.alt_text'] = 'Alt-Text';
 $_lang['imageplus.caption'] = 'Titel';
 $_lang['imageplus.credits'] = 'Bildnachweis';
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Optionen';
-$_lang['imageplus.section_desc'] = 'Die folgenden Optionen können per System-/Kontexteinstellungen überschrieben werden. Bitte lesen Sie die <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">Dokumentation</a> für die entsprechenden Einträge in den System-/Kontexteinstellungen.';
+$_lang['imageplus.input_section'] = 'Image+ Optionen';
+$_lang['imageplus.input_section_desc'] = 'Die folgenden Optionen können per System-/Kontexteinstellungen überschrieben werden. Bitte lesen Sie die <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank">Dokumentation</a> für die entsprechenden Einträge in den System-/Kontexteinstellungen.';
 $_lang['imageplus.selectConfig'] = 'Vordefinierte Ausgabegrößen/Ausgabe-Seitenverältnisse';
 $_lang['imageplus.selectConfig_desc'] = 'Wählen Sie eine vordefinierte Ausgabegröße/ein Seitenverhältnis. Die Vorgaben können in den Systemeinstellungen eingestellt werden.';
 $_lang['imageplus.selectConfigForce'] = 'Erzwungene vordefinierte Ausgabegrößen/Ausgabe-Seitenverältnisse';

@@ -5,8 +5,8 @@ $_lang['imageplus.alt_text'] = 'Alt-tekst';
 $_lang['imageplus.caption'] = 'Billedtekst';
 $_lang['imageplus.credits'] = 'Kreditter';
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'Følgende indstillinger kan tilsidesættes af kontekst-/systemindstillinger. Læs venligst <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">dokumentationen</a> for at finde de relevante taster i kontekst-/systemindstillingerne.';
+$_lang['imageplus.input_section'] = 'Image+ Options';
+$_lang['imageplus.input_section_desc'] = 'Følgende indstillinger kan tilsidesættes af kontekst-/systemindstillinger. Læs venligst <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank">dokumentationen</a> for at finde de relevante taster i kontekst-/systemindstillingerne.';
 $_lang['imageplus.selectConfig'] = 'Foruddefinerede målstørrelser/aspektforhold';
 $_lang['imageplus.selectConfig_desc'] = 'Vælg et foruddefineret målstørrelse/aspektforhold. Definitionerne kan oprettes i systemindstillingerne.';
 $_lang['imageplus.selectConfigForce'] = 'Forcerede foruddefinerede målstørrelser/aspektforhold';

@@ -13,8 +13,8 @@ $_lang['imageplus.caption'] = 'Caption';
 $_lang['imageplus.credits'] = 'Credits';
 
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentation</a> for the appropriate keys in the context/system settings.';
+$_lang['imageplus.input_section'] = 'Image+ Options';
+$_lang['imageplus.input_section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank">documentation</a> for the appropriate keys in the context/system settings.';
 $_lang['imageplus.selectConfig'] = 'Predefined target sizes/aspect ratios';
 $_lang['imageplus.selectConfig_desc'] = 'Select a predefined target size/aspect ratio. The definitions could be created in the system settings.';
 $_lang['imageplus.selectConfigForce'] = 'Forced predefined target sizes/aspect ratios';

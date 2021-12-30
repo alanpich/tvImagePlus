@@ -5,8 +5,8 @@ $_lang['imageplus.alt_text'] = 'Alt text';
 $_lang['imageplus.caption'] = 'Felirat';
 $_lang['imageplus.credits'] = 'Credits';
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'A következő beállítások felülírhatók a kontextus/rendszer beállításaival. Kérjük, olvassa el a <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">dokumentációt</a> a megfelelő kulcsokért a kontextus/rendszerbeállításokban.';
+$_lang['imageplus.input_section'] = 'Image+ Options';
+$_lang['imageplus.input_section_desc'] = 'A következő beállítások felülírhatók a kontextus/rendszer beállításaival. Kérjük, olvassa el a <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank">dokumentációt</a> a megfelelő kulcsokért a kontextus/rendszerbeállításokban.';
 $_lang['imageplus.selectConfig'] = 'Előre meghatározott célméretek/aspektusarányok';
 $_lang['imageplus.selectConfig_desc'] = 'Válasszon ki egy előre meghatározott célméret/szögarányt. A definíciókat a rendszerbeállításokban lehet létrehozni.';
 $_lang['imageplus.selectConfigForce'] = 'Kényszerített előre meghatározott célméretek/aspektusarányok';

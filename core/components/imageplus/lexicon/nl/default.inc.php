@@ -5,8 +5,8 @@ $_lang['imageplus.alt_text'] = 'Alternatieve tekst';
 $_lang['imageplus.caption'] = 'Titel';
 $_lang['imageplus.credits'] = 'Credits';
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Opties';
-$_lang['imageplus.section_desc'] = 'De volgende opties kunnen met een context of system setting worden overschreven. Bekijk de <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">documentatie</a> voor de juiste keys.';
+$_lang['imageplus.input_section'] = 'Image+ Opties';
+$_lang['imageplus.input_section_desc'] = 'De volgende opties kunnen met een context of system setting worden overschreven. Bekijk de <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank">documentatie</a> voor de juiste keys.';
 $_lang['imageplus.selectConfig'] = 'Voorgedefinieerde doel maten/aspect ratios';
 $_lang['imageplus.selectConfig_desc'] = 'Selecteer een vooraf gedefinieerde doel grootte/hoogte-breedteverhouding. Deze kunnen aangemaakt worden in de systeeminstellingen.';
 $_lang['imageplus.selectConfigForce'] = 'Forceer vooraf gedefinieerde doel maten/hoogte-breedteverhoudingen';

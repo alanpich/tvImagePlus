@@ -5,8 +5,8 @@ $_lang['imageplus.alt_text'] = 'Texte de l\'attribut Alt';
 $_lang['imageplus.caption'] = 'Légende';
 $_lang['imageplus.credits'] = 'Crédits';
 /** Input options render **/
-$_lang['imageplus.section'] = 'Options d\'Image+';
-$_lang['imageplus.section_desc'] = 'Les options suivantes pourraient être remplacées par des paramètres de contexte/système. Veuillez lire la <a href="https://jako.github.io/ImagePlus/usage/" target="_blank"> documentation </a> pour connaître les clés appropriées dans les paramètres du contexte/système.';
+$_lang['imageplus.input_section'] = 'Options d\'Image+';
+$_lang['imageplus.input_section_desc'] = 'Les options suivantes pourraient être remplacées par des paramètres de contexte/système. Veuillez lire la <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank"> documentation </a> pour connaître les clés appropriées dans les paramètres du contexte/système.';
 $_lang['imageplus.selectConfig'] = 'Tailles cibles/ratios d\'aspect prédéfinis';
 $_lang['imageplus.selectConfig_desc'] = 'Sélectionnez un rapport taille/aspect cible prédéfini. Les définitions peuvent être créées dans les paramètres du système.';
 $_lang['imageplus.selectConfigForce'] = 'Obligation de fixer des tailles cibles/ratios d\'aspect prédéfinis';

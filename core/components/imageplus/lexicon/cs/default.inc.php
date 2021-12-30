@@ -5,8 +5,8 @@ $_lang['imageplus.alt_text'] = 'Alt text';
 $_lang['imageplus.caption'] = 'Titulek';
 $_lang['imageplus.credits'] = 'Kredity';
 /** Input options render **/
-$_lang['imageplus.section'] = 'Image+ Options';
-$_lang['imageplus.section_desc'] = 'Následující možnosti mohou být přepsány kontextovým/systémovým nastavením. Příslušné klíče v kontextovém/systémovém nastavení naleznete v <a href="https://jako.github.io/ImagePlus/usage/" target="_blank">dokumentaci</a>.';
+$_lang['imageplus.input_section'] = 'Image+ Options';
+$_lang['imageplus.input_section_desc'] = 'Následující možnosti mohou být přepsány kontextovým/systémovým nastavením. Příslušné klíče v kontextovém/systémovém nastavení naleznete v <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank">dokumentaci</a>.';
 $_lang['imageplus.selectConfig'] = 'Předdefinované velikosti cílů/poměry stran';
 $_lang['imageplus.selectConfig_desc'] = 'Zvolte předem definovaný cílový poměr velikostí a stran. Definice lze vytvořit v nastavení systému.';
 $_lang['imageplus.selectConfigForce'] = 'Vynucené předdefinované velikosti cílů/poměr stran';
