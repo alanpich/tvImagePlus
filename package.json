@@ -4,7 +4,7 @@
   "author": "Thomas Jakobi <thomas.jakobi@partout.info>",
   "private": true,
   "devDependencies": {
-    "autoprefixer": "^10.4.0",
+    "autoprefixer": "^10.4.1",
     "cssnano": "^5.0.14",
     "date-format": "^3.0.0",
     "gulp": "^4.0.2",
@@ -20,7 +20,7 @@
     "gulp-uglify": "^3.0.2",
     "gulp-watch": "^5.0.1",
     "postcss": "^8.4.5",
-    "sass": "^1.45.0",
+    "sass": "^1.45.1",
     "uglify-js": "^3.14.5"
   },
   "dependencies": {

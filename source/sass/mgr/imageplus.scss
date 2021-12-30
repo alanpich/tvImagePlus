@@ -1,7 +1,9 @@
 $treehillstudio-color: #cbd842;
 
-.modx-input-props {
-  padding: 0;
+#modx-input-props, #modx-widget-props {
+  &.imageplus-props {
+    padding-top: 0;
+  }
 }
 
 .x-form-field-wrap {

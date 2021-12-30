@@ -1,5 +1,5 @@
-.modx-input-props {
-  padding: 0;
+#modx-input-props.imageplus-props, #modx-widget-props.imageplus-props {
+  padding-top: 0;
 }
 
 .x-form-field-wrap .x-form-triple-triggers {

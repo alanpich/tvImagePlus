@@ -48,7 +48,7 @@ ImagePlus.grid.SizesRatio = function (config) {
             dataIndex: 'id',
             hidden: true
         }, {
-            header: _('setting_imageplus.configname'),
+            header: _('imageplus.gridsetting_configname'),
             dataIndex: 'name',
             editable: true,
             editor: {
@@ -63,7 +63,7 @@ ImagePlus.grid.SizesRatio = function (config) {
             },
             width: 100
         }, {
-            header: _('setting_imageplus.target_width'),
+            header: _('imageplus.gridsetting_target_width'),
             dataIndex: 'targetwidth',
             editable: true,
             editor: {
@@ -77,7 +77,7 @@ ImagePlus.grid.SizesRatio = function (config) {
             },
             width: 100
         }, {
-            header: _('setting_imageplus.target_height'),
+            header: _('imageplus.gridsetting_target_height'),
             dataIndex: 'targetheight',
             editable: true,
             editor: {
@@ -91,7 +91,7 @@ ImagePlus.grid.SizesRatio = function (config) {
             },
             width: 100
         }, {
-            header: _('setting_imageplus.target_ratio'),
+            header: _('imageplus.gridsetting_target_ratio'),
             dataIndex: 'targetRatio',
             editable: true,
             editor: {

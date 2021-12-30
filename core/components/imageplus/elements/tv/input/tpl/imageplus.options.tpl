@@ -16,6 +16,7 @@
         xtype: 'panel',
         layout: 'form',
         applyTo: 'modx-input-props',
+        cls: 'imageplus-props',
         border: false,
         labelAlign: 'top',
         listeners: {
@@ -23,17 +24,20 @@
                 Ext.getCmp('modx-panel-tv-input-properties').addListener('resize', function () {
                     component.setWidth(Ext.getCmp('modx-input-props').getWidth()).doLayout();
                 });
-            }
+                Ext.getCmp('modx-tv-tabs').addListener('tabchange', function () {
+                    component.setWidth(Ext.getCmp('modx-input-props').getWidth()).doLayout();
+                });
+            },
         },
         items: [{
             cls: 'x-form-item imageplus-section',
             html: '<label class="x-form-item-label" style="padding-bottom: 0">' +
-                _('imageplus.section') + '</label><label class="desc-under" style="">' +
-                _('imageplus.section_desc') + '</label>'
+                _('imageplus.input_section') + '</label><label class="desc-under" style="">' +
+                _('imageplus.input_section_desc') + '</label>'
         }, {
             xtype: 'sizes-ratio-combo',
-            fieldLabel: _('imageplus.selectConfig{/literal}{if $forceconfig}Force{/if}{literal}'),
-            description: MODx.expandHelp ? '' : _('imageplus.selectConfig{/literal}{if $forceconfig}Force{/if}{literal}_desc'),
+            fieldLabel: {/literal}{if $forceconfig}_('imageplus.selectConfigForce'){else}_('imageplus.selectConfig'){/if}{literal},
+            description: MODx.expandHelp ? '' : {/literal}{if $forceconfig}_('imageplus.selectConfigForce_desc'){else}_('imageplus.selectConfig_desc'){/if}{literal},
             name: 'inopt_selectConfig',
             id: 'inopt_selectConfig{/literal}{$tv}{literal}',
             tvId: '{/literal}{$tv}{literal}',
@@ -45,7 +49,7 @@
         }, {
             xtype: MODx.expandHelp ? 'label' : 'hidden',
             forId: 'inopt_selectConfig{/literal}{$tv}{literal}',
-            html: _('imageplus.selectConfig{/literal}{if $forceconfig}Force{/if}{literal}_desc'),
+            html: {/literal}{if $forceconfig}_('imageplus.selectConfigForce_desc'){else}_('imageplus.selectConfig_desc'){/if}{literal},
             cls: 'desc-under'
         }, {
             layout: 'column',

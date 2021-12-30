@@ -119,11 +119,11 @@ gulp.task('bump', gulp.series('bump-copyright', 'bump-version', 'bump-options', 
 
 gulp.task('watch', function () {
     // Watch .js files
-    gulp.watch(['./source/js/**/*.js'], gulp.series('scripts-mgr'));
+    gulp.watch(['source/js/**/*.js'], gulp.series('scripts-mgr'));
     // Watch .scss files
-    gulp.watch(['./source/scss/**/*.scss'], gulp.series('sass-mgr'));
+    gulp.watch(['source/sass/**/*.scss'], gulp.series('sass-mgr'));
     // Watch .scss files
-    gulp.watch(['./source/img/**/*.(png|jpg|gif|svg)'], gulp.series('images-mgr'));
+    gulp.watch(['source/img/**/*.(png|jpg|gif|svg)'], gulp.series('images-mgr'));
 });
 
 // Default Task
