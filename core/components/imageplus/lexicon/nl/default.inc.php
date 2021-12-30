@@ -1,4 +1,10 @@
 <?php
+/**
+ * Default Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.alt_text'] = 'Alternatieve tekst';
@@ -51,13 +57,3 @@ $_lang['imageplus.error.image_too_small.title'] = 'Afbeelding is te klein';
 $_lang['imageplus.error.image_too_small.msg'] = 'De geselecteerde afbeelding is te klein om hier gebruikt te worden. Selecteer een andere afbeelding.';
 $_lang['imageplus.error.image_not_found.title'] = 'Afbeelding niet gevonden';
 $_lang['imageplus.error.image_not_found.msg'] = 'De afbeelding kan niet worden bijgesneden omdat hij niet gevonden kon worden. Selecteer een andere afbeelding.';
-/** System settings **/
-$_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Foutoplossing';
-$_lang['setting_imageplus.debug_desc'] = 'Log debug/foutopsporings informatie in het foutenlogboek van MODX.';
-$_lang['setting_imageplus.select_config'] = 'Vooraf gedefinieerde uitknip maten/hoogte-breedteverhoudingen';
-$_lang['setting_imageplus.select_config_desc'] = 'Maak vooraf gedefinieerde uitknip grootte/hoogte-breedteverhoudingen die selecteerbaar zijn in de template variabele opties.';
-$_lang['setting_imageplus.force_config'] = 'Forceer vooraf gedefinieerde uitknip maten/hoogte-breedteverhoudingen';
-$_lang['setting_imageplus.force_config_desc'] = 'Forceer het gebruik van vooraf gedefinieerde uitknip grootte/hoogte-breedteverhoudingen.';
-/** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Naam';

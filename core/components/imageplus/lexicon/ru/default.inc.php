@@ -1,4 +1,10 @@
 <?php
+/**
+ * Default Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Редактор Image+';
 $_lang['imageplus.alt_text'] = 'Альтернатиный текст (alt)';
@@ -51,13 +57,3 @@ $_lang['imageplus.error.image_too_small.title'] = 'Изображение сли
 $_lang['imageplus.error.image_too_small.msg'] = 'Выбранное изображение слишком маленькое для использования здесь. Выберите другое изображение, пожалуйста.';
 $_lang['imageplus.error.image_not_found.title'] = 'Изображение не найдено';
 $_lang['imageplus.error.image_not_found.msg'] = 'Изображение не найдено и не может быть обрезано. Выберите другое изображение, пожалуйста.';
-/** System settings **/
-$_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Отладка';
-$_lang['setting_imageplus.debug_desc'] = 'Записывать отладочную информацию в лог ошибок MODX.';
-$_lang['setting_imageplus.select_config'] = 'Предопределенные размеры/соотношения сторон';
-$_lang['setting_imageplus.select_config_desc'] = 'Создайте предопределенные соотношения размера/пропорций, которые выбираются в настройках переменной шаблона.';
-$_lang['setting_imageplus.force_config'] = 'Предопределенные размеры/соотношения сторон';
-$_lang['setting_imageplus.force_config_desc'] = 'Предопределенные размеры/соотношения сторон.';
-/** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Имя';

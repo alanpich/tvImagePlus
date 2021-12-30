@@ -1,4 +1,10 @@
 <?php
+/**
+ * Default Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ editor';
 $_lang['imageplus.alt_text'] = 'Alt-tekst';
@@ -51,13 +57,3 @@ $_lang['imageplus.error.image_too_small.title'] = 'Billedet er for lille';
 $_lang['imageplus.error.image_too_small.msg'] = 'Det valgte billede er for småt til at blive brugt her. Vælg venligst et andet billede.';
 $_lang['imageplus.error.image_not_found.title'] = 'Billedet blev ikke fundet';
 $_lang['imageplus.error.image_not_found.msg'] = 'Billedet blev ikke fundet og kan dermed ikke blive beskåret. Vælg venligst et andet billede.';
-/** System settings **/
-$_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Log fejlfindingsoplysninger i MODX-fejlloggen.';
-$_lang['setting_imageplus.select_config'] = 'Foruddefinerede afgrødestørrelser/aspektforhold';
-$_lang['setting_imageplus.select_config_desc'] = 'Opret foruddefinerede størrelses-/aspektforhold, der kan vælges i skabelonens variable indstillinger.';
-$_lang['setting_imageplus.force_config'] = 'Tvinge foruddefinerede beskæringsstørrelser/aspektforhold';
-$_lang['setting_imageplus.force_config_desc'] = 'Tvinge brugen af foruddefinerede størrelses-/aspektforhold for afgrøder.';
-/** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';

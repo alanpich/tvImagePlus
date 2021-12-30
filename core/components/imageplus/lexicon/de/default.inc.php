@@ -1,4 +1,10 @@
 <?php
+/**
+ * Default Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.alt_text'] = 'Alt-Text';
@@ -51,13 +57,3 @@ $_lang['imageplus.error.image_too_small.title'] = 'Bild ist zu klein';
 $_lang['imageplus.error.image_too_small.msg'] = 'Das gewählte Bild ist zu klein um benutzt zu werden. Bitte wählen Sie ein anderes Bild.';
 $_lang['imageplus.error.image_not_found.title'] = 'Bild nicht gefunden';
 $_lang['imageplus.error.image_not_found.msg'] = 'Das Bild wurde nicht gefunden und kann nicht zugeschnitten werden. Bitte wählen Sie ein anderes Bild.';
-/** System settings **/
-$_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Debug-Informationen im MODX Fehlerprotokoll ausgeben.';
-$_lang['setting_imageplus.select_config'] = 'Vordefinierte Ausgabegrößen/Ausgabe-Seitenverhältnisse';
-$_lang['setting_imageplus.select_config_desc'] = 'Erstellen Sie vordefinierte Ausgabegrößen/Ausgabe-Seitenverhältnisse, welche in den Template Variable Optionen wählbar sind.';
-$_lang['setting_imageplus.force_config'] = 'Erzwungene vordefinierte Ausgabegrößen/Ausgabe-Seitenverältnisse';
-$_lang['setting_imageplus.force_config_desc'] = 'Erzwingen Sie die Verwendung von vordefinierten Ausgabegrößen/Ausgabe-Seitenverhältnissen.';
-/** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';

@@ -1,5 +1,10 @@
 <?php
-/** Snippet properties */
+/**
+ * Properties Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus.imageplus.docid'] = 'Dokument, odkud je přebírána hodnota Image+ TV.';
 $_lang['imageplus.imageplus.options'] = 'Rozšířené možnosti nastavení pro phpThumb.';
 $_lang['imageplus.imageplus.tpl'] = 'Chunk pro výstup snippetu.';

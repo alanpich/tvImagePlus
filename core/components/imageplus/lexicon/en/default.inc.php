@@ -5,13 +5,11 @@
  * @package imageplus
  * @subpackage lexicon
  */
-
 $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.alt_text'] = 'Alt text';
 $_lang['imageplus.caption'] = 'Caption';
 $_lang['imageplus.credits'] = 'Credits';
-
 /** Input options render **/
 $_lang['imageplus.input_section'] = 'Image+ Options';
 $_lang['imageplus.input_section_desc'] = 'The following options could be overridden by context/system settings. Please read the <a href="https://jako.github.io/ImagePlus/usage/#contextsystem-settings" target="_blank">documentation</a> for the appropriate keys in the context/system settings.';
@@ -33,7 +31,6 @@ $_lang['imageplus.allowCaption'] = 'Show Caption Field';
 $_lang['imageplus.allowCaption_desc'] = 'Allow user to enter a caption for the image.';
 $_lang['imageplus.allowCredits'] = 'Show Credits Field';
 $_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
-
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Additional phpThumb Parameters';
 $_lang['imageplus.phpThumbParams_desc'] = 'Add additional filters etc for phpThumb. Documentation can be found <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">here</a>.';
@@ -42,7 +39,6 @@ $_lang['imageplus.outputChunk_desc'] = 'Select a chunk for tv output. Leave blan
 $_lang['imageplus.generateUrl'] = 'Generate Thumb URL';
 $_lang['imageplus.generateUrl_desc'] = '(Optional) The thumb url is maybe not necessary, if you generate the thumbnail in output chunk i.e. by a pthumb output filter.';
 $_lang['imageplus.generateUrl_desc_warning'] = 'You have to activate this option, when you don\'t specify an output chunk in the output options or when you use the [[+url]] placeholder in the specified output chunk. Otherwise the image is not cropped/resized and the original image path is returned.';
-
 /** Placeholder descriptions */
 $_lang['imageplus.placeholder.url'] = 'URL of the thumbnail image';
 $_lang['imageplus.placeholder.alt'] = 'Alt text';

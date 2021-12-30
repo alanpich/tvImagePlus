@@ -1,4 +1,10 @@
 <?php
+/**
+ * Default Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ Szerkesztő';
 $_lang['imageplus.alt_text'] = 'Alt text';
@@ -51,13 +57,3 @@ $_lang['imageplus.error.image_too_small.title'] = 'Túl kicsi kép';
 $_lang['imageplus.error.image_too_small.msg'] = 'A kiválasztott kép túl kicsi ahhoz, hogy itt felhasználható legyen. Kérjük, válasszon másik képet.';
 $_lang['imageplus.error.image_not_found.title'] = 'Kép nem található';
 $_lang['imageplus.error.image_not_found.msg'] = 'A képet nem találtuk, és nem lehet levágni. Kérjük, válasszon másik képet.';
-/** System settings **/
-$_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Naplózza a hibakeresési információkat a MODX hibanaplójában.';
-$_lang['setting_imageplus.select_config'] = 'Előre meghatározott termésméretek/szögarányok';
-$_lang['setting_imageplus.select_config_desc'] = 'Létrehozhat előre definiált vágási méret/szögarányokat, amelyek a sablonváltozó beállításaiban választhatók.';
-$_lang['setting_imageplus.force_config'] = 'Előre meghatározott méret/arányok kikényszerítése';
-$_lang['setting_imageplus.force_config_desc'] = 'Előre meghatározott méret/szögarányok használatának kikényszerítése.';
-/** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';

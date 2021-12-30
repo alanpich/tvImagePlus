@@ -1,4 +1,10 @@
 <?php
+/**
+ * Default Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.alt_text'] = 'Alt text';
@@ -51,13 +57,3 @@ $_lang['imageplus.error.image_too_small.title'] = 'Imagine prea mică';
 $_lang['imageplus.error.image_too_small.msg'] = 'Imaginea selectată este prea mică pentru a fi utilizată aici. Vă rugăm să selectați o altă imagine.';
 $_lang['imageplus.error.image_not_found.title'] = 'Imaginea nu a fost găsită';
 $_lang['imageplus.error.image_not_found.msg'] = 'Imaginea nu a fost găsită și nu poate fi decupată. Vă rugăm să selectați o altă imagine.';
-/** System settings **/
-$_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Înregistrați informațiile de depanare în jurnalul de erori MODX.';
-$_lang['setting_imageplus.select_config'] = 'Dimensiuni predefinite ale culturilor/raporturi de aspect';
-$_lang['setting_imageplus.select_config_desc'] = 'Creați rapoarte predefinite de mărime/raport de aspect al culturii care pot fi selectate în opțiunile variabile ale șablonului.';
-$_lang['setting_imageplus.force_config'] = 'Forțați dimensiunile predefinite ale culturilor/raporturile de aspect';
-$_lang['setting_imageplus.force_config_desc'] = 'Forțați utilizarea unor rapoarte predefinite de mărime/aspectul culturii.';
-/** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';

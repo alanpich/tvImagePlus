@@ -1,4 +1,10 @@
 <?php
+/**
+ * Default Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Image+ Editor';
 $_lang['imageplus.alt_text'] = 'Alt text';
@@ -51,13 +57,3 @@ $_lang['imageplus.error.image_too_small.title'] = 'Obrázek je příliš malý';
 $_lang['imageplus.error.image_too_small.msg'] = 'Vybraný obrázek je moc malý pro použití. Prosím vyberte jiný obrázek.';
 $_lang['imageplus.error.image_not_found.title'] = 'Obrázek nebyl nalezen';
 $_lang['imageplus.error.image_not_found.msg'] = 'Obrázek nebyl nalezen a nelze ho oříznout. Prosím vyberte jiný obrázek.';
-/** System settings **/
-$_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Zaznamenávání ladicích informací do protokolu chyb MODX.';
-$_lang['setting_imageplus.select_config'] = 'Předdefinované velikosti plodin/poměry stran';
-$_lang['setting_imageplus.select_config_desc'] = 'Vytvořit předdefinované poměry velikosti ořezu/plochy, které lze vybrat v proměnných možnostech šablony.';
-$_lang['setting_imageplus.force_config'] = 'Vynucení předdefinovaných velikostí ořezů/poměrů stran';
-$_lang['setting_imageplus.force_config_desc'] = 'Vynucení použití předdefinovaných poměrů velikosti a perspektivy ořezu.';
-/** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Name';

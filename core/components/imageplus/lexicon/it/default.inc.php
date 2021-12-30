@@ -1,4 +1,10 @@
 <?php
+/**
+ * Default Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus'] = 'Image+';
 $_lang['imageplus.editor_title'] = 'Editor Image+';
 $_lang['imageplus.alt_text'] = 'Testo per l\'attributo Alt';
@@ -51,13 +57,3 @@ $_lang['imageplus.error.image_too_small.title'] = 'Immagine troppo piccola';
 $_lang['imageplus.error.image_too_small.msg'] = 'L\'immagine selezionata è troppo piccola per essere usata qui. Si prega di selezionare un\'altra immagine.';
 $_lang['imageplus.error.image_not_found.title'] = 'L\'immagine non è stata trovata';
 $_lang['imageplus.error.image_not_found.msg'] = 'L\'immagine non è stata trovata e perciò non può essere tagliata. Si prega di selezionare un\'altra immagine.';
-/** System settings **/
-$_lang['area_imageplus'] = 'Image+';
-$_lang['setting_imageplus.debug'] = 'Debug';
-$_lang['setting_imageplus.debug_desc'] = 'Scrivi le informazioni di debug nell\'error log di MODX.';
-$_lang['setting_imageplus.select_config'] = 'Ritaglio con dimensioni/proporzioni predefinite';
-$_lang['setting_imageplus.select_config_desc'] = 'Crea ritaglio con dimensioni/proporzioni predefinite che sono selezionabili nelle opzioni delle variabili di template.';
-$_lang['setting_imageplus.force_config'] = 'Forza ritaglio con dimensioni/proporzioni predefinite';
-$_lang['setting_imageplus.force_config_desc'] = 'Forza l\'uso di ritagli con dimensioni/proporzioni predefinite.';
-/** System settings grid */
-$_lang['setting_imageplus.configname'] = 'Nome';

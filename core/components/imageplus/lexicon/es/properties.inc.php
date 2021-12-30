@@ -1,5 +1,10 @@
 <?php
-/** Snippet properties */
+/**
+ * Properties Lexicon Entries for Image+
+ *
+ * @package imageplus
+ * @subpackage lexicon
+ */
 $_lang['imageplus.imageplus.docid'] = 'Recurso desde el que se recibe el valor de Image+ TV.';
 $_lang['imageplus.imageplus.options'] = 'Opciones extendidas de phpThumb para la imagen.';
 $_lang['imageplus.imageplus.tpl'] = 'Trozo de plantilla para la salida del fragmento.';
