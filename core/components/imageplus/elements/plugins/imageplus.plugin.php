@@ -7,13 +7,13 @@
  * Collections)
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2021 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2021 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package imageplus
  * @subpackage plugin
  *
  * @author Alan Pich <alan.pich@gmail.com>
- * @author Thomas Jakobi <thomas.jakobi@partout.info>
+ * @author Thomas Jakobi <office@treehillstudio.com>
  * @copyright Alan Pich 2013-2015
  * @copyright Thomas Jakobi 2015-2021
  *

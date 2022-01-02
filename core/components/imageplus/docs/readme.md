@@ -3,7 +3,7 @@
 Advanced image custom template variable for MODX Revolution.
 
 - Author: Alan Pich <alan.pich@gmail.com>
-- Maintainer and further development: Thomas Jakobi <thomas.jakobi@partout.info>
+- Maintainer and further development: Thomas Jakobi <office@treehillstudio.com>
 - License: GNU GPLv2
 
 ## Features

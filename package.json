@@ -1,7 +1,7 @@
 {
   "name": "imageplus",
   "description": "Advanced Image template variable",
-  "author": "Thomas Jakobi <thomas.jakobi@partout.info>",
+  "author": "Thomas Jakobi <office@treehillstudio.com>",
   "private": true,
   "devDependencies": {
     "autoprefixer": "^10.4.1",

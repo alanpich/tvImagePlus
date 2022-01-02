@@ -3,13 +3,13 @@
  * Image+ classfile
  *
  * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2021 by Thomas Jakobi <thomas.jakobi@partout.info>
+ * Copyright 2015-2021 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package imageplus
  * @subpackage classfile
  *
  * @author Alan Pich <alan.pich@gmail.com>
- * @author Thomas Jakobi <thomas.jakobi@partout.info>
+ * @author Thomas Jakobi <office@treehillstudio.com>
  * @copyright Alan Pich 2013-2015
  * @copyright Thomas Jakobi 2015-2021
  */
@@ -37,7 +37,7 @@ class ImagePlus
      * The version
      * @var string $version
      */
-    public $version = '2.8.5';
+    public $version = '2.8.4';
 
     /**
      * The class options
