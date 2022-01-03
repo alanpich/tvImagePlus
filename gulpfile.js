@@ -50,6 +50,7 @@ gulp.task('sass-mgr', function () {
             autoprefixer()
         ]))
         .pipe(gulp.dest('source/css/mgr/'))
+        .pipe(concat('imageplus.css'))
         .pipe(postcss([
             cssnano({
                 preset: ['default', {
@@ -67,19 +68,7 @@ gulp.task('sass-mgr', function () {
 });
 
 gulp.task('images-mgr', function () {
-    return gulp.src('./source/img/**/*.+(png|jpg|gif|svg)')
-        .pipe(changed('assets/components/imageplus/img/mgr/'))
-        .pipe(imagemin([
-            imagemin.gifsicle({interlaced: true}),
-            imagemin.mozjpeg({progressive: true}),
-            imagemin.optipng({optimizationLevel: 7}),
-            imagemin.svgo({
-                plugins: [
-                    {removeViewBox: true},
-                    {cleanupIDs: true}
-                ]
-            })
-        ]))
+    return gulp.src('./source/img/**/*.(png|jpg|gif|svg)')
         .pipe(gulp.dest('assets/components/imageplus/img/'));
 });
 
