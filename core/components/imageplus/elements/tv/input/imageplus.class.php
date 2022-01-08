@@ -46,15 +46,12 @@ class ImagePlusInputRender extends modTemplateVarInputRender
      */
     public function process($value, array $params = array())
     {
-        // Load imageplus class
         $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
         /** @var ImagePlus $imageplus */
         $imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
             'core_path' => $corePath
         ));
         $version = $this->modx->getVersionData();
-
-        // Load required javascripts & register global config
         $imageplus->includeScriptAssets();
 
         // Get Media Source

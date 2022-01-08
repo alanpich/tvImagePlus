@@ -6,7 +6,7 @@
         {/foreach}{literal}
     };
     var oc = {
-        'change': {
+        change: {
             fn: function () {
                 Ext.getCmp('modx-panel-tv').markDirty();
             }, scope: this
@@ -208,7 +208,7 @@
                     });
                 }
             }
-        }],
+        }]
     });
     // ]]>
 </script>
