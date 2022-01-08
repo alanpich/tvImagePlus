@@ -8,8 +8,8 @@ the required dimensions/proportions.
 
 ### Requirements
 
-* MODX Revolution 2.2.4+
-* PHP v5.3+
+* MODX Revolution 2.6+
+* PHP 5.6+
 * MODX Cropping Engine i.e. [pThumb](https://modx.com/extras/package/pthumb)
 
 ### Features

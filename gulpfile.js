@@ -19,6 +19,20 @@ const banner = '/*!\n' +
     ' * Version: <%= pkg.version %>\n' +
     ' * Build date: ' + format("yyyy-MM-dd", new Date()) + '\n' +
     ' */';
+const year = new Date().getFullYear();
+
+let phpversion;
+let modxversion;
+pkg.dependencies.forEach(function (dependency, index) {
+    switch (pkg.dependencies[index].name) {
+        case 'php':
+            phpversion = pkg.dependencies[index].version.replace(/>=/, '');
+            break;
+        case 'modx':
+            modxversion = pkg.dependencies[index].version.replace(/>=/, '');
+            break;
+    }
+});
 
 gulp.task('scripts-mgr', function () {
     return gulp.src([
@@ -74,8 +88,8 @@ gulp.task('bump-copyright', function () {
         'core/components/imageplus/**/*.php',
         'source/js/mgr/**/*.js',
     ], {base: './'})
-        .pipe(replace(/Copyright 2015(-\d{4})? by/g, 'Copyright ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear() + ' by'))
-        .pipe(replace(/(@copyright .*?) 2015(-\d{4})?/g, '$1 ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear()))
+        .pipe(replace(/Copyright 2015(-\d{4})? by/g, 'Copyright ' + (year > 2015 ? '2015-' : '') + year + ' by'))
+        .pipe(replace(/(@copyright .*?) 2015(-\d{4})?/g, '$1 ' + (year > 2015 ? '2015-' : '') + year))
         .pipe(gulp.dest('.'));
 });
 gulp.task('bump-version', function () {
@@ -90,25 +104,32 @@ gulp.task('bump-options', function () {
         'core/components/imageplus/elements/tv/input/tpl/imageplus.options.tpl',
         'core/components/imageplus/elements/tv/output/tpl/imageplus.options.tpl',
     ], {base: './'})
-        .pipe(replace(/&copy; 2015(-\d{4})?/g, '&copy; ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear()))
+        .pipe(replace(/&copy; 2015(-\d{4})?/g, '&copy; ' + (year > 2015 ? '2015-' : '') + year))
         .pipe(gulp.dest('.'));
 });
 gulp.task('bump-docs', function () {
     return gulp.src([
         'mkdocs.yml',
     ], {base: './'})
-        .pipe(replace(/&copy; 2015(-\d{4})?/g, '&copy; ' + (new Date().getFullYear() > 2015 ? '2015-' : '') + new Date().getFullYear()))
+        .pipe(replace(/&copy; 2015(-\d{4})?/g, '&copy; ' + (year > 2015 ? '2015-' : '') + year))
         .pipe(gulp.dest('.'));
 });
-gulp.task('bump', gulp.series('bump-copyright', 'bump-version', 'bump-options', 'bump-docs'));
-
+gulp.task('bump-requirements', function () {
+    return gulp.src([
+        'docs/index.md',
+    ], {base: './'})
+        .pipe(replace(/[*-] MODX Revolution \d.\d.*/g, '* MODX Revolution ' + modxversion + '+'))
+        .pipe(replace(/[*-] PHP (v)?\d.\d.*/g, '* PHP ' + phpversion + '+'))
+        .pipe(gulp.dest('.'));
+});
+gulp.task('bump', gulp.series('bump-copyright', 'bump-version', 'bump-options', 'bump-docs', 'bump-requirements'));
 
 gulp.task('watch', function () {
     // Watch .js files
     gulp.watch(['source/js/**/*.js'], gulp.series('scripts-mgr'));
     // Watch .scss files
     gulp.watch(['source/sass/**/*.scss'], gulp.series('sass-mgr'));
-    // Watch .scss files
+    // Watch *.(png|jpg|gif|svg) files
     gulp.watch(['source/img/**/*.(png|jpg|gif|svg)'], gulp.series('images-mgr'));
 });
 
