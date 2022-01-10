@@ -133,7 +133,7 @@ class ImagePlus
         });
 
         // Do some basic intelligent sniffing
-        if (!isset($this->options['cropEngineClass'])) {
+        if (!$this->getOption('cropEngineClass')) {
             if (CropEngines\PhpThumbsUp::engineRequirementsMet($this->modx)) {
                 $this->options['cropEngineClass'] = '\\ImagePlus\\CropEngines\\PhpThumbsUp';
             } elseif (CropEngines\PhpThumbOf::engineRequirementsMet($this->modx)) {
@@ -143,7 +143,7 @@ class ImagePlus
             } else {
                 $this->options['cropEngineClass'] = '';
             }
-            if (!$this->options['cropEngineClass']) {
+            if (!$this->getOption('cropEngineClass')) {
                 // Handle unmet dependencies
                 $this->options['hasUnmetDependencies'] = true;
                 return;
@@ -224,7 +224,7 @@ class ImagePlus
         ));
 
         // Check crop engine is usable
-        if ($this->options['hasUnmetDependencies']) {
+        if ($this->getOption('hasUnmetDependencies')) {
             $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Requirements not met for crop engine.', '', 'Image+');
             return 'Image+ error - requirements not met for crop engine.';
         }
