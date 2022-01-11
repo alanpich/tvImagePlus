@@ -21,8 +21,8 @@
       "plugins": [
         {
           "name": "ImagePlus",
-          "file": "imageplus.plugin.php",
           "description": "Image+ runtime hooks - registers custom TV input & output types and includes javascripts on document edit pages.",
+          "file": "imageplus.plugin.php",
           "events": [
             "OnManagerPageBeforeRender",
             "OnTVInputPropertiesList",
