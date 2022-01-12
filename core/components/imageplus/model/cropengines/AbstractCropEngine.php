@@ -32,7 +32,7 @@ abstract class AbstractCropEngine
 
     public function __construct(\modX &$modx)
     {
-        $this->modx = &$modx;
+        $this->modx =& $modx;
 
         $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
         $this->imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
