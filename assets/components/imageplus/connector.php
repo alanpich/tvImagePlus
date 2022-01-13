@@ -29,9 +29,9 @@ require_once MODX_CONNECTORS_PATH . 'index.php';
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
 /** @var ImagePlus $imageplus */
-$imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+$imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', [
     'core_path' => $corePath
-));
+]);
 
 // Set HTTP_MODAUTH for web processors
 if (defined('MODX_REQP') && MODX_REQP === false) {
@@ -39,7 +39,7 @@ if (defined('MODX_REQP') && MODX_REQP === false) {
 }
 
 // Handle request
-$modx->request->handleRequest(array(
+$modx->request->handleRequest([
     'processors_path' => $imageplus->getOption('processorsPath'),
     'location' => ''
-));
+]);

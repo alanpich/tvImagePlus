@@ -43,7 +43,7 @@ class ImagePlus
      * The class options
      * @var array $options
      */
-    public $options = array();
+    public $options = [];
 
     /**
      * ImagePlus constructor
@@ -51,7 +51,7 @@ class ImagePlus
      * @param modX $modx A reference to the modX instance.
      * @param array $options An array of options. Optional.
      */
-    function __construct(modX &$modx, $options = array())
+    function __construct(modX &$modx, $options = [])
     {
         $this->modx =& $modx;
 
@@ -60,7 +60,7 @@ class ImagePlus
         $assetsUrl = $this->getOption('assets_url', $options, $this->modx->getOption('assets_url') . 'components/imageplus/');
 
         // Load some default paths for easier management
-        $this->options = array_merge(array(
+        $this->options = array_merge([
             'namespace' => $this->namespace,
             'version' => $this->version,
             'corePath' => $corePath,
@@ -79,12 +79,12 @@ class ImagePlus
             'cssUrl' => $assetsUrl . 'css/',
             'imagesUrl' => $assetsUrl . 'images/',
             'connectorUrl' => $assetsUrl . 'connector.php'
-        ), $options);
+        ], $options);
 
         // Add default options
-        $this->options = array_merge($this->options, array(
+        $this->options = array_merge($this->options, [
             'sources' => $this->loadSourceMap()
-        ));
+        ]);
 
         $this->checkDependencies();
 
@@ -100,7 +100,7 @@ class ImagePlus
      * namespaced system setting; by default this value is null.
      * @return mixed The option value or the default value specified.
      */
-    public function getOption($key, $options = array(), $default = null)
+    public function getOption($key, $options = [], $default = null)
     {
         $option = $default;
         if (!empty($key) && is_string($key)) {
@@ -160,7 +160,7 @@ class ImagePlus
     private function loadSourceMap()
     {
         $sources = $this->modx->getCollection('sources.modMediaSource');
-        $sourceMap = array();
+        $sourceMap = [];
         foreach ($sources as $source) {
             /** @var modMediaSource $source */
             $source->initialize();
@@ -211,7 +211,7 @@ class ImagePlus
      * @return string
      * @internal param array $params
      */
-    public function getImageURL($json, $opts = array(), $tv = null)
+    public function getImageURL($json, $opts = [], $tv = null)
     {
         // Check system settings for crop engine override
         $engineClass = $this->getOption('cropEngineClass');
@@ -219,9 +219,9 @@ class ImagePlus
         /**
          * @var ImagePlus\CropEngines\AbstractCropEngine $cropEngine
          */
-        $cropEngine = new $engineClass($this->modx, array(
+        $cropEngine = new $engineClass($this->modx, [
             'core_path' => $this->getOption('corePath')
-        ));
+        ]);
 
         // Check crop engine is usable
         if ($this->getOption('hasUnmetDependencies')) {
@@ -241,7 +241,7 @@ class ImagePlus
      * @param modTemplateVar $tv
      * @return string
      */
-    public function prepareTvValue($json, $opts = array(), $tv = null)
+    public function prepareTvValue($json, $opts = [], $tv = null)
     {
         // Prepare value
         $decoded = json_decode($json);
@@ -272,23 +272,23 @@ class ImagePlus
                     }
                     $size = false;
                 }
-                $json = json_encode(array(
+                $json = json_encode([
                     'altTag' => '',
-                    'crop' => array(
+                    'crop' => [
                         'height' => ($size) ? $size[1] : 0,
                         'width' => ($size) ? $size[0] : 0,
                         'x' => 0,
                         'y' => 0
-                    ),
-                    'sourceImg' => array(
+                    ],
+                    'sourceImg' => [
                         'height' => ($size) ? $size[1] : 0,
                         'width' => ($size) ? $size[0] : 0,
                         'source' => $source->get('id'),
                         'src' => $json
-                    ),
+                    ],
                     'targetHeight' => (int)$opts['targetHeight'],
                     'targetWidth' => (int)$opts['targetWidth']
-                ));
+                ]);
             }
         }
         return $json;

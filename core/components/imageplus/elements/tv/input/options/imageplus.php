@@ -14,12 +14,12 @@
  * @copyright Thomas Jakobi 2015-2021
  */
 
-/** @var \modX $modx */
+/** @var modX $modx */
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
 /** @var ImagePlus $imageplus */
-$imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+$imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', [
     'core_path' => $corePath
-));
+]);
 
 $selectConfig = json_decode($imageplus->getOption('select_config'), true);
 $forceConfig = $imageplus->getOption('force_config', false);

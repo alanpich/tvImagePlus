@@ -34,7 +34,7 @@ class PhpThumbOf extends AbstractCropEngine
      */
     public static function engineRequirementsMet(\modX $modx)
     {
-        $pto = $modx->getObject('modSnippet', array('name' => 'phpthumbof'));
+        $pto = $modx->getObject('modSnippet', ['name' => 'phpthumbof']);
         return $pto instanceof \modSnippet;
     }
 
@@ -47,7 +47,7 @@ class PhpThumbOf extends AbstractCropEngine
      * @param \modTemplateVar $tv
      * @return string
      */
-    public function getImageUrl($json, $opts = array(), $tv = null)
+    public function getImageUrl($json, $opts = [], $tv = null)
     {
         if ($json == '') {
             if ($this->imageplus->getOption('debug')) {
@@ -88,33 +88,33 @@ class PhpThumbOf extends AbstractCropEngine
         }
 
         // Prepare arguments for phpthumbof snippet call
-        $cropParams = array(
+        $cropParams = [
             'sx' => $data->crop->x,
             'sy' => $data->crop->y,
             'sw' => $data->crop->width,
             'sh' => $data->crop->height,
-        );
-        $params = array();
+        ];
+        $params = [];
         if ($data->targetWidth) {
-            $params = array_merge($params, array(
+            $params = array_merge($params, [
                 'w' => $data->targetWidth
-            ));
+            ]);
         }
         if ($data->targetHeight) {
-            $params = array_merge($params, array(
+            $params = array_merge($params, [
                 'h' => $data->targetHeight
-            ));
+            ]);
         }
         if ($data->targetWidth && $data->targetHeight) {
-            $params = array_merge($params, array(
+            $params = array_merge($params, [
                 'far' => true
-            ));
+            ]);
         }
         $params = array_merge($cropParams, $params);
 
         // Add phpThumbParams to phpthumbof snippet call arguments
         $phpThumbParams = $this->modx->getOption('phpThumbParams', $opts, '');
-        $optParams = array();
+        $optParams = [];
         if ($phpThumbParams) {
             parse_str($phpThumbParams, $optParams);
             foreach ($optParams as $key => $val) {
@@ -137,10 +137,10 @@ class PhpThumbOf extends AbstractCropEngine
             if ($generateUrl) {
                 $url = $this->modx->runSnippet(
                     'phpthumbof',
-                    array(
+                    [
                         'options' => $options,
                         'input' => $imgPath
-                    )
+                    ]
                 );
             } else {
                 $url = $source->getBaseUrl() . $data->sourceImg->src;
@@ -152,7 +152,7 @@ class PhpThumbOf extends AbstractCropEngine
         // If an output chunk is selected, parse that
         $outputChunk = $this->modx->getOption('outputChunk', $opts, '');
         if ($outputChunk) {
-            $chunkParams = array_merge($opts, array(
+            $chunkParams = array_merge($opts, [
                 'url' => $url,
                 'alt' => isset($data->altTag) ? $data->altTag : '',
                 'width' => $data->targetWidth,
@@ -168,7 +168,7 @@ class PhpThumbOf extends AbstractCropEngine
                 'crop.options' => $cropOptions,
                 'caption' => isset($data->caption) ? $data->caption : '',
                 'credits' => isset($data->credits) ? $data->credits : ''
-            ));
+            ]);
             return $this->modx->getChunk($outputChunk, $chunkParams);
         } else {
             // Otherwise return raw url

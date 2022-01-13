@@ -34,7 +34,7 @@ class ImagePlusInputRender extends modTemplateVarInputRender
      */
     public function getLexiconTopics()
     {
-        return array('imageplus:default');
+        return ['imageplus:default'];
     }
 
     /**
@@ -44,13 +44,13 @@ class ImagePlusInputRender extends modTemplateVarInputRender
      * @param array $params
      * @return void
      */
-    public function process($value, array $params = array())
+    public function process($value, array $params = [])
     {
         $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
         /** @var ImagePlus $imageplus */
-        $imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+        $imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', [
             'core_path' => $corePath
-        ));
+        ]);
         $version = $this->modx->getVersionData();
         $imageplus->includeScriptAssets();
 

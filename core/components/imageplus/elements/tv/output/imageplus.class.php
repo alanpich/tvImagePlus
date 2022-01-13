@@ -23,17 +23,17 @@ class ImagePlusOutputRender extends modTemplateVarOutputRender
      * @param array $params
      * @return string
      */
-    public function process($value, array $params = array())
+    public function process($value, array $params = [])
     {
         // Load imageplus class
         $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
-        $imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+        $imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', [
             'core_path' => $corePath
-        ));
+        ]);
 
-        $params = array_merge(array(
+        $params = array_merge([
             'docid' => ($this->modx->resource) ? $this->modx->resource->get('id') : 0
-        ), $params);
+        ], $params);
 
         return $imageplus->getImageURL($value, $params, $this->tv);
     }

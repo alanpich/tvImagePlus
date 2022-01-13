@@ -19,9 +19,9 @@
 
 $corePath = $modx->getOption('imageplus.core_path', null, $modx->getOption('core_path') . 'components/imageplus/');
 /** @var ImagePlus $imageplus */
-$imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', array(
+$imageplus = $modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', [
     'core_path' => $corePath
-));
+]);
 
 $tvname = $modx->getOption('tvname', $scriptProperties, '', true);
 $docid = $modx->getOption('docid', $scriptProperties, (isset($modx->resource)) ? $modx->resource->get('id') : 0, true);
@@ -42,11 +42,11 @@ if ($value) {
     }
     // No TV is used
     $tv = null;
-    $tvOutputProperties = array();
+    $tvOutputProperties = [];
 } else {
     // Value is retreived from template variable
     /** @var modTemplateVar $tv */
-    $tv = $modx->getObject('modTemplateVar', array('name' => $tvname));
+    $tv = $modx->getObject('modTemplateVar', ['name' => $tvname]);
     if ($tv) {
         // Get the raw content of the TV
         $value = $tv->getValue($docid);
@@ -67,7 +67,7 @@ if ($value) {
             $modx->log(xPDO::LOG_LEVEL_ERROR, "Template Variable '{$tvname}' not found.", '', 'Image+');
             return "Template Variable '{$tvname}' not found.";
         }
-        $tvOutputProperties = array();
+        $tvOutputProperties = [];
     }
 }
 
@@ -80,26 +80,26 @@ switch ($type) {
         break;
     case 'tpl':
         $data = json_decode($value);
-        $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, array(
+        $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, [
             'docid' => $docid,
             'phpThumbParams' => $options,
             'outputChunk' => $tpl,
             'caption' => ($data && isset($data->caption)) ? $data->caption : '',
             'credits' => ($data && isset($data->credits)) ? $data->credits : ''
-        )), $tv) : '';
+        ]), $tv) : '';
         break;
     case 'thumb':
-        $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, array(
+        $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, [
             'docid' => $docid,
             'phpThumbParams' => $options,
             'outputChunk' => '',
-        )), $tv) : '';
+        ]), $tv) : '';
         break;
     default:
-        $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, array(
+        $output = ($value) ? $imageplus->getImageURL($value, array_merge($tvOutputProperties, $scriptProperties, [
             'docid' => $docid,
             'phpThumbParams' => $options,
-        )), $tv) : '';
+        ]), $tv) : '';
         break;
 }
 return $output;
