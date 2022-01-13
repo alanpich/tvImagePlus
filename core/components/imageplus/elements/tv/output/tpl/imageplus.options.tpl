@@ -116,6 +116,7 @@
             }
         }],
     });
+    MODx.helpUrl = 'https://jako.github.io/ImagePlus/usage/';
     // ]]>
 </script>
 {/literal}
