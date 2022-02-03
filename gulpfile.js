@@ -85,8 +85,8 @@ gulp.task('images-mgr', function () {
 
 gulp.task('bump-copyright', function () {
     return gulp.src([
-        'core/components/imageplus/**/*.php',
-        'source/js/mgr/**/*.js',
+        'core/components/imageplus/model/imageplus/imageplus.class.php',
+        'core/components/imageplus/src/ImagePlus.php'
     ], {base: './'})
         .pipe(replace(/Copyright 2015(-\d{4})? by/g, 'Copyright ' + (year > 2015 ? '2015-' : '') + year + ' by'))
         .pipe(replace(/(@copyright .*?) 2015(-\d{4})?/g, '$1 ' + (year > 2015 ? '2015-' : '') + year))
@@ -94,15 +94,15 @@ gulp.task('bump-copyright', function () {
 });
 gulp.task('bump-version', function () {
     return gulp.src([
-        'core/components/imageplus/model/imageplus/imageplus.class.php',
+        'core/components/imageplus/src/ImagePlus.php'
     ], {base: './'})
-        .pipe(replace(/version = '\d+.\d+.\d+[-a-z0-9]*'/ig, 'version = \'' +  pkg.version + '\''))
+        .pipe(replace(/version = '\d+.\d+.\d+[-a-z0-9]*'/ig, 'version = \'' + pkg.version + '\''))
         .pipe(gulp.dest('.'));
 });
 gulp.task('bump-options', function () {
     return gulp.src([
         'core/components/imageplus/elements/tv/input/tpl/imageplus.options.tpl',
-        'core/components/imageplus/elements/tv/output/tpl/imageplus.options.tpl',
+        'core/components/imageplus/elements/tv/output/tpl/imageplus.options.tpl'
     ], {base: './'})
         .pipe(replace(/&copy; 2015(-\d{4})?/g, '&copy; ' + (year > 2015 ? '2015-' : '') + year))
         .pipe(gulp.dest('.'));

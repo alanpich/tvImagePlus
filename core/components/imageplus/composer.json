@@ -1,0 +1,20 @@
+{
+  "name": "treehillstudio/imageplus",
+  "description": "Time Range Custom Template Variable",
+  "authors": [
+    {
+      "name": "Thomas Jakobi",
+      "email": "office@treehillstudio.com",
+      "homepage": "https://treehillstudio.com"
+    }
+  ],
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "php": ">=7.2.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "TreehillStudio\\ImagePlus\\": "src/"
+    }
+  }
+}

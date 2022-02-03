@@ -2,16 +2,8 @@
 /**
  * Image+ Output Options Render
  *
- * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2021 by Thomas Jakobi <office@treehillstudio.com>
- *
  * @package imageplus
  * @subpackage outputoptions_render
- *
- * @author Alan Pich <alan.pich@gmail.com>
- * @author Thomas Jakobi <office@treehillstudio.com>
- * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2021
  */
 
 /** @var \modX $modx */

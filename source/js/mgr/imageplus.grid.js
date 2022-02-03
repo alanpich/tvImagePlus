@@ -1,17 +1,8 @@
 /**
-/**
  * Image+ Sizes Ratio Helper
- *
- * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2021 by Thomas Jakobi <office@treehillstudio.com>
  *
  * @package imageplus
  * @subpackage script
- *
- * @author Alan Pich <alan.pich@gmail.com>
- * @author Thomas Jakobi <office@treehillstudio.com>
- * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2021
  */
 
 ImagePlus.grid.SizesRatio = function (config) {
@@ -43,11 +34,9 @@ ImagePlus.grid.SizesRatio = function (config) {
         enableDragDrop: true,
         ddGroup: this.ident + '-sizes-ratio-grid-dd',
         autoExpandColumn: 'value',
+        showActionsColumn: false,
         labelStyle: 'position: absolute',
         columns: [{
-            dataIndex: 'id',
-            hidden: true
-        }, {
             header: _('imageplus.gridsetting_configname'),
             dataIndex: 'name',
             editable: true,
@@ -114,6 +103,9 @@ ImagePlus.grid.SizesRatio = function (config) {
             align: 'right'
         }, {
             dataIndex: 'rank',
+            hidden: true
+        }, {
+            dataIndex: 'id',
             hidden: true
         }],
         tbar: ['->', {
@@ -252,7 +244,7 @@ ImagePlus.combo.SizesRatio = function (config) {
         mode: 'local',
         displayField: 'name',
         valueField: 'name',
-        submitValue : false,
+        submitValue: false,
         triggerAction: 'all',
         listeners: {
             select: {

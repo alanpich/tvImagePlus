@@ -28,8 +28,7 @@
             "OnTVInputPropertiesList",
             "OnTVInputRenderList",
             "OnTVOutputRenderList",
-            "OnTVOutputRenderPropertiesList",
-            "OnDocFormRender"
+            "OnTVOutputRenderPropertiesList"
           ]
         }
       ],

@@ -1,20 +1,18 @@
 <?php
 /**
- * Image+ cropengine
- *
- * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2021 by Thomas Jakobi <office@treehillstudio.com>
+ * PhpThumbsUp crop engine
  *
  * @package imageplus
  * @subpackage cropengine
- *
- * @author Alan Pich <alan.pich@gmail.com>
- * @author Thomas Jakobi <office@treehillstudio.com>
- * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2021
  */
 
-namespace ImagePlus\CropEngines;
+namespace TreehillStudio\ImagePlus\CropEngines;
+
+use modMediaSource;
+use modSnippet;
+use modTemplateVar;
+use modX;
+use xPDO;
 
 /**
  * Class PhpThumbsUp
@@ -29,13 +27,13 @@ class PhpThumbsUp extends AbstractCropEngine
     /**
      * Checks that all requirements are met for using this engine
      *
-     * @param \modX $modx
+     * @param modX $modx
      * @return bool True if engine is usable
      */
-    public static function engineRequirementsMet(\modX $modx)
+    public static function engineRequirementsMet(modX $modx)
     {
         $pto = $modx->getObject('modSnippet', ['name' => 'phpthumbsup']);
-        return $pto instanceof \modSnippet;
+        return $pto instanceof modSnippet;
     }
 
     /**
@@ -44,14 +42,14 @@ class PhpThumbsUp extends AbstractCropEngine
      *
      * @param $json
      * @param array $opts
-     * @param \modTemplateVar $tv
+     * @param modTemplateVar $tv
      * @return string
      */
     public function getImageUrl($json, $opts = [], $tv = null)
     {
         if ($json == '') {
             if ($this->imageplus->getOption('debug')) {
-                $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The value is empty. Could not prepare the output.', '', 'Image+');
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'The value is empty. Could not prepare the output.', '', 'Image+');
             }
             return ($tv) ? $tv->default_text : '';
         }
@@ -63,17 +61,17 @@ class PhpThumbsUp extends AbstractCropEngine
         // This is almost certainly because the TV is empty
         if (is_null($data)) {
             if ($this->imageplus->getOption('debug')) {
-                $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The JSON value is invalid. Could not prepare the output.', '', 'Image+');
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'The JSON value is invalid. Could not prepare the output.', '', 'Image+');
             }
             return ($tv) ? $tv->default_text : '';
         }
 
         // Load up the mediaSource
-        /** @var \modMediaSource $source */
+        /** @var modMediaSource $source */
         $source = $this->modx->getObject('sources.modMediaSource', $data->sourceImg->source);
-        if (!$source instanceof \modMediaSource) {
+        if (!$source instanceof modMediaSource) {
             if ($this->imageplus->getOption('debug')) {
-                $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'Invalid Media Source', '', 'Image+');
+                $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Invalid Media Source', '', 'Image+');
             }
             return 'Image+ Error: Invalid Media Source';
         }
@@ -84,7 +82,7 @@ class PhpThumbsUp extends AbstractCropEngine
         $imgPath = realpath($source->getBasePath() . $data->sourceImg->src);
 
         if ($this->imageplus->getOption('debug') && !$imgPath) {
-            $this->modx->log(\xPDO::LOG_LEVEL_ERROR, 'The realpath of the image ' . $source->getBasePath() . $data->sourceImg->src . 'is not valid. Please check the media source path setting of the Image+ image.', '', 'Image+');
+            $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'The realpath of the image ' . $source->getBasePath() . $data->sourceImg->src . 'is not valid. Please check the media source path setting of the Image+ image.', '', 'Image+');
         }
 
         // Prepare arguments for phpthumbof snippet call
@@ -128,8 +126,8 @@ class PhpThumbsUp extends AbstractCropEngine
         $options = rawurldecode(preg_replace('/%5B[0-9]+%5D/simU', '%5B%5D', $options));
         $cropOptions = http_build_query($cropParams);
 
-        $data->targetWidth = isset($optParams['w']) ? $optParams['w'] : 0;
-        $data->targetHeight = isset($optParams['h']) ? $optParams['h'] : 0;
+        $data->targetWidth = $optParams['w'] ?? 0;
+        $data->targetHeight = $optParams['h'] ?? 0;
 
         // Call phpthumbsup for url
         $generateUrl = $this->modx->getOption('generateUrl', $opts, 1);
@@ -154,7 +152,7 @@ class PhpThumbsUp extends AbstractCropEngine
         if ($outputChunk) {
             $chunkParams = array_merge($opts, [
                 'url' => $url,
-                'alt' => isset($data->altTag) ? $data->altTag : '',
+                'alt' => $data->altTag ?? '',
                 'width' => $data->targetWidth,
                 'height' => $data->targetHeight,
                 'source.src' => $imgPath,
@@ -166,8 +164,8 @@ class PhpThumbsUp extends AbstractCropEngine
                 'crop.y' => $data->crop->y,
                 'options' => $options,
                 'crop.options' => $cropOptions,
-                'caption' => isset($data->caption) ? $data->caption : '',
-                'credits' => isset($data->credits) ? $data->credits : ''
+                'caption' => $data->caption ?? '',
+                'credits' => $data->credits ?? ''
             ]);
             return $this->modx->getChunk($outputChunk, $chunkParams);
         } else {

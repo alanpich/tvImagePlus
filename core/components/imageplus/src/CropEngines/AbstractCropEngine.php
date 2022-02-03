@@ -1,36 +1,32 @@
 <?php
 /**
- * Image+ cropengine abstract
- *
- * Copyright 2013-2015 by Alan Pich <alan.pich@gmail.com>
- * Copyright 2015-2021 by Thomas Jakobi <office@treehillstudio.com>
+ * Abstract Image+ crop engine
  *
  * @package imageplus
- * @subpackage cropengine abstract
- *
- * @author Alan Pich <alan.pich@gmail.com>
- * @author Thomas Jakobi <office@treehillstudio.com>
- * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2021
+ * @subpackage cropengine
  */
 
-namespace ImagePlus\CropEngines;
+namespace TreehillStudio\ImagePlus\CropEngines;
+
+use ImagePlus;
+use modTemplateVar;
+use modX;
 
 abstract class AbstractCropEngine
 {
     /**
      * A reference to the modX instance
-     * @var \modX $modx
+     * @var modX $modx
      */
     protected $modx;
 
     /**
      * A reference to the ImagePlus instance
-     * @var \ImagePlus $imageplus
+     * @var ImagePlus $imageplus
      */
     protected $imageplus;
 
-    public function __construct(\modX &$modx)
+    public function __construct(modX &$modx)
     {
         $this->modx =& $modx;
 
@@ -43,10 +39,10 @@ abstract class AbstractCropEngine
     /**
      * Checks that all requirements are met for using this engine
      *
-     * @param \modX $modx
+     * @param modX $modx
      * @return bool True if engine is usable
      */
-    public static function engineRequirementsMet(\modX $modx)
+    public static function engineRequirementsMet(modX $modx)
     {
         return true;
     }
@@ -57,7 +53,7 @@ abstract class AbstractCropEngine
      *
      * @param $json
      * @param array $opts
-     * @param \modTemplateVar $tv
+     * @param modTemplateVar $tv
      * @return string
      */
     abstract public function getImageUrl($json, $opts = [], $tv = null);
