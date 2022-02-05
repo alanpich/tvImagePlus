@@ -72,6 +72,24 @@ if ($object->xpdo) {
         }
     }
 
+    if (!function_exists('cleanupPluginEvents')) {
+        function cleanupPluginEvents($modx, $plugin, $events)
+        {
+            foreach ($events as $event) {
+                $c = $modx->newQuery('modPluginEvent');
+                $c->leftJoin('modPlugin', 'Plugin', ['modPluginEvent.pluginid = Plugin.id']);
+                $c->where([
+                    'event' => $event,
+                    'Plugin.name' => $plugin
+                ]);
+                /** @var modPluginEvent $pluginEvent */
+                $pluginEvent = $modx->getObject('modPluginEvent', $c);
+                $pluginEvent->remove();
+                $modx->log(xPDO::LOG_LEVEL_INFO, 'Removed ' . $event . ' from ' . $plugin . ' plugin.');
+            }
+        }
+    }
+
     /** @var xPDO $modx */
     $modx =& $object->xpdo;
 
@@ -115,6 +133,7 @@ if ($object->xpdo) {
                     ]
                 ];
                 cleanupFolders($modx, $corePath, $assetsPath, $cleanup, 'ImagePlus', '2.9.0');
+                cleanupPluginEvents($modx, 'ImagePlus', ['OnDocFormRender']);
             }
             $success = true;
             break;
