@@ -25,7 +25,7 @@ class ImagePlus extends Snippet
             'tvname' => '',
             'docid::int' => (isset($this->modx->resource)) ? $this->modx->resource->get('id') : 0,
             'type' => '',
-            'options::associativeJson' => [],
+            'options' => '',
             'tpl' => 'ImagePlus.image',
             'input::bool' => $this->imageplus->getOption('debug')
         ];
