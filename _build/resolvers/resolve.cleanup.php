@@ -126,13 +126,13 @@ if ($object->xpdo) {
             $corePath = $modx->getOption('core_path', null, MODX_CORE_PATH);
             $assetsPath = $modx->getOption('assets_path', null, MODX_ASSETS_PATH);
 
-            if ($oldPackage && $oldPackage->compareVersion('2.9.0', '>')) {
+            if ($oldPackage && $oldPackage->compareVersion('2.8.8', '>')) {
                 $cleanup = [
                     'core' => [
                         'components/imageplus/model/cropengines'
                     ]
                 ];
-                cleanupFolders($modx, $corePath, $assetsPath, $cleanup, 'ImagePlus', '2.9.0');
+                cleanupFolders($modx, $corePath, $assetsPath, $cleanup, 'ImagePlus', '2.8.8');
                 cleanupPluginEvents($modx, 'ImagePlus', ['OnDocFormRender']);
             }
             $success = true;
