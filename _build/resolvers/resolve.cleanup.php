@@ -47,7 +47,7 @@ if ($object->xpdo) {
                 }
             }
             if ($countFolders || $countFiles) {
-                $modx->log(xPDO::LOG_LEVEL_INFO, 'Removed ' . $countFiles . ' legacy files and ' . $countFolders . ' legacy folders before ' . $package . ' .' . $version);
+                $modx->log(xPDO::LOG_LEVEL_INFO, 'Removed ' . $countFiles . ' legacy files and ' . $countFolders . ' legacy folders before ' . $package . ' ' . $version . '.');
             }
         }
     }
@@ -126,7 +126,7 @@ if ($object->xpdo) {
             $corePath = $modx->getOption('core_path', null, MODX_CORE_PATH);
             $assetsPath = $modx->getOption('assets_path', null, MODX_ASSETS_PATH);
 
-            if ($oldPackage && $oldPackage->compareVersion('2.8.8', '>')) {
+            if ($oldPackage && $oldPackage->compareVersion('2.8.8-pl2', '>')) {
                 $cleanup = [
                     'core' => [
                         'components/imageplus/model/cropengines'
