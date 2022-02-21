@@ -8,8 +8,8 @@
 
 namespace TreehillStudio\ImagePlus\Snippets;
 
-use ImagePlus;
 use modX;
+use TreehillStudio\ImagePlus\ImagePlus;
 
 /**
  * Class Snippet
@@ -51,7 +51,6 @@ abstract class Snippet
         $this->modx =& $modx;
 
         $corePath = $this->modx->getOption('imageplus.core_path', null, $this->modx->getOption('core_path') . 'components/imageplus/');
-        /** @var ImagePlus $imageplus */
         $this->imageplus = $this->modx->getService('imageplus', 'ImagePlus', $corePath . 'model/imageplus/', [
             'core_path' => $corePath
         ]);
