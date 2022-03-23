@@ -84,8 +84,10 @@ if ($object->xpdo) {
                 ]);
                 /** @var modPluginEvent $pluginEvent */
                 $pluginEvent = $modx->getObject('modPluginEvent', $c);
-                $pluginEvent->remove();
-                $modx->log(xPDO::LOG_LEVEL_INFO, 'Removed ' . $event . ' from ' . $plugin . ' plugin.');
+                if ($pluginEvent) {
+                    $pluginEvent->remove();
+                    $modx->log(xPDO::LOG_LEVEL_INFO, 'Removed ' . $event . ' from ' . $plugin . ' plugin.');
+                }
             }
         }
     }
