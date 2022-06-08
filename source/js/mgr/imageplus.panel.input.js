@@ -240,7 +240,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Fired when user has selected an image from the browser
     onImageSelected: function (img) {
-        var diffImg = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src !== img.relativeUrl));
+        var changed = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src !== img.relativeUrl));
 
         this.oldSourceImg = {};
         for (var i in this.image.sourceImg) {
@@ -253,7 +253,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             source: this.options.mediaSource
         };
         // Reset crop rectangle everytime an image is selected to be different from browser
-        if (diffImg) {
+        if (changed) {
             this.image.crop.x = 0;
             this.image.crop.y = 0;
             if (this.options.targetRatio) {
@@ -271,20 +271,21 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         }
         // If server returns 800x600 or higher, image may be larger so need to get size manually
         if (img.image_width >= 800 || img.image_height >= 600) {
-            this.manualGetImageSize();
-        }
-        // Update display
-        if (!this.updateDisplay()) {
-            return;
-        }
-        if (diffImg) {
-            this.editImage();
+            this.manualGetImageSize(changed);
+        } else {
+            // Update display
+            if (!this.updateDisplay()) {
+                return;
+            }
+            if (changed) {
+                this.editImage();
+            }
         }
     },
     // Fired when user has changed the image input
     onImageChange: function (src) {
         if (src !== '') {
-            var diffImg = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src !== src));
+            var changed = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src !== src));
 
             this.oldSourceImg = {};
             for (var i in this.image.sourceImg) {
@@ -304,7 +305,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                     ths.image.sourceImg.height = this.height;
 
                     // Reset crop rectangle everytime an image is selected to be different from browser
-                    if (diffImg) {
+                    if (changed) {
                         ths.image.crop.x = 0;
                         ths.image.crop.y = 0;
                         if (ths.options.targetRatio) {
@@ -325,7 +326,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                     if (!ths.updateDisplay()) {
                         return;
                     }
-                    if (diffImg) {
+                    if (changed) {
                         ths.editImage();
                     }
 
@@ -373,7 +374,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.updateValue();
     },
     // Manually get image size
-    manualGetImageSize: function () {
+    manualGetImageSize: function (changed) {
         var baseUrl = ImagePlus.config['sources'][this.image.sourceImg.source].url;
         var img = new Image();
         img.onload = (function (ths) {
@@ -381,7 +382,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 ths.image.sourceImg.width = this.width;
                 ths.image.sourceImg.height = this.height;
                 ths.updateDisplay();
-                if (ths.image.crop.width === 0 || ths.image.crop.height === 0) {
+                if (changed || ths.image.crop.width === 0 || ths.image.crop.height === 0) {
                     ths.editImage();
                 }
             }
@@ -390,7 +391,6 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Update the component display on state change
     updateDisplay: function () {
-
         // Make sure image is large enough to use
         if (!this.checkImageIsLargeEnough()) {
             this.image.sourceImg = this.oldSourceImg;
@@ -466,8 +466,9 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Checks whether the image is larger than specified crop dimensions
     checkImageIsLargeEnough: function () {
-        if (!this.image.sourceImg || this.image === undefined) return true;
-
+        if (this.image === undefined || !this.image.sourceImg) {
+            return true;
+        }
         if (this.options.targetWidth > 0 && this.image.sourceImg.width > 0) {
             if (this.options.targetWidth > this.image.sourceImg.width) {
                 return false;
@@ -482,7 +483,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Launch the editor window
     editImage: function () {
-        // Create the editor window (if it doesnt exist)
+        // Create the editor window (if it doesn't exist)
         if (!this.editorWindow && this.image.sourceImg && this.image.sourceImg.src) {
 
             // Calculate safe image ratio
@@ -513,8 +514,8 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                 options: this.options,
                 inputPanel: this,
                 displayRatio: ratio,
-                width: (((imgW * ratio) + 20) <= 200) ? 200 : ((imgW * ratio) + 20),
-                height: ((imgH * ratio) + 20 + 84),
+                width: (((imgW * ratio) + 20) <= 200) ? 200 : (Math.ceil(imgW * ratio) + 20),
+                height: (Math.ceil(imgH * ratio) + 20 + 84 + (ImagePlus.config.modxversion === '2' ? 2 : 8)),
                 crop: this.image.crop,
                 padding: 10
             });

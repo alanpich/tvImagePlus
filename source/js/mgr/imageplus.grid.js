@@ -7,7 +7,7 @@
 
 ImagePlus.grid.SizesRatio = function (config) {
     config = config || {};
-    this.ident = config.ident || 'imageplus-mecitem' + Ext.id();
+    this.ident = 'imageplus-sizesratio-' + Ext.id();
     this.buttonColumnTpl = new Ext.XTemplate('<tpl for=".">'
         + '<tpl if="action_buttons !== null">'
         + '<ul class="action-buttons">'

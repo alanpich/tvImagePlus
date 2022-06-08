@@ -21,10 +21,11 @@
         labelAlign: 'top',
         listeners: {
             afterrender: function (component) {
+                var tvTabId = (ImagePlus.config.modxversion === '2') ? 'modx-tv-tabs' : 'modx-tv-editor-tabs';
                 Ext.getCmp('modx-panel-tv-input-properties').addListener('resize', function () {
                     component.setWidth(Ext.getCmp('modx-input-props').getWidth()).doLayout();
                 });
-                Ext.getCmp('modx-tv-tabs').addListener('tabchange', function () {
+                Ext.getCmp(tvTabId).addListener('tabchange', function () {
                     component.setWidth(Ext.getCmp('modx-input-props').getWidth()).doLayout();
                 });
             },
