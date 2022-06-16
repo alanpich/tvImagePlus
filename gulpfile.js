@@ -42,7 +42,7 @@ gulp.task('scripts-mgr', function () {
         'source/js/mgr/imageplus.migx_renderer.js',
         'source/js/mgr/tools/JSON2.js',
         'node_modules/jquery/dist/jquery.slim.min.js',
-        'source/js/mgr/jcrop/jquery.jcrop.min.js',
+        'source/vendor/jcrop/js/jquery.Jcrop.min.js',
         'source/js/mgr/imageplus.jquery.imagecrop.js',
         'source/js/mgr/imageplus.grid.js'
     ])
@@ -79,7 +79,9 @@ gulp.task('sass-mgr', function () {
 });
 
 gulp.task('images-mgr', function () {
-    return gulp.src('./source/img/**/*.+(png|jpg|gif|svg)')
+    return gulp.src([
+        './source/img/**/*.+(png|jpg|gif|svg)'
+    ])
         .pipe(gulp.dest('assets/components/imageplus/img/'));
 });
 

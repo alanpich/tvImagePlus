@@ -241,119 +241,37 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     // Fired when user has selected an image from the browser
     onImageSelected: function (img) {
         var changed = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src !== img.relativeUrl));
-
-        this.oldSourceImg = {};
-        for (var i in this.image.sourceImg) {
-            this.oldSourceImg[i] = this.image.sourceImg[i];
-        }
+        this.setOldSource();
         this.image.sourceImg = {
             src: img.relativeUrl,
-            width: img.image_width,
-            height: img.image_height,
             source: this.options.mediaSource
         };
-        // Reset crop rectangle everytime an image is selected to be different from browser
-        if (changed) {
-            this.image.crop.x = 0;
-            this.image.crop.y = 0;
-            if (this.options.targetRatio) {
-                if (this.image.sourceImg.width / this.image.sourceImg.height < this.options.targetRatio) {
-                    this.image.crop.width = this.image.sourceImg.width;
-                    this.image.crop.height = this.image.sourceImg.height / this.options.targetRatio;
-                } else {
-                    this.image.crop.width = this.image.sourceImg.width / this.options.targetRatio;
-                    this.image.crop.height = this.image.sourceImg.height;
-                }
-            } else {
-                this.image.crop.width = this.image.sourceImg.width;
-                this.image.crop.height = this.image.sourceImg.height;
-            }
-        }
-        // If server returns 800x600 or higher, image may be larger so need to get size manually
-        if (img.image_width >= 800 || img.image_height >= 600) {
-            this.manualGetImageSize(changed);
-        } else {
-            // Update display
-            if (!this.updateDisplay()) {
+        this.getImageSize(changed, function (ths) {
+            if (!ths.updateDisplay()) {
                 return;
             }
-            if (changed) {
-                this.editImage();
+            if (changed || ths.image.crop.width === 0 || ths.image.crop.height === 0) {
+                ths.editImage();
             }
-        }
+        }, this);
     },
     // Fired when user has changed the image input
     onImageChange: function (src) {
         if (src !== '') {
             var changed = (!this.image.sourceImg || (this.image.sourceImg && this.image.sourceImg.src !== src));
-
-            this.oldSourceImg = {};
-            for (var i in this.image.sourceImg) {
-                this.oldSourceImg[i] = this.image.sourceImg[i];
-            }
-
+            this.setOldSource();
             this.image.sourceImg = {
                 src: src,
                 source: this.options.mediaSource
             };
-
-            var baseUrl = ImagePlus.config['sources'][this.image.sourceImg.source].url;
-            var img = new Image();
-            img.onload = (function (ths) {
-                return function () {
-                    ths.image.sourceImg.width = this.width;
-                    ths.image.sourceImg.height = this.height;
-
-                    // Reset crop rectangle everytime an image is selected to be different from browser
-                    if (changed) {
-                        ths.image.crop.x = 0;
-                        ths.image.crop.y = 0;
-                        if (ths.options.targetRatio) {
-                            if (ths.image.sourceImg.width / ths.image.sourceImg.height < ths.options.targetRatio) {
-                                ths.image.crop.width = ths.image.sourceImg.width;
-                                ths.image.crop.height = ths.image.sourceImg.height / ths.options.targetRatio;
-                            } else {
-                                ths.image.crop.width = ths.image.sourceImg.width / ths.options.targetRatio;
-                                ths.image.crop.height = ths.image.sourceImg.height;
-                            }
-                        } else {
-                            ths.image.crop.width = ths.image.sourceImg.width;
-                            ths.image.crop.height = ths.image.sourceImg.height;
-                        }
-                    }
-
-                    // Update display
-                    if (!ths.updateDisplay()) {
-                        return;
-                    }
-                    if (changed) {
-                        ths.editImage();
-                    }
-
-                    ths.updateDisplay();
-                    if (ths.image.crop.width === 0 || ths.image.crop.height === 0) {
-                        ths.editImage();
-                    }
+            this.getImageSize(changed, function (ths) {
+                if (!ths.updateDisplay()) {
+                    return;
                 }
-            })(this);
-            img.onerror = (function (ths) {
-                return function () {
-                    if (!ths.oldSourceImg) {
-                        ths.imageBrowser.reset();
-                    } else {
-                        if (ths.oldSourceImg.crop) {
-                            ths.image.crop.x = ths.oldSourceImg.crop.x;
-                            ths.image.crop.y = ths.oldSourceImg.crop.y;
-                            ths.image.crop.width = ths.oldSourceImg.crop.width;
-                            ths.image.crop.height = ths.oldSourceImg.crop.height;
-                        }
-                        ths.imageBrowser.setValue(ths.lastFileLabel || '');
-                    }
-                    MODx.msg.alert(_('imageplus.error.image_not_found.title'), _('imageplus.error.image_not_found.msg'));
-                    return false;
+                if (changed || ths.image.crop.width === 0 || ths.image.crop.height === 0) {
+                    ths.editImage();
                 }
-            })(this);
-            img.src = baseUrl + this.image.sourceImg.src;
+            }, this);
         } else {
             this.clearImage();
         }
@@ -373,18 +291,72 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.image.credits = value;
         this.updateValue();
     },
-    // Manually get image size
-    manualGetImageSize: function (changed) {
-        var baseUrl = ImagePlus.config['sources'][this.image.sourceImg.source].url;
+    // Set old source
+    setOldSource: function () {
+        if (!this.oldSourceImg) {
+            this.oldSourceImg = {};
+            for (var i in this.image.sourceImg) {
+                this.oldSourceImg[i] = this.image.sourceImg[i];
+            }
+        }
+        if (this.image.crop) {
+            this.oldSourceImg.crop = {};
+            this.oldSourceImg.crop.x = this.image.crop.x;
+            this.oldSourceImg.crop.y = this.image.crop.y;
+            this.oldSourceImg.crop.width = this.image.crop.width;
+            this.oldSourceImg.crop.height = this.image.crop.height;
+        }
+    },
+    // Get image size
+    getImageSize: function (changed, callback, scope) {
+        var baseUrl = ImagePlus.config.sources[this.image.sourceImg.source].url;
         var img = new Image();
         img.onload = (function (ths) {
             return function () {
                 ths.image.sourceImg.width = this.width;
                 ths.image.sourceImg.height = this.height;
-                ths.updateDisplay();
-                if (changed || ths.image.crop.width === 0 || ths.image.crop.height === 0) {
-                    ths.editImage();
+                ths.oldSource = ths.image.sourceImg.src;
+
+                // Reset crop rectangle everytime an image is changed
+                if (changed) {
+                    ths.image.crop.x = 0;
+                    ths.image.crop.y = 0;
+                    if (ths.options.targetRatio) {
+                        if (ths.image.sourceImg.width / ths.image.sourceImg.height < ths.options.targetRatio) {
+                            ths.image.crop.width = ths.image.sourceImg.width;
+                            ths.image.crop.height = ths.image.sourceImg.height / ths.options.targetRatio;
+                        } else {
+                            ths.image.crop.width = ths.image.sourceImg.width / ths.options.targetRatio;
+                            ths.image.crop.height = ths.image.sourceImg.height;
+                        }
+                    } else {
+                        ths.image.crop.width = ths.image.sourceImg.width;
+                        ths.image.crop.height = ths.image.sourceImg.height;
+                    }
                 }
+                if (typeof callback === 'function') {
+                    callback(scope);
+                }
+            }
+        })(this);
+        img.onerror = (function (ths) {
+            return function () {
+                if (!ths.oldSourceImg) {
+                    ths.imageBrowser.reset();
+                } else {
+                    for (var i in this.oldSourceImg) {
+                        ths.image.sourceImg[i] = this.oldSourceImg[i];
+                    }
+                    if (ths.oldSourceImg.crop) {
+                        ths.image.crop.x = ths.oldSourceImg.crop.x;
+                        ths.image.crop.y = ths.oldSourceImg.crop.y;
+                        ths.image.crop.width = ths.oldSourceImg.crop.width;
+                        ths.image.crop.height = ths.oldSourceImg.crop.height;
+                    }
+                    ths.imageBrowser.setValue(ths.oldSource || '');
+                }
+                MODx.msg.alert(_('imageplus.error.image_not_found.title'), _('imageplus.error.image_not_found.msg'));
+                return false;
             }
         })(this);
         img.src = baseUrl + this.image.sourceImg.src;
@@ -393,22 +365,24 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     updateDisplay: function () {
         // Make sure image is large enough to use
         if (!this.checkImageIsLargeEnough()) {
-            this.image.sourceImg = this.oldSourceImg;
             if (!this.oldSourceImg) {
                 this.imageBrowser.reset();
             } else {
+                for (var i in this.oldSourceImg) {
+                    this.image.sourceImg[i] = this.oldSourceImg[i];
+                }
                 if (this.oldSourceImg.crop) {
                     this.image.crop.x = this.oldSourceImg.crop.x;
                     this.image.crop.y = this.oldSourceImg.crop.y;
                     this.image.crop.width = this.oldSourceImg.crop.width;
                     this.image.crop.height = this.oldSourceImg.crop.height;
                 }
-                this.imageBrowser.setValue(this.lastFileLabel || '');
+                this.imageBrowser.setValue(this.oldSource || '');
             }
             MODx.msg.alert(_('imageplus.error.image_too_small.title'), _('imageplus.error.image_too_small.msg'));
             return false;
         }
-        this.lastFileLabel = this.image.sourceImg.src;
+        this.oldSource = this.image.sourceImg.src;
 
         this.updatePreviewImage.defer(10, this);
         this.updateValue();
@@ -419,24 +393,24 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         this.image = Ext.util.JSON.decode(Ext.get(field).getValue());
         if (!this.image) {
             this.image = {
-                'sourceImg': {
-                    'height': 0,
-                    'width': 0,
-                    'source': this.options.mediaSource,
-                    'src': Ext.get(field).getValue()
+                sourceImg: {
+                    height: 0,
+                    width: 0,
+                    source: this.options.mediaSource,
+                    src: Ext.get(field).getValue()
                 },
-                'crop': {
-                    'x': 0,
-                    'y': 0,
-                    'width': 0,
-                    'height': 0
+                crop: {
+                    x: 0,
+                    y: 0,
+                    width: 0,
+                    height: 0
                 }
             }
         }
     },
     // Update hidden field value
     updateValue: function () {
-        var TV = {
+        var tvValue = {
             sourceImg: this.image.sourceImg,
             crop: this.image.crop,
             targetWidth: this.options.targetWidth,
@@ -445,20 +419,20 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
             caption: this.image.caption,
             credits: this.image.credits
         };
-        var json = JSON.stringify(TV, null, '  ');
+        var newValue = JSON.stringify(tvValue, null, '  ');
 
-        var external = document.getElementById(this.hiddenField);
-        var current = external.value || external.innerHTML || '';
+        var hiddenField = document.getElementById(this.hiddenField);
+        var currentValue = hiddenField.value || hiddenField.innerHTML || '';
 
-        if (current !== '' && JSON.parse(current)) {
-            current = JSON.stringify(JSON.parse(current), null, '  ');
+        if (currentValue !== '' && JSON.parse(currentValue)) {
+            currentValue = JSON.stringify(JSON.parse(currentValue), null, '  ');
         } else {
-            current = '';
+            currentValue = '';
         }
 
         // Has value changed and is source image not empty?
-        if (external && current !== json && this.image.sourceImg.src !== '') {
-            external.value = json;
+        if (hiddenField && currentValue !== newValue && this.image.sourceImg.src !== '') {
+            hiddenField.value = newValue;
 
             // Mark resource as dirty
             MODx.fireResourceFormChange()
@@ -527,7 +501,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     clearImage: function () {
         this.image.sourceImg = null;
         this.oldSourceImg = null;
-        this.lastFileLabel = '';
+        this.oldSource = '';
         if (this.imagePreview.el) {
             jQuery(this.imagePreview.el.dom).attr('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==');
         }
@@ -572,7 +546,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
         });
         if (this.imagePreview.el) {
             this.imagePreview.el.dom.src = url;
-            this.imagePreview.show()
+            this.imagePreview.show();
         }
     }
 

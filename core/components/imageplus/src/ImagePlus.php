@@ -50,7 +50,7 @@ class ImagePlus
      * The version
      * @var string $version
      */
-    public $version = '2.9.0';
+    public $version = '2.9.1';
 
     /**
      * The class options
@@ -184,6 +184,7 @@ class ImagePlus
         $assetsUrl = $this->getOption('assetsUrl');
         $jsUrl = $this->getOption('jsUrl') . 'mgr/';
         $jsSourceUrl = $assetsUrl . '../../../source/js/mgr/';
+        $jsVendorUrl = $assetsUrl . '../../../source/vendor/';
         $cssUrl = $this->getOption('cssUrl') . 'mgr/';
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
         $nodeUrl = $assetsUrl . '../../../node_modules/';
@@ -195,7 +196,7 @@ class ImagePlus
             $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.migx_renderer.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'tools/JSON2.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($nodeUrl . 'jquery/dist/jquery.slim.min.js?v=v' . $this->version);
-            $this->modx->controller->addJavascript($jsSourceUrl . 'jcrop/jquery.jcrop.min.js?v=v' . $this->version);
+            $this->modx->controller->addJavascript($jsVendorUrl . 'jcrop/js/jquery.Jcrop.min.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.jquery.imagecrop.js?v=v' . $this->version);
             $this->modx->controller->addJavascript($jsSourceUrl . 'imageplus.grid.js?v=v' . $this->version);
             $this->modx->controller->addCss($cssSourceUrl . 'imageplus.css?v=v' . $this->version);
