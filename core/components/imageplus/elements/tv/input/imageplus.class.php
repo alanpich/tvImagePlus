@@ -60,24 +60,44 @@ class ImagePlusInputRender extends modTemplateVarInputRender
 
         $context = (isset ($_GET['wctx']) && $_GET['wctx']) ? $_GET['wctx'] : '';
         $obj = $this->modx->getContext($context);
-        $contextSettings = ($obj) ? $obj->config : null;
+        $contextSettings = ($obj) ? $obj->config : [];
+        $contextSettings = array_merge($this->modx->config, $contextSettings);
         $tvName = $this->tv->get('name');
 
-        // Prepare tv config for jsonification
+        // Prepare TV config
         $tvConfig = new stdClass();
-        $tvConfig->allowBlank = ($params['allowBlank'] === 'false' || $params['allowBlank'] === 0 || $params['allowBlank'] === false) ? false : true;;
-        $tvConfig->targetWidth = (int)$this->getTVConfig('target_width', $tvName, $contextSettings, $params['targetWidth']);
-        $tvConfig->targetHeight = (int)$this->getTVConfig('target_height', $tvName, $contextSettings, $params['targetHeight']);
-        $tvConfig->targetRatio = $this->getTVConfig('target_ratio', $tvName, $contextSettings, $params['targetRatio']);
-        $tvConfig->thumbnailWidth = (int)$this->getTVConfig('thumbnail_width', $tvName, $contextSettings, (isset($params['thumbnailWidth']) && $params['thumbnailWidth']) ? $params['thumbnailWidth'] : (($version['major_version'] >= 3) ? 400 : 150));
-        $tvConfig->altTagOn = (bool)$this->getTVConfig('allow_alt_tag', $tvName, $contextSettings, $params['allowAltTag']);
-        $tvConfig->captionOn = (bool)$this->getTVConfig('allow_caption', $tvName, $contextSettings, $params['allowCaption']);
-        $tvConfig->creditsOn = (bool)$this->getTVConfig('allow_credits', $tvName, $contextSettings, $params['allowCredits']);
+        $tvConfig->allowBlank = !($params['allowBlank'] === 'false' || $params['allowBlank'] === 0 || $params['allowBlank'] === false);
+        if (!empty($params['targetWidth']) || !empty($params['targetHeight']) || !empty($params['targetRatio'])) {
+            $tvConfig->targetWidth = !empty($params['targetWidth']) ? (int)$params['targetWidth'] : null;
+            $tvConfig->targetHeight = !empty($params['targetHeight']) ? (int)$params['targetHeight'] : null;
+            if (!$tvConfig->targetWidth || !$tvConfig->targetHeight) {
+                $targetRatio = !empty($params['targetRatio']) ? (float)$params['targetRatio'] : null;
+            } else {
+                $targetRatio = $tvConfig->targetWidth / $tvConfig->targetHeight;
+            }
+            $tvConfig->targetRatio = $targetRatio;
+        } else {
+            $targetWidth = $this->getTVConfig('target_width', $tvName, $contextSettings, isset($params['targetWidth']) && $params['targetWidth'] !== '' ? $params['targetWidth'] : null);
+            $tvConfig->targetWidth = ($targetWidth) ? (int)$targetWidth : null;
+            $targetHeight = $this->getTVConfig('target_height', $tvName, $contextSettings, isset($params['targetHeight']) && $params['targetHeight'] !== '' ? $params['targetHeight'] : null);
+            $tvConfig->targetHeight = ($targetHeight) ? (int)$targetHeight : null;
+            if (!$tvConfig->targetWidth || !$tvConfig->targetHeight) {
+                $targetRatio = $this->getTVConfig('target_width', $tvName, $contextSettings, isset($params['targetRatio']) && $params['targetRatio'] !== '' ? $params['targetRatio'] : null);
+                $targetRatio = ($targetRatio) ? (float)$targetRatio : null;
+            } else {
+                $targetRatio = $tvConfig->targetWidth / $tvConfig->targetHeight;
+            }
+            $tvConfig->targetRatio = $targetRatio;
+        }
+        $tvConfig->thumbnailWidth = (int)$this->getTVConfig('thumbnail_width', $tvName, $contextSettings, (!empty($params['thumbnailWidth'])) ? $params['thumbnailWidth'] : (($version['major_version'] >= 3) ? 400 : 150));
+        $tvConfig->altTagOn = (bool)$this->getTVConfig('allow_alt_tag', $tvName, $contextSettings, $params['allowAltTag'] ?? null);
+        $tvConfig->captionOn = (bool)$this->getTVConfig('allow_caption', $tvName, $contextSettings, $params['allowCaption'] ?? null);
+        $tvConfig->creditsOn = (bool)$this->getTVConfig('allow_credits', $tvName, $contextSettings, $params['allowCredits'] ?? null);
         $tvConfig->mediaSource = $source->get('id');
         $tvConfig->tvId = $this->tv->get('id');
         $tvConfig->tvParams = $this->getInputOptions();
 
-        $this->setPlaceholder('tvConfig', json_encode($tvConfig));
+        $this->setPlaceholder('tvConfig', json_encode($tvConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
         // Prepare value
         $this->tv->value = $imageplus->prepareTvValue($this->tv->value, $params, $this->tv);
@@ -92,20 +112,17 @@ class ImagePlusInputRender extends modTemplateVarInputRender
      */
     private function getTVConfig($key, $name, $config, $default)
     {
-        // Global System/$config setting
-        $settingKey = 'imageplus.' . $key;
-        // Use MODX System setting if defined and not empty
-        $value = (isset($this->modx->config[$settingKey]) && !empty($this->modx->config[$settingKey])) ? $this->modx->config[$settingKey] : $default;
-        // Use $config setting if defined and not empty
-        $value = (isset($config[$settingKey]) && !empty($config[$settingKey])) ? $config[$settingKey] : $value;
+        if (is_null($default)) {
+            // Use $config if defined and not empty
+            $value = $this->modx->getOption('imageplus.' . $key, $config, $default, true);
 
-        // TV name based System/$config setting
-        if ($name) {
-            $settingKey = 'imageplus.' . $name . '.' . $key;
-            // Use MODX System setting if defined and not empty
-            $value = (isset($this->modx->config[$settingKey]) && !empty($this->modx->config[$settingKey])) ? $this->modx->config[$settingKey] : $value;
-            // Use $config setting if defined and not empty
-            $value = (isset($config[$settingKey]) && !empty($config[$settingKey])) ? $config[$settingKey] : $value;
+            // TV name based
+            if ($name) {
+                // Use $config if defined and not empty
+                $value = $this->modx->getOption('imageplus.' . $name . '.' . $key, $config, $value, true);
+            }
+        } else {
+            $value = $default;
         }
 
         return $value;
