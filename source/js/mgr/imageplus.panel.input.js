@@ -322,7 +322,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
                     ths.image.crop.x = 0;
                     ths.image.crop.y = 0;
                     if (ths.options.targetRatio) {
-                        if (ths.image.sourceImg.width / ths.image.sourceImg.height < ths.options.targetRatio) {
+                        if (ths.image.sourceImg.width / ths.image.sourceImg.height >= ths.options.targetRatio) {
                             ths.image.crop.width = ths.image.sourceImg.width;
                             ths.image.crop.height = Math.ceil(ths.image.sourceImg.width / ths.options.targetRatio);
                         } else {
