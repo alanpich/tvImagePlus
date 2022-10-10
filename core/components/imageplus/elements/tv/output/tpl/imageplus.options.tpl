@@ -59,7 +59,7 @@
                     xtype: 'modx-combo',
                     url: MODx.config.connectors_url + 'index.php',
                     baseParams: {
-                        action: 'element/chunk/getlist'
+                        action: (ImagePlus.config.modxversion === '2') ? 'element/chunk/getlist' : 'Element/Chunk/GetList'
                     },
                     pageSize: 20,
                     fields: ['name', 'id'],

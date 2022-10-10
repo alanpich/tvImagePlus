@@ -5,11 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.9.3] - TBA
+## [2.9.3] - 2022-10-10
 
 ### Fixed
 
 - Fix a swapped ratio for the displayed image, when no crop is created after selecting an image
+- Fix chunk getlist processor not found in MODX 3.x [#113]
 
 ## [2.9.2] - 2022-08-01
 
