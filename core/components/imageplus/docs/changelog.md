@@ -109,7 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixing a jQuery issue with ContentBlocks and other extras that use jQuery inside [#60]
 - Fixing cannot read property 'destroy' of undefined issue
 - Fixing Undefined property issue [#71]
-- Fixing a window issue with really small images [#53]
+- Fixing a window issue with tiny images [#53]
 
 ### Removed
 
@@ -156,7 +156,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- System wide predefined crop sizes/aspect ratios, selectable in the TV options
+- System-wide predefined crop sizes/aspect ratios, selectable in the TV options
 - Context/system settings that supercede the TV options
 
 ### Removed
@@ -183,7 +183,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Don't try get an Image+ url with an empty template variable value
+- Don't try to get an Image+ url with an empty template variable value
 - Change the image by typing the filename
 - Correcting typos, refactored code
 

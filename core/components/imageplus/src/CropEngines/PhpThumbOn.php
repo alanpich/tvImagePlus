@@ -37,7 +37,7 @@ class PhpThumbOn extends AbstractCropEngine
     }
 
     /**
-     * Parse image+ data and return a url for the cropped
+     * Parse image+ data and return an url for the cropped
      * version of the image
      *
      * @param $json

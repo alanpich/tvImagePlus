@@ -17,5 +17,5 @@ the required dimensions/proportions.
 * Visual Image cropping tool integrated into the MODX manager interface.
 * Option to constrain minimal width and/or height for the uploaded image. 
 * User image crop can be forced to remain at pre-set ratio.
-* Use a chunk as an output template and fill placeholders with url, height, width, alt-tag, phpthumb options etc of the 
+* Use a chunk as an output template and fill placeholders with url, height, width, alt-tag, phpthumb options etc. of the 
   cropped uploaded image.

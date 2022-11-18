@@ -33,7 +33,7 @@ $_lang['imageplus.allowCredits'] = 'Показать поле «Авторы»';
 $_lang['imageplus.allowCredits_desc'] = 'Разрешить пользователю ввести Автора для изображения.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Дополнительные параметры phpThumb';
-$_lang['imageplus.phpThumbParams_desc'] = 'Добавляет дополнительные фильтры и другие параметры для phpThumb. Документацию можно найти <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">здесь</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Добавляет дополнительные фильтры и другие параметры для phpThumb. Документацию можно найти <a href="https://raw.githubusercontent.com/JamesHeinrich/phpThumb/master/docs/phpthumb.readme.txt" target="_blank">здесь</a>.';
 $_lang['imageplus.outputChunk'] = 'Чанк для вывода';
 $_lang['imageplus.outputChunk_desc'] = 'Выберите чанк для вывода TV. Оставьте пустым для обычного вывода текстом.';
 $_lang['imageplus.generateUrl'] = 'Генерировать Thumb URL';

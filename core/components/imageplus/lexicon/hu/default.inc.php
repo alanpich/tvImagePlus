@@ -33,7 +33,7 @@ $_lang['imageplus.allowCredits'] = 'Mutasd a kreditek mezőt';
 $_lang['imageplus.allowCredits_desc'] = 'Lehetővé teszi a felhasználó számára, hogy megadja a kép kreditpontját.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'További phpThumb paraméterek';
-$_lang['imageplus.phpThumbParams_desc'] = 'További szűrők stb. hozzáadása a phpThumbhoz. A dokumentáció megtalálható <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">itt</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'További szűrők stb. hozzáadása a phpThumbhoz. A dokumentáció megtalálható <a href="https://raw.githubusercontent.com/JamesHeinrich/phpThumb/master/docs/phpthumb.readme.txt" target="_blank">itt</a>.';
 $_lang['imageplus.outputChunk'] = 'Kimeneti chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Válasszon ki egy darabot a tv-kimenethez. Hagyja üresen a nyers url kimenethez.';
 $_lang['imageplus.generateUrl'] = 'Hüvelykujj URL generálása';

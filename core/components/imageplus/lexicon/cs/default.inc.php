@@ -33,7 +33,7 @@ $_lang['imageplus.allowCredits'] = 'Zobrazit pole Kredity';
 $_lang['imageplus.allowCredits_desc'] = 'Umožnit uživateli zadat kredit obrázku.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Další phpThumb parametry';
-$_lang['imageplus.phpThumbParams_desc'] = 'Přidání dalších filtrů atd. pro phpThumb. Dokumentaci najdete <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">zde</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Přidání dalších filtrů atd. pro phpThumb. Dokumentaci najdete <a href="https://raw.githubusercontent.com/JamesHeinrich/phpThumb/master/docs/phpthumb.readme.txt" target="_blank">zde</a>.';
 $_lang['imageplus.outputChunk'] = 'Výstupní chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Vyberte chunk pro výstup TV. Nechte prázdé pro výstup čisté URL.';
 $_lang['imageplus.generateUrl'] = 'Generovat URL miniatury';

@@ -33,7 +33,7 @@ $_lang['imageplus.allowCredits'] = 'Vis feltet Credits';
 $_lang['imageplus.allowCredits_desc'] = 'Tillader brugeren at angive en kredit for billedet.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Ekstra phpThumb parametre';
-$_lang['imageplus.phpThumbParams_desc'] = 'Tilføj ekstra filtre osv. til phpThumb. Dokumentationen kan findes <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">her</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Tilføj ekstra filtre osv. til phpThumb. Dokumentationen kan findes <a href="https://raw.githubusercontent.com/JamesHeinrich/phpThumb/master/docs/phpthumb.readme.txt" target="_blank">her</a>.';
 $_lang['imageplus.outputChunk'] = 'Output chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Vælg en chunk til tv-udgang. Lad det være tomt for rå url-udgang.';
 $_lang['imageplus.generateUrl'] = 'Generer URL til miniature';

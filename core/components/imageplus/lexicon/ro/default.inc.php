@@ -33,7 +33,7 @@ $_lang['imageplus.allowCredits'] = 'Afișați câmpul Credite';
 $_lang['imageplus.allowCredits_desc'] = 'Permite utilizatorului să introducă un credit pentru imagine.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Parametrii suplimentari phpThumb';
-$_lang['imageplus.phpThumbParams_desc'] = 'Adăugați filtre suplimentare etc. pentru phpThumb. Documentația poate fi găsită <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">aici</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Adăugați filtre suplimentare etc. pentru phpThumb. Documentația poate fi găsită <a href="https://raw.githubusercontent.com/JamesHeinrich/phpThumb/master/docs/phpthumb.readme.txt" target="_blank">aici</a>.';
 $_lang['imageplus.outputChunk'] = 'Output Chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Selectați o bucată pentru ieșirea TV. Lăsați gol pentru ieșirea în format raw url.';
 $_lang['imageplus.generateUrl'] = 'Generarea URL-ului degetului mare';

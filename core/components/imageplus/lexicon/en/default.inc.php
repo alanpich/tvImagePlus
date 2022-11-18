@@ -33,7 +33,7 @@ $_lang['imageplus.allowCredits'] = 'Show Credits Field';
 $_lang['imageplus.allowCredits_desc'] = 'Allow user to enter a credit for the image.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Additional phpThumb Parameters';
-$_lang['imageplus.phpThumbParams_desc'] = 'Add additional filters etc for phpThumb. Documentation can be found <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">here</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Add additional filters etc for phpThumb. Documentation can be found <a href="https://raw.githubusercontent.com/JamesHeinrich/phpThumb/master/docs/phpthumb.readme.txt" target="_blank">here</a>.';
 $_lang['imageplus.outputChunk'] = 'Output Chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Select a chunk for tv output. Leave blank for raw url output.';
 $_lang['imageplus.generateUrl'] = 'Generate Thumb URL';

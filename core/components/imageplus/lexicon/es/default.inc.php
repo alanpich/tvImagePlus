@@ -33,7 +33,7 @@ $_lang['imageplus.allowCredits'] = 'Mostrar campo de créditos';
 $_lang['imageplus.allowCredits_desc'] = 'Permitir al usuario introducir un crédito para la imagen.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Parámetros phpThumb adicionales';
-$_lang['imageplus.phpThumbParams_desc'] = 'Añade filtros adicionales etc a phpThumb. La documentación se puede encontrar <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">aquí</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = 'Añade filtros adicionales etc a phpThumb. La documentación se puede encontrar <a href="https://raw.githubusercontent.com/JamesHeinrich/phpThumb/master/docs/phpthumb.readme.txt" target="_blank">aquí</a>.';
 $_lang['imageplus.outputChunk'] = 'Resultado chunk';
 $_lang['imageplus.outputChunk_desc'] = 'Selecciona un chunk para obtener un resultado del tv. Dejar en vacío para obtener un resultado de la url cruda.';
 $_lang['imageplus.generateUrl'] = 'Generar la URL del pulgar';

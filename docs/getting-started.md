@@ -10,7 +10,7 @@ For most use cases, you should also set the **Output Type** in Output Options to
 ## The cropping tool
 
 When using an *Image+* TV, you could select an image exactly the same way as in
-a normal *Image* TV. Once an image is selected, a cropping window is displayed
+a normal *Image* TV. Once an image is selected, a cropping window is displayed,
 and you could select the area of the image to use. The original image is not
 changed and so you can upload a single image, and re-use it in several places at
 different sizes (and crops with multiple Image+ TVs) around the site.

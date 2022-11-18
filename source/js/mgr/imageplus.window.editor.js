@@ -75,7 +75,7 @@ Ext.extend(ImagePlus.window.Editor, Ext.Window, {
     getDisplayHeight: function () {
         return Math.round(this.image.sourceImg.height * this.displayRatio);
     },
-    // Get a url to image resized for window
+    // Get an url to image resized for window
     getImageUrl: function () {
         return this.inputPanel.generateThumbUrl({
             src: this.image.sourceImg.src,

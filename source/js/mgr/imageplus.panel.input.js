@@ -16,7 +16,7 @@ ImagePlus.panel.input = function (config) {
     this.createImagePreview();
     this.createTextFields();
 
-    // Warn if has no dependencies
+    // Warn if it has no dependencies
     if (ImagePlus.config.hasUnmetDependencies) {
         ImagePlus.warnAboutUnmetDependencies()
     }

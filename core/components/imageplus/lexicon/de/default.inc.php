@@ -33,7 +33,7 @@ $_lang['imageplus.allowCredits'] = 'Bildnachweis Feld anzeigen';
 $_lang['imageplus.allowCredits_desc'] = 'Ermöglicht die Eingabe eines Bildnachweises für das Bild.';
 /** Output options render **/
 $_lang['imageplus.phpThumbParams'] = 'Zursätzliche phpThumb Parameter';
-$_lang['imageplus.phpThumbParams_desc'] = '(Optional) Geben Sie zusätzliche phpThumb Parameter an. Mehr Informationen zu phpThumb Parametern erhalten Sie <a href="http://phpthumb.sourceforge.net/demo/docs/phpthumb.readme.txt" target="_blank">hier</a>.';
+$_lang['imageplus.phpThumbParams_desc'] = '(Optional) Geben Sie zusätzliche phpThumb Parameter an. Mehr Informationen zu phpThumb Parametern erhalten Sie <a href="https://raw.githubusercontent.com/JamesHeinrich/phpThumb/master/docs/phpthumb.readme.txt" target="_blank">hier</a>.';
 $_lang['imageplus.outputChunk'] = 'Ausgabe Chunk';
 $_lang['imageplus.outputChunk_desc'] = '(Optional) Wählen Sie einen Ausgabe Chunk aus. Wenn kein Wert angebeben ist wird der Bildpfad ausgegeben.';
 $_lang['imageplus.generateUrl'] = 'Thumbnail URL generieren';
