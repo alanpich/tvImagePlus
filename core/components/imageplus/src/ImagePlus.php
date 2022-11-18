@@ -50,7 +50,7 @@ class ImagePlus
      * The version
      * @var string $version
      */
-    public $version = '2.9.3';
+    public $version = '2.9.3-pl2';
 
     /**
      * The class options

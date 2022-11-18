@@ -3,7 +3,7 @@
   "lowCaseName": "imageplus",
   "description": "Advanced Image Template Variable",
   "author": "Alan Pich, Thomas Jakobi",
-  "version": "2.9.3",
+  "version": "2.9.3-pl2",
   "package": {
     "elements": {
       "chunks": [
@@ -124,7 +124,7 @@
   "dependencies": [
     {
       "name": "php",
-      "version": ">=7.2.5"
+      "version": ">=7.1"
     },
     {
       "name": "modx",
