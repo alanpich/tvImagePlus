@@ -75,7 +75,6 @@ class ImagePlusInputRender extends modTemplateVarInputRender
             } else {
                 $targetRatio = $tvConfig->targetWidth / $tvConfig->targetHeight;
             }
-            $tvConfig->targetRatio = $targetRatio;
         } else {
             $targetWidth = $this->getTVConfig('target_width', $tvName, $contextSettings, isset($params['targetWidth']) && $params['targetWidth'] !== '' ? $params['targetWidth'] : null);
             $tvConfig->targetWidth = ($targetWidth) ? (int)$targetWidth : null;
@@ -87,8 +86,8 @@ class ImagePlusInputRender extends modTemplateVarInputRender
             } else {
                 $targetRatio = $tvConfig->targetWidth / $tvConfig->targetHeight;
             }
-            $tvConfig->targetRatio = $targetRatio;
         }
+        $tvConfig->targetRatio = $targetRatio;
         $tvConfig->thumbnailWidth = (int)$this->getTVConfig('thumbnail_width', $tvName, $contextSettings, (!empty($params['thumbnailWidth'])) ? $params['thumbnailWidth'] : (($version['major_version'] >= 3) ? 400 : 150));
         $tvConfig->altTagOn = (bool)$this->getTVConfig('allow_alt_tag', $tvName, $contextSettings, $params['allowAltTag'] ?? null);
         $tvConfig->captionOn = (bool)$this->getTVConfig('allow_caption', $tvName, $contextSettings, $params['allowCaption'] ?? null);
