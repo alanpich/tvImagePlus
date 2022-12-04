@@ -121,7 +121,7 @@ ImagePlus.grid.SizesRatio = function (config) {
             }
         }
     });
-    ImagePlus.grid.SizesRatio.superclass.constructor.call(this, config)
+    ImagePlus.grid.SizesRatio.superclass.constructor.call(this, config);
 };
 Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
     windows: {},
