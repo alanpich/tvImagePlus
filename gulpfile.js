@@ -101,7 +101,7 @@ const bumpVersion = function () {
     return gulp.src([
         'core/components/imageplus/src/ImagePlus.php'
     ], {base: './'})
-        .pipe(replace(/version = '\d+.\d+.\d+[-a-z0-9]*'/ig, 'version = \'' + pkg.version + '\''))
+        .pipe(replace(/version = '\d+\.\d+\.\d+[-a-z0-9]*'/ig, 'version = \'' + pkg.version + '\''))
         .pipe(gulp.dest('.'));
 };
 const bumpOptions = function () {
@@ -131,11 +131,11 @@ gulp.task('bump', gulp.series(bumpCopyright, bumpVersion, bumpOptions, bumpDocs,
 
 gulp.task('watch', function () {
     // Watch .js files
-    gulp.watch(['source/js/**/*.js'], gulp.series('scripts'));
+    gulp.watch(['./source/js/**/*.js'], gulp.series('scripts'));
     // Watch .scss files
-    gulp.watch(['source/sass/**/*.scss'], gulp.series('sass'));
+    gulp.watch(['./source/sass/**/*.scss'], gulp.series('sass'));
     // Watch *.(png|jpg|gif|svg) files
-    gulp.watch(['source/img/**/*.(png|jpg|gif|svg)'], gulp.series('images'));
+    gulp.watch(['./source/img/**/*.(png|jpg|gif|svg)'], gulp.series('images'));
 });
 
 // Default Task
