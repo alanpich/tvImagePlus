@@ -24,7 +24,7 @@ ImagePlus.grid.SizesRatio = function (config) {
         hidden: true
     });
     Ext.applyIf(config, {
-        id: this.ident + '-sizes-ratio-grid',
+        id: this.ident,
         fields: ['id', 'name', 'targetwidth', 'targetheight', 'targetRatio', 'rank'],
         autoHeight: true,
         store: new Ext.data.JsonStore({
