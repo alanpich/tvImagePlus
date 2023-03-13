@@ -1,10 +1,9 @@
 # Image+
 
-Image+ is an advanced image custom template variable type for MODx Revolution.
-The dimensions for the uploaded image can (optionally) be configured to
-constrain a minimal width and/or height. The image crop could be forced to
-remain at a pre-set ratio. A graphical tool could be used to crop the image to
-the required dimensions/proportions.
+Image+ is an advanced image template for MODx Revolution. The dimensions for the
+uploaded image can be configured (optionally) to restrict a minimum width and/or
+height. Image cropping can be forced to stay within a preset ratio. A graphical
+tool can be used to resize the image to the desired dimensions/proportions.
 
 ### Requirements
 
@@ -14,8 +13,8 @@ the required dimensions/proportions.
 
 ### Features
 
-* Visual Image cropping tool integrated into the MODX manager interface.
-* Option to constrain minimal width and/or height for the uploaded image. 
-* User image crop can be forced to remain at pre-set ratio.
-* Use a chunk as an output template and fill placeholders with url, height, width, alt-tag, phpthumb options etc. of the 
-  cropped uploaded image.
+* Visual tool for cropping images, integrated with MODX Manager interface.
+* Option to restrict minimum width and/or height for uploaded image.
+* User image cropping can be forced to stay at preset ratio.
+* Use chunk as output mask and fill placeholders with url, height, width, alt
+  tag, phpthumb options etc. of cropped uploaded image.

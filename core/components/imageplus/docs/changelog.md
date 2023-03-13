@@ -5,11 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.9.4] - TBA
+## [2.9.4] - 2023-03-13
 
 ### Fixed
 
-- Fix PHP warning: Undefined array key targetHeight & targetWidth (#115)
+- Fix PHP warning: Undefined array key targetHeight & targetWidth [#115]
+- Fix reset the TV value to a default value [#116]
 
 ## [2.9.3] - 2022-10-10
 

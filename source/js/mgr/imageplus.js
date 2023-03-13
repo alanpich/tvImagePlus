@@ -14,10 +14,10 @@ Ext.extend(imagePlus, Ext.Component, {
     page: {}, window: {}, grid: {}, tree: {}, panel: {}, combo: {}, config: {}, jquery: {}, form: {},
 
     generateThumbUrl: function (params) {
-        return this.generatePhpThumbOfUrl(params);
+        return this.generatePhpThumbUrl(params);
     },
 
-    generatePhpThumbOfUrl: function (params) {
+    generatePhpThumbUrl: function (params) {
         var url = MODx.config.connectors_url + 'system/phpthumb.php?';
         var defaults = {
             wctx: 'mgr',

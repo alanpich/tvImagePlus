@@ -1,154 +1,165 @@
 ## Input Options
 
-In *Image+* you could control the final size and aspect ratio of selected
-images. There are several extended input options available for an *Image+* TV:
+In *Image+* you can control the final size and aspect ratio of selected
+images. For an *Image+* TV, several advanced input options are available:
 
 #### Target Height/Width
 
-Images can be constrained to a minimal height and/or width with **Target
-height** and **Target width**. If both values are set, the target aspect ratio
-of the output image is calculated with these values. Both fields have to be
+Images can be constrained to a minimum height and/or width with **Target
+Height** and **Target Width**. If both values are set, the target aspect ratio
+of the output image will be calculated with these values. Both fields must be
 filled with an integer value.
 
 #### Target Aspect Ratio
 
-The aspect ratio for the output image could be restricted with **Target Aspect
-Ratio**. If target height and target width are set, this value is ignored and
-the calculated aspect ratio of target height and target width is used. The field
-has to be filled with a float value.
+The aspect ratio for the output image can be restricted with **Target aspect
+ratio**. If target height and target width are specified, this value is ignored
+and the calculated aspect ratio of target height and target width is used. The
+field must be filled with a float value.
 
-If you set only one value of **Target Height** or **Target Width** and leave
-empty **Target Aspect Ratio**, the size of the crop is not restricted to any
+If you specify only a value for **Target Height** or **Target Width** and leave
+**Target Aspect Ratio** blank, the size of the crop is not constrained to any
 aspect ratio.
 
 !!! note "How to calculate the aspect ratio"
-    The aspect ratio contains a float value: this value is easily acquired by
-    dividing any width of a desired aspect ratio by its corresponding height. So
-    say you want to all your crops to have the same aspect ratio as a `1600x1000`
-    image, simply divide `1600` by `1000`, resulting in `1.6`. This is your aspect
-    ratio value.
+    The aspect ratio contains a floating point value: this value can be easily
+    determined by dividing any width with the desired aspect ratio by the
+    corresponding height. For example, suppose you want all your crops to have the
+    same aspect ratio as an image of size "1600x1000", then simply divide "1600" by
+    "1000", which gives the value "1.6". This is the value for your aspect ratio.
 
 #### Show Alt Tag Field
 
-*Image+* TVs can also contain an **Alt Tag Field**, which is an additional text
-input, that is stored with each image. It could be output alongside the image
-i.e. as an alt-tag or title-tag.
+*Image+* TVs can also contain an **Alt Tag field** which is an additional text
+input that is stored with each image. It can be output next to the image i.e. as
+an alt tag or title tag.
 
-In order to output the alt text in a *Image+* TV placeholder, you will need to
-select a chunk in the **Output Options**. You could also use the ImagePlus
-snippet and specify a template chunk in the snippet call options. The alt text
-is filled in the placeholder `[[+alt]]` in that chunk.
+To output the alt text in an *Image+* TV placeholder, you need to select a chunk
+in the **Output Options**. You can also use the ImagePlus snippet and specify a
+template chunk in the snippet call options. The alt text is entered in the
+`[[+alt]]` placeholder in this chunk.
 
 #### Show Caption Field
 
-*Image+* TVs can also contain a **Caption Field**, which is an additional text
-input, that is stored with each image. It could be output beneath the image
-i.e. in an additional caption div.
+*Image+* TVs can also include a **Caption Div**, which is an additional text
+input that is stored with each image. This can be output below the image, i.e.
+in an additional caption div.
 
-In order to output the caption in a *Image+* TV placeholder, you will need to
-select a chunk in the **Output Options**. You could also use the ImagePlus
-snippet and specify a template chunk in the snippet call options. The caption is
-filled in the placeholder `[[+caption]]` in that chunk.
+To output the caption in an *Image+* TV placeholder, you must select a chunk in
+the **Output Options**. You can also use the ImagePlus snippet and specify a
+template chunk in the call options of the snippet. The caption will be inserted
+into the `[[+caption]]` placeholder in that chunk.
 
 #### Show Credits Field
 
-*Image+* TVs can also contain a **Credits Field**, which is an additional text
-input, that is stored with each image. It could be output beneath the image
-i.e. in an additional credits div.
+*Image+* TVs can also include a **Credits field**, which is an additional text
+input stored with each image. It can be output below the image, for example in
+an additional credits field.
 
-In order to output the credits in an *Image+* TV placeholder, you will need to
-select a chunk in the **Output Options**. You could also use the ImagePlus
-snippet and specify a template chunk in the snippet call options. The credits
-are filled in the placeholder `[[+credits]]` in that chunk.
+To output the credits in an *Image+* TV placeholder, you must select a chunk in
+the **Output Options**. You can also use the ImagePlus snippet and specify a
+template chunk in the snippet's call options. The credits are inserted into the
+`[[+credits]]` placeholder in that chunk.
 
 ### Context/System Settings
 
-Each *Image+* TV **Input Option** could be superceded by a context setting or a
-system setting. And context/system settings for a single TV could be defined,
-too. 
+Each *Image+* TV **Input Option** can be replaced by a context or system
+setting. And context/system settings can be defined for a single TV.
 
-There are predefined system settings in the `imageplus` namespace, that are
-empty or equal zero. If you enable one or fill it with a value, this setting
-will supercede the Input Options of all Image+ TVs. Context settings have to be
-created before usage.
+There are predefined system settings in the `imageplus` namespace which are
+empty or zero. If you activate one of them or fill it with a value, this setting
+will override the input options of all image+ TVs. Context settings must be
+created before they can be used.
 
-The global context/system settings have the prefix `imageplus.` and the single
-TV context/system settings have the prefix `imageplus.{tvname}.`. `{tvname}` has
-to be replaced by the name of the template variable.
+| Key                       | Name                                      | Description                                                                                     | Default |
+|---------------------------|-------------------------------------------|-------------------------------------------------------------------------------------------------|---------|
+| imageplus.allow_alt_tag   | Show Alt Tag Field                        | Allow user to enter a title/alt-tag for the image.                                              | No      |
+| imageplus.allow_caption   | Show Caption Field                        | Allow user to enter a caption for the image.                                                    | No      |
+| imageplus.allow_credits   | Show Credits Field                        | Allow user to enter a credit for the image.                                                     | No      |
+| imageplus.debug           | Debug                                     | Log debug information in the MODX error log.                                                    | No      |
+| imageplus.force_config    | Force predefined crop sizes/aspect ratios | Force the usage of predefined crop size/aspect ratios.                                          | No      |
+| imageplus.select_config   | Predefined crop sizes/aspect ratios       | Create predefined crop size/aspect ratios that are selectable in the template variable options. | []      |
+| imageplus.target_height   | Target Height                             | Constrain the target images to a minimal height.                                                | -       |
+| imageplus.target_ratio    | Target Aspect Ratio                       | Restrict the target images to a aspect ratio.                                                   | -       |
+| imageplus.target_width    | Target Width                              | Constrain the target images to a minimal width.                                                 | -       |
+| imageplus.thumbnail_width | Thumbnail Width                           | The thumbnail width of the image in the template variable panel.                                | -       |
 
-The order for those settings is [^1]
+The global context/system settings have the prefix `imageplus.` and the
+individual TV context/system settings have the prefix `imageplus.{tvname}.`.
+`{tvname}` must be replaced with the name of the template variable.
+
+The order for these settings is [^1].
 
 - TV name based context setting
 - TV name based system setting
 - context setting
 - system setting
 
-In the `imageplus.select_config` system setting, you could create predefined
-crop sizes/aspect ratios with a helper grid. To force use the predefined
-sizes/ratios, you could enable the `imageplus.force_config` system setting.
+In the `imageplus.select_config` system setting, you can create predefined
+internal forces/aspect ratios with an auxiliary grid. To force the use of the
+predefined sizes/ratios, you can activate the system setting
+`imageplus.force_config`.
 
 ## Output Options
 
-There are several extended output options available for of an *Image+* TV:
+Several advanced output options are available for an *Image+* TV:
 
 #### Additional phpThumb Parameters
 
-As default an *Image+* TV returns a relative URL to a cropped (and maybe
-constrained) image that is scaled by phpThumb. With this output option, you
-could assign several additional phpThumb parameters, that are used to generate
-the thumbnail image.
+By default, an *Image+* TV returns a relative URL to a cropped (and possibly
+constrained) image scaled by phpThumb. This output option allows you to assign
+several additional phpThumb parameters that will be generated to create the
+thumbnail image.
 
 #### Output Chunk
 
-If you select an **Output Chunk** the TV output is rendered with that chunk.
-Select the chunk name from the dropdown. Several placeholders are possible in
-that chunk to customize the output:
+When you select an **Output Chunk**, the TV output is rendered using that chunk.
+Select the name of the chunk from the drop-down menu. Multiple placeholders are
+possible in this chunk to customize the output:
 
 | Placeholder   | Description                                                    |
 |---------------|----------------------------------------------------------------|
-| url           | URL of the thumbnail image                                     |
 | alt           | Alt text                                                       |
-| width         | Minimal width of the thumbnail image                           |
-| height        | Minimal height of the thumbnail image                          |
-| source.src    | Full path of the source image on the server (not a URL)        |
-| source.width  | Width of the source image                                      |
-| source.height | Height of the source image                                     |
-| crop.width    | Crop width of the thumbnail image                              |
 | crop.height   | Crop height of the thumbnail image                             |
+| crop.options  | Crop engine crop option string to generate the thumbnail image |
+| crop.width    | Crop width of the thumbnail image                              |
 | crop.x        | Crop x position of the thumbnail image                         |
 | crop.y        | Crop y position of the thumbnail image                         |
+| height        | Minimal height of the thumbnail image                          |
 | options       | Crop engine full option string to generate the thumbnail image |
-| crop.options  | Crop engine crop option string to generate the thumbnail image |
+| source.height | Height of the source image                                     |
+| source.src    | Full path of the source image on the server (not a URL)        |
+| source.width  | Width of the source image                                      |
+| url           | URL of the thumbnail image                                     |
+| width         | Minimal width of the thumbnail image                           |
 
-All these placeholders could be used in the Snippet too.
+All these placeholders can be used in the Snippet too.
 
 #### Generate Thumb URL
 
-If you create the thumbnail in output chunk i.e. by a pthumb output filter, you
-could disable the generation of the internal thumb URL.
+If you create the thumbnail in the output chunk, i.e. through a pthumb output
+filter, you can disable the generation of the internal thumb URL.
 
 !!! caution "Caution"
-    You have to activate this option, when you don't specify an output chunk in
-    the output options or when you use the `[[+url]]` placeholder in the specified
-    output chunk. Otherwise, the image is not cropped/resized and the original
-    image path is returned.
+    You must enable this option if you do not specify an output chunk in the output
+    options or if you use the `[[+url]]` placeholder in the specified output chunk.
+    Otherwise the image will not be cropped/truncated and the original image path
+    will be returned.
 
 ## Snippet
 
-The snippet gives you a second option to render the TV value. With the template
-variable output, you are restricted to one output chunk per template variable,
-with the snippet you could be more flexiple use different output chunks. The
-following properties could be set in the snippet call:
+The snippet gives you a second way to display the TV value. With template
+variable output you are limited to one output chunk per template variable, with
+the snippet you can be more flexible and use different output chunks. The
+following properties can be set in the snippet call:
 
-| Property | Description                                                                                              | Default          |
-|----------|----------------------------------------------------------------------------------------------------------|------------------|
-| tvname   | Name of the Image+ TV.                                                                                   | -                |
-| docid    | Resource where the Image+ TV value is received from.                                                     | Current resource |
-| type     | Type of the snippet output. Could be set to `check` [^2], `tpl` [^3] and `thumb` [^4].                   | thumb            |
-| options  | Extended phpThumb options for the image [^5].                                                            | -                |
-| tpl      | Template chunk for the snippet output [^6].                                                              | ImagePlus.image  |
-| value    | Use your own JSON encoded value for the snippet output. The properties `tvname` and `docid` are ignored. | -                |
-| debug    | Log debug information in MODX error log.                                                                 | 0 (No)           |
+| Property | Description                                                                           | Default         |
+|----------|---------------------------------------------------------------------------------------|-----------------|
+| docid    | Resource where the Image+ TV value is received from.                                  | -               |
+| options  | Extended phpThumb options for the image.                                              | -               |
+| tpl      | Template chunk for the snippet output.                                                | ImagePlus.image |
+| tvname   | Name of the Image+ TV.                                                                | -               |
+| type     | Type of the snippet output. Could be set to <i>check</i> <i>tpl</i> and <i>thumb</i>. | -               |
 
 #### Example
 
@@ -162,7 +173,7 @@ following properties could be set in the snippet call:
 ]]
 ```
 
-This snippet call outputs the content of the template variable with the name
+This snippet call returns the contents of the template variable named
 `imageplus` of resource `1` and the extended phpThumb option `&w=100` (width:
 100px) in the parsed `ImagePlus.demo` chunk.
 

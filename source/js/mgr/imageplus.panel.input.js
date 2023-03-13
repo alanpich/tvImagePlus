@@ -61,7 +61,7 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     listenForResetEvent: function () {
         var resourcePanel = Ext.getCmp('modx-panel-resource');
         resourcePanel.on('tv-reset', function (changed) {
-            if (changed.id === this.options.tvId) {
+            if (parseInt(changed.id) === this.options.tvId) {
                 this.onReset();
             }
         }, this);
@@ -230,8 +230,8 @@ Ext.extend(ImagePlus.panel.input, MODx.Panel, {
     },
     // Fires when the TV field is reset
     onReset: function () {
-        this.imageBrowser.setValue('');
-        this.image.sourceImg = false;
+        this.getValue(this.config.hiddenField);
+        this.imageBrowser.setValue(this.image.sourceImg.src || '');
         this.updatePreviewImage.defer(10, this);
     },
     // Runs after initial render of panel

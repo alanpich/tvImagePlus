@@ -6,7 +6,7 @@ edit_uri: tree/master/docs
 repo_name: 'Jako/ImagePlus'
 repo_url: https://github.com/Jako/ImagePlus
 
-copyright: '&copy; 2015-2022 <a href="https://treehillstudio.com">Treehill Studio</a>'
+copyright: '&copy; 2015-2023 <a href="https://treehillstudio.com">Treehill Studio</a>'
 
 nav:
 - Description: 'index.md'
