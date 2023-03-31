@@ -77,7 +77,9 @@ if ($object->xpdo) {
         {
             foreach ($events as $event) {
                 $c = $modx->newQuery('modPluginEvent');
-                $c->leftJoin('modPlugin', 'Plugin', ['modPluginEvent.pluginid = Plugin.id']);
+                $c->leftJoin('modPlugin', 'Plugin', [
+                    'modPluginEvent.pluginid = Plugin.id'
+                ]);
                 $c->where([
                     'event' => $event,
                     'Plugin.name' => $plugin
