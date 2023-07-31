@@ -143,8 +143,14 @@ filter, you can disable the generation of the internal thumb URL.
 !!! caution "Caution"
     You must enable this option if you do not specify an output chunk in the output
     options or if you use the `[[+url]]` placeholder in the specified output chunk.
-    Otherwise the image will not be cropped/truncated and the original image path
+    Otherwise, the image will not be cropped/truncated and the original image path
     will be returned.
+
+#### Thumb URL Issues
+
+If you use Image+ in a multiple language site with different base URL context
+settings, you have to set the system setting `phpthumbof.cache_url` to `/`.
+Otherwise, the generated thumbnail path will contain the `{base_url}` prefix.
 
 ## Snippet
 
