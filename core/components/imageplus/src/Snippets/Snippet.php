@@ -119,7 +119,7 @@ abstract class Snippet
      */
     protected function getAssociativeJson($value)
     {
-        return is_string($value) ? json_decode($value, true) : $value;
+        return (is_string($value)) ? json_decode($value, true) : $value;
     }
 
     /**
