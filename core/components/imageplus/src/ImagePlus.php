@@ -262,7 +262,7 @@ class ImagePlus
                 } else {
                     $source = $this->modx->getObject('modMediaSource', $this->modx->getOption('default_media_source'));
                 }
-                if (!($source && $source->getWorkingContext())) {
+                if (!$source) {
                     $this->modx->log(xPDO::LOG_LEVEL_ERROR, 'Invalid Media Source', '', 'Image+');
                     return '';
                 }
