@@ -1,4 +1,4 @@
-[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/imageplus/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/imageplus/standard/)
+[![Default Lexicon](https://hosted.weblate.org/widget/modx-extras/imageplus/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/imageplus/standard/)
 
 # Image+
 
@@ -34,4 +34,4 @@ The project is licensed under the [GPLv2 license](https://github.com/Jako/ImageP
 
 ## Translations
 
-Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/imageplus/standard/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/imageplus/system-settings/)
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/imageplus/standard/), the [Properties Lexicon](https://hosted.weblate.org/projects/modx-extras/imageplus/properties/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/imageplus/system-settings/)
