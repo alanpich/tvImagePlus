@@ -18,3 +18,12 @@ tool can be used to resize the image to the desired dimensions/proportions.
 * User image cropping can be forced to stay at preset ratio.
 * Use chunk as output mask and fill placeholders with url, height, width, alt
   tag, phpthumb options etc. of cropped uploaded image.
+
+### License
+
+The project is licensed under the [GPLv2 license](https://github.com/Jako/ImagePlus/LICENSE.md).
+
+### Translations [![Default Lexicon](https://hosted.weblate.org/widget/modx-extras/imageplus/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/imageplus/)
+
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/imageplus/standard/), the [Properties Lexicon](https://hosted.weblate.org/projects/modx-extras/imageplus/properties/) and the [System Setting Lexicon](https://hosted.weblate.org/projects/modx-extras/imageplus/system-settings/)
+
