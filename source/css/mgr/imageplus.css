@@ -2,6 +2,51 @@
   padding-top: 0;
 }
 
+.modx-grid .x-grid-cell-icons .x-grid3-cell-inner {
+  padding-right: 5px;
+}
+
+.modx-grid-small .x-grid3-cell-inner {
+  padding: 8px 5px 8px 5px;
+}
+.modx-grid-small .x-grid3-hd-inner {
+  padding: 8px 18px 8px 5px;
+}
+.modx-grid-small .x-grid3-td-checker {
+  padding: 6px 0 0;
+}
+.modx-grid-small .x-grid3-td-checker.x-grid3-hd {
+  padding-top: 0;
+}
+.modx-grid-small .x-panel-tbar .x-toolbar {
+  padding-top: 2px;
+}
+.modx-grid-small .x-panel-tbar .x-toolbar.x-small-editor .x-form-text {
+  padding: 3px 8px 2px 8px;
+  margin-top: 0;
+}
+.modx-grid-small .x-panel-tbar .x-toolbar .x-btn {
+  padding: 4px 10px 4px 10px;
+}
+.modx-grid-small .x-panel-bbar .x-toolbar .x-btn {
+  padding: 2px 2px;
+}
+.modx-grid-small .x-panel-bbar .x-toolbar .x-form-text {
+  padding: 2px 3px;
+}
+.modx-grid-small .x-tbar-loading:before {
+  line-height: 16px;
+}
+.modx-grid-small .x-tbar-page-last:before, .modx-grid-small .x-tbar-page-next:before, .modx-grid-small .x-tbar-page-prev:before, .modx-grid-small .x-tbar-page-first:before {
+  line-height: 16px;
+}
+.modx-grid-small .x-btn-icon.arrow_up button:before, .modx-grid-small .x-btn-icon.arrow_down button:before, .modx-grid-small .x-btn-icon.refresh button:before {
+  line-height: 16px;
+}
+.modx-grid-small .x-small-editor .x-form-text, .modx-grid-small .x-small-editor .x-form-field-wrap {
+  margin-top: 2px;
+}
+
 .x-form-field-wrap .x-form-triple-triggers {
   border: 0;
   border-radius: 0 3px 3px 0;

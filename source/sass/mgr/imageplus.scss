@@ -6,6 +6,91 @@ $treehillstudio-color: #cbd842;
   }
 }
 
+.modx-grid {
+  .x-grid-cell-icons {
+    .x-grid3-cell-inner {
+      padding-right: 5px;
+    }
+  }
+}
+
+.modx-grid-small {
+  .x-grid3-cell-inner {
+    padding: 8px 5px 8px 5px;
+  }
+
+  .x-grid3-hd-inner {
+    padding: 8px 18px 8px 5px;
+  }
+
+  .x-grid3-td-checker {
+    padding: 6px 0 0;
+
+    &.x-grid3-hd {
+      padding-top: 0;
+    }
+  }
+
+  .x-panel-tbar {
+    .x-toolbar {
+      padding-top: 2px;
+
+      &.x-small-editor {
+        .x-form-text {
+          padding: 3px 8px 2px 8px;
+          margin-top: 0;
+        }
+      }
+
+      .x-btn {
+        padding: 4px 10px 4px 10px;
+      }
+    }
+  }
+
+  .x-panel-bbar {
+    .x-toolbar {
+      .x-btn {
+        padding: 2px 2px;
+      }
+
+      .x-form-text {
+        padding: 2px 3px;
+      }
+    }
+  }
+
+  .x-tbar-loading {
+    &:before {
+      line-height: 16px;
+    }
+  }
+
+  .x-tbar-page {
+    &-last, &-next, &-prev, &-first {
+      &:before {
+        line-height: 16px;
+      }
+    }
+  }
+
+  .x-btn-icon {
+    &.arrow_up, &.arrow_down, &.refresh {
+      button {
+        &:before {
+          line-height: 16px;
+        }
+      }
+    }
+  }
+
+  .x-small-editor {
+    .x-form-text, .x-form-field-wrap {
+      margin-top: 2px;
+    }
+  }
+}
+
 .x-form-field-wrap {
   .x-form-triple-triggers {
     border: 0;

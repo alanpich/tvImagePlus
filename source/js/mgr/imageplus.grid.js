@@ -25,6 +25,7 @@ ImagePlus.grid.SizesRatio = function (config) {
     });
     Ext.applyIf(config, {
         id: this.ident,
+        cls: 'modx-grid-small',
         fields: ['id', 'name', 'targetwidth', 'targetheight', 'targetRatio', 'rank'],
         autoHeight: true,
         store: new Ext.data.JsonStore({
@@ -64,7 +65,7 @@ ImagePlus.grid.SizesRatio = function (config) {
                     }
                 }
             },
-            width: 100
+            width: 75
         }, {
             header: _('imageplus.gridsetting_target_height'),
             dataIndex: 'targetheight',
@@ -78,7 +79,7 @@ ImagePlus.grid.SizesRatio = function (config) {
                     }
                 }
             },
-            width: 100
+            width: 75
         }, {
             header: _('imageplus.gridsetting_target_ratio'),
             dataIndex: 'targetRatio',
@@ -100,7 +101,7 @@ ImagePlus.grid.SizesRatio = function (config) {
             },
             menuDisabled: true,
             width: 30,
-            align: 'right'
+            fixed: true,
         }, {
             dataIndex: 'rank',
             hidden: true
@@ -193,7 +194,8 @@ Ext.extend(ImagePlus.grid.SizesRatio, MODx.grid.LocalGrid, {
         this.add(this.hiddenField);
         this.saveValue();
     },
-    buttonColumnRenderer: function () {
+    buttonColumnRenderer: function (value, metaData) {
+        metaData.css = 'x-grid-cell-icons';
         var values = {
             action_buttons: [{
                 className: 'remove',
