@@ -7,11 +7,6 @@
  *
  * @package imageplus
  * @subpackage classfile
- *
- * @author Alan Pich <alan.pich@gmail.com>
- * @author Thomas Jakobi <office@treehillstudio.com>
- * @copyright Alan Pich 2013-2015
- * @copyright Thomas Jakobi 2015-2023
  */
 
 namespace TreehillStudio\ImagePlus;
