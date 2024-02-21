@@ -25,7 +25,7 @@ ImagePlus.grid.SizesRatio = function (config) {
     });
     Ext.applyIf(config, {
         id: this.ident + '-systemsetting-grid',
-        cls: 'modx-grid-small',
+        cls: 'modx-grid modx-grid-small',
         fields: ['id', 'name', 'targetwidth', 'targetheight', 'targetRatio', 'rank'],
         autoHeight: true,
         store: new Ext.data.JsonStore({
