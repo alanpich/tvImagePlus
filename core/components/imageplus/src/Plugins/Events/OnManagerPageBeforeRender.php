@@ -13,6 +13,7 @@ class OnManagerPageBeforeRender extends Plugin
     public function process()
     {
         $this->modx->controller->addLexiconTopic('imageplus:default');
+        $this->modx->controller->addLexiconTopic('imageplus:setting');
         $this->imageplus->includeScriptAssets();
     }
 }
